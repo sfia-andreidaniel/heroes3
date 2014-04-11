@@ -1,0 +1,10 @@
+enum Terrains {
+	GRASS,
+	DIRT,
+	LAVA,
+	SUBTERRANEAN,
+	ROUGH,
+	SAND,
+	SNOW,
+	SWAMP
+}

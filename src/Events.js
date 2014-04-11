@@ -1,8 +1,8 @@
-var EventEmitter = (function () {
-    function EventEmitter() {
+var Events = (function () {
+    function Events() {
         this._listeners = {};
     }
-    EventEmitter.prototype._createListener = function (event) {
+    Events.prototype._createListener = function (event) {
         this._listeners[event] = this._listeners[event] || {
             "global": [],
             "once": [],
@@ -12,7 +12,7 @@ var EventEmitter = (function () {
         return this._listeners[event];
     };
 
-    EventEmitter.prototype.addListener = function (event, listener) {
+    Events.prototype.addListener = function (event, listener) {
         var grp = this._createListener(event);
 
         grp.global.push(listener);
@@ -23,16 +23,16 @@ var EventEmitter = (function () {
         return this;
     };
 
-    EventEmitter.prototype.on = function (event, listener) {
+    Events.prototype.on = function (event, listener) {
         return this.addListener(event, listener);
     };
 
-    EventEmitter.prototype.once = function (event, listener) {
+    Events.prototype.once = function (event, listener) {
         var grp = this._createListener(event);
         grp.once.push(listener);
     };
 
-    EventEmitter.prototype.removeListener = function (event, listener) {
+    Events.prototype.removeListener = function (event, listener) {
         var grp;
 
         if (this._listeners[event]) {
@@ -54,7 +54,7 @@ var EventEmitter = (function () {
         return this;
     };
 
-    EventEmitter.prototype.removeAllListeners = function (event) {
+    Events.prototype.removeAllListeners = function (event) {
         if (typeof event === "undefined") { event = null; }
         if (event !== null) {
             if (this._listeners[event])
@@ -64,7 +64,7 @@ var EventEmitter = (function () {
         }
     };
 
-    EventEmitter.prototype.emit = function (event) {
+    Events.prototype.emit = function (event) {
         var args = [];
         for (var _i = 0; _i < (arguments.length - 1); _i++) {
             args[_i] = arguments[_i + 1];
@@ -87,24 +87,8 @@ var EventEmitter = (function () {
         return anyCalled;
     };
 
-    EventEmitter.listenerCount = function (emitter, event) {
+    Events.listenerCount = function (emitter, event) {
         return emitter._listeners[event] ? emitter._listeners[event].count : 0;
     };
-    return EventEmitter;
+    return Events;
 })();
-
-var my = new EventEmitter();
-
-my.on('addListener', function (event) {
-    console.log("A listener has been setup for event ", event);
-});
-
-my.on('removeListener', function (event) {
-    console.log("A listener has been removed for event ", event);
-});
-
-my.on('connect', function () {
-    console.log('connected');
-});
-
-my.emit('connect');

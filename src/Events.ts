@@ -1,4 +1,4 @@
-class EventEmitter {
+class Events {
 
 		public _listeners = {};
 
@@ -84,7 +84,7 @@ class EventEmitter {
 			return anyCalled;
 		}
 
-		static listenerCount( emitter: EventEmitter, event: string ) {
+		static listenerCount( emitter: Events, event: string ) {
 
 			return emitter._listeners[ event ]
 				? emitter._listeners[ event ].count
