@@ -93,19 +93,3 @@ class EventEmitter {
 		}
 
 }
-
-var my = new EventEmitter();
-
-my.on( 'addListener', function( event ) {
-	console.log( "A listener has been setup for event ", event );
-});
-
-my.on( 'removeListener', function( event ) {
-	console.log( "A listener has been removed for event ", event );
-});
-
-my.on( 'connect', function() {
-	console.log( 'connected');
-	} );
-
-my.emit( 'connect');
