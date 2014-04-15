@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        div.tileset {
+            width: 64px;
+            display: inline-block;
+            height: 64px;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        div.tileset > img {
+            float: left;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <select id="resource">
+        <option value="">Choose</option>
+        <option value="resources/terrains/_build/dirt.json">dirt</option>
+        <option value="resources/terrains/_build/grass.json">grass</option>
+        <option value="resources/terrains/_build/lava.json">lava</option>
+        <option value="resources/terrains/_build/rockie.json">rockie</option>
+        <option value="resources/terrains/_build/rough.json">rough</option>
+        <option value="resources/terrains/_build/sand.json">sand</option>
+        <option value="resources/terrains/_build/snow.json">snow</option>
+        <option value="resources/terrains/_build/subteranean.json">subteranean</option>
+        <option value="resources/terrains/_build/swamp.json">swamp</option>
+        <option value="resources/terrains/_build/water.json">water</option>
+    </select>
+    
+    <div id="out">
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script>
+        $('#resource').on( 'change', function() {
+            
+            $('#out').html('');
+            
+            if ( $(this).val() == '' )
+                return;
+            
+            $.ajax( $(this).val() + '?rnd=' + ( new Date() ).getTime(), {
+                
+                "success": function( data ) {
+                    
+                    data.frames = data.frames || [];
+                    
+                    data.frames.sort();
+                    
+                    var html = [];
+                    
+                    for ( var i=0, len = data.frames.length; i<len; i++ ) {
+                        
+                        html.push( [
+                            '<div class="tileset" title="' + data.frames[i] + '">',
+                                '<img src="' + data.nw[ data.frames[i] ] + '" class="nw" />',
+                                '<img src="' + data.ne[ data.frames[i] ] + '" class="ne" />',
+                                '<img src="' + data.sw[ data.frames[i] ] + '" class="se" />',
+                                '<img src="' + data.se[ data.frames[i] ] + '" class="sw" />',
+                            '</div>'
+                        ].join('') );
+                        
+                    }
+                    
+                    $('#out').html( html.join( "\n" ) );
+                    
+                    console.log( data );
+                    
+                },
+                
+                "error": function() {
+                    alert("Error loading resource!");
+                }
+                
+            } );
+            
+        } );
+    </script>
+</body>
+</html>

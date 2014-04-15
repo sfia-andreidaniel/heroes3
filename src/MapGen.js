@@ -184,7 +184,7 @@ function MapMatrix( width, height ) {
             for ( var x = 0; x < width; x++ ) {
                 
                 cell = this.getCellAt( x, y );
-                row = row.concat( ( cell ? cell.outChar : '-' ) + ' ' );
+                row = row.concat( ( cell ? cell.outChar : '-' ) + '' );
                 
             }
 
@@ -288,8 +288,8 @@ function MapRegion( seedX, seedY, mapMatrix, outChar ) {
     return this;
 }
 
-var m = new MapMatrix( 30, 30 ),
-    c = [ '\\', '&', '+', '!' ];
+var m = new MapMatrix( 80, 40 ),
+    c = [ 'D', 'G', 'L', 'R', 'H', 'S', 'W', 'P', 'W' ];
 
 for ( var i=0, len = c.length; i<len; i++ )
     m.addRegion( c[i] );

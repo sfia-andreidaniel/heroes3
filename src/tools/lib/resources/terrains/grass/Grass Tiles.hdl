@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=tgrd000.bmp|tgrd001.bmp|tgrd002.bmp|tgrd003.bmp|tgrd010.bmp|tgrd011.bmp|tgrd012.bmp|tgrd013.bmp|tgrd020.bmp|tgrd021.bmp|tgrd022.bmp|tgrd023.bmp|tgrd030.bmp|tgrd031.bmp|tgrd032.bmp|tgrd033.bmp|tgrd040.bmp|tgrd041.bmp|tgrd042.bmp|tgrd043.bmp|tgrs000.bmp|tgrs001.bmp|tgrs002.bmp|tgrs003.bmp|tgrs010.bmp|tgrs011.bmp|tgrs012.bmp|tgrs013.bmp|tgrs020.bmp|tgrs021.bmp|tgrs022.bmp|tgrs023.bmp|tgrs030.bmp|tgrs031.bmp|tgrs032.bmp|tgrs033.bmp|tgrs040.bmp|tgrs041.bmp|tgrs042.bmp|tgrs043.bmp|tgrm000.bmp|tgrm002.bmp|tgrm001.bmp|tgrm010.bmp|tgrm011.bmp|tgrm020.bmp|tgrm021.bmp|tgrm012.bmp|tgrm013.bmp|tgrb000.bmp|tgrb001.bmp|tgrb002.bmp|tgrb003.bmp|tgrb004.bmp|tgrb005.bmp|tgrb006.bmp|tgrb007.bmp|tgrb010.bmp|tgrb011.bmp|tgrb012.bmp|tgrb013.bmp|tgrb014.bmp|tgrb015.bmp|tgrb016.bmp|tgrb017.bmp|tgrb018.bmp|tgrb019.bmp|tgrb020.bmp|tgrb021.bmp|tgrb022.bmp|tgrb023.bmp|tgrb024.bmp|tgrb025.bmp|tgrm040.bmp|tgrm041.bmp|tgrm043.bmp|tgrm042.bmp|tgrm030.bmp|tgrm031.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|

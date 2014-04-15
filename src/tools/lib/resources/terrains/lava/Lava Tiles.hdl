@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=tvld000.bmp|tvld001.bmp|tvld002.bmp|tvld003.bmp|tvld010.bmp|tvld011.bmp|tvld012.bmp|tvld013.bmp|tvld020.bmp|tvld021.bmp|tvld022.bmp|tvld023.bmp|tvld030.bmp|tvld031.bmp|tvld032.bmp|tvld033.bmp|tvld040.bmp|tvld041.bmp|tvld042.bmp|tvld043.bmp|tvls000.bmp|tvls001.bmp|tvls002.bmp|tvls003.bmp|tvls010.bmp|tvls011.bmp|tvls012.bmp|tvls013.bmp|tvls020.bmp|tvls021.bmp|tvls022.bmp|tvls023.bmp|tvls030.bmp|tvls031.bmp|tvls032.bmp|tvls033.bmp|tvls040.bmp|tvls041.bmp|tvls042.bmp|tvls043.bmp|tvlm000.bmp|tvlm002.bmp|tvlm001.bmp|tvlm010.bmp|tvlm011.bmp|tvlm020.bmp|tvlm021.bmp|tvlm012.bmp|tvlm013.bmp|tvlb000.bmp|tvlb001.bmp|tvlb002.bmp|tvlb003.bmp|tvlb004.bmp|tvlb005.bmp|tvlb006.bmp|tvlb007.bmp|tvlb010.bmp|tvlb011.bmp|tvlb012.bmp|tvlb013.bmp|tvlb014.bmp|tvlb015.bmp|tvlb016.bmp|tvlb017.bmp|tvlb018.bmp|tvlb019.bmp|tvlb020.bmp|tvlb021.bmp|tvlb022.bmp|tvlb023.bmp|tvlb024.bmp|tvlb025.bmp|tvlm040.bmp|tvlm041.bmp|tvlm043.bmp|tvlm042.bmp|tvlm030.bmp|tvlm031.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|

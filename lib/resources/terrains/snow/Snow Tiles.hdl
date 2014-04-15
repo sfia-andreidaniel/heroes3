@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=tsnd000.bmp|tsnd001.bmp|tsnd002.bmp|tsnd003.bmp|tsnd010.bmp|tsnd011.bmp|tsnd012.bmp|tsnd013.bmp|tsnd020.bmp|tsnd021.bmp|tsnd022.bmp|tsnd023.bmp|tsnd030.bmp|tsnd031.bmp|tsnd032.bmp|tsnd033.bmp|tsnd040.bmp|tsnd041.bmp|tsnd042.bmp|tsnd043.bmp|tsns000.bmp|tsns001.bmp|tsns002.bmp|tsns003.bmp|tsns010.bmp|tsns011.bmp|tsns012.bmp|tsns013.bmp|tsns020.bmp|tsns021.bmp|tsns022.bmp|tsns023.bmp|tsns030.bmp|tsns031.bmp|tsns032.bmp|tsns033.bmp|tsns040.bmp|tsns041.bmp|tsns042.bmp|tsns043.bmp|tsnm000.bmp|tsnm002.bmp|tsnm001.bmp|tsnm010.bmp|tsnm011.bmp|tsnm020.bmp|tsnm021.bmp|tsnm012.bmp|tsnm013.bmp|tsnb000.bmp|tsnb001.bmp|tsnb002.bmp|tsnb003.bmp|tsnb004.bmp|tsnb005.bmp|tsnb006.bmp|tsnb007.bmp|tsnb010.bmp|tsnb011.bmp|tsnb012.bmp|tsnb013.bmp|tsnb014.bmp|tsnb015.bmp|tsnb016.bmp|tsnb017.bmp|tsnb018.bmp|tsnb019.bmp|tsnb020.bmp|tsnb021.bmp|tsnb022.bmp|tsnb023.bmp|tsnb024.bmp|tsnb025.bmp|tsnm040.bmp|tsnm041.bmp|tsnm043.bmp|tsnm042.bmp|tsnm030.bmp|tsnm031.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|
