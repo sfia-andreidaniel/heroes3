@@ -1,0 +1,51 @@
+{
+    "terrains": [
+        {
+            "name": "dirt",
+            "code": "D"
+        },
+        {
+            "name": "lava",
+            "code": "L"
+        },
+        {
+            "name": "grass",
+            "code": "G"
+        },
+        {
+            "name": "rockie",
+            "code": "R"
+        },
+        {
+            "name": "rough",
+            "code": "O"
+        },
+        {
+            "name": "sand",
+            "code": "S"
+        },
+        {
+            "name": "snow",
+            "code": "N"
+        },
+        {
+            "name": "subteranean",
+            "code": "U"
+        },
+        {
+            "name": "swamp",
+            "code": "A"
+        },
+        {
+            "name": "water",
+            "code": "W"
+        }
+    ],
+    "styles": [
+        {
+            "name": "land",
+            "path": "styles/land",
+            "selectorLength": 9
+        }
+    ]
+}

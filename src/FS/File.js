@@ -38,6 +38,8 @@ var FS_File = (function (_super) {
                                 f.data = null;
 
                                 f.emit('error', 'Failed to decode file contents as json!');
+
+                                console.log( "File COntents: ", data );
                             }
                         } else
                             f.emit('ready');

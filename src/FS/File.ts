@@ -29,13 +29,11 @@ class FS_File extends Events {
 
 	    	            	} else {
 
-	    	            		f.data = data + '';
-
 	    	            		if ( f.readAs == 'json' ) {
 
 	    	            			try {
 
-	    	            				f.data = JSON.parse( f.data );
+	    	            				f.data = JSON.parse( data.toString( 'utf8' ) );
 
 	    	            				f.emit( 'ready' );
 
@@ -43,11 +41,16 @@ class FS_File extends Events {
 
 	    	            				f.data = null;
 
-	    	            				f.emit( 'error', 'Failed to decode file contents as json!' );
+	    	            				f.emit( 'error', 'Failed to decode file contents as json!: ' + error );
+
+	    	            				// console.log( data.toString( 'utf8' ) );
 
 	    	            			}
 
-	    	            		} else f.emit( 'ready' );
+	    	            		} else {
+	    	            			f.data = data.toString( 'utf8' );
+	    	            			f.emit( 'ready' );
+	    	            		}
 
 	    	            	}
 
