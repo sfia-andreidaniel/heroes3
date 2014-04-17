@@ -15,11 +15,11 @@ class GameMap_Image extends Events {
 	    ( function( self ) {
 			
 			self.node.onload = function() {
-				this.loaded = true;
+				self.loaded = true;
 	    	}
 
 	    	self.node.onerror = function() {
-	    		this.error = 'Error loading image';
+	    		self.error = 'Error loading image';
 	    	}
 
 	    } )( this );

@@ -1,0 +1,84 @@
+#editor {
+    position: absolute;
+    left: 769px;
+    right: 0px;
+    display: block;
+    top: 0px;
+    bottom: 0px;
+}
+
+#editor > .widget {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    background-color: #ddd;
+}
+
+#terrain-picker {
+    display: block;
+    background-color: #333;
+    height: 170px;
+    overflow-y: scroll;
+}
+
+#terrain-picker > div {
+    float: left;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    display: block;
+    position: relative;
+}
+
+#terrain-picker > div > img {
+    position: absolute;
+    display: block;
+}
+
+#terrain-picker > div > img.nw {
+    top: 7px;
+    left: 7px;
+}
+
+#terrain-picker > div > img.ne {
+    top: 7px;
+    right: 7px;
+}
+
+#terrain-picker > div > img.se {
+    bottom: 7px;
+    right: 7px;
+}
+
+#terrain-picker > div > img.sw {
+    bottom: 7px;
+    left: 7px;
+}
+
+.ui-accordion-content {
+    padding: 5px !important;
+}
+
+#cell-x, #cell-y {
+    width: 40px;
+}
+
+#mss-edit {
+    height: 300px;
+    overflow-y: scroll;
+    display: block;
+}
+
+#mss-edit > table td.c1 {
+    width: 150px;
+}
+#mss-edit > table td.c2 {
+    width: 56px;
+}
+#mss-edit > table td.c3 {
+    width: 93px;
+    text-align: center;
+}
+#mss-edit > table td.c4 {
+    width: 150px;
+}

@@ -1,29 +1,80 @@
-# dirt
 ****D**** terrains/dirt#nw.tdtb013
-
-# lava
 ****L**** terrains/lava#nw.tvlb005
-
-# grass
 ****G**** terrains/grass#nw.tgrb015
-
-# rockie
 ****R**** terrains/dirt#nw.tdtm041
-
-# rough
 ****O**** terrains/rough#nw.trob025
-
-# sand
 ****S**** terrains/sand#nw.tsab000
-
-# snow
 ****N**** terrains/snow#nw.tsnb004
-
-# subteranean
 ****U**** terrains/subteranean#nw.tsus031
-
-# swamp
 ****A**** terrains/swamp#nw.tswb023
-
-# water
 ****W**** terrains/water#nw.watrtl26
+DDDAADAAD terrains/swamp#ne.tswd000
+AADAADAAD terrains/swamp#se.tswd012
+ADDAADAAA terrains/swamp#sw.tswd043
+DDDADDAAD terrains/swamp#ne.tswd041
+DDDADAAAA terrains/swamp#ne.tswd012
+DDADAAAAA terrains/swamp#se.tswd031
+DDDDDADDA terrains/swamp#se.tswd030
+DDADDADAA terrains/swamp#ne.tswd031
+DDDDDDDAD terrains/swamp#ne.tswd012
+DDDDDDDDA terrains/swamp#nw.tswd041
+DDDADDAAA terrains/swamp#sw.tswd043
+DDDDDDADD terrains/swamp#ne.tswd041
+AADAADADD terrains/swamp#se.tswd013
+DDDADDADD terrains/swamp#se.tswd041
+ADDADDAAD terrains/swamp#ne.tswd041
+DDDDDDDAA terrains/swamp#nw.tswd041
+DDDDDAAAA terrains/swamp#se.tswd043
+DDDDAAAAA terrains/swamp#se.tswd043
+_DD_DA_AA terrains/swamp#nw.tswd040
+AADAARRRR terrains/swamp#nw.tswm013
+AAAAAARRR terrains/swamp#se.tsws020
+AAAAAAARR terrains/swamp#nw.tsws030
+ARRARRARR terrains/swamp#ne.tsws023
+AAAARRARR terrains/swamp#ne.tsws023
+ARRARRAAA terrains/swamp#sw.tsws030
+RRRRRRAAA terrains/swamp#nw.tsws023
+ARRAARRAA terrains/swamp#sw.tsws033
+RRRRRRAAR terrains/swamp#ne.tsws041
+RRRARRAAR terrains/swamp#ne.tsws041
+AARAAARRA terrains/swamp#ne.tsws032
+RAARAARRR terrains/swamp#ne.tsws032
+AAARRARRA terrains/swamp#sw.tsws020
+RRARRARRR terrains/swamp#sw.tsws040
+ARRARRRRR terrains/swamp#se.tsws040
+AARAARARR terrains/swamp#nw.tsws043
+AARARRAAA terrains/swamp#sw.tsws042
+ARRRRRAAA terrains/swamp#nw.tsws023
+RRRAARAAR terrains/swamp#sw.tsws032
+RRRARRARR terrains/swamp#ne.tsws041
+ARRAARAAR terrains/swamp#sw.tsws030
+AARAARRRR terrains/swamp#nw.tsws042
+RRRRAAAAA terrains/swamp#se.tsws030
+RRRRRRRAA terrains/swamp#nw.tsws041
+ARRARRARA terrains/swamp#se.tsws001
+ARRARAAAA terrains/swamp#sw.tsws042
+ADDADDARD terrains/swamp#se.tswd041
+AADADDADD terrains/swamp#ne.tswd021
+AADAADAAR terrains/swamp#nw.tswd030
+AAAARRAAA terrains/swamp#sw.tsws042
+RRRAARAAA terrains/swamp#sw.tsws042
+ARRARRAAR terrains/swamp#ne.tsws023
+AARRRRAAR terrains/swamp#ne.tsws041
+AAARRRAAA terrains/swamp#nw.tsws023
+RRRARRAAA terrains/swamp#nw.tsws023
+RRARRAAAA terrains/swamp#se.tsws030
+RRARRARRA terrains/swamp#sw.tsws023
+AAAAAARRA terrains/swamp#ne.tsws030
+AAARAARRR terrains/swamp#nw.tsws032
+RAARRARRR terrains/swamp#ne.tsws032
+RRARAARRA terrains/swamp#se.tsws032
+RRRRRARAA terrains/swamp#nw.tsws040
+RRRARAAAA terrains/swamp#se.tsws043
+RRRRRRARA terrains/swamp#nw.tsws041
+RRRRARAAA terrains/swamp#sw.tsws043
+RRRRRRRAR terrains/swamp#ne.tsws041
+ARRARRAAN terrains/swamp#se.tsws041
+AAAAANANN terrains/swamp#nw.tswd030
+AAAAANNNN terrains/swamp#nw.tswd042
+ANNAANAAN terrains/swamp#ne.tswd041
+AAAANNANN terrains/snow#nw.tsnd001

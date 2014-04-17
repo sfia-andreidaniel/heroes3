@@ -163,11 +163,16 @@ function MapMatrix( width, height ) {
         
     }
     
-    this.getFreeNeighbours = function( neighbours ) {
+    this.getFreeNeighbours = function( neighbours, xAxis, yAxis ) {
         var out = [];
+
         for ( var i=0, len = neighbours.length; i<len; i++ )
-            if ( this.cells[ neighbours[i].y ][ neighbours[i].x ] === null )
+            if ( this.cells[ neighbours[i].y ][ neighbours[i].x ] === null &&
+                ( neighbours[i].x == xAxis ||
+                  neighbours[i].y == yAxis  )
+            )
                 out.push( neighbours[i] );
+
         return out.length ? out : null;
     }
     
@@ -247,7 +252,7 @@ function MapRegion( seedX, seedY, mapMatrix, outChar ) {
                         "x"              : x,
                         "y"              : y,
                         "border"         : this.matrix.isBorderCell( x, y ),
-                        "freeNeighbours" : this.matrix.getFreeNeighbours( neighbours )
+                        "freeNeighbours" : this.matrix.getFreeNeighbours( neighbours, x, y )
                     } );
                 }
                 
@@ -272,9 +277,25 @@ function MapRegion( seedX, seedY, mapMatrix, outChar ) {
         if ( !placeable.length )
             return 0;
         
+        placeable.sort( function( a, b ) {
+            
+            return b.freeNeighbours.length - a.freeNeighbours.length;
+            
+        } );
+        
+        var nLen = placeable[0].freeNeighbours.length,
+            slLen= 1;
+        
+        while ( slLen < placeable.length && placeable[ slLen ].freeNeighbours.length == nLen )
+            slLen++;
+        
+        placeable = placeable.slice( 0, slLen );
+        
         rndP = ~~( Math.random() * placeable.length )
         
         rndN = ~~( Math.random() * placeable[ rndP ].freeNeighbours.length );
+        
+        
         
         this.put( placeable[ rndP ].freeNeighbours[ rndN ].x, placeable[ rndP ].freeNeighbours[ rndN ].y );
         

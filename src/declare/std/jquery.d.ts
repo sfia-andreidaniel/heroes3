@@ -123,6 +123,9 @@ interface JQueryEventObject extends Event {
     pageY: number;
     which: number;
     metaKey: any;
+    shiftKey: boolean;
+    controlKey: boolean;
+    altKey: boolean;
 }
 
 /*

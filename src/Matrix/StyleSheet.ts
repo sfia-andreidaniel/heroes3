@@ -4,7 +4,7 @@ class Matrix_StyleSheet extends Events {
 	
 	public rules = [];
 
-	constructor( fileData, public selectorLength: number, name: string = "unnamed" ) {
+	constructor( public map: GameMap, fileData, public selectorLength: number, name: string = "unnamed" ) {
 
 	    super();
 	    
@@ -84,6 +84,49 @@ class Matrix_StyleSheet extends Events {
 		}
 
 		return out.length ? out : null;
+
+	}
+
+	public addSelector( rule: string, value: string ) {
+		
+		if ( rule.length != this.selectorLength )
+			throw "Failed to add selector, selector value is ne with this matrix stylesheet selector length.";
+
+		for ( var i=0, len = this.rules.length; i<len; i++ )
+			if ( this.rules[i].rule == rule && this.rules[i].value == value )
+				return;
+
+		this.rules.push({
+			"rule": rule,
+			"value": value
+		});
+
+		this.map.emit( 'mss-changed', rule );
+
+	}
+
+	public removeSelector( rule: string, value: string ) {
+
+		for ( var i=0, len = this.rules.length; i<len; i++ )
+			if ( this.rules[i].rule == rule && this.rules[i].value == value ) {
+				this.rules.splice( i, 1 );
+				this.map.emit( 'mss-changed', rule );
+				return;
+			}
+
+	}
+
+	public getStyleSheet() {
+
+		var out = [];
+
+		for ( var i=0, len = this.rules.length; i<len; i++ ) {
+
+			out.push( this.rules[i].rule + ' ' + this.rules[i].value );
+
+		}
+
+		return out.join( '\n' );
 
 	}
 

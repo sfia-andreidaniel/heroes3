@@ -46,6 +46,7 @@ class GameMap extends Events {
 		    		console.log( "GameMap: Init matrix stylesheet: ", cfg.data.styles[i].name );
 
 		    		myself.styles[ cfg.data.styles[i].name ] = new Matrix_StyleSheet(
+		    			myself,
 		    			this.open( cfg.data.styles[i].path ).data,
 		    			cfg.data.styles[i].selectorLength,
 		    			cfg.data.styles[i].name
@@ -60,11 +61,21 @@ class GameMap extends Events {
 
 	    })( this );
 
+	    this.on( 'mss-changed', function( mssSelector ) {
+	    	this.onMSSChanged( mssSelector );
+	    });
+
 	}
 
-	public loadStyles() {
+	// triggered when a matrix stylesheet chages
+	public onMSSChanged( selector: string ) {
 
-
+		for ( var col=0; col<this.width; col++ ) {
+			for ( var row = 0; row < this.height; row++ ) {
+				if ( this.cells[row][col].hash == selector )
+					this.cells[row][col].__buildHash( this.width, this.height );
+			}
+		}
 
 	}
 

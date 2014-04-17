@@ -1,15 +1,63 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="tools/game.css" />
+    <link rel="stylesheet" type="text/css" href="tools/editor.css" />
+    <link rel="stylesheet" type="text/css" href="../vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.min.css" />
 </head>
 <body>
     
+    <div id="game" class="game">
+        <div class="border nw"></div>
+        <div class="border n"></div>
+        <div class="border ne"></div>
+        <div class="border e"></div>
+        <div class="border se"></div>
+        <div class="border s"></div>
+        <div class="border sw"></div>
+        <div class="border w"></div>
+        <canvas width="768" height="512" />
+    </div>
+    
     <div id="editor">
-        <canvas id="viewport"></canvas>
+        <div class="accordion">
+            <h3>Terrain</h3>
+            <div class="widget">
+                <fieldset>
+                    <label>
+                        Tileset:
+                        <select id="terrains">
+                            <option value=""></option>
+                            <option value="dirt">Dirt</option>
+                            <option value="lava">Lava</option>
+                            <option value="grass">Grass</option>
+                            <option value="rockie">Rockie</option>
+                            <option value="rough">Rough</option>
+                            <option value="sand">Sand</option>
+                            <option value="snow">Snow</option>
+                            <option value="subteranean">Subteranean</option>
+                            <option value="swamp">Swamp</option>
+                            <option value="water">Water</option>
+                        </select>
+                    </label>
+                    <div id="terrain-picker"></div>
+                </fieldset>
+                <fieldset>
+                    <label>X: <input type="number" id="cell-x"/></label>
+                    <label>Y: <input type="number" id="cell-y" /></label><br />
+                    <label>Terrain: <input type="text" readonly="readonly" id="cell-terrain-name" /></label><br />
+                    <label>Hash: <input type="text" id="cell-hash" /></label>
+                </fieldset>
+                <fieldset id="mss-edit">
+                </fieldset>
+                <button id="save-mss">Save MSS</button>
+            </div>
+        </div>
     </div>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="tools/editor-init.js"></script>
+    <script type="text/javascript" src="tools/editor.js"></script>
 </body>
 </html>

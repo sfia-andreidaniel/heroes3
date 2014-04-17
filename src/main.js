@@ -182,11 +182,11 @@ var GameMap_Image = (function (_super) {
 
         (function (self) {
             self.node.onload = function () {
-                this.loaded = true;
+                self.loaded = true;
             };
 
             self.node.onerror = function () {
-                this.error = 'Error loading image';
+                self.error = 'Error loading image';
             };
         })(this);
 
@@ -361,29 +361,41 @@ var GameMap_Cell = (function (_super) {
 
         if (bgTiles) {
             bgTiles.sort(function (a, b) {
-                return a.relevance - b.relevance;
+                return b.relevance - a.relevance;
             });
 
-            this.background = this.map.FS.createImage(bgTiles[0].value);
+            if (bgTiles.length == 1)
+                this.background = this.map.FS.createImage(bgTiles[0].value);
+            else {
+                var firstRelevance = bgTiles[0].relevance, soFar = 1, len = bgTiles.length;
+
+                while (soFar < len && bgTiles[soFar].relevance == firstRelevance)
+                    soFar++;
+
+                this.background = this.map.FS.createImage(bgTiles[~~(Math.random() * soFar)].value);
+            }
         }
     };
 
     GameMap_Cell.prototype.paintAt = function (viewport, ctxX, ctxY) {
         // paint the cell on a canvas context
-        if (this.background && this.background.loaded)
-            viewport.ctx.drawImage(this.background.node, ctxX, ctxY);
+        if (this.background) {
+            if (this.background.loaded)
+                viewport.ctx.drawImage(this.background.node, ctxX, ctxY);
+        }
     };
     return GameMap_Cell;
 })(Events);
 /// <reference path="../GameMap.ts" />
 var GameMap_Viewport = (function (_super) {
     __extends(GameMap_Viewport, _super);
-    // matrix style systems
     function GameMap_Viewport(map, width, height) {
         _super.call(this);
         this.map = map;
-        this.width = width;
-        this.height = height;
+        // public map: GameMap
+        // public width: number
+        // public height: number
+        // physical map dimensions
         this.mapWidthPX = 0;
         this.mapHeightPX = 0;
         this.vpWidth = 0;
@@ -393,7 +405,12 @@ var GameMap_Viewport = (function (_super) {
         // the canvas and it's context
         this.canvas = null;
         this.ctx = null;
+        // here we store the elements that should be painted
+        // on the game paint loop
         this.renderables = [];
+        // the joistick var is used to scroll the game when the mouse
+        // enters the borders
+        this.joystick = 0;
 
         (function (viewport, map) {
             map.on('map-loaded', function () {
@@ -427,14 +444,22 @@ var GameMap_Viewport = (function (_super) {
 
         this.renderables = [];
 
-        this.paint();
+        for (var row = mapTileY; row < mapTileY1; row++) {
+            for (var col = mapTileX; col < mapTileX1; col++) {
+                this.renderables.push(this.map.cells[row][col]);
+            }
+        }
+
+        //console.log( "onScroll: " + this.renderables.length + " cells" );
+        this.vpX = newVPx;
+        this.vpY = newVPy;
     };
 
     GameMap_Viewport.prototype.onMapLoaded = function () {
         this.mapWidthPX = 32 * this.map.width;
         this.mapHeightPX = 32 * this.map.height;
 
-        this.canvas = document.getElementById('viewport');
+        this.canvas = $('#game > canvas').get(0);
         this.ctx = this.canvas.getContext('2d');
 
         this.vpWidth = this.canvas.offsetWidth;
@@ -496,9 +521,76 @@ var GameMap_Viewport = (function (_super) {
                     });
                 }
             });
+
+            $('#game > .border.n').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 1; // north
+                console.log('joystick: north');
+            });
+
+            $('#game > .border.e').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 2; // east
+                console.log('joystick: east');
+            });
+
+            $('#game > .border.s').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 3; //south
+                console.log('joystick: south');
+            });
+
+            $('#game > .border.w').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 4; // west
+                console.log('joystick: east');
+            });
+
+            $('#game > .border.nw').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 5; // north-west
+                console.log('joystick: north-west');
+            });
+
+            $('#game > .border.ne').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 6; // north-east
+                console.log('joystick: north-east');
+            });
+
+            $('#game > .border.se').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 7; //south-east
+                console.log('joystick: south-east');
+            });
+
+            $('#game > .border.sw').mouseenter(function (evt) {
+                if (!evt.shiftKey)
+                    return;
+                viewport.joystick = 8; // south-west
+                console.log('joystick: south-west');
+            });
+
+            $('#game > canvas').mouseenter(function () {
+                viewport.joystick = 0;
+                console.log('joystick: normal');
+            });
+
+            setInterval(function () {
+                viewport._joystick();
+            }, 50);
         })(this);
 
         this.onScroll(0, 0);
+
+        this.paint();
 
         eval('window.gameVp = this;');
     };
@@ -507,15 +599,91 @@ var GameMap_Viewport = (function (_super) {
         this.ctx.fillStyle = "rgb(0,0,0)";
 
         this.ctx.fillRect(0, 0, this.vpWidth, this.vpHeight);
+
+        for (var i = 0, len = this.renderables.length; i < len; i++) {
+            this.renderables[i].paintAt(this, (this.renderables[i].x * 32) - this.vpX, (this.renderables[i].y * 32) - this.vpY);
+        }
+
+        var myself = this;
+
+        requestAnimationFrame(function () {
+            myself.paint.call(myself);
+        });
+    };
+
+    GameMap_Viewport.prototype._joystick = function () {
+        var relX = 0, relY = 0;
+
+        switch (this.joystick) {
+            case 0:
+                return;
+                break;
+
+            case 1:
+                relY = -32;
+                break;
+
+            case 2:
+                relX = 32;
+                break;
+
+            case 3:
+                relY = 32;
+                break;
+
+            case 4:
+                relX = -32;
+                break;
+
+            case 5:
+                relX = -32;
+                relY = -32;
+                break;
+
+            case 6:
+                relX = 32;
+                relY = -32;
+                break;
+
+            case 7:
+                relX = 32;
+                relY = 32;
+                break;
+
+            case 8:
+                relX = -32;
+                relY = 32;
+                break;
+        }
+
+        //console.log( "Joystick: relativeX = ", relX, ' relativeY = ', relY );
+        this.vpX += relX;
+        this.vpY += relY;
+
+        if (this.vpX < 0)
+            this.vpX = 0;
+
+        if (this.vpX + this.vpWidth > this.mapWidthPX)
+            this.vpX = this.mapWidthPX - this.vpWidth;
+
+        if (this.vpY + this.vpHeight > this.mapHeightPX)
+            this.vpY = this.mapHeightPX - this.vpHeight;
+
+        this.scrollToXY(this.vpX, this.vpY);
+    };
+
+    GameMap_Viewport.prototype.scrollToXY = function (x, y) {
+        this.onScroll(x, y);
     };
     return GameMap_Viewport;
 })(Events);
 /// <reference path="../Events.ts" />
 var Matrix_StyleSheet = (function (_super) {
     __extends(Matrix_StyleSheet, _super);
-    function Matrix_StyleSheet(fileData, selectorLength, name) {
+    function Matrix_StyleSheet(map, fileData, selectorLength, name) {
         if (typeof name === "undefined") { name = "unnamed"; }
         _super.call(this);
+        this.map = map;
         this.selectorLength = selectorLength;
         this.rules = [];
 
@@ -579,6 +747,41 @@ var Matrix_StyleSheet = (function (_super) {
 
         return out.length ? out : null;
     };
+
+    Matrix_StyleSheet.prototype.addSelector = function (rule, value) {
+        if (rule.length != this.selectorLength)
+            throw "Failed to add selector, selector value is ne with this matrix stylesheet selector length.";
+
+        for (var i = 0, len = this.rules.length; i < len; i++)
+            if (this.rules[i].rule == rule && this.rules[i].value == value)
+                return;
+
+        this.rules.push({
+            "rule": rule,
+            "value": value
+        });
+
+        this.map.emit('mss-changed', rule);
+    };
+
+    Matrix_StyleSheet.prototype.removeSelector = function (rule, value) {
+        for (var i = 0, len = this.rules.length; i < len; i++)
+            if (this.rules[i].rule == rule && this.rules[i].value == value) {
+                this.rules.splice(i, 1);
+                this.map.emit('mss-changed', rule);
+                return;
+            }
+    };
+
+    Matrix_StyleSheet.prototype.getStyleSheet = function () {
+        var out = [];
+
+        for (var i = 0, len = this.rules.length; i < len; i++) {
+            out.push(this.rules[i].rule + ' ' + this.rules[i].value);
+        }
+
+        return out.join('\n');
+    };
     return Matrix_StyleSheet;
 })(Events);
 /// <reference path="GameMap/Terrain.ts" />
@@ -613,7 +816,7 @@ var GameMap = (function (_super) {
                 for (var i = 0, len = cfg.data.styles.length; i < len; i++) {
                     console.log("GameMap: Init matrix stylesheet: ", cfg.data.styles[i].name);
 
-                    myself.styles[cfg.data.styles[i].name] = new Matrix_StyleSheet(this.open(cfg.data.styles[i].path).data, cfg.data.styles[i].selectorLength, cfg.data.styles[i].name);
+                    myself.styles[cfg.data.styles[i].name] = new Matrix_StyleSheet(myself, this.open(cfg.data.styles[i].path).data, cfg.data.styles[i].selectorLength, cfg.data.styles[i].name);
                 }
 
                 myself.loadMap(FSMapFile);
@@ -621,8 +824,19 @@ var GameMap = (function (_super) {
                 console.log("GameMap: initialized");
             });
         })(this);
+
+        this.on('mss-changed', function (mssSelector) {
+            this.onMSSChanged(mssSelector);
+        });
     }
-    GameMap.prototype.loadStyles = function () {
+    // triggered when a matrix stylesheet chages
+    GameMap.prototype.onMSSChanged = function (selector) {
+        for (var col = 0; col < this.width; col++) {
+            for (var row = 0; row < this.height; row++) {
+                if (this.cells[row][col].hash == selector)
+                    this.cells[row][col].__buildHash(this.width, this.height);
+            }
+        }
     };
 
     GameMap.prototype.loadMap = function (FSMapFile) {

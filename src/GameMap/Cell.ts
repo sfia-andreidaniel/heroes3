@@ -22,7 +22,7 @@ class GameMap_Cell extends Events {
 
 	public background: GameMap_Image = null;
 	public isHovered: boolean = false;
-
+	
 	constructor( private map: GameMap, public x: number, public y: number, public terrain: GameMap_Terrain ) {
 	    super();
 
@@ -79,10 +79,23 @@ class GameMap_Cell extends Events {
 		if ( bgTiles ) {
 			
 			bgTiles.sort( function( a, b ) {
-				return a.relevance - b.relevance;
+				return b.relevance - a.relevance;
 			});
 
-			this.background = this.map.FS.createImage( bgTiles[0].value );
+			if ( bgTiles.length == 1 )
+				this.background = this.map.FS.createImage( bgTiles[0].value );
+			else {
+
+				var firstRelevance = bgTiles[0].relevance,
+				    soFar = 1,
+				    len = bgTiles.length;
+
+				while ( soFar < len && bgTiles[soFar].relevance == firstRelevance )
+					soFar++;
+
+				this.background = this.map.FS.createImage( bgTiles[ ~~( Math.random() * soFar ) ].value );
+
+			}
 		}
 
 	}
@@ -91,8 +104,10 @@ class GameMap_Cell extends Events {
 
 		// paint the cell on a canvas context
 
-		if ( this.background && this.background.loaded )
-			viewport.ctx.drawImage( this.background.node, ctxX, ctxY );
+		if ( this.background ) {
+			if ( this.background.loaded )
+				viewport.ctx.drawImage( this.background.node, ctxX, ctxY );
+		}
 	}
 
 }
