@@ -82,3 +82,8 @@
 #mss-edit > table td.c4 {
     width: 150px;
 }
+
+#widget-paint > button.btn-paint.pressed {
+    outline: 3px solid red;
+    background-color: black;
+}

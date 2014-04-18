@@ -36,7 +36,8 @@ class GameMap extends Events {
 		    		myself.terrains[ cfg.data.terrains[i].name ] = new GameMap_Terrain(
 		    			myself,
 		    			cfg.data.terrains[i].code,
-		    			cfg.data.terrains[i].name
+		    			cfg.data.terrains[i].name,
+		    			cfg.data.terrains[i].defaultTile
 		    		);
 
 		    	}
@@ -62,7 +63,11 @@ class GameMap extends Events {
 	    })( this );
 
 	    this.on( 'mss-changed', function( mssSelector ) {
-	    	this.onMSSChanged( mssSelector );
+	    	this.onMSSChanged( mssSelector, true );
+	    });
+
+	    this.on( 'cells-changed', function() {
+	    	this.onCellsChanged();
 	    });
 
 	}
@@ -75,6 +80,38 @@ class GameMap extends Events {
 				if ( this.cells[row][col].hash == selector )
 					this.cells[row][col].__buildHash( this.width, this.height );
 			}
+		}
+
+	}
+
+	public onCellsChanged( xCenter: number = null, yCenter: number = null, radius: number = 4 ) {
+		
+		var colStart : number,
+		    colEnd   : number,
+		    rowStart : number,
+		    rowEnd   : number;
+
+		if ( xCenter === null || yCenter == null ) {
+
+			for ( var row = 0; row < this.height; row++ ) {
+				for ( var col = 0; col < this.width; col++ ) {
+					this.cells[ row ][ col ].__buildHash( this.width, this.height );
+				}
+			}
+
+		} else {
+
+			colStart = ( xCenter - radius > 0 ) ? xCenter - radius : 0;
+			rowStart = ( yCenter - radius > 0 ) ? yCenter - radius : 0;
+
+			colEnd   = ( xCenter + radius ) < this.width  ? xCenter + radius : this.width - 1;
+			rowEnd   = ( yCenter + radius ) < this.height ? yCenter + radius : this.height - 1;
+
+			for ( var row = rowStart; row <= rowEnd; row++ ) {
+				for (var col = colStart; col <= colEnd; col++ )
+					this.cells[ row ][ col ].__buildHash( this.width, this.height );
+			}
+
 		}
 
 	}
@@ -116,9 +153,10 @@ class GameMap extends Events {
 		for ( var row = 0; row < this.height; row++ ) {
 			for ( var col = 0; col < this.width; col++ ) {
 				this.cells[ row ][ col ].__computeCells();
-				this.cells[ row ][ col ].__buildHash( this.width, this.height );
 			}
 		}
+
+		this.onCellsChanged();
 
 		this.emit( 'map-loaded' );
 

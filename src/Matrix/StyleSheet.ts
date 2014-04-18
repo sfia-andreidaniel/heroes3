@@ -2,7 +2,7 @@
 
 class Matrix_StyleSheet extends Events {
 	
-	public rules = [];
+	public rules = {};
 
 	constructor( public map: GameMap, fileData, public selectorLength: number, name: string = "unnamed" ) {
 
@@ -20,99 +20,56 @@ class Matrix_StyleSheet extends Events {
 	    		selector = matches[2];
 	    		value = matches[3];
 
-	    		if ( selector.length == this.selectorLength )
-	    			this.rules.push({
-	    				"rule": selector,
-	    				"value": value
-	    			});
+	    		this.addSelector( selector, value, false );
 
 	    	}
 
 	    }
 
-	    console.log( "Loaded matrix stylesheet: " + name + ", " + this.rules.length + " rules, selectorLength: " + this.selectorLength );
+	    console.log( "Loaded matrix stylesheet: " + name + ", selectorLength: " + this.selectorLength );
 
 	}
 
 	public querySelector( hash: string ) {
 
-		var relevance: number,
-		    out = [],
-		    isMatch: boolean,
-		    rule: string;
-
-		if ( hash.length != this.selectorLength )
-			return null;
-
-		for ( var i=0, len = this.rules.length; i<len; i++ ) {
-
-			rule = this.rules[i].rule;
-
-			relevance = this.selectorLength;
-			
-			isMatch = true;
-
-			for ( var j = 0; j < this.selectorLength; j++ ) {
-
-				if ( hash[j] == '*' )
-					continue;
-
-				switch ( rule[j] ) {
-					
-					case '*':
-						relevance--;
-						break;
-
-					case hash[j]:
-						break;
-					default:
-						isMatch = false;
-						break;
-				}
-
-				if ( !isMatch )
-					break;
-			}
-
-			if ( isMatch )
-				out.push( {
-					"rule": rule,
-					"relevance": relevance,
-					"value": this.rules[i].value
-				} );
-
-		}
-
-		return out.length ? out : null;
+		return this.rules[ hash ] || null;
 
 	}
 
-	public addSelector( rule: string, value: string ) {
+	public addSelector( rule: string, value: string, triggerMapUpdate: boolean = true ) {
 		
 		if ( rule.length != this.selectorLength )
 			throw "Failed to add selector, selector value is ne with this matrix stylesheet selector length.";
 
-		for ( var i=0, len = this.rules.length; i<len; i++ )
-			if ( this.rules[i].rule == rule && this.rules[i].value == value )
-				return;
+		if ( this.rules[ rule ] ) {
+			if ( this.rules[rule].indexOf( value ) == -1 )
+				this.rules[ rule ].push( value );
+		} else {
+			this.rules[ rule ] = [ value ];
+		}
 
-		this.rules.push({
-			"rule": rule,
-			"value": value
-		});
-
-		this.map.emit( 'mss-changed', rule );
+		if ( triggerMapUpdate )
+			this.map.emit( 'mss-changed', rule );
 
 	}
 
 	public removeSelector( rule: string, value: string ) {
 
-		for ( var i=0, len = this.rules.length; i<len; i++ )
-			if ( this.rules[i].rule == rule && this.rules[i].value == value ) {
-				this.rules.splice( i, 1 );
-				this.map.emit( 'mss-changed', rule );
-				return;
-			}
+		if ( this.rules[ rule ] ) {
+
+			for ( var i=0, len = this.rules[ rule ].length; i<len; i++ )
+				
+				if ( this.rules[ rule ][i] == value ) {
+					this.rules[ rule ].splice( i, 1 );
+
+					if ( this.rules[ rule ].length == 0 )
+						delete this.rules[rule];
+
+					this.map.emit( 'mss-changed', rule );
+					return;
+				}
+
+		}
 
 	}
 
@@ -120,9 +77,12 @@ class Matrix_StyleSheet extends Events {
 
 		var out = [];
 
-		for ( var i=0, len = this.rules.length; i<len; i++ ) {
+		for ( var k in this.rules ) {
 
-			out.push( this.rules[i].rule + ' ' + this.rules[i].value );
+			if ( this.rules.propertyIsEnumerable( k ) ) {
+				for ( var i=0, len = this.rules[k].length; i<len; i++ )
+					out.push( k + ' ' + this.rules[k][i] );
+			}
 
 		}
 

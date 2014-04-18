@@ -2,43 +2,53 @@
     "terrains": [
         {
             "name": "dirt",
-            "code": "D"
+            "code": "D",
+            "defaultTile": "terrains/dirt#nw.tdtb000"
         },
         {
             "name": "lava",
-            "code": "L"
+            "code": "L",
+            "defaultTile": "terrains/lava#ne.tvlb002"
         },
         {
             "name": "grass",
-            "code": "G"
+            "code": "G",
+            "defaultTile": "terrains/grass#se.tgrb000"
         },
         {
             "name": "rockie",
-            "code": "R"
+            "code": "R",
+            "defaultTile": "terrains/rockie#nw.rocktl01"
         },
         {
             "name": "rough",
-            "code": "O"
+            "code": "O",
+            "defaultTile": "terrains/rough#nw.trob002"
         },
         {
             "name": "sand",
-            "code": "S"
+            "code": "S",
+            "defaultTile": "terrains/sand#ne.tsab002"
         },
         {
             "name": "snow",
-            "code": "N"
+            "code": "N",
+            "defaultTile": "terrains/snow#nw.tsnb000"
         },
         {
             "name": "subteranean",
-            "code": "U"
+            "code": "U",
+            "defaultTile": "terrains/subteranean#ne.tsub000"
         },
         {
             "name": "swamp",
-            "code": "A"
+            "code": "A",
+            "defaultTile": "terrains/swamp#ne.tswb000"
         },
         {
             "name": "water",
-            "code": "W"
+            "code": "W",
+            "defaultTile": "terrains/water#se.watrtl22"
         }
     ],
     "styles": [

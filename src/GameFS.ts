@@ -57,6 +57,9 @@ class GameFS extends Events {
 	}
 
     public open( filePath: string ) {
+
+        console.log( "GameFS: OpenFile: ", filePath );
+
         if ( !this.files[ filePath ] )
             throw "GameFS: File: " + filePath + " not found!";
         return this.files[ filePath ];

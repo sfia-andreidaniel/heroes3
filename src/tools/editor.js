@@ -1,20 +1,28 @@
 map.viewport.on( 'dom-initialization', function( viewport ) {
     
+    var paintWith = null; // with what type of terrain we're currently painting on the map
+    
     $('.accordion').accordion({
         heightStyle: "content"
     });
     
     
     function updateMSS( mssHash ) {
+    
         var cssRules = map.styles.land.querySelector( mssHash );
+        
+        if ( !cssRules ) {
+            $('#mss-edit').html( '<b>' + mssHash + '</b> has no  rules' );
+            return;
+        }
         
         var tbl = [
             '<table id="mss-cell-rules">' + 
-            '<tr><td>Selector</td><td>Tile</td><td>Relevance</td><td>Edit</td></tr>'
+            '<tr><td>Tile</td><td>Edit</td></tr>'
         ];
         
         for ( var i=0, len = cssRules.length; i<len; i++ ) {
-            tbl.push( '<tr><td class="c1">' + cssRules[i].rule + "</td><td class='c2'><img src='" + map.FS.unpackResource( cssRules[i].value ) + "' /></td><td class='c3'>" + cssRules[i].relevance + '</td><td><button class="delete" data-mss="' + cssRules[i].rule + '|' + cssRules[i].value + '">Delete</button></tr>' );
+            tbl.push( "<tr><td class='c2'><img src='" + map.FS.unpackResource( cssRules[i] ) + "' /></td><td><button class=\"delete\" data-mss='" + mssHash + '|' + cssRules[i] + "'>Delete</button></tr>" );
         }
         
         tbl.push( '</table>' );
@@ -35,6 +43,88 @@ map.viewport.on( 'dom-initialization', function( viewport ) {
             }
             
         } );
+        
+    } );
+    
+    var isPainting = false;
+    
+    function paintCell( cell ) {
+
+        if ( paintWith === null )
+            return;
+        
+        cell.terrain = map.terrains[ paintWith ];
+        
+        if ( cell._nCell  ) cell._nCell.terrain = map.terrains[ paintWith ];
+        if ( cell._nwCell ) cell._nwCell.terrain = map.terrains[ paintWith ];
+        if ( cell._sCell  ) cell._sCell.terrain = map.terrains[ paintWith ];
+        if ( cell._neCell ) cell._neCell.terrain = map.terrains[ paintWith ];
+        if ( cell._wCell  ) cell._wCell.terrain = map.terrains[ paintWith ];
+        if ( cell._swCell ) cell._swCell.terrain = map.terrains[ paintWith ];
+        if ( cell._eCell  ) cell._eCell.terrain = map.terrains[ paintWith ];
+        if ( cell._seCell ) cell._seCell.terrain = map.terrains[ paintWith ];
+        
+        map.onCellsChanged( cell.x, cell.y, 6 );
+        
+        // console.log( "Painting cell @ " + cell.x + ", " + cell.y );
+
+    }
+    
+    function onPaintMouseDown( evt ) {
+
+        isPainting = true;
+
+        paintCell( evt.cell );
+
+    }
+    
+    function onPaintMouseMove( evt ) {
+
+        if ( !isPainting )
+            return;
+
+        paintCell( evt.cell );
+
+    }
+    
+    function onPaintMouseUp( evt ) {
+
+        isPainting = false;
+
+    }
+    
+    function addPaintListener() {
+        map.on( 'cell-mousedown', onPaintMouseDown );
+        map.on( 'cell-mousemove', onPaintMouseMove );
+        map.on( 'cell-mouseup', onPaintMouseUp );
+        
+    }
+    
+    function removePaintListener() {
+        
+    }
+    
+    $('#widget-paint > button.btn-paint').on( 'click', function() {
+        
+        if ( $(this).hasClass( 'pressed' ) ) {
+
+            $(this).removeClass( 'pressed' );
+
+            removePaintListener();
+
+            paintWith = null;
+
+        } else {
+            
+            $(this).parent().find('button.btn-paint').removeClass( 'pressed' );
+            
+            if ( paintWith === null )
+                addPaintListener();
+            
+            paintWith = $(this).attr('data-terrain');
+            
+            $(this).addClass( 'pressed' );
+        }
         
     } );
     
@@ -121,7 +211,7 @@ map.viewport.on( 'dom-initialization', function( viewport ) {
             
         }
         
-        console.log( data );
+        // console.log( data );
         
     } );
     

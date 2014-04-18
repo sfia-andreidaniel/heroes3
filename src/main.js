@@ -243,6 +243,8 @@ var GameFS = (function (_super) {
     };
 
     GameFS.prototype.open = function (filePath) {
+        console.log("GameFS: OpenFile: ", filePath);
+
         if (!this.files[filePath])
             throw "GameFS: File: " + filePath + " not found!";
         return this.files[filePath];
@@ -294,10 +296,13 @@ var GameFS = (function (_super) {
 /// <reference path="../FS/File.ts" />
 var GameMap_Terrain = (function (_super) {
     __extends(GameMap_Terrain, _super);
-    function GameMap_Terrain(ownerMap, charCode, name) {
+    function GameMap_Terrain(ownerMap, charCode, name, defaultTile) {
         _super.call(this);
         this.charCode = charCode;
         this.name = name;
+        this.defaultTile = defaultTile;
+
+        console.log("Terrain: ", this.name, " default tile: \"" + this.defaultTile, +"\"");
     }
     return GameMap_Terrain;
 })(Events);
@@ -359,22 +364,7 @@ var GameMap_Cell = (function (_super) {
 
         bgTiles = this.map.styles.land.querySelector(this.hash);
 
-        if (bgTiles) {
-            bgTiles.sort(function (a, b) {
-                return b.relevance - a.relevance;
-            });
-
-            if (bgTiles.length == 1)
-                this.background = this.map.FS.createImage(bgTiles[0].value);
-            else {
-                var firstRelevance = bgTiles[0].relevance, soFar = 1, len = bgTiles.length;
-
-                while (soFar < len && bgTiles[soFar].relevance == firstRelevance)
-                    soFar++;
-
-                this.background = this.map.FS.createImage(bgTiles[~~(Math.random() * soFar)].value);
-            }
-        }
+        this.background = this.map.FS.createImage(bgTiles === null ? this.terrain.defaultTile : bgTiles[~~(Math.random() * bgTiles.length)]);
     };
 
     GameMap_Cell.prototype.paintAt = function (viewport, ctxX, ctxY) {
@@ -685,7 +675,7 @@ var Matrix_StyleSheet = (function (_super) {
         _super.call(this);
         this.map = map;
         this.selectorLength = selectorLength;
-        this.rules = [];
+        this.rules = {};
 
         var lines = fileData.split("\n"), selector, value, matches;
 
@@ -694,90 +684,55 @@ var Matrix_StyleSheet = (function (_super) {
                 selector = matches[2];
                 value = matches[3];
 
-                if (selector.length == this.selectorLength)
-                    this.rules.push({
-                        "rule": selector,
-                        "value": value
-                    });
+                this.addSelector(selector, value, false);
             }
         }
 
-        console.log("Loaded matrix stylesheet: " + name + ", " + this.rules.length + " rules, selectorLength: " + this.selectorLength);
+        console.log("Loaded matrix stylesheet: " + name + ", selectorLength: " + this.selectorLength);
     }
     Matrix_StyleSheet.prototype.querySelector = function (hash) {
-        var relevance, out = [], isMatch, rule;
-
-        if (hash.length != this.selectorLength)
-            return null;
-
-        for (var i = 0, len = this.rules.length; i < len; i++) {
-            rule = this.rules[i].rule;
-
-            relevance = this.selectorLength;
-
-            isMatch = true;
-
-            for (var j = 0; j < this.selectorLength; j++) {
-                if (hash[j] == '*')
-                    continue;
-
-                switch (rule[j]) {
-                    case '*':
-                        relevance--;
-                        break;
-
-                    case hash[j]:
-                        break;
-                    default:
-                        isMatch = false;
-                        break;
-                }
-
-                if (!isMatch)
-                    break;
-            }
-
-            if (isMatch)
-                out.push({
-                    "rule": rule,
-                    "relevance": relevance,
-                    "value": this.rules[i].value
-                });
-        }
-
-        return out.length ? out : null;
+        return this.rules[hash] || null;
     };
 
-    Matrix_StyleSheet.prototype.addSelector = function (rule, value) {
+    Matrix_StyleSheet.prototype.addSelector = function (rule, value, triggerMapUpdate) {
+        if (typeof triggerMapUpdate === "undefined") { triggerMapUpdate = true; }
         if (rule.length != this.selectorLength)
             throw "Failed to add selector, selector value is ne with this matrix stylesheet selector length.";
 
-        for (var i = 0, len = this.rules.length; i < len; i++)
-            if (this.rules[i].rule == rule && this.rules[i].value == value)
-                return;
+        if (this.rules[rule]) {
+            if (this.rules[rule].indexOf(value) == -1)
+                this.rules[rule].push(value);
+        } else {
+            this.rules[rule] = [value];
+        }
 
-        this.rules.push({
-            "rule": rule,
-            "value": value
-        });
-
-        this.map.emit('mss-changed', rule);
+        if (triggerMapUpdate)
+            this.map.emit('mss-changed', rule);
     };
 
     Matrix_StyleSheet.prototype.removeSelector = function (rule, value) {
-        for (var i = 0, len = this.rules.length; i < len; i++)
-            if (this.rules[i].rule == rule && this.rules[i].value == value) {
-                this.rules.splice(i, 1);
-                this.map.emit('mss-changed', rule);
-                return;
-            }
+        if (this.rules[rule]) {
+            for (var i = 0, len = this.rules[rule].length; i < len; i++)
+                if (this.rules[rule][i] == value) {
+                    this.rules[rule].splice(i, 1);
+
+                    if (this.rules[rule].length == 0)
+                        delete this.rules[rule];
+
+                    this.map.emit('mss-changed', rule);
+                    return;
+                }
+        }
     };
 
     Matrix_StyleSheet.prototype.getStyleSheet = function () {
         var out = [];
 
-        for (var i = 0, len = this.rules.length; i < len; i++) {
-            out.push(this.rules[i].rule + ' ' + this.rules[i].value);
+        for (var k in this.rules) {
+            if (this.rules.propertyIsEnumerable(k)) {
+                for (var i = 0, len = this.rules[k].length; i < len; i++)
+                    out.push(k + ' ' + this.rules[k][i]);
+            }
         }
 
         return out.join('\n');
@@ -810,7 +765,7 @@ var GameMap = (function (_super) {
                 for (var i = 0, len = cfg.data.terrains.length; i < len; i++) {
                     console.log("GameMap: Init terrain type: ", cfg.data.terrains[i].name);
 
-                    myself.terrains[cfg.data.terrains[i].name] = new GameMap_Terrain(myself, cfg.data.terrains[i].code, cfg.data.terrains[i].name);
+                    myself.terrains[cfg.data.terrains[i].name] = new GameMap_Terrain(myself, cfg.data.terrains[i].code, cfg.data.terrains[i].name, cfg.data.terrains[i].defaultTile);
                 }
 
                 for (var i = 0, len = cfg.data.styles.length; i < len; i++) {
@@ -826,7 +781,11 @@ var GameMap = (function (_super) {
         })(this);
 
         this.on('mss-changed', function (mssSelector) {
-            this.onMSSChanged(mssSelector);
+            this.onMSSChanged(mssSelector, true);
+        });
+
+        this.on('cells-changed', function () {
+            this.onCellsChanged();
         });
     }
     // triggered when a matrix stylesheet chages
@@ -834,6 +793,32 @@ var GameMap = (function (_super) {
         for (var col = 0; col < this.width; col++) {
             for (var row = 0; row < this.height; row++) {
                 if (this.cells[row][col].hash == selector)
+                    this.cells[row][col].__buildHash(this.width, this.height);
+            }
+        }
+    };
+
+    GameMap.prototype.onCellsChanged = function (xCenter, yCenter, radius) {
+        if (typeof xCenter === "undefined") { xCenter = null; }
+        if (typeof yCenter === "undefined") { yCenter = null; }
+        if (typeof radius === "undefined") { radius = 4; }
+        var colStart, colEnd, rowStart, rowEnd;
+
+        if (xCenter === null || yCenter == null) {
+            for (var row = 0; row < this.height; row++) {
+                for (var col = 0; col < this.width; col++) {
+                    this.cells[row][col].__buildHash(this.width, this.height);
+                }
+            }
+        } else {
+            colStart = (xCenter - radius > 0) ? xCenter - radius : 0;
+            rowStart = (yCenter - radius > 0) ? yCenter - radius : 0;
+
+            colEnd = (xCenter + radius) < this.width ? xCenter + radius : this.width - 1;
+            rowEnd = (yCenter + radius) < this.height ? yCenter + radius : this.height - 1;
+
+            for (var row = rowStart; row <= rowEnd; row++) {
+                for (var col = colStart; col <= colEnd; col++)
                     this.cells[row][col].__buildHash(this.width, this.height);
             }
         }
@@ -866,9 +851,10 @@ var GameMap = (function (_super) {
         for (var row = 0; row < this.height; row++) {
             for (var col = 0; col < this.width; col++) {
                 this.cells[row][col].__computeCells();
-                this.cells[row][col].__buildHash(this.width, this.height);
             }
         }
+
+        this.onCellsChanged();
 
         this.emit('map-loaded');
     };

@@ -25,7 +25,6 @@ class GameMap_Cell extends Events {
 	
 	constructor( private map: GameMap, public x: number, public y: number, public terrain: GameMap_Terrain ) {
 	    super();
-
 	}
 
 	public __computeCells( ) {
@@ -76,27 +75,11 @@ class GameMap_Cell extends Events {
 
 		bgTiles = this.map.styles.land.querySelector( this.hash );
 
-		if ( bgTiles ) {
-			
-			bgTiles.sort( function( a, b ) {
-				return b.relevance - a.relevance;
-			});
-
-			if ( bgTiles.length == 1 )
-				this.background = this.map.FS.createImage( bgTiles[0].value );
-			else {
-
-				var firstRelevance = bgTiles[0].relevance,
-				    soFar = 1,
-				    len = bgTiles.length;
-
-				while ( soFar < len && bgTiles[soFar].relevance == firstRelevance )
-					soFar++;
-
-				this.background = this.map.FS.createImage( bgTiles[ ~~( Math.random() * soFar ) ].value );
-
-			}
-		}
+		this.background = this.map.FS.createImage( 
+			bgTiles === null 
+			? this.terrain.defaultTile 
+			: bgTiles[ ~~( Math.random() * bgTiles.length ) ] 
+		);
 
 	}
 
