@@ -344,6 +344,52 @@ var GameMap_Cell = (function (_super) {
         this._seCell = this.x < this.map.width - 1 && this.y < this.map.height - 1 ? this.map.cells[this.y + 1][this.x + 1] : null;
     };
 
+    GameMap_Cell.prototype.predominantNeighbourTerrain = function () {
+        var terrains = [];
+
+        if (this._nwCell)
+            terrains[this._nwCell.terrain.charCode] = (terrains[this._nwCell.terrain.charCode] || 0) + 1;
+
+        if (this._nCell)
+            terrains[this._nCell.terrain.charCode] = (terrains[this._nCell.terrain.charCode] || 0) + 1;
+
+        if (this._neCell)
+            terrains[this._neCell.terrain.charCode] = (terrains[this._neCell.terrain.charCode] || 0) + 1;
+
+        if (this._sCell)
+            terrains[this._sCell.terrain.charCode] = (terrains[this._sCell.terrain.charCode] || 0) + 1;
+
+        if (this._wCell)
+            terrains[this._wCell.terrain.charCode] = (terrains[this._wCell.terrain.charCode] || 0) + 1;
+
+        if (this._swCell)
+            terrains[this._swCell.terrain.charCode] = (terrains[this._swCell.terrain.charCode] || 0) + 1;
+
+        if (this._eCell)
+            terrains[this._eCell.terrain.charCode] = (terrains[this._eCell.terrain.charCode] || 0) + 1;
+
+        if (this._seCell)
+            terrains[this._seCell.terrain.charCode] = (terrains[this._seCell.terrain.charCode] || 0) + 1;
+
+        var max = 0, ret = this.terrain;
+
+        for (var t in terrains)
+            if (terrains[t] > max) {
+                max = terrains[t];
+                ret = this.map.getTerrainByCharCode(t);
+            }
+
+        return ret;
+    };
+
+    GameMap_Cell.prototype.hasInvalidTerrain = function () {
+        return (!this.cellTerrainIs(this._nwCell, this.terrain) && !this.cellTerrainIs(this._nCell, this.terrain) && !this.cellTerrainIs(this._neCell, this.terrain) && !this.cellTerrainIs(this._eCell, this.terrain) && !this.cellTerrainIs(this._seCell, this.terrain) && !this.cellTerrainIs(this._sCell, this.terrain) && !this.cellTerrainIs(this._swCell, this.terrain) && !this.cellTerrainIs(this._wCell, this.terrain));
+    };
+
+    GameMap_Cell.prototype.cellTerrainIs = function (cell, terrain) {
+        return !cell ? true : cell.terrain == terrain;
+    };
+
     GameMap_Cell.prototype.__buildHash = function () {
         var bgTiles = [];
 
@@ -798,30 +844,58 @@ var GameMap = (function (_super) {
         }
     };
 
+    GameMap.prototype.getTerrainByCharCode = function (terrainCharCode) {
+        for (var t in this.terrains)
+            if (this.terrains[t].charCode == terrainCharCode)
+                return this.terrains[t];
+
+        return null;
+    };
+
     GameMap.prototype.onCellsChanged = function (xCenter, yCenter, radius) {
         if (typeof xCenter === "undefined") { xCenter = null; }
         if (typeof yCenter === "undefined") { yCenter = null; }
         if (typeof radius === "undefined") { radius = 4; }
-        var colStart, colEnd, rowStart, rowEnd;
+        var colStart, colEnd, rowStart, rowEnd, badTerrain = false;
 
-        if (xCenter === null || yCenter == null) {
-            for (var row = 0; row < this.height; row++) {
-                for (var col = 0; col < this.width; col++) {
-                    this.cells[row][col].__buildHash(this.width, this.height);
+        do {
+            badTerrain = false;
+
+            if (xCenter === null || yCenter == null) {
+                for (var row = 0; row < this.height; row++) {
+                    for (var col = 0; col < this.width; col++) {
+                        if (this.cells[row][col].hasInvalidTerrain()) {
+                            badTerrain = true;
+                            this.cells[row][col].terrain = this.cells[row][col].predominantNeighbourTerrain();
+                            break;
+                        }
+                        this.cells[row][col].__buildHash(this.width, this.height);
+                    }
+                    if (badTerrain)
+                        break;
+                }
+            } else {
+                colStart = (xCenter - radius > 0) ? xCenter - radius : 0;
+                rowStart = (yCenter - radius > 0) ? yCenter - radius : 0;
+
+                colEnd = (xCenter + radius) < this.width ? xCenter + radius : this.width - 1;
+                rowEnd = (yCenter + radius) < this.height ? yCenter + radius : this.height - 1;
+
+                for (var row = rowStart; row <= rowEnd; row++) {
+                    for (var col = colStart; col <= colEnd; col++) {
+                        if (this.cells[row][col].hasInvalidTerrain()) {
+                            badTerrain = true;
+                            this.cells[row][col].terrain = this.cells[row][col].predominantNeighbourTerrain();
+                            break;
+                        }
+                        this.cells[row][col].__buildHash(this.width, this.height);
+                    }
+
+                    if (badTerrain)
+                        break;
                 }
             }
-        } else {
-            colStart = (xCenter - radius > 0) ? xCenter - radius : 0;
-            rowStart = (yCenter - radius > 0) ? yCenter - radius : 0;
-
-            colEnd = (xCenter + radius) < this.width ? xCenter + radius : this.width - 1;
-            rowEnd = (yCenter + radius) < this.height ? yCenter + radius : this.height - 1;
-
-            for (var row = rowStart; row <= rowEnd; row++) {
-                for (var col = colStart; col <= colEnd; col++)
-                    this.cells[row][col].__buildHash(this.width, this.height);
-            }
-        }
+        } while(badTerrain);
     };
 
     GameMap.prototype.loadMap = function (FSMapFile) {

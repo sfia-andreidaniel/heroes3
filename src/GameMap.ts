@@ -84,35 +84,66 @@ class GameMap extends Events {
 
 	}
 
+	public getTerrainByCharCode( terrainCharCode: string ) {
+		for ( var t in this.terrains )
+			if ( this.terrains[ t ].charCode == terrainCharCode )
+				return this.terrains[t];
+
+		return null;
+	}
+
 	public onCellsChanged( xCenter: number = null, yCenter: number = null, radius: number = 4 ) {
 		
 		var colStart : number,
 		    colEnd   : number,
 		    rowStart : number,
-		    rowEnd   : number;
+		    rowEnd   : number,
+		    badTerrain: boolean = false;
 
-		if ( xCenter === null || yCenter == null ) {
+		do {
 
-			for ( var row = 0; row < this.height; row++ ) {
-				for ( var col = 0; col < this.width; col++ ) {
-					this.cells[ row ][ col ].__buildHash( this.width, this.height );
+			badTerrain = false;
+
+			if ( xCenter === null || yCenter == null ) {
+
+				for ( var row = 0; row < this.height; row++ ) {
+					for ( var col = 0; col < this.width; col++ ) {
+						if ( this.cells[ row ][ col ].hasInvalidTerrain() ) {
+							badTerrain = true;
+							this.cells[ row ][ col ].terrain = this.cells[ row ][ col ].predominantNeighbourTerrain();
+							break;
+						}
+						this.cells[ row ][ col ].__buildHash( this.width, this.height );
+					}
+					if ( badTerrain )
+						break;
 				}
+
+			} else {
+
+				colStart = ( xCenter - radius > 0 ) ? xCenter - radius : 0;
+				rowStart = ( yCenter - radius > 0 ) ? yCenter - radius : 0;
+
+				colEnd   = ( xCenter + radius ) < this.width  ? xCenter + radius : this.width - 1;
+				rowEnd   = ( yCenter + radius ) < this.height ? yCenter + radius : this.height - 1;
+
+				for ( var row = rowStart; row <= rowEnd; row++ ) {
+					for (var col = colStart; col <= colEnd; col++ ) {
+						if ( this.cells[ row ][ col ].hasInvalidTerrain() ) {
+							badTerrain = true;
+							this.cells[ row ][ col ].terrain = this.cells[ row ][ col ].predominantNeighbourTerrain();
+							break;
+						}
+						this.cells[ row ][ col ].__buildHash( this.width, this.height );
+					}
+
+					if ( badTerrain )
+						break;
+				}
+
 			}
 
-		} else {
-
-			colStart = ( xCenter - radius > 0 ) ? xCenter - radius : 0;
-			rowStart = ( yCenter - radius > 0 ) ? yCenter - radius : 0;
-
-			colEnd   = ( xCenter + radius ) < this.width  ? xCenter + radius : this.width - 1;
-			rowEnd   = ( yCenter + radius ) < this.height ? yCenter + radius : this.height - 1;
-
-			for ( var row = rowStart; row <= rowEnd; row++ ) {
-				for (var col = colStart; col <= colEnd; col++ )
-					this.cells[ row ][ col ].__buildHash( this.width, this.height );
-			}
-
-		}
+		} while ( badTerrain );
 
 	}
 

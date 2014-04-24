@@ -54,6 +54,62 @@ class GameMap_Cell extends Events {
 			: null;
 	}
 
+	public predominantNeighbourTerrain() {
+		var terrains = [];
+
+		if ( this._nwCell )
+			terrains [this._nwCell.terrain.charCode ] = ( terrains[ this._nwCell.terrain.charCode ] || 0 ) + 1;
+		
+		if ( this._nCell )
+			terrains [this._nCell.terrain.charCode ]  = ( terrains[ this._nCell.terrain.charCode  ] || 0 ) + 1;
+
+		if ( this._neCell )
+			terrains[ this._neCell.terrain.charCode ] = ( terrains[ this._neCell.terrain.charCode ] || 0 ) + 1;
+
+		if ( this._sCell )
+			terrains[ this._sCell.terrain.charCode ]  = ( terrains[ this._sCell.terrain.charCode ] || 0 ) + 1;
+
+		if ( this._wCell )
+			terrains[ this._wCell.terrain.charCode ]  = ( terrains[ this._wCell.terrain.charCode ] || 0 ) + 1;
+
+		if ( this._swCell )
+			terrains[ this._swCell.terrain.charCode ] = ( terrains[ this._swCell.terrain.charCode ] || 0 ) + 1;
+
+		if ( this._eCell )
+			terrains[ this._eCell.terrain.charCode ]  = ( terrains[ this._eCell.terrain.charCode ] || 0 ) + 1;
+
+		if ( this._seCell )
+			terrains[ this._seCell.terrain.charCode ] = ( terrains[ this._seCell.terrain.charCode ] || 0 ) + 1;
+
+		var max = 0,
+		    ret = this.terrain;
+
+		for ( var t in terrains )
+			if ( terrains[t] > max ) {
+				max = terrains[t];
+				ret = this.map.getTerrainByCharCode( t );
+			}
+
+		return ret;
+
+	}
+
+	public hasInvalidTerrain() {
+		return ( !this.cellTerrainIs( this._nwCell, this.terrain ) && 
+			 	 !this.cellTerrainIs( this._nCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._neCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._eCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._seCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._sCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._swCell, this.terrain ) &&
+				 !this.cellTerrainIs( this._wCell, this.terrain )
+		);
+	}
+
+	public cellTerrainIs( cell: GameMap_Cell, terrain: GameMap_Terrain ) {
+		return !cell ? true : cell.terrain == terrain;
+	}
+
 	public __buildHash( ) {
 		
 		var bgTiles = [];
