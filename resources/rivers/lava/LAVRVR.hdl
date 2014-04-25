@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=lavrvr00.bmp|lavrvr01.bmp|lavrvr02.bmp|lavrvr03.bmp|lavrvr04.bmp|lavrvr05.bmp|lavrvr06.bmp|lavrvr07.bmp|lavrvr08.bmp|lavrvr09.bmp|lavrvr10.bmp|lavrvr11.bmp|lavrvr12.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|

@@ -966,6 +966,15 @@ fs.add('terrains/subteranean', 'resources/terrains/_build/subteranean.json', 'js
 fs.add('terrains/swamp', 'resources/terrains/_build/swamp.json', 'json');
 fs.add('terrains/water', 'resources/terrains/_build/water.json', 'json');
 
+fs.add('roads/dirt', 'resources/roads/_build/dirt.json', 'json');
+fs.add('roads/pavement', 'resources/roads/_build/pavement.json', 'json');
+fs.add('roads/stone', 'resources/roads/_build/stone.json', 'json');
+
+fs.add('rivers/icy', 'resources/rivers/_build/icy.json', 'json');
+fs.add('rivers/lava', 'resources/rivers/_build/lava.json', 'json');
+fs.add('rivers/mud', 'resources/rivers/_build/mud.json', 'json');
+fs.add('rivers/river', 'resources/rivers/_build/river.json', 'json');
+
 fs.add('styles/land', 'resources/styles/land.mss', 'text');
 
 fs.add('maps/rnd01', 'resources/maps/rnd01.json', 'json');

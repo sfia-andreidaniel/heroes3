@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=clrrvr00.bmp|clrrvr01.bmp|clrrvr02.bmp|clrrvr03.bmp|clrrvr04.bmp|clrrvr05.bmp|clrrvr06.bmp|clrrvr07.bmp|clrrvr08.bmp|clrrvr09.bmp|clrrvr10.bmp|clrrvr11.bmp|clrrvr12.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF97FF|$FF67FF|$FF33FF|$FF00FF|$00FFFF|$FF00B7|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF97FF|$FF67FF|$FF33FF|$FF00FF|$00FFFF|$FF00B7|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|

@@ -1,3 +1,89 @@
+
+map.viewport.on( 'dom-initialization', function( ) {
+    
+    var row = -1,
+        col = 0,
+        ind = 0,
+        data,
+        ctx = document.getElementById( 'sprites' ).getContext( '2d' ),
+        img,
+        h = [ 'nw', 'ne', 'se', 'sw' ];
+        
+    for ( var t in { 
+        'roads/dirt': 1,
+        'roads/pavement': 1,
+        'roads/stone': 1,
+        'rivers/icy': 1,
+        'rivers/lava': 1,
+        'rivers/mud': 1,
+        'rivers/river': 1
+    } ) {
+    
+        console.log( t );
+        
+        data = map.FS.open( t ).data;
+        
+        // row += 2;
+        // col = 0;
+        
+        data.frames.sort();
+    
+        for ( var ind = 0, len = data.frames.length; ind<len; ind++ ) {
+            
+            for ( var k = 0; k < 4; k++ ) {
+                
+                ( function( src, paintX, paintY, hor ) {
+                    
+                    //console.log( hor );
+                    
+                    var img = new Image();
+                    
+                    img.onload = function() {
+                        ctx.drawImage( img,
+                            paintX * 64 + ( [ 0, 3 ].indexOf( hor ) == -1 ? 32 : 0 ),
+                            paintY * 64 + ( [ 0, 1 ].indexOf( hor ) == -1 ? 32 : 0 )
+                        );
+                        
+                    }
+                    
+                    img.onerror = function() {
+                        console.error( "Failed to paint!" );
+                    }
+                    
+                    img.src = src;
+                    
+                } )( data[ h[k] ][ data.frames[ind] ], col, row, k );
+                
+            }
+            
+            col ++;
+            
+            if ( col >= 8 ) {
+                col = 0;
+                row++;
+            }
+            
+            //console.log( col, row );
+            
+        }
+    
+    }
+    
+    
+    setTimeout( function() {
+        
+        var img = new Image();
+        
+        img.src = document.getElementById( 'sprites' ).toDataURL();
+        
+        document.body.appendChild( img );
+        
+    }, 5000 );
+    
+} );
+
+
+
 map.viewport.on( 'dom-initialization', function( viewport ) {
     
     var paintWith = null; // with what type of terrain we're currently painting on the map

@@ -1,0 +1,10 @@
+[Data]
+Type=5
+Shadow Type=0
+Groups Number=1
+Group0=TRDC000.bmp|TRDC001.bmp|TRDC010.bmp|TRDC011.bmp|TRDC012.bmp|TRDC013.bmp|TRDC020.bmp|TRDC021.bmp|TRDC022.bmp|TRDC023.bmp|TRDC030.bmp|TRDC031.bmp|TRDC032.bmp|TRDC033.bmp|TRDC040.bmp|TRDC041.bmp|TRDC050.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|0|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|
