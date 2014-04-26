@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="Heroes 3 Terrains" tilewidth="32" tileheight="32">
+<tileset name="Terrains" tilewidth="32" tileheight="32">
  <image source="terrains.png" width="512" height="5824"/>
  <terraintypes>
   <terrain name="Dirt" tile="0"/>

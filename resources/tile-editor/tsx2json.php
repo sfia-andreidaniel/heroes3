@@ -22,7 +22,7 @@
         pq($node)->find( '> image' )->each( function( $img ) use (&$out) {
             $out[ 'width' ] = (int)pq($img)->attr('width');
             $out[ 'height'] = (int)pq($img)->attr('height');
-            $out[ 'src' ] = 'data:image/png;base64,' /* . base64_encode( file_get_contents( pq($img)->attr('source') ) ) */;
+            $out[ 'src' ] = 'data:image/png;base64,' . base64_encode( file_get_contents( pq($img)->attr('source') ) );
         } );
         
         $hash = 1;
