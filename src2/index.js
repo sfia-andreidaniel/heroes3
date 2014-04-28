@@ -328,6 +328,8 @@ var AdvMap = (function (_super) {
         this.layers = [];
         this.cells = [];
         this._iniLayers = null;
+        this.viewports = [];
+        this._activeCell = null;
 
         (function (me) {
             me.fs.on('ready', function () {
@@ -364,6 +366,21 @@ var AdvMap = (function (_super) {
             })(this);
         }
     }
+    Object.defineProperty(AdvMap.prototype, "activeCell", {
+        get: function () {
+            return this._activeCell;
+        },
+        set: function (c) {
+            if (c != this._activeCell) {
+                this._activeCell = c;
+                this.emit('selection-changed', c);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+
     AdvMap.prototype._loadFS = function () {
         /* Load filesystem data */
         this.fs.add('tilesets/terrains.json', 'resources/tilesets/terrains.tsx.json', 'json');
@@ -551,6 +568,11 @@ var AdvMap = (function (_super) {
 
         return t;
     };
+
+    AdvMap.prototype.addViewport = function (vp) {
+        this.viewports.push(vp);
+        return vp;
+    };
     return AdvMap;
 })(Events);
 var Layer = (function (_super) {
@@ -583,6 +605,9 @@ var Layer = (function (_super) {
     Layer.prototype.setData = function (data) {
         // not implemented
     };
+
+    Layer.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
+    };
     return Layer;
 })(Events);
 var Layer_Terrain = (function (_super) {
@@ -595,6 +620,7 @@ var Layer_Terrain = (function (_super) {
         this.CT_SAND = 1;
         this.CT_DIRT = 0;
         this.CT_ABYSS = 4;
+        this.bitsorder = [0, 1, 2, 3];
         // matrix correction bits
         this.mcb = [
             [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1],
@@ -614,14 +640,23 @@ var Layer_Terrain = (function (_super) {
             [3, 6], [4, 6], [5, 6], [6, 6]
         ];
         this._interactive = false;
+        this._tilesList = [];
 
         this.tileset = this.map.tilesets[0];
 
         this._onInit();
     }
+    Layer_Terrain.prototype.bits2hash = function (bits) {
+        return bits[0] + ',' + bits[2] + ',' + bits[1] + ',' + bits[3];
+    };
+
     Layer_Terrain.prototype.setBits = function (x, y, bits) {
-        if (x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows)
-            this.tiles[y * this.map.rows + x] = bits;
+        var tileIndex;
+        if (x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows) {
+            this.tiles[tileIndex = (y * this.map.rows + x)] = bits;
+
+            this._tilesList[tileIndex] = bits ? this.tileset.getTileIdByHash(this.bits2hash(bits)) : null;
+        }
     };
 
     Layer_Terrain.prototype.getBits = function (x, y, defaultBits) {
@@ -684,9 +719,12 @@ var Layer_Terrain = (function (_super) {
         (function (me) {
             me.map.on('resize', function (cols, rows) {
                 me.tiles = [];
+                me.tilesList = [];
 
-                for (var i = 0, len = cols * rows; i < len; i++)
+                for (var i = 0, len = cols * rows; i < len; i++) {
                     me.tiles.push(null);
+                    me.tilesList.push(null);
+                }
             });
         })(this);
 
@@ -731,14 +769,18 @@ var Layer_Terrain = (function (_super) {
     Layer_Terrain.prototype.setData = function (data) {
         console.log("Terrain layer: begin set data");
 
-        var old_interactive = this._interactive;
+        var old_interactive = this._interactive, i = 0, len = 0;
 
         this._interactive = false;
 
         if (data) {
             this.tiles = data.tiles;
 
-            for (var i = 0, len = this.map.cells.length; i < len; i++) {
+            for (i = 0, len = this.tiles.length; i < len; i++) {
+                this._tilesList[i] = this.tiles[i] ? this.tileset.getTileIdByHash(this.bits2hash(this.tiles[i])) : null;
+            }
+
+            for (i = 0, len = this.map.cells.length; i < len; i++) {
                 this.map.cells[i].layers[this.index] = data.terrain[i];
             }
         }
@@ -762,6 +804,13 @@ var Layer_Terrain = (function (_super) {
         configurable: true
     });
 
+
+    Layer_Terrain.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
+        var tileId = this._tilesList[cellRow * this.map.rows + cellCol];
+        if (tileId) {
+            this.tileset.paintTile(tileId, ctx, x, y);
+        }
+    };
     return Layer_Terrain;
 })(Layer);
 var Layer_RoadsRivers = (function (_super) {
@@ -872,6 +921,20 @@ var Cell = (function () {
             "se": this.map.cellAt(x + 1, y + 1, false)
         };
     };
+
+    Cell.prototype.paintAt = function (x, y, ctx) {
+        var _x = this.x, _y = this.y;
+
+        for (var i = 0, len = this.map.layers.length; i < len; i++) {
+            this.map.layers[i].paint(_x, _y, x, y, ctx);
+        }
+
+        if (this == this.map.activeCell) {
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#f00';
+            ctx.strokeRect(x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3);
+        }
+    };
     return Cell;
 })();
 var AdvMap_Tileset = (function (_super) {
@@ -915,9 +978,6 @@ var AdvMap_Tileset = (function (_super) {
             this._canvas.height = this.tileHeight;
 
             this._ctxWriter = this._canvas.getContext('2d');
-
-            if (typeof global == 'undefined')
-                console.log(this._ctxWriter);
 
             (function (me) {
                 me.sprite.once('load', function () {
@@ -1057,6 +1117,140 @@ var AdvMap_Tileset_RoadsRivers = (function (_super) {
     }
     return AdvMap_Tileset_RoadsRivers;
 })(AdvMap_Tileset);
+var Viewport = (function (_super) {
+    __extends(Viewport, _super);
+    function Viewport(width, height, map) {
+        _super.call(this);
+        this.canvas = null;
+        this.ctx = null;
+        this.map = null;
+        this._width = 0;
+        this._height = 0;
+        this.cols = 0;
+        this.rows = 0;
+        this.x = 0;
+        this.y = 0;
+        this.tileWidth = 0;
+        this.tileHeight = 0;
+        this.paintables = [];
+        this._joystick = 0;
+        this.loopPaint = function () {
+            (function (me) {
+                window.requestAnimationFrame(function () {
+                    me.loopPaint();
+                });
+            })(this);
+
+            this.ctx.fillStyle = 'rgb(255,255,255)';
+            this.ctx.fillRect(0, 0, this._width, this._height);
+
+            var x, y;
+
+            for (var i = 0, len = this.paintables.length; i < len; i++) {
+                x = (this.paintables[i].x - this.x) * this.tileWidth;
+                y = (this.paintables[i].y - this.y) * this.tileHeight;
+                this.paintables[i].paintAt(x, y, this.ctx);
+            }
+        };
+
+        this.map = map;
+
+        if (typeof global == 'undefined') {
+            this.canvas = document.createElement('canvas');
+        } else {
+            var canvas = require('canvas');
+            this.canvas = new canvas;
+        }
+
+        this.resize(width, height);
+
+        this._setupMouseEvents();
+
+        this.loopPaint();
+    }
+    Viewport.prototype.updatePaintables = function () {
+        // determine the paintables objects
+        var cx = this.x, cy = this.y, cx1 = this.x + this.cols, cy1 = this.y + this.rows;
+
+        this.paintables = [];
+
+        for (var x = cx; x <= cx1; x++)
+            for (var y = cy; y < cy1; y++) {
+                if (x >= 0 && y >= 0 && x < this.map.cols && y < this.map.rows)
+                    this.paintables.push(this.map.cellAt(x, y));
+            }
+    };
+
+    Viewport.prototype.resize = function (width, height) {
+        this._width = width;
+        this._height = height;
+
+        this.canvas.width = this._width;
+        this.canvas.height = this._height;
+
+        this.ctx = this.canvas.getContext('2d');
+
+        this.tileWidth = this.map.tilesets[0].tileWidth;
+        this.tileHeight = this.map.tilesets[0].tileHeight;
+
+        this.cols = ~~(this._width / this.map.tilesets[0].tileWidth);
+        this.rows = ~~(this._height / this.map.tilesets[0].tileHeight);
+
+        this.updatePaintables();
+
+        console.log("resized viewport to: " + this._width + "x" + this._height + "px, cols=" + this.cols + ", rows=" + this.rows + ", " + this.paintables.length + " paintables in paint loop");
+    };
+
+    Viewport.prototype._setupMouseEvents = function () {
+        if (typeof global != 'undefined')
+            return;
+
+        (function (me) {
+            $(me.canvas).on('mousemove', function (evt) {
+                var x = evt.offsetX, y = evt.offsetY, col = ~~(x / me.tileWidth) + me.x, row = ~~(y / me.tileHeight) + me.y, cell = me.map.cellAt(col, row, false);
+
+                if (cell != me.map.activeCell)
+                    me.map.activeCell = cell;
+            });
+
+            $(me.canvas).on('mouseout', function () {
+                me.map.activeCell = null;
+            });
+
+            me.canvas.addEventListener('mousewheel', function (evt) {
+                var delta = evt.wheelDelta || -evt.detail;
+
+                delta = Math.abs(delta) >= 40 ? -(~~(delta / 40)) : delta;
+
+                delta = delta > 0 ? 1 : (delta < 0 ? -1 : 0);
+
+                if (delta == 0)
+                    return;
+
+                if (evt.shiftKey) {
+                    me.x += delta;
+
+                    if (me.x + me.cols >= me.map.cols - 1)
+                        me.x = me.map.cols - me.cols - 1;
+
+                    if (me.x < 0)
+                        me.x = 0;
+                } else {
+                    me.y += delta;
+
+                    if (me.y + me.rows >= me.map.rows)
+                        me.y = me.map.rows - me.rows - 1;
+
+                    if (me.y < 0)
+                        me.y = 0;
+                }
+
+                me.updatePaintables();
+            }, true);
+        })(this);
+    };
+    return Viewport;
+})(Events);
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
@@ -1071,7 +1265,8 @@ var AdvMap_Tileset_RoadsRivers = (function (_super) {
 ///<reference path="AdvMap/TilesetTerrain.ts" />
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
-var map = new AdvMap(32, 32);
+///<reference path="Viewport.ts" />
+var map = new AdvMap(32, 32, 'test.map');
 
 if (typeof window !== 'undefined')
     window['map'] = map;

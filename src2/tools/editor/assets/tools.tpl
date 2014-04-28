@@ -1,5 +1,4 @@
 <div class="widget" id="tools">
-    <h2>Brushes</h2>
     <div class="tabs" >
         <ul>
             <!-- BEGIN: layer -->
@@ -18,5 +17,8 @@
             </ul>
         </div>
         <!-- END: tab -->
+    </div>
+    <div id="paintbrush">
+        <b>Brush:</b> <span id="brush-info">No brush selected</span>
     </div>
 </div>

@@ -31,4 +31,8 @@ class Layer extends Events {
 		// not implemented
 	}
 
+	public paint( cellCol, cellRow, x, y, ctx ) {
+		
+	}
+
 }

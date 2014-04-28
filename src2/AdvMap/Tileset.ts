@@ -50,9 +50,6 @@ class AdvMap_Tileset extends Events {
 
 	        this._ctxWriter = this._canvas.getContext( '2d' );
 
-	        if ( typeof global == 'undefined' )
-	        	console.log( this._ctxWriter );
-
 	        ( function( me ) {
 	        	me.sprite.once( 'load', function() {
 	        		me.loaded = true;

@@ -7,6 +7,8 @@ class Layer_Terrain extends Layer {
 	public CT_DIRT  = 0;
 	public CT_ABYSS = 4;
 
+	public bitsorder = [ 0, 1, 2, 3 ];
+
 	// matrix correction bits
 	private mcb = [
 		[ 1,1 ], [ 2,1 ], [ 3,1 ], [ 4,1 ], [ 5,1 ], [ 6,1 ], [ 7,1 ], [ 8,1 ],
@@ -28,6 +30,7 @@ class Layer_Terrain extends Layer {
 	];
 
 	private _interactive = false;
+	private _tilesList = [];
 
 	constructor( public map: AdvMap, public index: number ) {
 	    
@@ -39,9 +42,19 @@ class Layer_Terrain extends Layer {
 
 	}
 
+	public bits2hash( bits ): string {
+		return bits[ 0 ] + ',' + bits[ 2 ] + ',' + bits[ 1 ] + ',' + bits[ 3 ];
+	}
+
 	private setBits( x, y, bits ) {
-		if ( x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows )
-			this.tiles[ y * this.map.rows + x ] = bits;
+		var tileIndex;
+		if ( x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows ) {
+			this.tiles[ tileIndex = ( y * this.map.rows + x ) ] = bits;
+
+			this._tilesList[ tileIndex ] = bits
+				? this.tileset.getTileIdByHash( this.bits2hash( bits ) )
+				: null;
+		}
 	}
 
 	private getBits( x, y, defaultBits ) {
@@ -113,11 +126,14 @@ class Layer_Terrain extends Layer {
 			me.map.on( 'resize', function( cols, rows ) {
 				
 				me.tiles = [];
+				me.tilesList = [];
 
 				// we keep a track of tiles ID's, depending on our map tileset data
 
-				for ( var i=0, len = cols * rows; i<len; i++ )
+				for ( var i=0, len = cols * rows; i<len; i++ ) {
 					me.tiles.push( null );
+					me.tilesList.push( null );
+				}
 
 			});
 
@@ -177,15 +193,22 @@ class Layer_Terrain extends Layer {
 		
 		console.log( "Terrain layer: begin set data" );
 
-		var old_interactive = this._interactive;
+		var old_interactive = this._interactive,
+		    i: number = 0,
+		    len: number = 0;
 		
 		this._interactive = false;
 
 		if ( data ) {
-
 			this.tiles = data.tiles;
 
-			for ( var i=0, len = this.map.cells.length; i<len; i++ ) {
+			for ( i=0, len = this.tiles.length; i<len; i++ ) {
+				this._tilesList[i] = this.tiles[i]
+					? this.tileset.getTileIdByHash( this.bits2hash( this.tiles[i] ) )
+					: null;
+			}
+
+			for ( i=0, len = this.map.cells.length; i<len; i++ ) {
 				this.map.cells[i].layers[ this.index ] = data.terrain[ i ];
 			}
 
@@ -205,6 +228,13 @@ class Layer_Terrain extends Layer {
 			this._interactive = value;
 			this.emit( 'interactive', value );
 		}
+	}
+
+	public paint( cellCol, cellRow, x, y, ctx ) {
+		var tileId = this._tilesList[ cellRow * this.map.rows + cellCol ] ;
+			if ( tileId ) {
+				this.tileset.paintTile( tileId, ctx, x, y );
+			}
 	}
 
 }

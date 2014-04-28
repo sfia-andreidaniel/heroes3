@@ -11,6 +11,10 @@ class AdvMap extends Events {
 
     public _iniLayers = null;
 
+    public viewports = [];
+
+    private _activeCell = null;
+
     constructor(  public _iniCols: number = 0, public _iniRows: number = 0, mapFile: string = null ) {
         
         super();
@@ -57,6 +61,17 @@ class AdvMap extends Events {
 
         }
 
+    }
+
+    get activeCell(): Cell {
+        return this._activeCell;
+    }
+
+    set activeCell( c: Cell ) {
+        if ( c != this._activeCell ) {
+            this._activeCell = c;
+            this.emit( 'selection-changed', c );
+        }
     }
 
     public _loadFS() {
@@ -267,5 +282,10 @@ class AdvMap extends Events {
         } );
 
         return t;
+    }
+
+    public addViewport( vp: Viewport ) /*: HTMLCanvasObject */ {
+        this.viewports.push( vp );
+        return vp;
     }
 }
