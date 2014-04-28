@@ -6,7 +6,7 @@ class AdvMap_TilesetTerrain {
 	public hash: number; //bitmask constant
 
 	private _validNeighbours = [];
-
+	private _tiles = [];
 
 	constructor ( config, public tileset: AdvMap_Tileset ) {
 
@@ -54,8 +54,34 @@ class AdvMap_TilesetTerrain {
 		this._validNeighbours = out;
 	}
 
+	public _computeTilesWhereThisTerrainIsSet() {
+
+		var out = [],
+		    terrains;
+
+		for ( var tid in this.tileset.tiles ) {
+
+			terrains = this.tileset.tiles[ tid ].hash.split( ',' );
+
+			terrains[0] = ~~terrains[0]; terrains[1] = ~~terrains[1];
+			terrains[2] = ~~terrains[2]; terrains[3] = ~~terrains[3];
+
+			if ( terrains.indexOf( this.id ) >= 0 )
+				out.push( ~~tid );
+
+		}
+
+		out.sort( function( a, b ) { return a - b; });
+
+		this._tiles = out;
+
+	}
+
 	get validNeighbours(): AdvMap_TilesetTerrain[] {
 		return this._validNeighbours;
 	}
 
+	get tiles() {
+		return this._tiles;
+	}
 }

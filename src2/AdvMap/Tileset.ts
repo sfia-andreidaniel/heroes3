@@ -71,6 +71,7 @@ class AdvMap_Tileset extends Events {
 	        // compute allowed terrain neighbours
 	        for ( i=0, len = this.terrains.length; i<len; i++ ) {
 	        	this.terrains[i]._computeAllowedNeighboursTerrains();
+	        	this.terrains[i]._computeTilesWhereThisTerrainIsSet();
 	        }
 
        		//console.log( 'loaded terrain: ', this.name, ': ', this.tileCols + 'x' + this.tileRows, " terrains: ", this.terrains.join( ", " ) );

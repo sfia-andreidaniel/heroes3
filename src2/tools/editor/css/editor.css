@@ -74,6 +74,11 @@ body {
     overflow-y: scroll;
 }
 
+.ui-dialog-content {
+    background-image: none !important;
+    background-color: white !important;
+}
+
 #tools .terrain-group,
 #tools .terrain-group > li {
     list-style-type: none;
@@ -106,6 +111,61 @@ body {
     display: inline;
     vertical-align: middle;
 }
+
+/* Tileset explorer dialog */
+
+.ui-dialog-content .tileset-explorer {
+    height: 172px;
+    display: block;
+    overflow-y: scroll;
+    margin: 5px;
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite {
+    
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite:hover {
+    color: white;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite:hover > img {
+    outline: 1px solid white;
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite > span.index {
+    z-index: 10;
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite > img {
+    position: absolute;
+    left: 25px;
+    top: 4px;
+    width: 32px;
+    height: auto;
+}
+
+.ui-dialog-content .tileset-explorer > div.sprite > span.id {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    text-align: right;
+}
+
+
+
+/* End of tilese texplorer dialog */
 
 /* BUTTONS */
 div.button {

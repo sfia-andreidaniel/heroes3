@@ -821,15 +821,66 @@ var Layer_RoadsRivers = (function (_super) {
         this.index = index;
         this.tileset = null;
         this._interactive = null;
+        this._tiles = [];
+        this._bits = [];
+        //      2
+        //  16  1   4
+        //      8
+        this._indexes = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
 
         this.tileset = this.map.tilesets[1];
 
         this._onInit();
     }
+    Layer_RoadsRivers.prototype.computeHash = function (x, y, recursive) {
+        if (typeof recursive === "undefined") { recursive = true; }
+        if (x < 0 || y < 0 || x > this.map.cols - 1 || y > this.map.rows - 1)
+            return;
+
+        console.log('chash: ', x, y);
+
+        // we-re computing hash depending on neighbours data
+        var my = y * this.map.rows + x;
+
+        var n = [x, y - 1], s = [x, y + 1], w = [x - 1, y], e = [x + 1, y], bits = [n, e, s, w], nbit = 2, ebit = 4, sbit = 8, wbit = 16, bitv = [nbit, ebit, sbit, wbit], hash = 1;
+
+        for (var i = 0; i < 4; i++) {
+            if (bits[i][0] >= 0 && bits[i][1] >= 0 && bits[i][0] < this.map.cols && bits[i][1] < this.map.rows && this._tiles[bits[i][1] * this.map.rows + bits[i][0]] === this._tiles[my]) {
+                hash += bitv[i];
+                if (recursive)
+                    this.computeHash(bits[i][0], bits[i][1], false);
+            }
+        }
+
+        this._bits[my] = hash;
+    };
+
     Layer_RoadsRivers.prototype._onInit = function () {
+        (function (me) {
+            me.map.on('resize', function (cols, rows) {
+                me._tiles = [];
+                me._bits = [];
+                for (var i = 0, len = cols * rows; i < len; i++) {
+                    me._tiles.push(null);
+                    me._bits.push(null);
+                }
+            });
+        })(this);
+
         this.on('change', function (x, y, data) {
             if (!this._interactive)
                 return;
+
+            this._tiles[y * this.map.rows + x] = data;
+
+            this.computeHash(x, y);
         });
     };
 
@@ -999,6 +1050,7 @@ var AdvMap_Tileset = (function (_super) {
 
             for (i = 0, len = this.terrains.length; i < len; i++) {
                 this.terrains[i]._computeAllowedNeighboursTerrains();
+                this.terrains[i]._computeTilesWhereThisTerrainIsSet();
             }
             //console.log( 'loaded terrain: ', this.name, ': ', this.tileCols + 'x' + this.tileRows, " terrains: ", this.terrains.join( ", " ) );
         }
@@ -1054,6 +1106,7 @@ var AdvMap_TilesetTerrain = (function () {
     function AdvMap_TilesetTerrain(config, tileset) {
         this.tileset = tileset;
         this._validNeighbours = [];
+        this._tiles = [];
         this.name = config.name;
         this.defaultTile = config.defaultTile;
         this.id = config.id;
@@ -1094,9 +1147,39 @@ var AdvMap_TilesetTerrain = (function () {
         this._validNeighbours = out;
     };
 
+    AdvMap_TilesetTerrain.prototype._computeTilesWhereThisTerrainIsSet = function () {
+        var out = [], terrains;
+
+        for (var tid in this.tileset.tiles) {
+            terrains = this.tileset.tiles[tid].hash.split(',');
+
+            terrains[0] = ~~terrains[0];
+            terrains[1] = ~~terrains[1];
+            terrains[2] = ~~terrains[2];
+            terrains[3] = ~~terrains[3];
+
+            if (terrains.indexOf(this.id) >= 0)
+                out.push(~~tid);
+        }
+
+        out.sort(function (a, b) {
+            return a - b;
+        });
+
+        this._tiles = out;
+    };
+
     Object.defineProperty(AdvMap_TilesetTerrain.prototype, "validNeighbours", {
         get: function () {
             return this._validNeighbours;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(AdvMap_TilesetTerrain.prototype, "tiles", {
+        get: function () {
+            return this._tiles;
         },
         enumerable: true,
         configurable: true
@@ -1266,7 +1349,7 @@ var Viewport = (function (_super) {
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
-var map = new AdvMap(32, 32, 'test.map');
+var map = new AdvMap(64, 64);
 
 if (typeof window !== 'undefined')
     window['map'] = map;

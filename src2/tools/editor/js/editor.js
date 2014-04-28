@@ -102,6 +102,60 @@ map.on( 'load', function() {
                 
             } );
             
+            $( '#tools .terrain-group li' ).on( 'dblclick', function() {
+                
+                // Explore tileset
+                
+                var matches,
+                    layerIndex,
+                    terrainIndex,
+                    terrainName = $(this).text();
+                
+                if ( !( matches = /^([\d]+)x([\d]+)$/.exec( $(this).attr( 'data-brush' ) ) ) )
+                    return; // tileset not explorable
+                
+                layerIndex = ~~matches[1];
+                terrainIndex = ~~matches[2];
+                
+                $.ajax( 'tools/editor/assets/tileset-explorer.tpl', {
+                    "type": "GET",
+                    "success": function( str ) {
+                        
+                        var tpl = new XTemplate( str );
+                        
+                        tpl.assign( 'terrainName', terrainName );
+                        
+                        var tiles = map.layers[ layerIndex ].tileset.terrains[ terrainIndex ].tiles;
+                        
+                        if ( tiles ) {
+                            
+                            for ( var i=0, len = tiles.length; i<len; i++ ) {
+                                tpl.assign ('index', i + '' );
+                                tpl.assign ('id', tiles[i] + '' );
+                                tpl.assign( 'src', map.layers[ layerIndex ].tileset.getTileBase64Src( tiles[i] ) || '' );
+                                tpl.parse( 'sprite' );
+                            }
+                            
+                        }
+                        
+                        tpl.parse();
+                        
+                        $( tpl.text + '' ).dialog({
+                            "width": 500,
+                            "height": 300,
+                            "close": function() {
+                                $(this).remove();
+                            },
+                            "modal": true,
+                            "title": "Explore tileset terrain",
+                            "resizable": false
+                        });
+                        
+                    }
+                } );
+                
+            } );
+            
             $('#btn-eraser').on( 'click', function() {
                 $('#brush-info').html(
                     '<span class="brush" data-brush="rubber">'
