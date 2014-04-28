@@ -255,7 +255,7 @@ var FS_File = (function (_super) {
     }
     FS_File.prototype.open = function () {
         // node wrapper
-        if (typeof global != 'undefined') {
+        if (typeof global !== 'undefined') {
             (function (f) {
                 var fs = require('fs');
 
@@ -314,7 +314,10 @@ f.open();
 */
 var AdvMap = (function (_super) {
     __extends(AdvMap, _super);
-    function AdvMap(_iniCols, _iniRows) {
+    function AdvMap(_iniCols, _iniRows, mapFile) {
+        if (typeof _iniCols === "undefined") { _iniCols = 0; }
+        if (typeof _iniRows === "undefined") { _iniRows = 0; }
+        if (typeof mapFile === "undefined") { mapFile = null; }
         _super.call(this);
         this._iniCols = _iniCols;
         this._iniRows = _iniRows;
@@ -324,13 +327,49 @@ var AdvMap = (function (_super) {
         this.rows = 0;
         this.layers = [];
         this.cells = [];
+        this._iniLayers = null;
 
         (function (me) {
             me.fs.on('ready', function () {
                 me._onFSReady();
             });
         })(this);
+
+        if (mapFile === null) {
+            this._loadFS();
+        } else {
+            console.log("Loading map file: ", 'resources/maps/' + mapFile);
+
+            this._iniCols = 0;
+            this._iniRows = 0;
+
+            var load = new FS_File('resources/maps/' + mapFile, 'json');
+
+            (function (me) {
+                load.once('ready', function () {
+                    console.log("Loaded map: " + this.data.width + "x" + this.data.height);
+
+                    me._iniCols = this.data.width;
+                    me._iniRows = this.data.height;
+                    me._iniLayers = this.data.layers;
+
+                    me._loadFS();
+                });
+
+                load.once('error', function () {
+                    throw "Failed to initialize map! Map file " + mapFile + " failed to load!";
+                });
+
+                load.open();
+            })(this);
+        }
     }
+    AdvMap.prototype._loadFS = function () {
+        /* Load filesystem data */
+        this.fs.add('tilesets/terrains.json', 'resources/tilesets/terrains.tsx.json', 'json');
+        this.fs.add('tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json');
+    };
+
     AdvMap.prototype._onFSReady = function () {
         (function (me) {
             me.addTileset(new AdvMap_Tileset_Terrains(me.fs.open('tilesets/terrains.json').data)).on('load', function (tileset) {
@@ -364,7 +403,9 @@ var AdvMap = (function (_super) {
     };
 
     AdvMap.prototype._onLayersReady = function () {
-        for (var i = 0, len = this.layers.length; i < len; i++) {
+        var len, i;
+
+        for (i = 0, len = this.layers.length; i < len; i++) {
             if (!this.layers[i].loaded)
                 return;
         }
@@ -373,13 +414,25 @@ var AdvMap = (function (_super) {
 
         /* Initialize cells for the first time */
         this.setSize(this._iniCols, this._iniRows);
+
+        /* Load layers */
+        if (this._iniLayers) {
+            for (i = 0, len = this._iniLayers.length; i < len; i++) {
+                this.layers[i].setData(this._iniLayers[i]);
+                this.layers[i].interactive = true;
+            }
+        }
     };
 
     AdvMap.prototype.setSize = function (columns, rows) {
+        console.log("SetSize::begin");
+
         this.cols = columns;
         this.rows = rows;
 
-        var needLen = columns * rows, len = this.cells.length, numLayers = this.layers.length;
+        var needLen = columns * rows, len = this.cells.length * 1, numLayers = this.layers.length * 1;
+
+        console.log("SetSize::resize begin");
 
         while (len != needLen) {
             if (len < needLen) {
@@ -391,12 +444,20 @@ var AdvMap = (function (_super) {
             }
         }
 
+        console.log("SetSize::compute neighbours");
+
         for (var i = 0; i < needLen; i++) {
             this.cells[i]._computeNeighbours();
         }
 
+        console.log("SetSize:: emit resize");
+
         this.emit('resize', columns, rows);
+
+        console.log("SetSize:: emit load");
         this.emit('load');
+
+        console.log("SetSize:: END");
     };
 
     AdvMap.prototype.cellAt = function (column, row, strict) {
@@ -432,6 +493,51 @@ var AdvMap = (function (_super) {
         console.log(out.join("\n"));
     };
 
+    AdvMap.prototype.getData = function () {
+        var data = {
+            "width": this.cols,
+            "height": this.rows,
+            "layers": []
+        };
+
+        for (var i = 0, len = this.layers.length; i < len; i++) {
+            data.layers.push(this.layers[i].getData());
+        }
+
+        return data;
+    };
+
+    AdvMap.prototype.save = function (fname, callback) {
+        var data = this.getData();
+
+        // saves the map to disk.
+        if (typeof global != 'undefined') {
+            var fs = require('fs');
+
+            fs.writeFile('resources/maps/' + fname, JSON.stringify(data), function (err) {
+                callback(err);
+            });
+        } else {
+            // JQuery submit to server
+            $.ajax('tools/save-map.php', {
+                'type': 'POST',
+                'data': {
+                    "data": JSON.stringify(data),
+                    "file": fname
+                },
+                "success": function (result) {
+                    if (!result.ok)
+                        callback(result.error || "Unknown server side error");
+                    else
+                        callback();
+                },
+                "error": function () {
+                    callback("Failed to save file (server error)!");
+                }
+            });
+        }
+    };
+
     AdvMap.prototype.addTileset = function (t) {
         this.tilesets.push(t);
 
@@ -465,6 +571,14 @@ var Layer = (function (_super) {
     Layer.prototype.set = function (column, row, data) {
         this.map.cellAt(column, row).layers[this.index] = data;
     };
+
+    Layer.prototype.getData = function () {
+        // not implemented
+    };
+
+    Layer.prototype.setData = function (data) {
+        // not implemented
+    };
     return Layer;
 })(Events);
 var Layer_Terrain = (function (_super) {
@@ -477,37 +591,30 @@ var Layer_Terrain = (function (_super) {
         this.CT_SAND = 1;
         this.CT_DIRT = 0;
         this.CT_ABYSS = 4;
+        // matrix correction bits
+        this.mcb = [
+            [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1],
+            [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2],
+            [1, 3], [2, 3], [7, 3], [8, 3],
+            [1, 4], [2, 4], [7, 4], [8, 4],
+            [1, 5], [2, 5], [7, 5], [8, 5],
+            [1, 6], [2, 6], [7, 6], [8, 6],
+            [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7],
+            [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8]
+        ];
+        // matrix write bits
+        this.mwb = [
+            [3, 3], [4, 3], [5, 3], [6, 3],
+            [3, 4], [4, 4], [5, 4], [6, 4],
+            [3, 5], [4, 5], [5, 5], [6, 5],
+            [3, 6], [4, 6], [5, 6], [6, 6]
+        ];
+        this._interactive = false;
 
         this.tileset = this.map.tilesets[0];
 
         this._onInit();
     }
-    Layer_Terrain.prototype.compute = function (x, y, radius) {
-        if (typeof radius === "undefined") { radius = 4; }
-        var x1 = x - radius, y1 = y - radius, x2 = x + radius, y2 = y + radius, bits, nBits, sBits, wBits, eBits, neBits, nwBits, seBits, swBits, computed = false;
-
-        x1 = x1 < 0 ? 0 : (x1 >= this.map.cols ? this.map.cols - 1 : x1);
-        y1 = y1 < 0 ? 0 : (y1 >= this.map.rows ? this.map.rows - 1 : y1);
-        x2 = x2 < x1 ? x1 : (x2 >= this.map.cols ? this.map.cols - 1 : x2);
-        y2 = y2 < y1 ? y1 : (y2 >= this.map.rows ? this.map.rows - 1 : y2);
-
-        for (var col = x1; col <= x2; col++) {
-            for (var row = y1; row <= y2; row++) {
-                bits = this.getBits(col, row, null);
-
-                nBits = this.getBits(col, row - 1, bits);
-                sBits = this.getBits(col, row + 1, bits);
-                wBits = this.getBits(col - 1, row, bits);
-                eBits = this.getBits(col + 1, row, bits);
-
-                neBits = this.getBits(col + 1, row - 1, bits);
-                nwBits = this.getBits(col - 1, row - 1, bits);
-                seBits = this.getBits(col + 1, row + 1, bits);
-                swBits = this.getBits(col - 1, row + 1, bits);
-            }
-        }
-    };
-
     Layer_Terrain.prototype.setBits = function (x, y, bits) {
         if (x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows)
             this.tiles[y * this.map.rows + x] = bits;
@@ -524,63 +631,131 @@ var Layer_Terrain = (function (_super) {
             ] : defaultBits;
     };
 
+    Layer_Terrain.prototype.getMatrix = function (x, y, defaultBits) {
+        var matrix = [
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null],
+            [null, null, null, null, null, null, null, null, null, null]
+        ], bits;
+
+        for (var row1 = -2, row = 0; row1 <= 2; row1++, row++) {
+            for (var col1 = -2, col = 0; col1 <= 2; col1++, col++) {
+                bits = this.getBits(x + col1, y + row1, defaultBits);
+
+                matrix[col * 2][row * 2] = bits[0];
+                matrix[col * 2][row * 2 + 1] = bits[1];
+                matrix[col * 2 + 1][row * 2] = bits[2];
+                matrix[col * 2 + 1][row * 2 + 1] = bits[3];
+            }
+        }
+
+        return matrix;
+    };
+
+    Layer_Terrain.prototype.writeMatrix = function (x, y, matrix) {
+        var bits;
+
+        for (var row1 = -2, row = 0; row1 <= 2; row1++, row++) {
+            for (var col1 = -2, col = 0; col1 <= 2; col1++, col++) {
+                bits = [
+                    matrix[col * 2][row * 2],
+                    matrix[col * 2][row * 2 + 1],
+                    matrix[col * 2 + 1][row * 2],
+                    matrix[col * 2 + 1][row * 2 + 1]
+                ];
+
+                this.setBits(x + col1, y + row1, bits);
+            }
+        }
+    };
+
     Layer_Terrain.prototype._onInit = function () {
         (function (me) {
             me.map.on('resize', function (cols, rows) {
                 for (var i = 0, len = cols * rows; i < len; i++)
                     me.tiles.push(null);
-
-                // console.log( "Layer_Terrain: reinitialized tile data" );
-                me.compute(0, 0, Math.max(this.cols, this.rows));
             });
         })(this);
 
+        // @data is a tileset terrain id
         this.on('change', function (x, y, data) {
+            if (!this._interactive)
+                return;
+
             console.log('change: ', x, y);
 
-            var bits, bits1;
+            var matrix = this.getMatrix(x, y, [data, data, data, data]);
 
-            this.setBits(x, y, bits = [data, data, data, data]);
+            for (var i = 0; i < 16; i++) {
+                // console.log( "mwb: ", this.mwb[i][1], this.mwb[i][0] );
+                matrix[this.mwb[i][1]][this.mwb[i][0]] = data;
+            }
 
-            bits1 = this.getBits(x - 1, y - 1, bits);
-            bits1[3] = bits[0];
-            this.setBits(x - 1, y - 1, bits1);
+            for (var i = 0; i < 48; i++) {
+                // console.log( "mcb: ", this.mcb[i][1], this.mcb[i][0] );
+                matrix[this.mcb[i][1]][this.mcb[i][0]] = matrix[this.mcb[i][1]][this.mcb[i][0]] == data ? data : this.CT_SAND;
+            }
 
-            bits1 = this.getBits(x, y - 1, bits);
-            bits1[2] = bits[0];
-            bits1[3] = bits[1];
-            this.setBits(x, y - 1, bits1);
-
-            bits1 = this.getBits(x + 1, y - 1, bits);
-            bits1[2] = bits[1];
-            this.setBits(x + 1, y - 1, bits1);
-
-            bits1 = this.getBits(x - 1, y, bits);
-            bits1[1] = bits[0];
-            bits1[3] = bits[2];
-            this.setBits(x - 1, y, bits1);
-
-            bits1 = this.getBits(x + 1, y, bits);
-            bits1[0] = bits[1];
-            bits1[2] = bits[3];
-            this.setBits(x + 1, y, bits1);
-
-            bits1 = this.getBits(x - 1, y + 1, bits);
-            bits1[1] = bits[2];
-            this.setBits(x - 1, y + 1, bits1);
-
-            bits1 = this.getBits(x, y + 1, bits);
-            bits1[0] = bits[2];
-            bits1[1] = bits[3];
-            this.setBits(x, y + 1, bits1);
-
-            bits1 = this.getBits(x + 1, y + 1);
-            bits1[0] = bits[3];
-            this.setBits(x + 1, y + 1, bits);
-
-            this.compute(x, y, 1);
+            // write matrix
+            this.writeMatrix(x, y, matrix);
         });
     };
+
+    Layer_Terrain.prototype._getTerrain = function () {
+        var out = [];
+        for (var i = 0, len = this.map.cells.length; i < len; i++)
+            out.push(this.map.cells[i].layers[this.index]);
+        return out;
+    };
+
+    Layer_Terrain.prototype.getData = function () {
+        return {
+            "tiles": this.tiles,
+            "terrain": this._getTerrain()
+        };
+    };
+
+    Layer_Terrain.prototype.setData = function (data) {
+        console.log("Terrain layer: begin set data");
+
+        var old_interactive = this._interactive;
+
+        this._interactive = false;
+
+        if (data) {
+            this.tiles = data.tiles;
+
+            for (var i = 0, len = this.map.cells.length; i < len; i++) {
+                this.map.cells[i].layers[this.index] = data.terrain[i];
+            }
+        }
+
+        this._interactive = old_interactive;
+
+        console.log("Terrain layer: end set data");
+    };
+
+    Object.defineProperty(Layer_Terrain.prototype, "interactive", {
+        get: function () {
+            return this._interactive;
+        },
+        set: function (value) {
+            if (this._interactive != value) {
+                this._interactive = value;
+                this.emit('interactive', value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+
     return Layer_Terrain;
 })(Layer);
 var Cell = (function () {
@@ -659,9 +834,14 @@ var AdvMap_Tileset = (function (_super) {
         this.loaded = false;
         this.terrains = [];
         this.tiles = {};
+        this.hashes = {};
         this.sprite = null;
         this.tileRows = 0;
         this.tileCols = 0;
+        this._canvas = null;
+        this._ctxWriter = null;
+
+        var len, i;
 
         if (data) {
             this.name = data.name;
@@ -673,6 +853,21 @@ var AdvMap_Tileset = (function (_super) {
             this.tileRows = data.height / this.tileHeight;
 
             this.sprite = new Picture(data.src);
+
+            /* Build the internal canvas writer */
+            if (typeof global == 'undefined') {
+                this._canvas = document.createElement('canvas');
+            } else {
+                this._canvas = new (require('canvas'));
+            }
+
+            this._canvas.width = this.tileWidth;
+            this._canvas.height = this.tileHeight;
+
+            this._ctxWriter = this._canvas.getContext('2d');
+
+            if (typeof global == 'undefined')
+                console.log(this._ctxWriter);
 
             (function (me) {
                 me.sprite.once('load', function () {
@@ -686,36 +881,105 @@ var AdvMap_Tileset = (function (_super) {
             })(this);
 
             this.tiles = data.tiles;
+            this.hashes = data.hashes;
 
-            for (var i = 0, len = data.types.length; i < len; i++) {
+            for (i = 0, len = data.types.length; i < len; i++) {
                 this.terrains.push(new AdvMap_TilesetTerrain(data.types[i], this));
+            }
+
+            for (i = 0, len = this.terrains.length; i < len; i++) {
+                this.terrains[i]._computeAllowedNeighboursTerrains();
             }
             //console.log( 'loaded terrain: ', this.name, ': ', this.tileCols + 'x' + this.tileRows, " terrains: ", this.terrains.join( ", " ) );
         }
     }
+    AdvMap_Tileset.prototype.getTileIdByHash = function (hash) {
+        var len;
+
+        if (this.hashes[hash] && (len = this.hashes[hash].length)) {
+            return this.hashes[hash][~~(Math.random() * len)];
+        } else
+            return null;
+    };
+
     AdvMap_Tileset.prototype.paintTile = function (tileId, ctx2d /*: CanvasRenderingContext2D */ , x, y) {
-        if (this.loaded && this.tiles[tileId]) {
+        if (this.loaded) {
             var sx, sy, sw, sh;
 
-            sx = (this.tileCols % tileId) * this.tileWidth;
-            sy = ~~(this.tileRows / tileId) * this.tileHeight;
+            sx = ~~(tileId % this.tileCols) * this.tileWidth;
+            sy = ~~(tileId / this.tileCols) * this.tileHeight;
+
+            console.log("paintTile: ", tileId, "ctx2d.drawImage( ... ", sx, sy, sw = this.tileWidth, sh = this.tileHeight, x, y, sw, sh, ")");
 
             ctx2d.drawImage(this.sprite.node, sx, sy, sw = this.tileWidth, sh = this.tileHeight, x, y, sw, sh);
         }
+    };
+
+    AdvMap_Tileset.prototype.getTerrainById = function (terrainId) {
+        return this.terrains[terrainId];
+    };
+
+    AdvMap_Tileset.prototype.getTileBase64Src = function (tileId) {
+        if (this._ctxWriter) {
+            this.paintTile(tileId, this._ctxWriter, 0, 0);
+
+            return this._canvas.toDataURL('image/png');
+        } else
+            return null;
     };
     return AdvMap_Tileset;
 })(Events);
 var AdvMap_TilesetTerrain = (function () {
     function AdvMap_TilesetTerrain(config, tileset) {
         this.tileset = tileset;
+        this._validNeighbours = [];
         this.name = config.name;
         this.defaultTile = config.defaultTile;
         this.id = config.id;
         this.hash = config.hash;
     }
     AdvMap_TilesetTerrain.prototype.toString = function () {
-        return this.name;
+        return this.id.toString();
     };
+
+    AdvMap_TilesetTerrain.prototype._computeAllowedNeighboursTerrains = function () {
+        var out = [], terrains = [];
+
+        var tid;
+
+        for (var tid in this.tileset.tiles) {
+            terrains = this.tileset.tiles[tid].hash.split(',');
+
+            terrains[0] = ~~terrains[0];
+            terrains[1] = ~~terrains[1];
+            terrains[2] = ~~terrains[2];
+            terrains[3] = ~~terrains[3];
+
+            if (terrains.indexOf(this.id) >= 0) {
+                for (var k = 0; k < 4; k++) {
+                    if (out.indexOf(terrains[k]) == -1) {
+                        out.push(terrains[k]);
+                    }
+                }
+            }
+        }
+
+        out.sort();
+
+        for (var i = 0, len = out.length; i < len; i++) {
+            out[i] = this.tileset.getTerrainById(out[i]);
+        }
+
+        this._validNeighbours = out;
+    };
+
+    Object.defineProperty(AdvMap_TilesetTerrain.prototype, "validNeighbours", {
+        get: function () {
+            return this._validNeighbours;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return AdvMap_TilesetTerrain;
 })();
 var AdvMap_Tileset_Terrains = (function (_super) {
@@ -745,7 +1009,10 @@ var AdvMap_Tileset_RoadsRivers = (function (_super) {
 ///<reference path="AdvMap/TilesetTerrain.ts" />
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
-var map = new AdvMap(10, 10);
+var map = new AdvMap(32, 32);
+
+if (typeof window !== 'undefined')
+    window['map'] = map;
 
 map.on('tileset-added', function (e) {
     console.log("MAP:", "Tileset: ", e.data.name);
@@ -769,18 +1036,8 @@ map.on('resize', function (width, height) {
 
 map.on('load', function () {
     console.log("map loaded");
-    map.cellAt(0, 0).layers[0] = 2;
-    console.log(map.layers[0].getBits(0, 0));
-    console.log(map.layers[0].getBits(1, 0));
-    console.log(map.layers[0].getBits(0, 1));
-    console.log(map.layers[0].getBits(1, 1));
 });
 
 map.fs.on('log', function (data) {
     console.log("FS :", data);
 });
-
-/* Load game files */
-map.fs.add('tilesets/terrains.json', 'resources/tilesets/terrains.tsx.json', 'json');
-map.fs.add('tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json');
-/* Setup Map Data*/ 

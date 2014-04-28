@@ -23,4 +23,12 @@ class Layer extends Events {
 		this.map.cellAt( column, row ).layers[ this.index ] = data;
 	}
 
+	public getData(): any {
+		// not implemented
+	}
+
+	public setData( data: any ) {
+		// not implemented
+	}
+
 }

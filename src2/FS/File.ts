@@ -15,7 +15,7 @@ class FS_File extends Events {
 	    
 	    // node wrapper
 	    
-	    if ( typeof global != 'undefined' ) {
+	    if ( typeof global !== 'undefined' ) {
                 
                 ( function( f ) {
 

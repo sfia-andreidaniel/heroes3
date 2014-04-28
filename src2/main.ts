@@ -12,7 +12,10 @@
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 
-var map = new AdvMap( 10, 10 );
+var map = new AdvMap( 32, 32 /*, 'test.map' */ );
+
+if ( typeof window !== 'undefined' )
+	window[ 'map' ] = map;
 
 map.on( 'tileset-added', function( e ) {
     console.log( "MAP:", "Tileset: ", e.data.name );
@@ -35,21 +38,11 @@ map.on( 'resize', function( width: number, height: number ) {
 });
 
 map.on( 'load', function() {
+	
 	console.log( "map loaded");
-	map.cellAt(0,0).layers[0] = 2;
-	console.log( map.layers[0].getBits( 0, 0 ) ); 
-	console.log( map.layers[0].getBits( 1, 0 ) ); 
-	console.log( map.layers[0].getBits( 0, 1 ) ); 
-	console.log( map.layers[0].getBits( 1, 1 ) ); 
+
 });
 
 map.fs.on( 'log', function( data ) {
     console.log( "FS :", data );
 } );
-
-/* Load game files */
-
-map.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json', 'json' );
-map.fs.add( 'tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json' );
-
-/* Setup Map Data*/

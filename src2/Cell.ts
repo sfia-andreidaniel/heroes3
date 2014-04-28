@@ -23,7 +23,7 @@ class Cell {
 	    			},
 	    			"set": function( data: any ) {
 	    				nowVal = data;
-	    				cell.map.layers[ index ].emit( 'change', cell.x, cell.y, data );
+	   					cell.map.layers[ index ].emit( 'change', cell.x, cell.y, data );
 	    			}
 	    		} );
 

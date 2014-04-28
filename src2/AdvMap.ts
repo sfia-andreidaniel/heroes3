@@ -9,7 +9,9 @@ class AdvMap extends Events {
     public layers = [];
     public cells  = [];
 
-    constructor( public _iniCols: number, public _iniRows: number ) {
+    public _iniLayers = null;
+
+    constructor(  public _iniCols: number = 0, public _iniRows: number = 0, mapFile: string = null ) {
         
         super();
         
@@ -18,6 +20,49 @@ class AdvMap extends Events {
                 me._onFSReady();
             } );
         } )( this );
+
+        if ( mapFile === null ) {
+        
+            this._loadFS();
+        
+        } else {
+
+            console.log( "Loading map file: ", 'resources/maps/' + mapFile );
+
+            this._iniCols = 0;
+            this._iniRows = 0;
+
+            var load = new FS_File( 'resources/maps/' + mapFile, 'json' );
+
+            ( function( me ) {
+
+                load.once( 'ready', function() {
+
+                    console.log( "Loaded map: " + this.data.width + "x" + this.data.height );
+
+                    me._iniCols = this.data.width;
+                    me._iniRows = this.data.height;
+                    me._iniLayers = this.data.layers;
+
+                    me._loadFS();
+                } );
+
+                load.once( 'error', function() {
+                    throw "Failed to initialize map! Map file " + mapFile + " failed to load!";
+                } );
+
+                load.open();
+
+            })( this );
+
+        }
+
+    }
+
+    public _loadFS() {
+        /* Load filesystem data */
+        this.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json', 'json' );
+        this.fs.add( 'tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json' );
     }
 
     public _onFSReady() {
@@ -62,7 +107,10 @@ class AdvMap extends Events {
 
     public _onLayersReady( ) {
 
-        for ( var i=0, len = this.layers.length; i<len; i++ ) {
+        var len: number,
+            i: number;
+
+        for ( i=0, len = this.layers.length; i<len; i++ ) {
             if ( !this.layers[i].loaded )
                 return;
         }
@@ -70,17 +118,29 @@ class AdvMap extends Events {
         this.emit( 'layers-ready' );
 
         /* Initialize cells for the first time */
-        this.setSize( this._iniCols, this._iniRows )
+        this.setSize( this._iniCols, this._iniRows );
+
+        /* Load layers */
+        if ( this._iniLayers ) {
+            for ( i=0, len = this._iniLayers.length; i<len; i++ ) {
+                this.layers[i].setData( this._iniLayers[i] );
+                this.layers[i].interactive = true;
+            }
+        }
 
     }
     
     public setSize( columns: number, rows: number ) {
+        console.log( "SetSize::begin");
+
         this.cols = columns;
         this.rows = rows;
 
         var needLen = columns * rows,
-            len = this.cells.length,
-            numLayers = this.layers.length;
+            len = this.cells.length * 1,
+            numLayers = this.layers.length * 1;
+
+        console.log( "SetSize::resize begin");
 
         while ( len != needLen ) {
             if ( len < needLen ) {
@@ -92,12 +152,21 @@ class AdvMap extends Events {
             }
         }
 
+
+        console.log( "SetSize::compute neighbours" );
+
         for ( var i=0; i<needLen; i++ ) {
             this.cells[i]._computeNeighbours();
         }
 
+        console.log( "SetSize:: emit resize");
+
         this.emit( 'resize', columns, rows );
+
+        console.log( "SetSize:: emit load");
         this.emit( 'load' );
+
+        console.log( "SetSize:: END")
     }
 
     public cellAt( column: number, row: number, strict: boolean = true ): Cell {
@@ -132,6 +201,58 @@ class AdvMap extends Events {
         }
 
         console.log( out.join( "\n" ) );
+    }
+
+    public getData() {
+
+        var data = {
+            "width": this.cols,
+            "height": this.rows,
+            "layers": [
+            ]
+        };
+
+        for ( var i=0, len = this.layers.length; i<len; i++ ) {
+            data.layers.push( this.layers[i].getData() );
+        }
+
+        return data;
+
+    }
+
+    public save( fname: string, callback ) {
+
+        var data = this.getData();
+
+        // saves the map to disk.
+        if ( typeof global != 'undefined' ) {
+
+            var fs = require( 'fs' );
+
+            fs.writeFile( 'resources/maps/' + fname, JSON.stringify( data ), function( err ) {
+                callback( err );
+            });
+
+        } else {
+
+            // JQuery submit to server
+            $.ajax( 'tools/save-map.php', {
+                'type': 'POST',
+                'data': {
+                    "data": JSON.stringify( data ),
+                    "file": fname
+                },
+                "success": function( result ) {
+                    if ( !result.ok )
+                        callback( result.error || "Unknown server side error" );
+                    else
+                        callback();
+                },
+                "error": function() {
+                    callback( "Failed to save file (server error)!" );
+                }
+            } )
+        }
     }
 
     public addTileset ( t: AdvMap_Tileset ) {
