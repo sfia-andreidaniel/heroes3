@@ -399,6 +399,10 @@ var AdvMap = (function (_super) {
             me.layers.push((new Layer_Terrain(me, 0)).on('load', function () {
                 me._onLayersReady();
             }));
+
+            me.layers.push((new Layer_RoadsRivers(me, 1)).on('load', function () {
+                me._onLayersReady();
+            }));
         })(this);
     };
 
@@ -679,6 +683,8 @@ var Layer_Terrain = (function (_super) {
     Layer_Terrain.prototype._onInit = function () {
         (function (me) {
             me.map.on('resize', function (cols, rows) {
+                me.tiles = [];
+
                 for (var i = 0, len = cols * rows; i < len; i++)
                     me.tiles.push(null);
             });
@@ -757,6 +763,50 @@ var Layer_Terrain = (function (_super) {
     });
 
     return Layer_Terrain;
+})(Layer);
+var Layer_RoadsRivers = (function (_super) {
+    __extends(Layer_RoadsRivers, _super);
+    function Layer_RoadsRivers(map, index) {
+        _super.call(this, map, index);
+        this.map = map;
+        this.index = index;
+        this.tileset = null;
+        this._interactive = null;
+
+        this.tileset = this.map.tilesets[1];
+
+        this._onInit();
+    }
+    Layer_RoadsRivers.prototype._onInit = function () {
+        this.on('change', function (x, y, data) {
+            if (!this._interactive)
+                return;
+        });
+    };
+
+    Object.defineProperty(Layer_RoadsRivers.prototype, "interactive", {
+        get: function () {
+            return this._interactive;
+        },
+        set: function (value) {
+            if (this._interactive != value) {
+                this._interactive = value;
+                this.emit('interactive', value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+
+    Layer_RoadsRivers.prototype.getData = function () {
+        return null;
+    };
+
+    Layer_RoadsRivers.prototype.setData = function (data) {
+        // not implemented
+    };
+    return Layer_RoadsRivers;
 })(Layer);
 var Cell = (function () {
     function Cell(cellIndex, numLayers, map) {
@@ -909,8 +959,17 @@ var AdvMap_Tileset = (function (_super) {
             sx = ~~(tileId % this.tileCols) * this.tileWidth;
             sy = ~~(tileId / this.tileCols) * this.tileHeight;
 
-            console.log("paintTile: ", tileId, "ctx2d.drawImage( ... ", sx, sy, sw = this.tileWidth, sh = this.tileHeight, x, y, sw, sh, ")");
-
+            /*
+            console.log( "paintTile: ", tileId, "ctx2d.drawImage( ... ",
+            sx,
+            sy,
+            sw = this.tileWidth,
+            sh = this.tileHeight,
+            x,
+            y,
+            sw,
+            sh, ")" );
+            */
             ctx2d.drawImage(this.sprite.node, sx, sy, sw = this.tileWidth, sh = this.tileHeight, x, y, sw, sh);
         }
     };
@@ -921,6 +980,8 @@ var AdvMap_Tileset = (function (_super) {
 
     AdvMap_Tileset.prototype.getTileBase64Src = function (tileId) {
         if (this._ctxWriter) {
+            this._ctxWriter.clearRect(0, 0, this.tileWidth, this.tileHeight);
+
             this.paintTile(tileId, this._ctxWriter, 0, 0);
 
             return this._canvas.toDataURL('image/png');
@@ -1003,6 +1064,7 @@ var AdvMap_Tileset_RoadsRivers = (function (_super) {
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
 ///<reference path="Layer/Terrain.ts" />
+///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="Cell.ts" />
 ///<reference path="AdvMap/Tileset.ts" />

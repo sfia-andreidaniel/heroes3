@@ -100,6 +100,7 @@ class AdvMap_Tileset extends Events {
 	    	sx = ~~( tileId % this.tileCols ) * this.tileWidth;
 			sy = ~~( tileId / this.tileCols ) * this.tileHeight;
 
+			/*
 			console.log( "paintTile: ", tileId, "ctx2d.drawImage( ... ", 
 				sx,
 				sy,
@@ -109,7 +110,8 @@ class AdvMap_Tileset extends Events {
 				y,
 				sw,
 				sh, ")" );
-			
+			*/
+
 			ctx2d.drawImage( 
 				this.sprite.node,
 				sx,
@@ -133,6 +135,8 @@ class AdvMap_Tileset extends Events {
     public getTileBase64Src( tileId ) {
 
     	if ( this._ctxWriter ) {
+
+    		this._ctxWriter.clearRect ( 0 , 0 , this.tileWidth , this.tileHeight );
 
     		this.paintTile( tileId, this._ctxWriter, 0, 0 );
 

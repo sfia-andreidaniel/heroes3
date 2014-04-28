@@ -1,5 +1,5 @@
 <div class="widget" id="tools">
-    <h2>Tools</h2>
+    <h2>Brushes</h2>
     <div class="tabs" >
         <ul>
             <!-- BEGIN: layer -->

@@ -102,6 +102,10 @@ class AdvMap extends Events {
                 me._onLayersReady();
             } ));
 
+            me.layers.push( ( new Layer_RoadsRivers( me, 1 ) ).on( 'load', function() {
+                me._onLayersReady();
+            } ));
+
         } )( this );
     }
 

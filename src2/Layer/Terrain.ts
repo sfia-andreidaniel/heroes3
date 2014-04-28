@@ -111,6 +111,9 @@ class Layer_Terrain extends Layer {
 		( function( me ) {
 
 			me.map.on( 'resize', function( cols, rows ) {
+				
+				me.tiles = [];
+
 				// we keep a track of tiles ID's, depending on our map tileset data
 
 				for ( var i=0, len = cols * rows; i<len; i++ )
