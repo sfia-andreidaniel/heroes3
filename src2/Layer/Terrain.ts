@@ -1,11 +1,14 @@
 class Layer_Terrain extends Layer {
 
-	public tileset: AdvMap_Tileset_Terrains;
-	public tiles = [];
+	public   tileset: AdvMap_Tileset_Terrains;
+	public   tiles = [];						// array of terrain bits
+	private _tilesList = [];					// array of tileset id of sprites
+
 
 	public CT_SAND  = 1;
 	public CT_DIRT  = 0;
 	public CT_ABYSS = 4;
+	public CT_WATER = 9;
 
 	public bitsorder = [ 0, 1, 2, 3 ];
 
@@ -29,9 +32,6 @@ class Layer_Terrain extends Layer {
 	    [ 3,6 ], [ 4,6 ], [ 5,6 ], [ 6,6 ]
 	];
 
-	private _interactive = false;
-	private _tilesList = [];
-
 	constructor( public map: AdvMap, public index: number ) {
 	    
 	    super( map, index );
@@ -47,7 +47,9 @@ class Layer_Terrain extends Layer {
 	}
 
 	private setBits( x, y, bits ) {
+		
 		var tileIndex;
+
 		if ( x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows ) {
 			this.tiles[ tileIndex = ( y * this.map.rows + x ) ] = bits;
 
@@ -126,13 +128,13 @@ class Layer_Terrain extends Layer {
 			me.map.on( 'resize', function( cols, rows ) {
 				
 				me.tiles = [];
-				me.tilesList = [];
+				me._tilesList = [];
 
 				// we keep a track of tiles ID's, depending on our map tileset data
 
 				for ( var i=0, len = cols * rows; i<len; i++ ) {
 					me.tiles.push( null );
-					me.tilesList.push( null );
+					me._tilesList.push( null );
 				}
 
 			});
@@ -146,7 +148,12 @@ class Layer_Terrain extends Layer {
 			if ( !this._interactive )
 				return;
 
-			console.log( 'change: ', x, y );
+			if ( data == null ) {
+
+				this.setBits( x, y, null );
+
+				return;
+			}
 
 			var matrix = this.getMatrix( x, y, [ data, data, data, data ] );
 
@@ -170,7 +177,6 @@ class Layer_Terrain extends Layer {
 
 			this.writeMatrix( x, y, matrix );
 
-
 		});
 
 	}
@@ -178,7 +184,7 @@ class Layer_Terrain extends Layer {
 	private _getTerrain() {
 		var out = [];
 		for ( var i=0, len = this.map.cells.length; i<len; i++ )
-			out.push( this.map.cells[i].layers[ this.index ] );
+			out.push( this.map.cells[i].getData( this.index ) );
 		return out;
 	}
 
@@ -191,8 +197,6 @@ class Layer_Terrain extends Layer {
 
 	public setData( data: any ) {
 		
-		console.log( "Terrain layer: begin set data" );
-
 		var old_interactive = this._interactive,
 		    i: number = 0,
 		    len: number = 0;
@@ -209,32 +213,28 @@ class Layer_Terrain extends Layer {
 			}
 
 			for ( i=0, len = this.map.cells.length; i<len; i++ ) {
-				this.map.cells[i].layers[ this.index ] = data.terrain[ i ];
+				this.map.cells[i].setData( this.index, data.terrain[ i ] );
 			}
 
 		}
 
 		this._interactive = old_interactive;
-
-		console.log( "Terrain layer: end set data" );
-	}
-
-	get interactive(): boolean {
-		return this._interactive;
-	}
-
-	set interactive( value: boolean ) {
-		if ( this._interactive != value ) {
-			this._interactive = value;
-			this.emit( 'interactive', value );
-		}
 	}
 
 	public paint( cellCol, cellRow, x, y, ctx ) {
-		var tileId = this._tilesList[ cellRow * this.map.rows + cellCol ] ;
-			if ( tileId ) {
-				this.tileset.paintTile( tileId, ctx, x, y );
-			}
+
+		if ( this.visible ) {
+			var tileId = this._tilesList[ cellRow * this.map.rows + cellCol ] ;
+				if ( tileId ) {
+					this.tileset.paintTile( tileId, ctx, x, y );
+				}
+		}
+
+	}
+
+	/* The name of the layer */
+	get name(): string {
+		return "Terrain";
 	}
 
 }

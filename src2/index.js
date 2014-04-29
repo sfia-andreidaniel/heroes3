@@ -446,18 +446,14 @@ var AdvMap = (function (_super) {
     };
 
     AdvMap.prototype.setSize = function (columns, rows) {
-        console.log("SetSize::begin");
-
         this.cols = columns;
         this.rows = rows;
 
-        var needLen = columns * rows, len = this.cells.length * 1, numLayers = this.layers.length * 1;
-
-        console.log("SetSize::resize begin");
+        var needLen = columns * rows, len = this.cells.length;
 
         while (len != needLen) {
             if (len < needLen) {
-                this.cells.push(new Cell(len, numLayers, this));
+                this.cells.push(new Cell(len, this));
                 len++;
             } else {
                 this.cells.splice(len - 1, 1);
@@ -465,20 +461,12 @@ var AdvMap = (function (_super) {
             }
         }
 
-        console.log("SetSize::compute neighbours");
-
         for (var i = 0; i < needLen; i++) {
             this.cells[i]._computeNeighbours();
         }
 
-        console.log("SetSize:: emit resize");
-
         this.emit('resize', columns, rows);
-
-        console.log("SetSize:: emit load");
         this.emit('load');
-
-        console.log("SetSize:: END");
     };
 
     AdvMap.prototype.cellAt = function (column, row, strict) {
@@ -582,6 +570,8 @@ var Layer = (function (_super) {
         this.map = map;
         this.index = index;
         this.loaded = false;
+        this._interactive = null;
+        this.visible = true;
 
         (function (me) {
             setTimeout(function () {
@@ -591,11 +581,11 @@ var Layer = (function (_super) {
         })(this);
     }
     Layer.prototype.get = function (column, row) {
-        return this.map.cellAt(column, row).layers[this.index];
+        return this.map.cellAt(column, row).getData(this.index);
     };
 
     Layer.prototype.set = function (column, row, data) {
-        this.map.cellAt(column, row).layers[this.index] = data;
+        this.map.cellAt(column, row).setData(this.index, data);
     };
 
     Layer.prototype.getData = function () {
@@ -608,6 +598,30 @@ var Layer = (function (_super) {
 
     Layer.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
     };
+
+    Object.defineProperty(Layer.prototype, "interactive", {
+        get: function () {
+            return this._interactive;
+        },
+        set: function (value) {
+            if (this._interactive != value) {
+                this._interactive = value;
+                this.emit('interactive', value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+
+    Object.defineProperty(Layer.prototype, "name", {
+        /* The name of the layer */
+        get: function () {
+            return 'Unnamed Layer';
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Layer;
 })(Events);
 var Layer_Terrain = (function (_super) {
@@ -617,9 +631,11 @@ var Layer_Terrain = (function (_super) {
         this.map = map;
         this.index = index;
         this.tiles = [];
+        this._tilesList = [];
         this.CT_SAND = 1;
         this.CT_DIRT = 0;
         this.CT_ABYSS = 4;
+        this.CT_WATER = 9;
         this.bitsorder = [0, 1, 2, 3];
         // matrix correction bits
         this.mcb = [
@@ -639,8 +655,6 @@ var Layer_Terrain = (function (_super) {
             [3, 5], [4, 5], [5, 5], [6, 5],
             [3, 6], [4, 6], [5, 6], [6, 6]
         ];
-        this._interactive = false;
-        this._tilesList = [];
 
         this.tileset = this.map.tilesets[0];
 
@@ -652,6 +666,7 @@ var Layer_Terrain = (function (_super) {
 
     Layer_Terrain.prototype.setBits = function (x, y, bits) {
         var tileIndex;
+
         if (x >= 0 && x < this.map.cols && y >= 0 && y < this.map.rows) {
             this.tiles[tileIndex = (y * this.map.rows + x)] = bits;
 
@@ -719,11 +734,11 @@ var Layer_Terrain = (function (_super) {
         (function (me) {
             me.map.on('resize', function (cols, rows) {
                 me.tiles = [];
-                me.tilesList = [];
+                me._tilesList = [];
 
                 for (var i = 0, len = cols * rows; i < len; i++) {
                     me.tiles.push(null);
-                    me.tilesList.push(null);
+                    me._tilesList.push(null);
                 }
             });
         })(this);
@@ -733,7 +748,11 @@ var Layer_Terrain = (function (_super) {
             if (!this._interactive)
                 return;
 
-            console.log('change: ', x, y);
+            if (data == null) {
+                this.setBits(x, y, null);
+
+                return;
+            }
 
             var matrix = this.getMatrix(x, y, [data, data, data, data]);
 
@@ -755,7 +774,7 @@ var Layer_Terrain = (function (_super) {
     Layer_Terrain.prototype._getTerrain = function () {
         var out = [];
         for (var i = 0, len = this.map.cells.length; i < len; i++)
-            out.push(this.map.cells[i].layers[this.index]);
+            out.push(this.map.cells[i].getData(this.index));
         return out;
     };
 
@@ -767,8 +786,6 @@ var Layer_Terrain = (function (_super) {
     };
 
     Layer_Terrain.prototype.setData = function (data) {
-        console.log("Terrain layer: begin set data");
-
         var old_interactive = this._interactive, i = 0, len = 0;
 
         this._interactive = false;
@@ -781,36 +798,30 @@ var Layer_Terrain = (function (_super) {
             }
 
             for (i = 0, len = this.map.cells.length; i < len; i++) {
-                this.map.cells[i].layers[this.index] = data.terrain[i];
+                this.map.cells[i].setData(this.index, data.terrain[i]);
             }
         }
 
         this._interactive = old_interactive;
-
-        console.log("Terrain layer: end set data");
     };
 
-    Object.defineProperty(Layer_Terrain.prototype, "interactive", {
-        get: function () {
-            return this._interactive;
-        },
-        set: function (value) {
-            if (this._interactive != value) {
-                this._interactive = value;
-                this.emit('interactive', value);
+    Layer_Terrain.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
+        if (this.visible) {
+            var tileId = this._tilesList[cellRow * this.map.rows + cellCol];
+            if (tileId) {
+                this.tileset.paintTile(tileId, ctx, x, y);
             }
+        }
+    };
+
+    Object.defineProperty(Layer_Terrain.prototype, "name", {
+        /* The name of the layer */
+        get: function () {
+            return "Terrain";
         },
         enumerable: true,
         configurable: true
     });
-
-
-    Layer_Terrain.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
-        var tileId = this._tilesList[cellRow * this.map.rows + cellCol];
-        if (tileId) {
-            this.tileset.paintTile(tileId, ctx, x, y);
-        }
-    };
     return Layer_Terrain;
 })(Layer);
 var Layer_RoadsRivers = (function (_super) {
@@ -820,19 +831,99 @@ var Layer_RoadsRivers = (function (_super) {
         this.map = map;
         this.index = index;
         this.tileset = null;
-        this._interactive = null;
         this._tiles = [];
         this._bits = [];
+        this._computed = [];
         //      2
         //  16  1   4
         //      8
+        /* There are 16 possible cases for the tiles of this layer.
+        Each case is determined by summing a mask of bits:
+        
+        center: 1, north: 2, east: 4, south: 8, west: 16
+        
+        In the _indexes, we're assigning tiles that match this bits
+        combinations
+        */
         this._indexes = [
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
+            {
+                "3": [59, 64], "5": [58, 60], "17": [43, 65], "9": [42, 61], "11": [34, 36, 39, 41, 51, 53, 54, 56], "21": [35, 37, 38, 40, 50, 52, 55, 57],
+                "31": [62, 63, 66, 67], "15": [12, 28, 46, 48], "29": [13, 29, 32], "23": [26, 44, 47], "27": [27, 31, 33, 45],
+                "19": [15, 17, 19, 21, 23, 25], "7": [14, 16, 18, 20, 22, 24], "13": [0, 2, 4, 6, 8, 10], "25": [1, 3, 5, 7, 9, 11]
+            },
+            {
+                "3": [63, 64], "5": [58, 62], "17": [57, 65], "9": [56, 59], "11": [32, 34, 37, 39, 49, 51, 52, 54], "21": [35, 36, 38, 50, 53, 55],
+                "31": [60, 61, 66, 67], "15": [24, 26, 44, 46], "29": [25, 27, 28, 30], "23": [40, 42, 45, 47], "27": [29, 31, 41, 43], "19": [13, 15, 17, 19, 21, 23],
+                "7": [12, 14, 16, 18, 20, 22], "13": [0, 2, 4, 6, 8, 10], "25": [1, 3, 5, 7, 9, 11]
+            },
+            {
+                "3": [45],
+                "5": [46],
+                "17": [46],
+                "9": [48],
+                "11": [30, 32, 35, 37, 38, 45, 47, 48, 50],
+                "21": [31, 33, 34, 36, 44, 46, 49, 51],
+                "31": [8, 9, 20, 21],
+                "15": [22, 26, 28],
+                "29": [10, 27, 29],
+                "23": [23, 40, 42],
+                "27": [11, 41, 43],
+                "19": [13, 15, 17, 19],
+                "7": [12, 14, 18, 16],
+                "13": [0, 2, 4, 6],
+                "25": [1, 3, 5, 7]
+            },
+            {
+                "3": [50, 48],
+                "5": [44, 46, 49, 51],
+                "17": [44, 46, 49, 51],
+                "9": [50, 48],
+                "11": [28, 30, 33, 35, 45, 47, 48, 50],
+                "21": [29, 31, 32, 34, 44, 46, 49, 51],
+                "31": [8, 9, 18, 19],
+                "15": [24, 26, 36, 38],
+                "29": [20, 22, 25, 27],
+                "23": [37, 39, 40, 42],
+                "27": [21, 23, 41, 43],
+                "19": [11, 13, 15, 17],
+                "7": [10, 12, 14, 16],
+                "13": [0, 2, 4, 6],
+                "25": [1, 3, 5, 7]
+            },
+            {
+                "3": [36, 41, 45],
+                "5": [40, 44, 46, 51],
+                "17": [40, 44, 46, 51],
+                "9": [36, 41, 45],
+                "11": [34, 36, 39, 41, 45, 47, 48, 50],
+                "21": [35, 37, 40, 44, 46, 49, 51],
+                "31": [8, 9, 24, 25],
+                "15": [26, 28, 32],
+                "29": [10, 12, 33],
+                "23": [27, 29, 42],
+                "27": [11, 13, 31, 43],
+                "19": [17, 19, 23],
+                "7": [16, 18, 22],
+                "13": [0, 2, 4, 6],
+                "25": [1, 3, 5, 7]
+            },
+            {
+                "3": [24, 41, 47],
+                "5": [40, 46, 51],
+                "17": [40, 46, 51],
+                "9": [24, 41, 47],
+                "11": [24, 41, 45, 47, 48, 50],
+                "21": [25, 27, 40, 42, 44, 46, 49, 51],
+                "31": [14, 15, 30, 31],
+                "15": [20, 22],
+                "29": [18, 21, 23],
+                "23": [33, 35, 36, 38],
+                "27": [19, 37, 39],
+                "19": [7, 9, 11, 29],
+                "7": [6, 8, 10, 28],
+                "13": [0, 2, 4, 12],
+                "25": [1, 3, 5, 13]
+            }
         ];
 
         this.tileset = this.map.tilesets[1];
@@ -843,8 +934,6 @@ var Layer_RoadsRivers = (function (_super) {
         if (typeof recursive === "undefined") { recursive = true; }
         if (x < 0 || y < 0 || x > this.map.cols - 1 || y > this.map.rows - 1)
             return;
-
-        console.log('chash: ', x, y);
 
         // we-re computing hash depending on neighbours data
         var my = y * this.map.rows + x;
@@ -860,6 +949,7 @@ var Layer_RoadsRivers = (function (_super) {
         }
 
         this._bits[my] = hash;
+        this._computed[my] = this._computeTile(x, y);
     };
 
     Layer_RoadsRivers.prototype._onInit = function () {
@@ -867,9 +957,11 @@ var Layer_RoadsRivers = (function (_super) {
             me.map.on('resize', function (cols, rows) {
                 me._tiles = [];
                 me._bits = [];
+                me._computed = [];
                 for (var i = 0, len = cols * rows; i < len; i++) {
                     me._tiles.push(null);
                     me._bits.push(null);
+                    me._computed.push(null);
                 }
             });
         })(this);
@@ -884,71 +976,111 @@ var Layer_RoadsRivers = (function (_super) {
         });
     };
 
-    Object.defineProperty(Layer_RoadsRivers.prototype, "interactive", {
-        get: function () {
-            return this._interactive;
-        },
-        set: function (value) {
-            if (this._interactive != value) {
-                this._interactive = value;
-                this.emit('interactive', value);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-
+    Layer_RoadsRivers.prototype._getLayerData = function () {
+        var out = [];
+        for (var i = 0, len = this.map.cells.length; i < len; i++) {
+            out.push(this.map.cells[i].getData(this.index));
+        }
+        return out;
+    };
 
     Layer_RoadsRivers.prototype.getData = function () {
-        return null;
+        return {
+            "bits": this._bits,
+            "tiles": this._tiles,
+            "computed": this._computed,
+            "data": this._getLayerData()
+        };
     };
 
     Layer_RoadsRivers.prototype.setData = function (data) {
-        // not implemented
+        var old_interactive = this._interactive;
+        this._interactive = false;
+
+        if (data) {
+            this._bits = data.bits;
+            this._tiles = data.tiles;
+            this._computed = data.computed;
+
+            for (var i = 0, len = this.map.cells.length; i < len; i++) {
+                this.map.cells[i].setData(this.index, data.data[i]);
+            }
+        }
+
+        this._interactive = old_interactive;
     };
+
+    Layer_RoadsRivers.prototype._computeTile = function (cellCol, cellRow) {
+        var index = cellRow * this.map.rows + cellCol, tileData = this._tiles[index], bits = this._bits[index], tileCollectionInTerrain = null, len = 0, tileOrderInTerrain, tileId;
+
+        if (~~tileData !== tileData || ~~bits !== bits)
+            return null;
+
+        tileCollectionInTerrain = this._indexes[tileData][bits];
+
+        if (!tileCollectionInTerrain || !(len = tileCollectionInTerrain.length))
+            return null;
+
+        tileOrderInTerrain = ~~(Math.random() * len);
+
+        tileId = this.tileset.terrains[tileData].tiles[tileCollectionInTerrain[tileOrderInTerrain]];
+
+        return tileId === ~~tileId ? tileId : null;
+    };
+
+    Layer_RoadsRivers.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
+        if (this.visible) {
+            var index = cellRow * this.map.rows + cellCol, tileId = this._computed[index];
+
+            if (~~tileId === tileId) {
+                this.tileset.paintTile(tileId, ctx, x, y);
+            }
+        }
+    };
+
+    Object.defineProperty(Layer_RoadsRivers.prototype, "name", {
+        /* The name of the layer */
+        get: function () {
+            return "Roads and Rivers";
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Layer_RoadsRivers;
 })(Layer);
 var Cell = (function () {
-    function Cell(cellIndex, numLayers, map) {
+    function Cell(cellIndex, map) {
         this.map = null;
         this.index = 0;
-        this.layers = {};
         this._neighbours = null;
+        this.$layerData = {};
         this.index = cellIndex;
         this.map = map;
-
-        for (var i = 0; i < numLayers; i++) {
-            // define getters and setters for the layer data
-            (function (cell, index) {
-                var nowVal = null;
-
-                Object.defineProperty(cell.layers, index, {
-                    "get": function () {
-                        return nowVal;
-                    },
-                    "set": function (data) {
-                        nowVal = data;
-                        cell.map.layers[index].emit('change', cell.x, cell.y, data);
-                    }
-                });
-            })(this, i);
-        }
     }
-    Object.defineProperty(Cell.prototype, "x", {
+    Object.defineProperty(Cell.prototype, "layers", {
         get: function () {
-            return this.index % this.map.cols;
+            throw "Layers";
         },
         enumerable: true,
         configurable: true
     });
 
-    Object.defineProperty(Cell.prototype, "y", {
-        get: function () {
-            return ~~(this.index / this.map.rows);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    Cell.prototype.getData = function (layerIndex) {
+        return typeof this.$layerData[layerIndex] == 'undefined' ? null : this.$layerData[layerIndex];
+    };
+
+    Cell.prototype.setData = function (layerIndex, data) {
+        this.$layerData[layerIndex] = data;
+        this.map.layers[layerIndex].emit('change', this.x(), this.y(), data);
+    };
+
+    Cell.prototype.x = function () {
+        return this.index % this.map.cols;
+    };
+
+    Cell.prototype.y = function () {
+        return ~~(this.index / this.map.rows);
+    };
 
     Object.defineProperty(Cell.prototype, "neighbours", {
         get: function () {
@@ -959,7 +1091,7 @@ var Cell = (function () {
     });
 
     Cell.prototype._computeNeighbours = function () {
-        var x = this.x, y = this.y;
+        var x = this.x(), y = this.y();
 
         this._neighbours = {
             "n": this.map.cellAt(x, y - 1, false),
@@ -974,7 +1106,7 @@ var Cell = (function () {
     };
 
     Cell.prototype.paintAt = function (x, y, ctx) {
-        var _x = this.x, _y = this.y;
+        var _x = this.x(), _y = this.y();
 
         for (var i = 0, len = this.map.layers.length; i < len; i++) {
             this.map.layers[i].paint(_x, _y, x, y, ctx);
@@ -1230,8 +1362,8 @@ var Viewport = (function (_super) {
             var x, y;
 
             for (var i = 0, len = this.paintables.length; i < len; i++) {
-                x = (this.paintables[i].x - this.x) * this.tileWidth;
-                y = (this.paintables[i].y - this.y) * this.tileHeight;
+                x = (this.paintables[i].x() - this.x) * this.tileWidth;
+                y = (this.paintables[i].y() - this.y) * this.tileHeight;
                 this.paintables[i].paintAt(x, y, this.ctx);
             }
         };
@@ -1349,7 +1481,7 @@ var Viewport = (function (_super) {
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
-var map = new AdvMap(64, 64);
+var map = new AdvMap(64, 64, 'test.map');
 
 if (typeof window !== 'undefined')
     window['map'] = map;

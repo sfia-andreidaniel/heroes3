@@ -56,6 +56,11 @@ body {
     overflow: hidden;
 }
 
+#editor > div > .widget > fieldset {
+    margin: 5px;
+    border-radius: 5px;
+}
+
 #editor > div > .widget > h2 {
     padding: 10px;
     margin: 0;
@@ -101,13 +106,18 @@ body {
 
 #paintbrush {
     color: #333;
-    padding: 5px;
     font-size: 12px;
+    
+    padding: 25px;
+    text-align: center;
+    border: 1px outset #888;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 #brush-info img {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
     display: inline;
     vertical-align: middle;
 }
@@ -167,6 +177,24 @@ body {
 
 /* End of tilese texplorer dialog */
 
+/* Panels config */
+
+div.panel-paint {
+    display: none;
+}
+
+body.panel-paint div.panel-paint {
+    display: block;
+}
+
+div.panel-erase {
+    display: none;
+}
+
+body.panel-erase div.panel-erase {
+    display: block;
+}
+
 /* BUTTONS */
 div.button {
     display: inline-block;
@@ -195,6 +223,10 @@ div.button:active {
 
 #btn-save {
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAALXRFWHRDcmVhdGlvbiBUaW1lAHNhbS4gMSBqdWluIDIwMDIgMTc6NDE6MzUgKzAxMDDq2GgaAAAAB3RJTUUH0gYCDzYoAZ5UHQAAAAlwSFlzAAAK8AAACvABQqw0mAAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAAIAAAACAAICAAAAAgIAAgACAgMDAwMDcwKbK8BYWexwcexwchCMjhCMjjyoqhDExhDExjzg4jzE4mDg4mDE4oTg4oUA4mEBAmEBAoUBAq0BAtlhYoVhgq2BghGpqhGpqmHNzmHt7mGpqoWpqtnNzoXN7tnt7tkhIwFBQwISEj4SEoY+Pq4SEyo+Pyo+YypiYwJiYypiY1KGhwKGhyqurwKur1La24LbAtrbAwMDAwMrKysrK1NTU1MDA4MDK4MrK6tTU4Orq6urq9Or09PT09PT0//T/////+v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/78KCgpICAgP8AAAD/AP//AAAA//8A/wD//////0tFwpwAAABKdFJOU/////////////////////////////////////////////////////////////////////////////////////////////////8AWiu/GwAAAKRJREFUeNp1zMkOgkAQRVF2JowiKEM7j+AAIiqQRpQWkP7/HxIoMW68i1qcpB5DqeLjDoSPMmXoqH8vnlBxRVoND4Ih0kKWQl8g8a0uJn9f2tEcQEnyLIcABsbS8VzPcVzvYKkVWBBC1bG1Bsz1ZjHbBydRRHoDxqrLbXEZsJz5gakgXMgvjKVhWpRnjgewjck+KV65z/L1BtVVeR5GURjuJKlH33puLWsqIU8GAAAAAElFTkSuQmCC );
+}
+
+#btn-paint {
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAzZJREFUeNp8k21MW1UYx//3rS20xTKhuBLoGGGXdaJowcAIYxt+gcVFkbgY4kxMFmPcPphIjA7mNw2JxkiMMTEZG2ELTfYG24QoS7VARohsCIlShkDBdY5YoBZKe3vvPTunKwvbhz33/nNOznl+z3NensN53xPBjEv+yM6LlrWYN3JO3OfvDK7V6qJQ+FxldGrxkjoe+E4nZFTVsa6TJAJ5vQr8wy4sVG8LJkuzEjScsMgywn5UR+3mSlkuR8iMBtuOkuM6+A9Tvknzm4fB0ucT8Eeziisqsp8/sPceJuDzeJB5cDe4DQnXr3fDkbYHC6XvvzFcVNxgm7vktKxMskBIP+cB139UPFlU2/S6KbvQrSoJbjO6ZDBANBqhxuNIKAo+X6yDy+WCz+eDpmmc7PPA6euGuBgme0odsksymDg9TVO1RIJui+P/Gh8JTNz8bemFyhr77tIKZ5nwBy78NA85dPV2rjKNLN8Y4jSRGI5hpOur1izaF1jm3EI5s/7d4y/9fWtwJte541XaDrxYecDZWBTGTv83N5bCM38qQwQJ4IgOfMzOoJ2JZ9fAwRGcneoQJAmHjjWXJ+Kx/ySjSWKHPtLb4Q3OzfiFm+RLLUQ+UwShcUPTOpN3yGCJT97NyfL6xoJYOAyjMS0j3ZwBQr++M+2D/8zeuWX+Hae1ZXKKt1qr1yKRXxSaWDRLj2Dqikx7/k6LYDKqiXhcuX93ITL2688LwdHpUcs8dxXL5Mcsp9PhDwRGKdxCEV3kOAI1VRiaDs/l79vCioY8VScaLZh/jSu4kj0OEgf5ev/hw+6Lvb3DFP6Iuq8zRsQW0wh6Ejp6KAydntA9UzEyYqjNwFRbCh7bAD6hU8FNRmAFPB16qMJtHGgAOLZb4eXqEBGe3RWNxRoOFRS81TcwwOAWOu1l4BDVebaCa37yaAWs/06VFS9vt4D8T3ZFo9G6Lq/303qX69t9QD+F+4dS8KY9toUtVltiDrx57IsfPnC73a0RVe2hY5NDeLqxh2WlyjnT/NrtiY4mcuQVe6fNZquhY9uonkk9pDQqQ6rwOP6JAMwhp09sL209q96dXli5sbq6uvS0AA8EGACkmE/Gpg9oEAAAAABJRU5ErkJggg== );
 }
 
 #btn-eraser {

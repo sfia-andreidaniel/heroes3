@@ -14,7 +14,7 @@
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
 
-var map = new AdvMap( 64, 64 /* , 'test.map' */ );
+var map = new AdvMap( 64, 64, 'test.map' );
 
 if ( typeof window !== 'undefined' )
 	window[ 'map' ] = map;

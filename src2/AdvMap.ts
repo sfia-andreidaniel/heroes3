@@ -1,22 +1,22 @@
 class AdvMap extends Events {
     
-    public tilesets = [];        // Array of AdvMap_Tileset
-    public fs: FS   = new FS();
+    public tilesets     : AdvMap_Tileset[] = [];        // Array of AdvMap_Tileset
+    public fs           : FS            = new FS();
     
-    public cols: number = 0;
-    public rows: number = 0;
+    public cols         : number        = 0;
+    public rows         : number        = 0;
 
-    public layers = [];
-    public cells  = [];
+    public layers       : Layer[]       = [];
+    public cells        : Cell[]        = [];
 
-    public _iniLayers = null;
+    public _iniLayers   : any           = null;
 
-    public viewports = [];
+    public viewports    : Viewport[]    = [];
 
-    private _activeCell = null;
+    private _activeCell : Cell          = null;
 
     constructor(  public _iniCols: number = 0, public _iniRows: number = 0, mapFile: string = null ) {
-        
+            
         super();
         
         ( function( me ) {
@@ -150,20 +150,15 @@ class AdvMap extends Events {
     }
     
     public setSize( columns: number, rows: number ) {
-        console.log( "SetSize::begin");
-
         this.cols = columns;
         this.rows = rows;
 
         var needLen = columns * rows,
-            len = this.cells.length * 1,
-            numLayers = this.layers.length * 1;
-
-        console.log( "SetSize::resize begin");
+            len = this.cells.length;
 
         while ( len != needLen ) {
             if ( len < needLen ) {
-                this.cells.push( new Cell( len, numLayers, this ) );
+                this.cells.push( new Cell( len, this ) );
                 len++;
             } else {
                 this.cells.splice( len - 1, 1 );
@@ -172,20 +167,12 @@ class AdvMap extends Events {
         }
 
 
-        console.log( "SetSize::compute neighbours" );
-
         for ( var i=0; i<needLen; i++ ) {
             this.cells[i]._computeNeighbours();
         }
 
-        console.log( "SetSize:: emit resize");
-
         this.emit( 'resize', columns, rows );
-
-        console.log( "SetSize:: emit load");
         this.emit( 'load' );
-
-        console.log( "SetSize:: END")
     }
 
     public cellAt( column: number, row: number, strict: boolean = true ): Cell {

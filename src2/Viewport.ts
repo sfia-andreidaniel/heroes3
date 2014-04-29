@@ -15,7 +15,7 @@ class Viewport extends Events {
 	public tileWidth = 0;
 	public tileHeight = 0;
 
-	public paintables = [];
+	public paintables: Cell[] = [];
 
 	private _joystick = 0;
 
@@ -160,8 +160,8 @@ class Viewport extends Events {
 
 		/* Paint */
 		for ( var i=0, len = this.paintables.length; i<len; i++ ) {
-			x = ( this.paintables[i].x - this.x ) * this.tileWidth;
-			y = ( this.paintables[i].y - this.y ) * this.tileHeight;
+			x = ( this.paintables[i].x() - this.x ) * this.tileWidth;
+			y = ( this.paintables[i].y() - this.y ) * this.tileHeight;
 			this.paintables[i].paintAt( x, y, this.ctx );
 		}
 	}

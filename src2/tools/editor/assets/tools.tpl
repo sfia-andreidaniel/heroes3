@@ -1,4 +1,4 @@
-<div class="widget" id="tools">
+<div class="widget panel-paint" id="tools">
     <div class="tabs" >
         <ul>
             <!-- BEGIN: layer -->

@@ -11,7 +11,8 @@
     <div id="toolbar">
         <div>
             <div id="btn-save" class="button">Save</div>
-            <div id="btn-eraser" class="button">Rubber</div>
+            <div id="btn-paint" class="button" data-panels="paint" data-editor-mode="1">Paint</div>
+            <div id="btn-eraser" class="button" data-panels="erase" data-editor-mode="2">Erase</div>
         </div>
     </div>
     <div id="map">
@@ -28,6 +29,16 @@
     <script type="text/javascript" src="index.js"></script>
     
     <script type="text/javascript" src="tools/editor/js/xtemplate.js"></script>
+    
+    <!-- EDITOR CODE GOES HERE -->
     <script type="text/javascript" src="tools/editor/js/editor.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-viewport.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-modes.js"></script>
+
+    <script type="text/javascript" src="tools/editor/js/editor-panels.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-paint.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-erase.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-save.js"></script>
+    
 </body>
 </html>
