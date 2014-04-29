@@ -1,0 +1,19 @@
+{
+    "name": "avlca020",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAn1BMVEUA\/\/+ed1o0FgshIQ0IAACykoQ1JBi4l4zHtaVLLRhHOQOJbVrItbBKOSkQCwCjj4C5rZAWAAAAAABeOSaKcmi\/pZR4aVrArZxgPg0ZGwAPEAqddGN2VDFVVjPdxYKznntRRjd3YkqzoIQuHQAlFQt3VjxeQRhpVTnGt1+JcE+iiW6Ydk7TtHGNbj8YDAAnDgA1JQu8sXDDvIBfRSYA\/\/+e2WDdAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAALdJREFUOI3t0VkOgkAMBmBcUCsKboC4UiiMoI44nfufzUeNKXoB+th8+Zu2jv1TTgc60A7YWH7+AM3DWG3urYD5dq0rvqg2UGrDpiCTZzLA9Ez6hLdjU4ngQPudzpKtiusolMBmvVP1KoyWvFAYCMCnfa7DeTHzMJ6ClMAAhGqi4gjFhJJqwowDVOkYpARb+DAqKG3c0XAgrsm+R17i6iFs5DvYRx+JfPDeA75\/0YO+goY\/W3\/f\/QKqX8MQmlIlQwAAAABJRU5ErkJggg=="
+}

@@ -1,0 +1,19 @@
+{
+    "name": "avlca030",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAaVBMVEUA\/\/90ayWco1hJRyZVVjM0Oiybn4ZWZz4fMQAZGwDKxbU1QCFXZyBvh1A1Ow1WaTEhIQ3Gz5S3vZSHpFqdtXCAiVYiMQxzfjsPEApiaUqToW6itYyBlFlDUxsvOxi9xapgdT9GVTEA\/\/+ud3puAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAXVJREFUOI3NkmFz2yAMhtsuDcmwrBbbYsZICP7\/j5w8d8nsXLuv5XxncTy86JX01P6znr4jULV8CQjn5WsgzZ8ppPXgF+eSWuMSHwFOpk3TOFjIQ2jtfd4Db9GuCqKFPRrGU9EdIBSAWdaQhtg1T9PPfZJXO8ZgMu3CXeOZ63J0ITjOY2uYePVLfFBoxC6eLTspWRt5cOkByHOu9lZWxKt7O59vgOY1YZKq9Q+YQK7Vw80muzJl+7\/6fpOqyETpXigf8rJWBQE\/DF1JOncHRMdpdE2hwN90qBu2cm9A9Qkci2rgj7r33C1luCVJDCf9Ie8wbxIsgtb3O9DEV\/YMYTAXjMCXnhX\/UVjXyW65c1pHJo++Z45jPBYqAADLVADNpgylHYBKmmqPKRfFnvglurAHWBYUygUyUG9CrDZlu26SU09jTnC6CL6IF02HdhMKT2ZFOD57sW04TLU1XDCr77toxyT6MPa1UtPOPm8PyNHFbnm\/Vf03w852PC\/qRHgAAAAASUVORK5CYII="
+}
