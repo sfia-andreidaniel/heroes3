@@ -1,0 +1,5 @@
+<?php
+    
+    /* Animated object tool */
+    
+?>
