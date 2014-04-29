@@ -4,6 +4,8 @@
 ///<reference path="FS/File.ts" />
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
+///<reference path="Objects.ts" />
+///<reference path="Objects/Item.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="ICellNeighbours.ts" />

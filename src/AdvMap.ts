@@ -1,6 +1,7 @@
 class AdvMap extends Events {
     
     public tilesets     : AdvMap_Tileset[] = [];        // Array of AdvMap_Tileset
+    public objects      : Objects       = null;
     public fs           : FS            = new FS();
     
     public cols         : number        = 0;
@@ -76,8 +77,9 @@ class AdvMap extends Events {
 
     public _loadFS() {
         /* Load filesystem data */
-        this.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json', 'json' );
+        this.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json',     'json' );
         this.fs.add( 'tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json' );
+        this.fs.add( 'objects/all',                'resources/objects/objects.list',            'json');
     }
 
     public _onFSReady() {
@@ -85,14 +87,20 @@ class AdvMap extends Events {
         ( function( me ) {
 
             me.addTileset( new AdvMap_Tileset_Terrains( me.fs.open( 'tilesets/terrains.json' ).data ) )
-                .on('load', function( tileset ) {
+                .once('load', function( tileset ) {
                     me.layers.terrains = this;
                     me._onTilesetsReady();
                 });
         
             me.addTileset( new AdvMap_Tileset_RoadsRivers( me.fs.open( 'tilesets/roads-rivers.json' ).data ) )
-                .on('load', function( tileset ) {
+                .once('load', function( tileset ) {
                     me.layers.roads = this;
+                    me._onTilesetsReady();
+                });
+
+            ( new Objects( me.fs.open( 'objects/all' ).data ) )
+                .once( 'load', function(){
+                    me.objects = this;
                     me._onTilesetsReady();
                 });
 
@@ -103,6 +111,10 @@ class AdvMap extends Events {
     }
 
     public _onTilesetsReady() {
+
+        if ( !this.objects || !this.objects.loaded )
+            return;
+
         for ( var i=0, len = this.tilesets.length; i<len; i++ ) {
             if ( !this.tilesets[i].loaded )
                 return;

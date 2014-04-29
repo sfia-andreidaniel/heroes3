@@ -1,6 +1,7 @@
 var panels = [
     "paint",
-    "erase"
+    "erase",
+    "objects"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

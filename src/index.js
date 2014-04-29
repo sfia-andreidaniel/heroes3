@@ -322,6 +322,7 @@ var AdvMap = (function (_super) {
         this._iniCols = _iniCols;
         this._iniRows = _iniRows;
         this.tilesets = [];
+        this.objects = null;
         this.fs = new FS();
         this.cols = 0;
         this.rows = 0;
@@ -385,17 +386,23 @@ var AdvMap = (function (_super) {
         /* Load filesystem data */
         this.fs.add('tilesets/terrains.json', 'resources/tilesets/terrains.tsx.json', 'json');
         this.fs.add('tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json');
+        this.fs.add('objects/all', 'resources/objects/objects.list', 'json');
     };
 
     AdvMap.prototype._onFSReady = function () {
         (function (me) {
-            me.addTileset(new AdvMap_Tileset_Terrains(me.fs.open('tilesets/terrains.json').data)).on('load', function (tileset) {
+            me.addTileset(new AdvMap_Tileset_Terrains(me.fs.open('tilesets/terrains.json').data)).once('load', function (tileset) {
                 me.layers.terrains = this;
                 me._onTilesetsReady();
             });
 
-            me.addTileset(new AdvMap_Tileset_RoadsRivers(me.fs.open('tilesets/roads-rivers.json').data)).on('load', function (tileset) {
+            me.addTileset(new AdvMap_Tileset_RoadsRivers(me.fs.open('tilesets/roads-rivers.json').data)).once('load', function (tileset) {
                 me.layers.roads = this;
+                me._onTilesetsReady();
+            });
+
+            (new Objects(me.fs.open('objects/all').data)).once('load', function () {
+                me.objects = this;
                 me._onTilesetsReady();
             });
         })(this);
@@ -404,6 +411,9 @@ var AdvMap = (function (_super) {
     };
 
     AdvMap.prototype._onTilesetsReady = function () {
+        if (!this.objects || !this.objects.loaded)
+            return;
+
         for (var i = 0, len = this.tilesets.length; i < len; i++) {
             if (!this.tilesets[i].loaded)
                 return;
@@ -623,6 +633,166 @@ var Layer = (function (_super) {
         configurable: true
     });
     return Layer;
+})(Events);
+var Objects = (function (_super) {
+    __extends(Objects, _super);
+    function Objects(data) {
+        _super.call(this);
+        this.loaded = false;
+        this.sprite = null;
+        this.cols = 0;
+        this.rows = 0;
+        this.width = 0;
+        this.height = 0;
+        this.tileWidth = 0;
+        this.tileHeight = 0;
+        this.store = [];
+        this._ctx = null;
+        this._canvas = null;
+
+        this.width = data.width;
+        this.height = data.height;
+
+        this.tileWidth = data.tileWidth;
+        this.tileHeight = data.tileHeight;
+
+        this.cols = data.cols;
+        this.rows = data.rows;
+
+        this.store = []; //data.objects;
+
+        this.sprite = new Picture(data.sprite);
+
+        (function (me) {
+            me.sprite.on('load', function () {
+                for (var i = 0, len = data.objects.length; i < len; i++) {
+                    me.store.push(new Objects_Item(data.objects[i], me));
+                }
+
+                me.loaded = true;
+                me.emit('load');
+            });
+        })(this);
+
+        this._canvas = typeof global != 'undefined' ? (function () {
+            var Canvas = require('canvas');
+
+            return new Canvas();
+        })() : document.createElement('canvas');
+
+        this._canvas.width = this.tileWidth;
+        this._canvas.height = this.tileHeight;
+
+        this._ctx = this._canvas.getContext('2d');
+    }
+    Objects.prototype.getObjectById = function (id) {
+        for (var i = 0, len = this.store.length; i < len; i++) {
+            if (this.store[i].id == id)
+                return this.store[i];
+        }
+        return null;
+    };
+
+    Objects.prototype.getObjectBase64Src = function (objectId) {
+        if (!this._ctx || !this.loaded || !this.sprite)
+            return null;
+
+        var sx, sy, sw, sh;
+
+        sx = (objectId % this.cols) * this.tileWidth;
+        sy = ~~(objectId / this.cols) * this.tileHeight;
+
+        this._canvas.width = this._canvas.width;
+
+        this._ctx.drawImage(this.sprite.node, sx, sy, sw = this.tileWidth, sh = this.tileHeight, 0, 0, sw, sh);
+
+        return this._canvas.toDataURL();
+    };
+    return Objects;
+})(Events);
+var Objects_Item = (function (_super) {
+    __extends(Objects_Item, _super);
+    function Objects_Item(data, store) {
+        _super.call(this);
+        this.store = store;
+        this.readyState = 0;
+        this.loaded = false;
+        // public store: Objects = null;   // reference to map.objects
+        this.id = 0;
+        this.name = '';
+        this.cols = 0;
+        this.rows = 0;
+        this.width = 0;
+        this.height = 0;
+        this.tileWidth = 0;
+        this.tileHeight = 0;
+        this.collision = null;
+        this.animated = null;
+        this.frames = 0;
+        this.hsx = 0;
+        this.hsy = 0;
+        this.sprite = null;
+
+        this.id = data.id;
+        this.name = data.name;
+        this.cols = data.cols;
+        this.rows = data.rows;
+        this.width = data.width;
+        this.height = data.height;
+    }
+    Objects_Item.prototype.load = function () {
+        if (this.readyState != 0)
+            return this;
+
+        this.readyState = 1;
+
+        var f = new FS_File('resources/objects/' + this.name + '.json', 'json');
+
+        (function (me) {
+            f.once('ready', function () {
+                /* Setup additional fields */
+                me.collision = this.data.collision || null; // object does not support collision
+
+                me.animated = this.data.animated || false;
+                me.frames = this.data.frames || 0;
+                me.tileWidth = this.data.tileWidth || 0;
+                me.tileHeight = this.data.tileHeight || 0;
+
+                if (!this.data.pixmap) {
+                    me.readyState = 2;
+                    me.loaded = true;
+                    me.emit('load');
+                } else {
+                    me.sprite = new Picture(this.data.pixmap);
+
+                    me.sprite.once('load', function () {
+                        me.readyState = 2;
+                        me.loaded = true;
+                        me.emit('load');
+                    });
+
+                    me.sprite.once('error', function () {
+                        me.readyState = 3;
+                        me.emit('error', 'The object has been loaded, but it\'s sprite not');
+                    });
+                }
+            });
+
+            f.once('error', function () {
+                me.readyState = 3;
+                me.emit('error', "Failed to load object!");
+            });
+        })(this);
+
+        f.open();
+
+        return this;
+    };
+
+    Objects_Item.prototype.saveProperties = function (properties) {
+        throw "Not implemented";
+    };
+    return Objects_Item;
 })(Events);
 var Layer_Terrain = (function (_super) {
     __extends(Layer_Terrain, _super);
@@ -1472,6 +1642,8 @@ var Viewport = (function (_super) {
 ///<reference path="FS/File.ts" />
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
+///<reference path="Objects.ts" />
+///<reference path="Objects/Item.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="ICellNeighbours.ts" />

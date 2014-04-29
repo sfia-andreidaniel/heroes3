@@ -1,6 +1,7 @@
 var modes = {
         "paint": 1,
-        "erase": 2
+        "erase": 2,
+        "object": 3
     },
     editorMode = null,
     isDragging = false;
