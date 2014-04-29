@@ -1,0 +1,11 @@
+[Data]
+Type=3
+Shadow Type=2
+Groups Number=1
+Group0=Avlautr7.bmp|Avlautr7.bmp|Avlautr71.bmp|Avlautr71.bmp|Avlautr72.bmp|Avlautr72.bmp|Avlautr73.bmp|Avlautr73.bmp|
+Shadow0=Shadow\Avlautr7.bmp|Shadow\Avlautr7.bmp|Shadow\Avlautr71.bmp|Shadow\Avlautr71.bmp|Shadow\Avlautr72.bmp|Shadow\Avlautr72.bmp|Shadow\Avlautr73.bmp|Shadow\Avlautr73.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$0000FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$0000FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|1|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|

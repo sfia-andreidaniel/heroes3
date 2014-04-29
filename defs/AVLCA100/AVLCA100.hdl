@@ -1,0 +1,11 @@
+[Data]
+Type=3
+Shadow Type=2
+Groups Number=1
+Group0=AVLca100.bmp|
+Shadow0=Shadow\AVLca100.bmp|
+Generate Selection=0
+ColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ShadowColorsBox.Colors=$FFFF00|$FF96FF|$FF64FF|$FF32FF|$FF00FF|$00FFFF|$FF00B4|$00FF00|
+ColorsBox.ColorChecks=1|0|0|0|0|1|0|0|0|
+ShadowColorsBox.ColorChecks=1|1|1|1|1|1|1|1|
