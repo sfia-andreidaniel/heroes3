@@ -331,6 +331,8 @@ var AdvMap = (function (_super) {
         this._iniLayers = null;
         this.viewports = [];
         this._activeCell = null;
+        this._objectHandle = null;
+        this.mapObjects = [];
 
         (function (me) {
             me.fs.on('ready', function () {
@@ -366,6 +368,16 @@ var AdvMap = (function (_super) {
                 load.open();
             })(this);
         }
+
+        this.on('entity-create', function (entity) {
+            if (entity)
+                map.mapObjects.push(entity);
+        });
+
+        this.on('entity-destroy', function (entity) {
+            if (entity)
+                map.mapObjects.splice(map.mapObjects.indexOf(entity), 1);
+        });
     }
     Object.defineProperty(AdvMap.prototype, "activeCell", {
         get: function () {
@@ -376,6 +388,18 @@ var AdvMap = (function (_super) {
                 this._activeCell = c;
                 this.emit('selection-changed', c);
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+
+    Object.defineProperty(AdvMap.prototype, "objectHandle", {
+        get: function () {
+            return this._objectHandle;
+        },
+        set: function (data) {
+            this._objectHandle = data || null;
         },
         enumerable: true,
         configurable: true
@@ -428,6 +452,14 @@ var AdvMap = (function (_super) {
             }));
 
             me.layers.push((new Layer_RoadsRivers(me, 1)).on('load', function () {
+                me._onLayersReady();
+            }));
+
+            me.layers.push((new Layer_Entities(me, 2, 'Static objects')).on('load', function () {
+                me._onLayersReady();
+            }));
+
+            me.layers.push((new Layer_Entities(me, 3, 'Moveable objects')).on('load', function () {
                 me._onLayersReady();
             }));
         })(this);
@@ -768,7 +800,7 @@ var Objects_Item = (function (_super) {
                 me.epx = this.data.epx || 0;
                 me.epy = this.data.epy || 0;
 
-                me.sprite = new Picture(this.data.pixmap || this.data.frame);
+                me.sprite = new Picture(this.data.pixmap ? this.data.pixmap : this.data.frame);
 
                 me.sprite.once('load', function () {
                     me.readyState = 2;
@@ -797,6 +829,69 @@ var Objects_Item = (function (_super) {
         throw "Not implemented";
     };
     return Objects_Item;
+})(Events);
+var Objects_Entity = (function (_super) {
+    __extends(Objects_Entity, _super);
+    function Objects_Entity(itemTypeId, col, row, layer) {
+        _super.call(this);
+        this.itemTypeId = itemTypeId;
+        this.col = col;
+        this.row = row;
+        this.layer = layer;
+        // public itemTypeId: number = 0;
+        // public col: number = 0;
+        // public row: number = 0;
+        // public layer: Layer_Entities;
+        this.instance = null;
+        this.frameIndex = 0;
+
+        this.instance = this.layer.map.objects.getObjectById(this.itemTypeId);
+
+        this.instance.load();
+
+        this.layer.map.emit('entity-create', this);
+    }
+    Objects_Entity.prototype.paint = function (ctx2d, x, y) {
+        if (this.instance.loaded) {
+            var sx = this.frameIndex * this.instance.width, sy = 0, sw = this.instance.width, sh = this.instance.height;
+
+            ctx2d.drawImage(this.instance.sprite.node, sx, sy, sw, sh, x, y, sw, sh);
+        }
+    };
+
+    Objects_Entity.prototype.paintRelative = function (ctx2d, x, y) {
+        if (this.instance.loaded) {
+            this.paint(ctx2d, x - (this.instance.hsx * this.instance.tileWidth), y - (this.instance.hsy * this.instance.tileHeight));
+        }
+    };
+
+    Objects_Entity.prototype.destroy = function () {
+        this.layer.map.emit('entity-destroy', this);
+    };
+
+    Objects_Entity.prototype.moveTo = function (x, y) {
+        if (x < 0 || y < 0 || x >= this.layer.map.cols || y >= this.layer.map.rows)
+            throw "Invalid destination (out of bounds)!";
+
+        var actualIndex = this.row * this.layer.map.cols + this.col, newIndex = y * this.layer.map.cols + x;
+
+        if (actualIndex == newIndex)
+            return;
+
+        if (this.layer._objects[newIndex])
+            throw "Destination allready contains an object!";
+
+        this.layer._objects[newIndex] = this;
+        this.layer._objects[actualIndex] = null;
+
+        this.col = x;
+        this.row = y;
+    };
+
+    Objects_Entity.prototype.moveBy = function (x, y) {
+        this.moveTo(this.col + x, this.row + y);
+    };
+    return Objects_Entity;
 })(Events);
 var Layer_Terrain = (function (_super) {
     __extends(Layer_Terrain, _super);
@@ -1222,6 +1317,83 @@ var Layer_RoadsRivers = (function (_super) {
     });
     return Layer_RoadsRivers;
 })(Layer);
+var Layer_Entities = (function (_super) {
+    __extends(Layer_Entities, _super);
+    function Layer_Entities(map, index, _name) {
+        _super.call(this, map, index);
+        this.map = map;
+        this.index = index;
+        this._name = _name;
+        // public map: AdvMap
+        // public index: number
+        this._objects = null;
+        this._onInit();
+    }
+    Layer_Entities.prototype._onInit = function () {
+        (function (me) {
+            me.map.on('resize', function (cols, rows) {
+                me._objects = [];
+                for (var i = 0, len = cols * rows; i < len; i++) {
+                    me._objects.push(null);
+                }
+            });
+        })(this);
+
+        this.on('change', function (x, y, data) {
+            if (!this._interactive)
+                return;
+
+            var index;
+
+            if (this._objects[index = (y * this.map.rows + x)]) {
+                this._objects[index].destroy();
+            }
+
+            this._objects[index] = data ? new Objects_Entity(data, x, y, this) : null;
+        });
+    };
+
+    Layer_Entities.prototype.getData = function () {
+        var out = [];
+
+        for (var i = 0, len = this.map.cells.length; i < len; i++) {
+            out.push(this.map.cells[i].getData(this.index));
+        }
+
+        return {
+            "objects": out
+        };
+    };
+
+    Layer_Entities.prototype.setData = function (data) {
+        var old_interactive = this._interactive;
+        this._interactive = true;
+
+        for (var i = 0, len = this.map.cells.length; i < len; i++) {
+            this.map.cells[i].setData(this.index, data.objects[i]);
+        }
+
+        this._interactive = old_interactive;
+    };
+
+    Layer_Entities.prototype.paint = function (cellCol, cellRow, x, y, ctx2d) {
+        if (this.visible) {
+            var index = cellRow * this.map.rows + cellCol, o = this._objects[index];
+
+            if (o)
+                o.paintRelative(ctx2d, x, y);
+        }
+    };
+
+    Object.defineProperty(Layer_Entities.prototype, "name", {
+        get: function () {
+            return this._name + " ( objects layer )";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Layer_Entities;
+})(Layer);
 var Cell = (function () {
     function Cell(cellIndex, map) {
         this.map = null;
@@ -1279,17 +1451,22 @@ var Cell = (function () {
         };
     };
 
-    Cell.prototype.paintAt = function (x, y, ctx) {
+    Cell.prototype.paintAt = function (x, y, ctx, phase) {
         var _x = this.x(), _y = this.y();
 
-        for (var i = 0, len = this.map.layers.length; i < len; i++) {
-            this.map.layers[i].paint(_x, _y, x, y, ctx);
-        }
+        if (phase == 0) {
+            this.map.layers[0].paint(_x, _y, x, y, ctx);
+            this.map.layers[1].paint(_x, _y, x, y, ctx);
+        } else {
+            for (var i = 2, len = this.map.layers.length; i < len; i++) {
+                this.map.layers[i].paint(_x, _y, x, y, ctx);
+            }
 
-        if (this == this.map.activeCell) {
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = '#f00';
-            ctx.strokeRect(x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3);
+            if (this == this.map.activeCell) {
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = '#f00';
+                ctx.strokeRect(x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3);
+            }
         }
     };
     return Cell;
@@ -1533,12 +1710,30 @@ var Viewport = (function (_super) {
             this.ctx.fillStyle = 'rgb(255,255,255)';
             this.ctx.fillRect(0, 0, this._width, this._height);
 
-            var x, y;
+            var x, y, x1, y1, oh, ac;
 
             for (var i = 0, len = this.paintables.length; i < len; i++) {
                 x = (this.paintables[i].x() - this.x) * this.tileWidth;
                 y = (this.paintables[i].y() - this.y) * this.tileHeight;
-                this.paintables[i].paintAt(x, y, this.ctx);
+                this.paintables[i].paintAt(x, y, this.ctx, 0);
+            }
+
+            for (var i = 0, len = this.paintables.length; i < len; i++) {
+                x = (this.paintables[i].x() - this.x) * this.tileWidth;
+                y = (this.paintables[i].y() - this.y) * this.tileHeight;
+                this.paintables[i].paintAt(x, y, this.ctx, 1);
+            }
+
+            /* Paint the objectHandle if is set */
+            if ((oh = this.map.objectHandle) && (ac = this.map.activeCell)) {
+                x = (ac.x() - this.x);
+                y = (ac.y() - this.y);
+
+                x1 = x - oh.hsx;
+                y1 = y - oh.hsy;
+
+                this.ctx.fillStyle = 'rgba(' + (oh.supported ? '0,255,0' : '255,0,0') + ',.3)';
+                this.ctx.fillRect(x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight);
             }
         };
 
@@ -1640,6 +1835,8 @@ var Viewport = (function (_super) {
     };
     return Viewport;
 })(Events);
+///<reference path="ICellNeighbours.ts" />
+///<reference path="IObjectHandle.ts" />
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
@@ -1648,9 +1845,10 @@ var Viewport = (function (_super) {
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
 ///<reference path="Objects/Item.ts" />
+///<reference path="Objects/Entity.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
-///<reference path="ICellNeighbours.ts" />
+///<reference path="Layer/Entities.ts" />
 ///<reference path="Cell.ts" />
 ///<reference path="AdvMap/Tileset.ts" />
 ///<reference path="AdvMap/TilesetTerrain.ts" />

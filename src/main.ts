@@ -1,3 +1,6 @@
+///<reference path="ICellNeighbours.ts" />
+///<reference path="IObjectHandle.ts" />
+
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
@@ -6,9 +9,10 @@
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
 ///<reference path="Objects/Item.ts" />
+///<reference path="Objects/Entity.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
-///<reference path="ICellNeighbours.ts" />
+///<reference path="Layer/Entities.ts" />
 ///<reference path="Cell.ts" />
 ///<reference path="AdvMap/Tileset.ts" />
 ///<reference path="AdvMap/TilesetTerrain.ts" />

@@ -15,6 +15,9 @@ class AdvMap extends Events {
     public viewports    : Viewport[]    = [];
 
     private _activeCell : Cell          = null;
+    private _objectHandle : IObjectHandle = null;
+
+    public  mapObjects  : Objects_Entity[] = [];
 
     constructor(  public _iniCols: number = 0, public _iniRows: number = 0, mapFile: string = null ) {
             
@@ -62,6 +65,16 @@ class AdvMap extends Events {
 
         }
 
+        this.on( 'entity-create', function( entity ) {
+            if ( entity )
+            map.mapObjects.push( entity );
+        });
+
+        this.on( 'entity-destroy', function( entity ) {
+            if ( entity )
+            map.mapObjects.splice( map.mapObjects.indexOf( entity ), 1 );
+        });
+
     }
 
     get activeCell(): Cell {
@@ -73,6 +86,14 @@ class AdvMap extends Events {
             this._activeCell = c;
             this.emit( 'selection-changed', c );
         }
+    }
+
+    get objectHandle(): IObjectHandle {
+        return this._objectHandle;
+    }
+
+    set objectHandle( data: IObjectHandle ) {
+        this._objectHandle = data || null;
     }
 
     public _loadFS() {
@@ -130,6 +151,14 @@ class AdvMap extends Events {
             } ));
 
             me.layers.push( ( new Layer_RoadsRivers( me, 1 ) ).on( 'load', function() {
+                me._onLayersReady();
+            } ));
+
+            me.layers.push( ( new Layer_Entities( me, 2, 'Static objects' ) ).on( 'load', function() {
+                me._onLayersReady();
+            } ));
+
+            me.layers.push( ( new Layer_Entities( me, 3, 'Moveable objects' ) ).on( 'load', function() {
                 me._onLayersReady();
             } ));
 

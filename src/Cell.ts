@@ -58,18 +58,28 @@ class Cell {
 		};
 	}
 
-	public paintAt( x, y, ctx ) {
+	public paintAt( x: number, y: number, ctx, phase: number ) {
 		var _x = this.x(),
 		    _y = this.y();
 
-		for ( var i=0, len = this.map.layers.length; i<len; i++ ) {
-			this.map.layers[i].paint( _x, _y, x, y, ctx );
-		}
+		 if ( phase == 0 ) {
 
-		if ( this == this.map.activeCell ) {
-			ctx.lineWidth = 1;
-			ctx.strokeStyle = '#f00';
-			ctx.strokeRect( x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3 );
+			
+			this.map.layers[0].paint( _x, _y, x, y, ctx );
+			this.map.layers[1].paint( _x, _y, x, y, ctx );
+
+		} else {
+
+			for ( var i=2, len = this.map.layers.length; i<len; i++ ) {
+				this.map.layers[i].paint( _x, _y, x, y, ctx );
+			}
+
+			if ( this == this.map.activeCell ) {
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = '#f00';
+				ctx.strokeRect( x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3 );
+			}
+
 		}
 	}
 }

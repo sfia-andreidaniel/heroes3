@@ -156,13 +156,34 @@ class Viewport extends Events {
 		this.ctx.fillStyle = 'rgb(255,255,255)';
 		this.ctx.fillRect( 0, 0, this._width, this._height );
 
-		var x, y;
+		var x, y, x1, y1, oh, ac;
 
 		/* Paint */
 		for ( var i=0, len = this.paintables.length; i<len; i++ ) {
 			x = ( this.paintables[i].x() - this.x ) * this.tileWidth;
 			y = ( this.paintables[i].y() - this.y ) * this.tileHeight;
-			this.paintables[i].paintAt( x, y, this.ctx );
+			this.paintables[i].paintAt( x, y, this.ctx, 0 );
+		}
+
+		for ( var i=0, len = this.paintables.length; i<len; i++ ) {
+			x = ( this.paintables[i].x() - this.x ) * this.tileWidth;
+			y = ( this.paintables[i].y() - this.y ) * this.tileHeight;
+			this.paintables[i].paintAt( x, y, this.ctx, 1 );
+		}
+
+
+		/* Paint the objectHandle if is set */
+		if ( ( oh = this.map.objectHandle ) && ( ac = this.map.activeCell ) )  {
+			
+			x = ( ac.x() - this.x );
+			y = ( ac.y() - this.y );
+			
+			x1 = x - oh.hsx;
+			y1 = y - oh.hsy;
+
+			this.ctx.fillStyle = 'rgba(' + ( oh.supported ? '0,255,0' : '255,0,0' ) + ',.3)';
+			this.ctx.fillRect( x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight );
+
 		}
 	}
 

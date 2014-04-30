@@ -74,7 +74,7 @@ class Objects_Item extends Events {
 				me.epy             = this.data.epy        || 0;
 
 
-				me.sprite = new Picture( this.data.pixmap || this.data.frame );
+				me.sprite = new Picture( this.data.pixmap ? this.data.pixmap : this.data.frame );
 
 				me.sprite.once( 'load', function() {
 					me.readyState = 2;
