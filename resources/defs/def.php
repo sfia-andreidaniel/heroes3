@@ -16,6 +16,8 @@
     
     $DATA = NULL;
     
+    $HDL_FILE = NULL;
+    
     /* Animated object tool */
     
     require_once __DIR__ . '/_lib/gd.php';
@@ -32,7 +34,12 @@
     $files = scandir( $def );
     
     
-    $files = array_values( array_filter( $files, function( $file ) {
+    $files = array_values( array_filter( $files, function( $file ) use ( &$HDL_FILE ) {
+        
+        if ( preg_match( '/\.hdl$/i', $file ) ) {
+            $HDL_FILE = $file;
+        }
+        
         return preg_match( '/\.bmp$/', $file ) ? TRUE : FALSE;
     } ) );
     
@@ -111,7 +118,7 @@
         
         if ( $index == 0 ) {
             
-            imagecolortransparent( $im, imagecolorallocate( $im, 0, 255, 255 ) );
+            imagecolortransparent( $im, imagecolorexact( $im, 0, 255, 255 ) );
             
             $FIRSTFRAME = gdtobuffer( $im );
             
@@ -127,8 +134,60 @@
         imagecolortransparent( $IMGD, imagecolorallocate( $IMGD, 0, 255, 255 ) );
     }
     
+    /* Parse the .hdl file */
+    
+    $contents = file_get_contents( $def . '/' .$HDL_FILE );
+    
+    $lines = explode("\n", $contents );
+    
+    $OBJECT_TYPE = NULL;
+    $GROUPS_NUMBER = 0;
+    
+    $ANIM_GROUPS = [];
+    
+    foreach ( $lines as $line ) {
+        
+        switch ( TRUE ) {
+            case preg_match( '/^Type=([\d]+)/', $line, $matches ) ? TRUE : FALSE:
+                $OBJECT_TYPE = (int)$matches[1];
+                break;
+            case preg_match( '/^Groups Number=([\d]+)/', $line, $matches ) ? TRUE : FALSE:
+                $GROUPS_NUMBER = (int)$matches[1];
+                break;
+        }
+        
+    }
+    
+    if ( $GROUPS_NUMBER > 0 ) {
+        
+        for ( $i=0, $len = $GROUPS_NUMBER; $i<$len; $i++ ) {
+            
+            foreach ( $lines as $line ) {
+                
+                if ( preg_match( '/^Group' . $i . '=([\S]+)/', $line, $matches ) ) {
+                    
+                    $ANIM_GROUPS[] = explode( '|', trim( $matches[1], '|' ) );
+                    
+                    break;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    for ( $i=0, $n = count( $ANIM_GROUPS ); $i<$n; $i++ ) {
+        
+        for ( $j = 0, $m = count( $ANIM_GROUPS[$i] ); $j < $m; $j++ ) {
+            $ANIM_GROUPS[$i][$j] = array_search( $ANIM_GROUPS[$i][$j], $files );
+        }
+        
+    }
+    
     $out = [
         'name'   => strtolower( basename( realpath( $def ) ) ),
+        'caption'=> strtolower( basename( realpath( $def ) ) ),
         'width'  => $WIDTH,
         'height' => $HEIGHT,
         'cols'   => $COLS,
@@ -140,7 +199,11 @@
         'hsx'    => 0,
         'hsy'    => 0,
         'animated' => $IS_ANIMATED,
-        'frame' => $FIRSTFRAME
+        'animationGroups' => $ANIM_GROUPS,
+        'frame' => $FIRSTFRAME,
+        'objectType' => $OBJECT_TYPE,
+        'epx'   => 0,
+        'epy'   => 0
     ];
     
     if ( $FRAMES > 1 ) {

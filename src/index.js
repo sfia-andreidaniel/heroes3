@@ -720,6 +720,7 @@ var Objects_Item = (function (_super) {
         // public store: Objects = null;   // reference to map.objects
         this.id = 0;
         this.name = '';
+        this.caption = '';
         this.cols = 0;
         this.rows = 0;
         this.width = 0;
@@ -728,9 +729,13 @@ var Objects_Item = (function (_super) {
         this.tileHeight = 0;
         this.collision = null;
         this.animated = null;
+        this.animationGroups = [];
         this.frames = 0;
         this.hsx = 0;
         this.hsy = 0;
+        this.epx = 0;
+        this.epy = 0;
+        this.type = 0;
         this.sprite = null;
 
         this.id = data.id;
@@ -739,6 +744,8 @@ var Objects_Item = (function (_super) {
         this.rows = data.rows;
         this.width = data.width;
         this.height = data.height;
+        this.type = data.type;
+        this.caption = data.caption;
     }
     Objects_Item.prototype.load = function () {
         if (this.readyState != 0)
@@ -757,25 +764,22 @@ var Objects_Item = (function (_super) {
                 me.frames = this.data.frames || 0;
                 me.tileWidth = this.data.tileWidth || 0;
                 me.tileHeight = this.data.tileHeight || 0;
+                me.animationGroups = this.data.animationGroups || [[0]];
+                me.epx = this.data.epx || 0;
+                me.epy = this.data.epy || 0;
 
-                if (!this.data.pixmap) {
+                me.sprite = new Picture(this.data.pixmap || this.data.frame);
+
+                me.sprite.once('load', function () {
                     me.readyState = 2;
                     me.loaded = true;
                     me.emit('load');
-                } else {
-                    me.sprite = new Picture(this.data.pixmap);
+                });
 
-                    me.sprite.once('load', function () {
-                        me.readyState = 2;
-                        me.loaded = true;
-                        me.emit('load');
-                    });
-
-                    me.sprite.once('error', function () {
-                        me.readyState = 3;
-                        me.emit('error', 'The object has been loaded, but it\'s sprite not');
-                    });
-                }
+                me.sprite.once('error', function () {
+                    me.readyState = 3;
+                    me.emit('error', 'The object has been loaded, but it\'s sprite not');
+                });
             });
 
             f.once('error', function () {

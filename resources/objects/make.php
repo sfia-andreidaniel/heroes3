@@ -95,7 +95,9 @@
             'cols' => $data['cols'],
             'rows' => $data['rows'],
             'width' => $data['width'],
-            'height' => $data['height']
+            'height' => $data['height'],
+            'type' => $data['objectType'],
+            'caption' => $data['caption']
         ];
         
         $id++;
