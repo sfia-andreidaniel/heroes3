@@ -4,7 +4,8 @@
     
         <label>Erase on: 
             <select id="eraser-scope">
-                <option value="">All layers</option>
+                <option value="*">All visible layers</option>
+                <option value="">All layers (including invisible ones)</option>
                 <!-- BEGIN: scope -->
                 <option value="{layer_id}">{layer_name}</option>
                 <!-- END: scope -->

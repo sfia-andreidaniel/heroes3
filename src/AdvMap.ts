@@ -61,6 +61,8 @@ class AdvMap extends Events {
 
                 load.open();
 
+                setInterval( function() { me.tick(); }, 200)
+
             })( this );
 
         }
@@ -75,6 +77,14 @@ class AdvMap extends Events {
             map.mapObjects.splice( map.mapObjects.indexOf( entity ), 1 );
         });
 
+    }
+
+    /* Method where the animations are hooked */
+    public tick() {
+        for ( var i=0, len = this.mapObjects.length; i<len; i++ ) {
+            if ( this.mapObjects[i].instance.animated )
+                this.mapObjects[i].tick();
+        }
     }
 
     get activeCell(): Cell {

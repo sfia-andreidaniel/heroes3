@@ -213,7 +213,7 @@ body {
 }
 
 #object-editor .ui-tabs-panel.ui-widget-content {
-    height: 326px;
+    height: 286px;
     padding: 5px;
     overflow-y: scroll;
 }
@@ -290,6 +290,30 @@ body {
     color: transparent;
     border-color: transparent;
     display: none;
+}
+
+/* Layers panel css */
+
+#layers {
+    padding: 5px 10px;
+    
+}
+
+#layers table thead {
+    background-color: black;
+    color: white;
+}
+
+#layers table td.c0 {
+    width: 60px;
+}
+
+#layers table td.c1 {
+    width: 300px;
+}
+
+#layers table td {
+    padding: 5px;
 }
 
 /* Tileset explorer dialog */
@@ -373,6 +397,14 @@ body.panel-objects div.panel-objects {
     display: block !important;
 }
 
+div.panel-layers {
+    display: none !important;
+}
+
+body.panel-layers div.panel-layers {
+    display: block !important;
+}
+
 /* BUTTONS */
 div.button {
     display: inline-block;
@@ -387,6 +419,7 @@ div.button {
     cursor: default;
     border: 1px outset transparent;
     height: 16px;
+    -webkit-user-select: none;
 }
 
 div.button:hover,
@@ -400,7 +433,8 @@ div.button:active {
     background-color: #888;
 }
 
-#btn-save {
+#btn-save,
+#btn-save-object {
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAALXRFWHRDcmVhdGlvbiBUaW1lAHNhbS4gMSBqdWluIDIwMDIgMTc6NDE6MzUgKzAxMDDq2GgaAAAAB3RJTUUH0gYCDzYoAZ5UHQAAAAlwSFlzAAAK8AAACvABQqw0mAAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAAIAAAACAAICAAAAAgIAAgACAgMDAwMDcwKbK8BYWexwcexwchCMjhCMjjyoqhDExhDExjzg4jzE4mDg4mDE4oTg4oUA4mEBAmEBAoUBAq0BAtlhYoVhgq2BghGpqhGpqmHNzmHt7mGpqoWpqtnNzoXN7tnt7tkhIwFBQwISEj4SEoY+Pq4SEyo+Pyo+YypiYwJiYypiY1KGhwKGhyqurwKur1La24LbAtrbAwMDAwMrKysrK1NTU1MDA4MDK4MrK6tTU4Orq6urq9Or09PT09PT0//T/////+v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/78KCgpICAgP8AAAD/AP//AAAA//8A/wD//////0tFwpwAAABKdFJOU/////////////////////////////////////////////////////////////////////////////////////////////////8AWiu/GwAAAKRJREFUeNp1zMkOgkAQRVF2JowiKEM7j+AAIiqQRpQWkP7/HxIoMW68i1qcpB5DqeLjDoSPMmXoqH8vnlBxRVoND4Ih0kKWQl8g8a0uJn9f2tEcQEnyLIcABsbS8VzPcVzvYKkVWBBC1bG1Bsz1ZjHbBydRRHoDxqrLbXEZsJz5gakgXMgvjKVhWpRnjgewjck+KV65z/L1BtVVeR5GURjuJKlH33puLWsqIU8GAAAAAElFTkSuQmCC );
 }
 
@@ -410,6 +444,10 @@ div.button:active {
 
 #btn-objects {
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADKElEQVR42o2TbWhTVxjH/+fcm7fWm8REm9oiUVur7YLYlBLH1o3V+imwKYigWBCpCLYdxVmpSpV+8oOi0Iofhgwmw+2LsE0tE/1SSqsmTdXaF1trTNMXk7aLSdokNy/3XG+viAoOdj4d/s95fuf/nPM8BP9zfdfPDkyN+KL+I9XdH+vk/ebFGjhlQk5ShlpGcV2i8pXyMAIrsdJuZqw0554/GhycDjbtcH0CGCrgdhFGThKKuo8DEsAIwy3GyZ17r4nuWhs5/k+/T9Gpe7blgwviP/i9lInFIAYDNBsOKZKsBqjegIzewAZ0hbh45gH7wc7zN3sGwBHiCbZ+cEEm9uyU0y8nwJdsYfzGUqQCfkqU5NB0UHo5Nkp/a75NgptrsL+E4tf7A7Ct0iCTg3vsp3cuyIi7Rk4H/MguhMBb1sJSf5j1/X4D0ZkgHXHuw9/1v6g3NVTwuNrthU3QwmrQeHoat6suyJM6l5xZnEdmbkY9uK6hEbeudiGtE/DzCR+WhUJVb3FqcOFPD9YqDjZZ9JiOZNzDp6u7ifebSllKJhAJT+HmVxJ6qzgs0TSEpXzlFesRM7WDUSOaFcDlvzxKCVqsX61DKs08/a1VLtLn2rqc5OT8szWTYLUmOBw65OcBiSVg6mEaocF1mLXcxaHtVly740WhUYsCQaO6SojMTforKiwXvg3cHq0Vvix1FeNYQQM633RgKJqCJabU6+Hwan43dlVdwh/3vCg26yDoORWQk5hXbaTydrI4t1NjdZWUo9KcB78Yhi+aQHJhGbbnOYjjq/CFI4A7yjfarTrwHF1Jfs3zXKsKcJwi8lydjDK7E0UGA+JSErPJZWTnIxAmIkhMAsX2KB56B7HGyGcZQ1dK1nREunbEVcC242QxVa2xhtZnIBreNUheErAuEBQFtHj1Ro7bTKHxZ08fJ7RE25S4XjPyySyUtZHOIqutWSyXsEBjYDJDvsihKG1CYo5iOBfqirXhx88NmQownYPZLJHeig02h90pQG+kEOMM40NL8IXCw3HIX6MNsf8EqJDzWE1ldPBZHKAE1izFv6ION5JGtOPo55NX1luHBkfvDXGsngAAAABJRU5ErkJggg== );
+}
+
+#btn-layers {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIXRFWHRTb2Z0d2FyZQBBZGFtIE5ham1hbm93aWN6IFRHQTJQTkdywFGBAAABSUlEQVR4nM2SIVIDMRSGv3YQdY2sIxLHyjr2CHuE5QQsNygOx3KDHGFxyOAqi6sMDvnL50BsdtvtlEFgeDPJm7zky8v/T+CPMTsttNuNZFoCYEJDNoA+ayv82n2EOvqLE3gntPSr4qiqfjaBQRc63Nq9hTqWAPMjOMp07d3vMFANJ+ZjZ9PN+c79qod5Aaqujho9aLeNdtISy1oFGKCsO9eLNdSLhEPoE5zj3te0ExNTrAosBVc01ywcg5GY+hcpkWLAOd58zdSDFKvSDfBERh6mEQbqUcKPnTM0jPTa4hzvQOVr0niBtlWhFDtMl/2Ts33GJLQoCdogedK+A3jYdc1m4kETvhoZT+XVCWyHi7vwjLsqb+NjESYeZHhzFmYKA2HYn5/Ay7OwZdj3cHw8/JdZE77a3f79btDfm3fIytmtinsWtMfw/4hv5Q/UZzwXIn8AAAAASUVORK5CYII=);
 }
 
 #btn-eraser {

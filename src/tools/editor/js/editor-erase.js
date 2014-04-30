@@ -20,6 +20,18 @@ map.on( 'load', function() {
             
             $('#editor > div').append( tpl.text + '' );
             
+            $('#eraser-size').on( 'change', function() {
+                var erSize = ~~$(this).val();
+                map.objectHandle = erSize === 0 ? null : {
+                    "cols": 2 * erSize + 1,
+                    "rows": 2 * erSize + 1,
+                    "hsx": erSize,
+                    "hsy": erSize,
+                    "supported": false
+                };
+            });
+
+            
         }
         
     } );

@@ -28,19 +28,18 @@
                         </tr>
                         <tr>
                             <td>Object type:</td>
-                            <td><input type="text" data-property-name="object_type" disabled="disabled" /></td>
+                            <td><input type="text" data-property-name="object_type" disabled="disabled" style="width: 50px" /></td>
                         </tr>
                         <tr>
                             <td>Id:</td>
-                            <td><input type="number" data-property-name="object_id" disabled="disabled" /></td>
+                            <td><input type="number" data-property-name="object_id" disabled="disabled" style="width: 50px" /></td>
                         </tr>
                         <tr>
-                            <td>Columns:</td>
-                            <td><input type="number" data-property-name="object_cols" disabled="disabled" /></td>
-                        </tr>
-                        <tr>
-                            <td>Rows:</td>
-                            <td><input type="number" data-property-name="object_rows" disabled="disabled" /></td>
+                            <td>Size:</td>
+                            <td>
+                                <input type="number" data-property-name="object_cols" disabled="disabled" style="width: 50px" /> x
+                                <input type="number" data-property-name="object_rows" disabled="disabled" style="width: 50px" /> tiles
+                            </td>
                         </tr>
                         <tr>
                             <td>Animated:</td>
@@ -48,23 +47,23 @@
                         </tr>
                         <tr>
                             <td># Frames:</td>
-                            <td><input type="number" data-property-name="object_frames" disabled="disabled" /></td>
+                            <td>
+                                <input type="number" data-property-name="object_frames" disabled="disabled" style="width: 50px" /> frames
+                            </td>
                         </tr>
                         <tr>
-                            <td>HotSpot X:</td>
-                            <td><input type="number" data-property-name="object_hsx" min="0" value="0" /></td>
+                            <td>HotSpots:</td>
+                            <td>
+                                <input type="number" data-property-name="object_hsx" min="0" value="0" style="width: 50px" /> :
+                                <input type="number" data-property-name="object_hsy" min="0" value="0" style="width: 50px" />
+                            </td>
                         </tr>
                         <tr>
-                            <td>HotSpot Y:</td>
-                            <td><input type="number" data-property-name="object_hsy" min="0" value="0" /></td>
-                        </tr>
-                        <tr>
-                            <td>Enter X:</td>
-                            <td><input type="number" data-property-name="object_epx" min="0" value="0" /></td>
-                        </tr>
-                        <tr>
-                            <td>Enter Y:</td>
-                            <td><input type="number" data-property-name="object_epy" min="0" value="0" /></td>
+                            <td>Enter:</td>
+                            <td>
+                                <input type="number" data-property-name="object_epx" min="0" value="0" style="width: 50px" /> :
+                                <input type="number" data-property-name="object_epy" min="0" value="0" style="width: 50px" />
+                            </td>
                         </tr>
                         
                     </tbody>
@@ -90,5 +89,6 @@
                 <label><input type="checkbox" id="cmd-editor-toggle-borders" /> Show guides</label><br />
             </div>
         </div>
+        <div class="button" id="btn-save-object">Save Object</div>
     </div>
 </div>

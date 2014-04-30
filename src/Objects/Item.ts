@@ -106,4 +106,19 @@ class Objects_Item extends Events {
 		throw "Not implemented";
 	}
 
+	/* Returns the layer on which this object can be placed */
+	public getDestinationLayerIndex(): number {
+		switch ( this.type ) {
+			case 4: // adventure map item
+				return 3; // moveable objects
+				break;
+			case 3:
+				return 2; // static objects
+				break;
+			default:
+				return null;
+				break;
+		}
+	}
+
 }

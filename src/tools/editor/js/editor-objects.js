@@ -54,6 +54,16 @@ map.on( 'load', function() {
         
         currentObject = obj;
         
+        if ( editorMode && editorMode == modes.object )
+        map.objectHandle = {
+            "cols": currentObject.cols,
+            "rows": currentObject.rows,
+            "hsx": currentObject.hsx,
+            "hsy": currentObject.hsy,
+            "supported": true
+        }
+
+        
         console.log( "editor_load_object" );
         
         gr_reset( '#object-grid' );
@@ -88,7 +98,7 @@ map.on( 'load', function() {
         $('#object-grid tr.r' + obj.hsy + ' > td.c' + obj.hsx ).addClass( 'hotspot' );
         $('#object-grid tr.r' + obj.epy + ' > td.c' + obj.epx ).addClass( 'entrypoint' );
         
-        console.log( '#object-grid tr.r' + obj.epy + ' > td.c' + obj.epx );
+        // console.log( '#object-grid tr.r' + obj.epy + ' > td.c' + obj.epx );
         
         /* End of load the object values */
         
@@ -205,6 +215,13 @@ map.on( 'load', function() {
                             
                             $('#btn-set-hotspot').click();
                             
+                            if ( editorMode && editorMode == modes.object ) {
+                                
+                                map.objectHandle.hsx = cellX;
+                                map.objectHandle.hsy = cellY;
+                                
+                            }
+                            
                             break;
                         
                         case 'entrypoint':
@@ -257,6 +274,51 @@ map.on( 'load', function() {
                     editor_load_object( obj );
                     
                 }
+                
+            } );
+            
+            $('#btn-save-object').on( 'click', function() {
+                // save object
+                if ( !currentObject )
+                    return;
+                
+                if ( !currentObject.loaded ) {
+                    alert("The object in not in a loaded state (yet)" );
+                    return;
+                }
+                
+                var oLabel = $('input[data-property-name=object_caption]').val(),
+                    hsx    = ~~$('input[data-property-name=object_hsx]').val(),
+                    hsy    = ~~$('input[data-property-name=object_hsy]').val(),
+                    epx    = ~~$('input[data-property-name=object_epx]').val(),
+                    epy    = ~~$('input[data-property-name=object_epy]').val(),
+                    id     = currentObject.id;
+                
+                currentObject.label = oLabel;
+                
+                $.ajax( 'tools/save-object.php', {
+                    
+                    "type": "POST",
+                    "data": {
+                        "data": 
+                            JSON.stringify( {
+                                "id": id,
+                                "label": oLabel,
+                                "hsx": hsx,
+                                "hsy": hsy,
+                                "epx": epx,
+                                "epy": epy
+                            } )
+                    },
+                    "success": function( data ) {
+                        if ( !data || !data.ok ) {
+                            alert( data && data.error ? data.error : 'Unknown save error' );
+                        }
+                    },
+                    "error": function( ) {
+                        alert( "Server error while saving object" );
+                    }
+                } );
                 
             } );
             

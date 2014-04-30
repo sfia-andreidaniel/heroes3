@@ -82,4 +82,20 @@ class Cell {
 
 		}
 	}
+
+	public getTerrainTypeIndex() {
+		if ( this.$layerData[0] !== null ) {
+			return this.$layerData[0];
+		} else {
+			// determine terrain type based on the layer bits
+			var bits = this.map.layers[0]['tiles'][ this.index ];
+
+			bits =  bits === null ? null : ( bits.indexOf( 4 /* CT_ABYSS */ ) >= 0 ? 4 : (bits.indexOf( 9 /* CT_WATER */ ) >= 0 ? 9 : bits[0] ) );
+
+			if ( bits != null )
+				this.$layerData[0] = bits; // correct map
+
+			return bits;
+		}
+	}
 }

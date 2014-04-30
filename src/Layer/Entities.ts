@@ -33,7 +33,7 @@ class Layer_Entities extends Layer {
 				this._objects[ index ].destroy();
 			}
 
-			this._objects[  index ] = data 
+			this._objects[  index ] = data !== null
 				? new Objects_Entity( data, x, y, this )
 				: null;
 

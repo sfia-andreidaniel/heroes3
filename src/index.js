@@ -366,6 +366,10 @@ var AdvMap = (function (_super) {
                 });
 
                 load.open();
+
+                setInterval(function () {
+                    me.tick();
+                }, 200);
             })(this);
         }
 
@@ -379,6 +383,14 @@ var AdvMap = (function (_super) {
                 map.mapObjects.splice(map.mapObjects.indexOf(entity), 1);
         });
     }
+    /* Method where the animations are hooked */
+    AdvMap.prototype.tick = function () {
+        for (var i = 0, len = this.mapObjects.length; i < len; i++) {
+            if (this.mapObjects[i].instance.animated)
+                this.mapObjects[i].tick();
+        }
+    };
+
     Object.defineProperty(AdvMap.prototype, "activeCell", {
         get: function () {
             return this._activeCell;
@@ -828,6 +840,21 @@ var Objects_Item = (function (_super) {
     Objects_Item.prototype.saveProperties = function (properties) {
         throw "Not implemented";
     };
+
+    /* Returns the layer on which this object can be placed */
+    Objects_Item.prototype.getDestinationLayerIndex = function () {
+        switch (this.type) {
+            case 4:
+                return 3;
+                break;
+            case 3:
+                return 2;
+                break;
+            default:
+                return null;
+                break;
+        }
+    };
     return Objects_Item;
 })(Events);
 var Objects_Entity = (function (_super) {
@@ -844,16 +871,33 @@ var Objects_Entity = (function (_super) {
         // public layer: Layer_Entities;
         this.instance = null;
         this.frameIndex = 0;
+        this._animationIndex = null;
+        this._animationFrames = [0];
+        this._animationNumFrames = 0;
 
         this.instance = this.layer.map.objects.getObjectById(this.itemTypeId);
 
-        this.instance.load();
+        if (this.instance.loaded) {
+            if (this.instance.animated) {
+                this.setAnimationIndex(this.instance.animationGroups[0] ? 0 : null);
+            }
+        } else {
+            (function (me) {
+                me.instance.once('load', function () {
+                    if (me.instance.animated) {
+                        me.setAnimationIndex(me.instance.animationGroups[0] ? 0 : null);
+                    }
+                });
+            })(this);
+
+            this.instance.load();
+        }
 
         this.layer.map.emit('entity-create', this);
     }
     Objects_Entity.prototype.paint = function (ctx2d, x, y) {
         if (this.instance.loaded) {
-            var sx = this.frameIndex * this.instance.width, sy = 0, sw = this.instance.width, sh = this.instance.height;
+            var sx = this._animationFrames[this.frameIndex] * this.instance.width, sy = 0, sw = this.instance.width, sh = this.instance.height;
 
             ctx2d.drawImage(this.instance.sprite.node, sx, sy, sw, sh, x, y, sw, sh);
         }
@@ -873,7 +917,7 @@ var Objects_Entity = (function (_super) {
         if (x < 0 || y < 0 || x >= this.layer.map.cols || y >= this.layer.map.rows)
             throw "Invalid destination (out of bounds)!";
 
-        var actualIndex = this.row * this.layer.map.cols + this.col, newIndex = y * this.layer.map.cols + x;
+        var actualIndex = this.row * this.layer.map.cols + this.col, newIndex = y * this.layer.map.cols + x, viewports = this.getVisibleViewports(), cell;
 
         if (actualIndex == newIndex)
             return;
@@ -881,15 +925,94 @@ var Objects_Entity = (function (_super) {
         if (this.layer._objects[newIndex])
             throw "Destination allready contains an object!";
 
+        for (var i = 0, len = viewports.length; i < len; i++) {
+            if (!viewports[i].shouldRenderCell(cell = this.getOwnerCell()))
+                viewports[i].removeFromPaintables(cell);
+        }
+
         this.layer._objects[newIndex] = this;
         this.layer._objects[actualIndex] = null;
 
         this.col = x;
         this.row = y;
+
+        viewports = this.getVisibleViewports();
+
+        for (var i = 0, len = viewports.length; i < len; i++) {
+            viewports[i].addToPaintables(cell = this.getOwnerCell());
+        }
+
+        for (var i = 0, len = this.layer.map.viewports.length; i < len; i++) {
+            if (this.layer.map.viewports[i].shouldRenderCell(cell))
+                this.layer.map.viewports[i].addToPaintables(cell);
+        }
     };
 
     Objects_Entity.prototype.moveBy = function (x, y) {
         this.moveTo(this.col + x, this.row + y);
+    };
+
+    /* We must determine if the entity's cell is outside
+    the viewport, but paintable on it.
+    */
+    Objects_Entity.prototype.inViewport = function (vp) {
+        if (this.instance.cols < 2 || this.instance.rows < 2)
+            return false;
+
+        var x1 = this.col - this.instance.hsx, y1 = this.row - this.instance.hsy, x2 = x1 + this.instance.cols, y2 = y1 + this.instance.rows;
+
+        return (x2 < vp.x || x1 > vp.x + vp.cols || y2 < vp.y || y1 > vp.y + vp.rows) ? false : true;
+    };
+
+    Objects_Entity.prototype.getOwnerCell = function () {
+        return this.layer.map.cellAt(this.col, this.row, false);
+    };
+
+    Objects_Entity.prototype.getVisibleViewports = function () {
+        var out = [];
+
+        for (var i = 0, len = this.layer.map.viewports.length; i < len; i++) {
+            if (this.inViewport(this.layer.map.viewports[i]))
+                out.push(this.layer.map.viewports[i]);
+        }
+
+        return out;
+    };
+
+    Objects_Entity.prototype.getAnimationIndex = function () {
+        return this._animationIndex;
+    };
+
+    Objects_Entity.prototype.setAnimationIndex = function (animationIndex) {
+        this._animationFrames = [];
+
+        if (animationIndex === null) {
+            if (this.instance.animated) {
+                for (var i = 0; i < this.instance.frames; i++) {
+                    this._animationFrames.push(i);
+                }
+                this._animationNumFrames = this.instance.frames;
+            } else {
+                this._animationFrames.push(0);
+                this._animationNumFrames = 1;
+            }
+        } else {
+            if (this.instance.animationGroups[animationIndex]) {
+                this._animationFrames = this.instance.animationGroups[animationIndex];
+                this._animationNumFrames = this._animationFrames.length;
+            } else
+                throw "Invalid animation index.";
+        }
+
+        this._animationIndex = animationIndex;
+
+        this.frameIndex = 0;
+    };
+
+    Objects_Entity.prototype.tick = function () {
+        if (this._animationNumFrames) {
+            this.frameIndex = ++this.frameIndex == this._animationNumFrames ? 0 : this.frameIndex;
+        }
     };
     return Objects_Entity;
 })(Events);
@@ -1349,7 +1472,7 @@ var Layer_Entities = (function (_super) {
                 this._objects[index].destroy();
             }
 
-            this._objects[index] = data ? new Objects_Entity(data, x, y, this) : null;
+            this._objects[index] = data !== null ? new Objects_Entity(data, x, y, this) : null;
         });
     };
 
@@ -1467,6 +1590,22 @@ var Cell = (function () {
                 ctx.strokeStyle = '#f00';
                 ctx.strokeRect(x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3);
             }
+        }
+    };
+
+    Cell.prototype.getTerrainTypeIndex = function () {
+        if (this.$layerData[0] !== null) {
+            return this.$layerData[0];
+        } else {
+            // determine terrain type based on the layer bits
+            var bits = this.map.layers[0]['tiles'][this.index];
+
+            bits = bits === null ? null : (bits.indexOf(4) >= 0 ? 4 : (bits.indexOf(9) >= 0 ? 9 : bits[0]));
+
+            if (bits != null)
+                this.$layerData[0] = bits; // correct map
+
+            return bits;
         }
     };
     return Cell;
@@ -1752,9 +1891,41 @@ var Viewport = (function (_super) {
 
         this.loopPaint();
     }
+    /* Adds the cell to the paint loop */
+    Viewport.prototype.addToPaintables = function (cell) {
+        if (this.paintables.indexOf(cell) == -1) {
+            this.paintables.push(cell);
+        }
+
+        return cell;
+    };
+
+    /* Removes the cell from the paint loop */
+    Viewport.prototype.removeFromPaintables = function (cell) {
+        var index = this.paintables.indexOf(cell);
+
+        if (index >= 0) {
+            this.paintables.splice(index, 1);
+        }
+
+        return cell;
+    };
+
+    /* Weather the cell is inside the paint loop */
+    Viewport.prototype.isInPaintables = function (cell) {
+        return this.paintables.indexOf(cell) != -1;
+    };
+
+    /* Weather the cell is inside the viewport region. Doesn't test
+    if the cell is outside but still needs to be painted
+    */
+    Viewport.prototype.shouldRenderCell = function (cell) {
+        return cell.x() >= this.x && cell.x() <= this.x + this.cols && cell.y() >= this.y && cell.y() <= this.y + this.rows;
+    };
+
     Viewport.prototype.updatePaintables = function () {
         // determine the paintables objects
-        var cx = this.x, cy = this.y, cx1 = this.x + this.cols, cy1 = this.y + this.rows;
+        var cx = this.x, cy = this.y, cx1 = this.x + this.cols, cy1 = this.y + this.rows, c = null;
 
         this.paintables = [];
 
@@ -1763,6 +1934,14 @@ var Viewport = (function (_super) {
                 if (x >= 0 && y >= 0 && x < this.map.cols && y < this.map.rows)
                     this.paintables.push(this.map.cellAt(x, y));
             }
+
+        for (var i = 0, len = this.map.mapObjects.length; i < len; i++) {
+            if (this.map.mapObjects[i].inViewport(this)) {
+                c = this.map.mapObjects[i].getOwnerCell();
+                if (c)
+                    this.paintables.push(c);
+            }
+        }
     };
 
     Viewport.prototype.resize = function (width, height) {

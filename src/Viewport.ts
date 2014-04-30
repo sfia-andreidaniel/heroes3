@@ -39,12 +39,46 @@ class Viewport extends Events {
 
 	}
 
+	/* Adds the cell to the paint loop */
+	public addToPaintables( cell: Cell ): Cell {
+		if ( this.paintables.indexOf( cell ) == -1 ) {
+			this.paintables.push( cell );
+		}
+
+		return cell;
+	}
+
+	/* Removes the cell from the paint loop */
+	public removeFromPaintables( cell: Cell ): Cell {
+		var index = this.paintables.indexOf( cell );
+
+		if ( index >= 0 ) {
+			this.paintables.splice( index, 1 );
+		}
+
+		return cell;
+	}
+
+	/* Weather the cell is inside the paint loop */
+	public isInPaintables( cell: Cell ): boolean {
+		return this.paintables.indexOf( cell ) != -1;
+	}
+
+	/* Weather the cell is inside the viewport region. Doesn't test
+	   if the cell is outside but still needs to be painted
+	 */
+	public shouldRenderCell( cell: Cell ): boolean {
+		return cell.x() >= this.x && cell.x() <= this.x + this.cols &&
+			   cell.y() >= this.y && cell.y() <= this.y + this.rows;
+	}
+
 	public updatePaintables() {
 		// determine the paintables objects
 		var cx = this.x,
 		    cy = this.y,
 		    cx1 = this.x + this.cols,
-		    cy1 = this.y + this.rows;
+		    cy1 = this.y + this.rows,
+		    c: Cell = null;
 
 		this.paintables = [];
 
@@ -54,6 +88,14 @@ class Viewport extends Events {
 					this.paintables.push( this.map.cellAt( x, y ) );
 
 			}
+
+		for ( var i=0, len = this.map.mapObjects.length; i<len; i++ ) {
+			if ( this.map.mapObjects[i].inViewport( this ) ) {
+				c = this.map.mapObjects[i].getOwnerCell();
+				if ( c )
+					this.paintables.push( c );
+			}
+		}
 
 	}
 

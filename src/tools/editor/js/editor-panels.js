@@ -1,7 +1,8 @@
 var panels = [
     "paint",
     "erase",
-    "objects"
+    "objects",
+    "layers"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {
@@ -21,9 +22,9 @@ $('div.button[data-panels]').on( 'click', function() {
     var mode = $(this).attr( 'data-editor-mode' );
     
     if ( mode.length ) {
-        editorMode = ~~mode;
+        setEditorMode( ~~mode );
     } else {
-        editorMode = null;
+        setEditorMode( null );
     }
     
 } );

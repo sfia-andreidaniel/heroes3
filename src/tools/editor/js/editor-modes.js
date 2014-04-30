@@ -7,7 +7,69 @@ var modes = {
     isDragging = false;
     
 
+function setEditorMode( mode ) {
+    
+    if ( editorMode === mode )
+        return;
+    
+    if ( editorMode === modes.object || editorMode === modes.erase ) {
+        map.objectHandle = null;
+    }
+    
+    editorMode = mode;
+    
+    if ( editorMode === modes.object ) {
+        
+        if ( currentObject && currentObject.loaded ) {
+            
+            map.objectHandle = {
+                "cols": currentObject.cols,
+                "rows": currentObject.rows,
+                "hsx": currentObject.hsx,
+                "hsy": currentObject.hsy,
+                "supported": true
+            }
+            
+        }
+        
+    }
+    
+    if ( editorMode === modes.erase ) {
+        
+        var erSize = ~~$('#eraser-size').val();
+        
+        switch ( true ) {
+            
+            case erSize == 0:
+                map.objectHandle = null;
+                break;
+            
+            default:
+                map.objectHandle = {
+                    "cols": 2 * erSize + 1,
+                    "rows": 2 * erSize + 1,
+                    "hsx": erSize,
+                    "hsy": erSize,
+                    "supported": false
+                };
+                break;
+        }
+        
+    }
+}
 
+function paintObject() {
+    if ( map.activeCell === null || !currentObject )
+        return;
+    
+    var destinationLayer = currentObject.getDestinationLayerIndex();
+    
+    if ( destinationLayer === null )
+        return;
+    
+    map.activeCell.setData( destinationLayer, currentObject.id );
+    
+}
 
 function paintTerrain( ) {
 
@@ -32,6 +94,7 @@ function eraseTerrain() {
         return;
     
     var eraseLayer = $('#eraser-scope').val(),
+        onlyVisible = false,
         rubberSize = ~~$('#eraser-size').val(),
         
         eraseCells = [ map.activeCell ],
@@ -48,7 +111,12 @@ function eraseTerrain() {
         
         cell;
     
-    eraseLayer = eraseLayer === '' ? null : ~~eraseLayer;
+    eraseLayer = eraseLayer === ''
+        ?  null 
+        : ( eraseLayer == '*'
+            ? ( function() { onlyVisible = true; return null; } )()
+            : ~~eraseLayer
+          );
     
     for ( var col = x1; col <= x2; col++ ) {
         for ( var row = y1; row <= y2; row++ ) {
@@ -60,6 +128,9 @@ function eraseTerrain() {
                 if ( eraseLayer === null ) {
                     
                     for ( var i=0, len = map.layers.length; i<len; i++ ) {
+                        
+                        if ( onlyVisible && !map.layers[i].visible )
+                            continue;
                         
                         cell.setData( i, null );
                         
@@ -88,6 +159,10 @@ map.on( 'load', function() {
 
             case modes.paint:
                 paintTerrain();
+                break;
+            
+            case modes.object:
+                paintObject();
                 break;
             
             case modes.erase:
@@ -132,6 +207,13 @@ map.on( 'load', function() {
             
                 if ( isDragging )
                     paintTerrain();
+                
+                break;
+            
+            case modes.object:
+                
+                if ( isDragging )
+                    paintObject();
                 
                 break;
             
