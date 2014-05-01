@@ -1,0 +1,37 @@
+{
+    "name": "avxreds0",
+    "caption": "avxreds0",
+    "width": 64,
+    "height": 96,
+    "cols": 2,
+    "rows": 3,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ],
+        [
+            0,
+            1
+        ],
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABgCAMAAACaG4TaAAAC3FBMVEUA\/\/\/d8O\/B9PTR8fXcpW\/x8v+6jHbY1O7V1N6SgXjDl4vFvPCchobCx\/6JQynx8\/mjm52jfoCfeHKtc2y9b0vXgEeqXyqhPSK5WziEPSWL\/wCBxwC8byx8lwC1ZzJMfAu2cDCwWDFmJxobNgmJLB2w\/ADSfESGPS9WigqgSR2XRiWqTzSrZCujRihMGhSdSyiPQzOEMh9bFjjVkD6XOyZYLxR2KBhlIBagUj9KGRCQOCCdWihZHxWhSTOTOiGRRSK+aDbQdEd+KBqrUSNvHheBNBnDYCd1NCDAaD9SFRGrVzhHEw5lHRBnMxbLbjmyWjxVHBGe1mR+nUCQPy5wJxievYY6EA1IIw8xQxNuMRna19gvHAZAQgBAOSHf5LYqEAgQCQWDoF8PBQI2awKqrI2lTB55MxlYJBYZCgaR1mlxcGs0YSS6SgV7h3ZqiUyTumGNkYnI4a06PjEqNSBRiz7O4G5WVkM0OCM7IxZUWSZQdT5Wbza40adVez5bi0UuPyFTTixRUSoRGgs7QTk1Timbp00iJxmWr2CUknocJhcIBgRIIheJvm2z8JKhvKF1jjmun4tjJBFgKBpKaTo1PyGw2ZSIf3CypI+djntXQzYXHxIQFAwxNC8rNRqUhHI5Gg5kUEg9NzGgxgBzem4qJR9cRz1bRT1jVUGFhYSy7gAMDgkHDAVcYkPl6PVqbWN5d2l+cGNqVUoSIQxaEwLg4tBvYVQcTAMqXwWKVkXq6u14al1pW1FNSkRfYFsUNgNXWVFXSz9WUUUfCgVEEAheFgU4DgkVBwPo5uV4SD0yDgeysLBNEwosCga3rKnn5tyom5IlCQUEAwIKAwFIQTq4naEfBwXn4+upq6X\/\/\/\/o9vjDwsK+vLnw7vXQzdHg3dTZz8T6+fb49vHs6uzn49nRzMr8+\/vVyML+\/v38+\/n39fXx7u7h3+HIxMP7+vbg4N3a1NTt7uHz7+PZ0sr38+zqj9AaAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAABtRJREFUWIXFlv9fE\/cdxz+tc3XdF9qt39gXq0hFKcqsNRKIqYkJRLCQDhYHrjsWB6H2yzbtpq2tbi1jS+u6glrbnMosutpkQSmilkgD0UsWEtldIsGEGHIhx+WIFxLuH9gdax+P\/Xj34Ye9f7h7PO4er+e9Pu8vn88B8P8IblHq+Vwul4WXz2U4jmU5SA9359PZWSZFsykahjAzPzfL8fIURVO0dEJyZn46QaZoXsyScemEu3enYllBR1Mkx7As70IKYSY5dSeRiNJxiiJJkiPjcTYugZCcn0lORsLTiWmWZuJMnOM4kmSo21RiWow8kpyZnJhOgomJ6RmOTZFxMs4xTDyVom+nsjFRDkLjt4JzAQL\/91wsQceFNmB5AJVK3ebGRHkAk0H8pt\/vG72ZzjG0kAEyFWdpmmS56RlRAAACwsX7L4+HY2neAhuP03SK4+YmJ0QC3G4egt3wJ3NciiLZeIqmWHI+NgEiIgEAx6+7hHssR1JxkqXjZDY5MSlWzYdrHICR4WFnzJNl+GYkc7PpiPjPA\/DFuH\/oWnDE6ZgcDOU4hvx87GowckW8\/rKf8A4MDDiDwZGRyPylHDN1s3\/8syuXxRvAA76+vr6LF3qdQZ89dCn2zxFX0GYlPhULOP\/JOOb9x7k+x8DghX5v8pOBEb\/fMXm2Z+hjsYBzZ9yY99zw3x0OR7931Om\/3n3x9KmT55NWcXr0pOUjL+6+caMf4xuy\/0b\/9cEPT3xwref4GVHyYzYbQI\/2DAedg12dnZ39Xsfp90+8P0zYRnPHHWL0fztrQ3ve++sR50eDgx+e\/uBd78UTJyzv2My20aG\/\/FkEwNbxJxQcbx9rR49mxyzWDuvbQ2+ZzUMnASDO\/1HMClDU+s4feCOHD1nefONIh5Ug0IOvO4deO8C\/2y8GwH+J6Pg9sFz73av7AjiO2whif3Z0BLWJEy8sYu9vgdnym1+\/8jKBj+OBl17uuPDGvhfFqs0o6NkDXpg3jzr39BJtblNrS+ZX1r0ESogE7LZajyZPHRw7hfYmcaObQHvfRNvb+WWhPSIJhCVmBuCXZstYM+IPBA6NvdLRc+kwgb76i+dFr8IGjplfB8CII27U8\/bBiZ8DGyA+O3tVLACAw0f286eIm1\/Brqxnb2+T8KwdoOIB4IuxJADNuJs4FDtssTVKUP5vNI+7iYyzaf\/PdsICDEgz8dPEvlYMEuD2NdQbX\/vJc8dgAUYMadQ3Ws0tsIAAbqhrrX22ZYceGlBTvV1XValFYAEIVq\/RtWxrxWEBOwz1atXWZ5RwOUC6A76aLTt0qm1qH5z+QAAz1Ct0FeXy6zBypHunEcHKTNWba2XbIQxs4tu3uQGr3qx+eqNWJl3\/1Cb+EvAZtmg2qCrVNdIBO4XSBzDsx5rSilqYHAABwOdgvUb3TIUWJgdC8DnQb1atq1BC5GAhhGFSlO\/UblvUMG1Ql1bAD5OhWl7dUFmyiGF60lfXWlwCP0zYlrXltbIS6BzwjaTQqBoqFF89WSMRgBmKFLLVMqrzywe7n8hIAgiNZCosNWQygo6iiilqlSQPfCPJCwo1CHKAymSKi12711ASHWCIvqpBZ8BxpNjl4v+9V+2WpBf6oKhRvVJbsglHyqVJvwLUVAnTtEIPXJ1aFbjy6eMSAQhWUKBZWblczv\/+d3eqqGzmR9IAOwwFa8urS3\/IlxHJEFQ2+wOJDnw1XQ0alXZ5J9iVpR7PrspI+FNbAGCGrgLZ6g0lnbuyGSqzipDYiEIjFZkKq4tLGi\/bMnwF13xfIoBvpDpFoXJjiRa8+JZE7X8dYFijvmHlSyugTiYg9AFW11qoa1kBvyNh1T5N3bbli9mR5Bpd\/uJ2JI0qfwX8jlQj7Ej5JdBJFI532UZtFczRJsTC8V6+9Vmo412IhUYqf6xRKzPCAdrkhnWmR598RC2Dq6PRvf5dpbr84eK1argyNLuL5GWNq\/Xda0vhymBsqzfpChGcUNQ2QAHceL6irNKFE10PwZXBiNebyiqtRkK+1eSG0OPNyKOmQqUzQnQ\/UgUzDa42wzqZev3Z9LXuh+UwZXB19X2vaHs3cSfmeCgfn5Ksb0O+m7n5oOLMA5m8SNl39NItPH91Zu7b3yqI7Jlj0t+8f71eogXkG3eXNYXmbtVORhh707I7W2oM0vQPpBkuj7K\/V3aeiUY9d+77epdckgXEnhdKhJc2JW9NMEwqHE1Pfc2AIFIQFOPJMVFP+L5ZJm9pXiKaiN2vVEqZySgTZTyhaDoaJlMUE05E08uAUikBsMRuT9iXziYYZillvx1eEv58iQS1EPeGeBOhUNhuXxK+J3xPNHrvly\/+A3BQnFtxxROYAAAAAElFTkSuQmCC",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

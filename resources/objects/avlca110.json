@@ -1,0 +1,28 @@
+{
+    "name": "avlca110",
+    "caption": "avlca110",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAaVBMVEUA\/\/+ToW6BlFkPEAotKyHKxbU1QCEhIRgiMQydtXBXZyA1Ow2Hi28hIQ0FCgC3vZRhalYvOxhGVTEZGwAfMQA0Oiy9xaqAiVZWaTFDUxsAAABWZz5iaUpvh1C5rZCbn4ZgdT+IjoGitYxbEKPJAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAATtJREFUOI3tkstywyAMRUmTOGpDbZ6KfQm14f8\/snIeM06cdtNttQCGe8SVNCj1H3+K+uqyqGn8uh7z+YWeasHQnzjKOfi1Pg7BwdqS5HXTpTWA9vPMQbdQ6ph7y2viw7pqCutkHFi\/r\/RJ0yHyYBrHLmcE6sojoMPe7T49gZuyxcCEsLThFmYrFqajtwJd22QYC72nDoCLjbPN0QQiIGEJ5CGRQykw0kcV1gQbnoqMRkwCGC08QMjP05asCN9I9sbOgKHj4yAlrYgKXfyRZWOfH4ZlrzJPyWa2U4BGH3AfBU5AqJd8KZ90YoRkhzrtNzeiSnFFGjOYydT4EAUqbpou6rYiYzfXF2lGQMkiZhqrzzeLAxqCmrXDvBbjdG7h3LLJeS3XDekyK6XVDyEYTPviUy3CYPxVv3sq9Q1oJx+hhuAX+QAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

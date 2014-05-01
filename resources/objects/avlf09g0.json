@@ -1,0 +1,29 @@
+{
+    "name": "avlf09g0",
+    "caption": "avlf09g0",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAABZVBMVEUA\/\/8DIQA+SCkhShgkWhQhMRAACABCYyloTSEMRQQxShgpORAeUidFRyExORAxQhgpShglaSYpSiFWSgwhNQY5WhgxWhg5Uhg5WiEhUhE\/YzJKYyFKaykEMQBujFeAXTk5YyG0byYYRgU+YxZmazAmKRAXRRMbJQZXTSkVKRBFfjFFWhgFOQA9NRAWORAtRgRigDYUMRs5ShgxSCsxUg1BcyQ5KRAhQhAXMRBFazMhShAsOSE5QiFnThIYNAU5Wik\/WgsQNQMGNgghRQQpQhgLFQQqZhU5QhhASRACKQBZeEqQcTEsMRDPnDN2XiEVUgspUhhvaxdZXiEpUg5fczUxUhguJAcxbSR3XhIrQhCzmzBASgQXORghORBFUhhKWiEtNQbNlyJveB2AXSkxWg5CLgaQaRBBax6QaiEQJQXcujCpiC5aXQ+gcBukhBmwlRssShCRiU\/Lsy\/RoUVFRxgpRixWShheJv5jAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAqxJREFUSInNU2lX2kAUTRe7aFeNWCtYOqG0FWusxaJU6aRWBSnLBBeYIMuICVmY0IH29zcE9LjA4Yhfer+8vDe597xzz30c91\/i75\/b8dst9vs2\/KZt04Z1cWIazLiBgF7X1PZp7by3T5hNqjcQIFalXDounveKiQv5CxthY8g6leLRYeWg12jcfs6UEcpmnKZtmxyXNlJO+dUyBysk9xLosPspN6rMrMeZbe7ucJyBaWqbWQqmFWrbeKDAT3nrh+RUpJopDI0Ug99JEsc2S7iO2IbyjbXMDbNs5aODBNbX9IhTvlYLhFiYWIyuhi30ZW2FYKziz6xq071lgganRRfFhFNsWyOZBG1iTa4WUjiJcX1ZU\/GybYoNRS612ZC0LH1a1EQcQlCSGDRonjJzAVrE+viBvEfBUPhaWi7jHaMBFICWAN4yFohRKJqC1Sj5d9+05n3eufLrq2m5gjpTsanizCx4Zc54HB8DgWlLLgsgabBqes\/at3ppyfbnMzVFKBVgs7bD47yN2aYaW5KmonzJ8RSfkGl5spsW0J+\/LdukciS+FKCw8wKUJYrS6WCp+fzZ04RKVZSUCuW4fiEt19CwanJOIeQJAFsan1ePUDEXndiajPojUe+pUtAPlHHpLC39INYERCAcdwwLA\/A49AhRX5gH\/OIs\/3DLByvhxIOYuD6mRyIDBDIB0a94gq5hQLoPYDwX5aMSd48\/FvQcXNHvcjDRS8sgzBFv17D5LAAgI0mzQWda1BaPvT7P2Fznl0H7n8M1jHJeKQvunP0tJLiQjx\/G7ME1bKL\/m3vYQ+Ealuv75B72UAHXsD5zBuPuYU8NVXAM6zOVGV0I253DHirQH1izqpHOYWtwNAHnvGcMVFl1oj7iCp3z7kZ9RIGzqI9K70Sd88c9o\/Mv4R8VBc08OxR0JwAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

@@ -1,0 +1,29 @@
+{
+    "name": "ava0053",
+    "caption": "ava0053",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAC4lBMVEUA\/\/93PiSGOh6wTCk1FAYrCwY\/CwRaGAqINRm5VyxRMg5pTg6lThtLFwJYGgbzejl0Tg5aGwOJNA2UOxZpGxjBVy1DHQTdjVZ+XxWAWg5aQQN2SRBDDgJnRg+jcRqNWw89EgC0ViOpWyZ2UQXywEHAjSlpGwM2FxA9MiGlfyOUahSMYw18VQxaLRFtOQQ7HgYXJSInKh4+Eww7EQiSYTiWdiCdchKccRWNZw+IWg5zTw1ZOgNlJQbmdDFqTw5aOxUMIiJWMBlxSw0+FgifTSRoLhSjXh+Pag5\/WA1cQwQ4EwKKNw+bdBtyOgmoajF4ORFpRg2LWRRdUw\/+5U728VQ0GAOOOhaAWhrDkyXTljC8lCZfOwpSKAxmKwp7YRj+\/2j\/zUFlWBMiDQZNEwVmRRmGZxuxfyeegSfdrTSqcRmOYw5eKgyEQhTw5lWMdRxOQQNPKADCiCnlsT7xz0nuyEPLni2ldhx\/Ww5sTgdGGwZqNRfSiUNZTxmKWhsYJCFpQQ7AjiangCezgSX1uT\/25Fr66lz51k7NoC2SaBV2Vgp4XRLCmC14Vx3JhkedTCJzZCwMAwMhBwenUifNpzX99mD5z0XIlSyHZRR7XxWzjifw0FjgfkQ3FggkACFdeHhwkJH\/84X8u0b\/4k3mtTqyiiV2Xw6JbRvrx0T994L28YHm4WmIfixXHgYlDwyAp6epxMRgWFerYS+edh51Wg9sUQ69mTD26mL++5X185DLwFF4bSMkLyJ7o6SYuLnV4d+InJksDQlBDgCXcRry4lT9+Yz3+YurmEFcTBdCKhAnAgIDEhFmgYety8q2zMyFp6dHU1CNOxr9+27\/+6f\/\/azz7nduYBpxThgDISDe7u2lw8KJra1ohoRMIg3\/xlf\/+py6pENaTQpuSRosOzv\/\/\/+GrasOBQT+g0Oxiip7WhpCLRen19N6oqIDAQCaQRuaaRtITUxPVVMMCQk2AwAPKSkDISEVCwsOjviDAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAZNJREFUSIljYBgFQxh8\/fKZIv2fPn54\/\/4L+frfvX3z+vWrD+Rqf\/ni+bOnr18\/efyIPP0PH9y\/d\/fO7Vs3b3y4To7+a1evXL508cL5c2fPnD5Fsu6TJ44fO3r5yOFDBw\/s37d3zx5S9e\/evWvnju3btm7ZvGnjhvXrXu8hMSLWrlm9auWK5cuWLlm8aOGCp\/PnzSXRgDmzV12ZNXPG9GlTp1xcNHnSxAkk6u\/v6+3p7ursaG9rbWluamyo\/1RHkv7amuqqyorystKS4qLCxoYXpNl+siA\/LzfnTnZWZnfG4mnpaakppOlPTkpMiG+Li42JjoqMaEpPCydNOwNDWGhIcGNQYIC\/n6\/PpiW1pGpnYPD2itjs6eFe5ubq4uzk6ECqdns7WxtrK0sLczNTE2MjQwNS9etvDtbTTdbR1tLSTGXQUCdVO4OaqkqjspKigvwhOVmSNQOBzEFpKUl5CfE1n8TI0S4qIiwkKODu847h0ydy9DPwC\/PxyvBwc5GlGQQ4OdjZWFnI1g4EzEyMlGinPQAAcUqcGsPnLCEAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

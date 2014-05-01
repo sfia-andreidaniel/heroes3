@@ -1,0 +1,28 @@
+{
+    "name": "avlct2u0",
+    "caption": "avlct2u0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABVlBMVEUA\/\/85IBi7nJIQCAjcqZAAAAClhFq7pXu8nXFKOCmCYlNAMSC9lHtuV0IuEACljHatl38+GAArDwmGWkJzUjmbdEoIAABtRhRwX05SOimHXDnKsp2Ua1IQCACMY0pqQyFLKRiMa0p7Y0ppUjlhSjEQAACIcFwhGBBgQjFkSTkhEAiMY0KDbErIrYxKMiE5KRicc1qMbVKYgGu2jHNCKRicfmPIpI+Uc1opGBBSOSC5lGucc1Kha0qEY0p7WkJoVDFKMRhaOSGXX0YcCABhOCqUa0qTfF2ljGuljGNGIBg8IRBoOSG9nIS9pYSthGOgfFIxGBDKr5SCY0IxIRBeNBWlhGuthGu1lHNfQiluRyk\/Kg64koW1lHutlHMxGgaBUDmtjGtrSjFSMR69lHPKnH28p46Uc1K2jGule2Ole1qce1pzUDG9nHu1nHutjHN7WzmlhGO1nISU219hAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAwJJREFUOI1tU1132kYQnbZJP1InTgmlcYMdZMeuuwRbYIEkUykQjASyhIVcIjlZhZVTCbGgRfr\/LxXkpMdNMg97Zs+d2Z25cwcAIEtXLIGNseWCzuEzi5NkFoUszd1\/PtwG8y8CgBCYvo98DO\/e3njulzjAm2Ty97XDxtS2r0buVwLAMleXgXNlDAfp13A31jW6uu1f9Dyaf5fb688i5t3Oq+n7666qELwu4a\/27H945g\/O5UUgGWIrhRRGVt613qT0bg06kQVDWuD2GXbJiioNqCvq3UdSwp8aJyfBaBzCmNhqDb\/0JuMNhNdH2NCtKhr+eXyhNUUa\/KERK5LF0FqaM4j5NYWNozRFhy\/Ug32RW1WE7j73XPKc1lmfwF4Q+wADjbrtXWm\/oeOy1n3LBd0eWl20y4s2PPt9QWGOIcRKr7fzVOF+82yEDOmwdCJ0AvorAF\/sPCEh5vYcr1QQPHn3F02rTyZOUJFkej6CyPVlWSHlQAku7UJRvQzqk8fhdv3gRpD4JeTMJ7VU8Ag\/rEgnQ\/vRseExNg6PHpa9Xdt1XWvNEguEyEMI9VAJyQU5zpJ6URWQsbPVGhF490TlctT+WfPTIto1roWO9+DBwU+2XZwtz\/L8qRcIHqeJpt5kZM8u2PKL\/cbTHWF7aZrJevYcIVF0ZbUjIv5IcPmRIF0\/PDoV2pZ5Bucbrj8Q+GE2c5ToJcNZo1IoocNSz0hm\/uij+PZ0SDNCwamrXI3VL5A9lUuoXUvnYN0dZ1Of6I\/FSEUVPtzyLl03JuT71n+wFkZa+IwVveD+7Tj2m0Paume9rlnL0Uc8zjcmzjLx2OsdyqMBxfL9LfK8062MBus2UhJjiy5UUUHfdToCt7WMuMrNwohWQ93cqAkmjNCufHy6MwnFqvDtskUnjtP2M75qLQGoPyac2PDQN0eYMTC7t\/03zMKE6+Owem8j74RNi3Uh4BmL8sm0ms10nWYCzxa5YMABnOlVRYHN+kIaUqAbD\/w+SfL6aX5lfN4J+9T0dvLJozj9Fy151ccviPrTAAAAAElFTkSuQmCC",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

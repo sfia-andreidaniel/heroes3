@@ -1,0 +1,35 @@
+{
+    "name": "avxboat2",
+    "caption": "avxboat2",
+    "width": 96,
+    "height": 64,
+    "cols": 3,
+    "rows": 2,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1,
+            0
+        ],
+        [
+            1,
+            1,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABACAMAAADS6oI8AAABJlBMVEUA\/\/8QEAgIAABjSjEICABNKSFaQjEAAAApEAhjQjEhGBA5IQiHWjm4f1xKKRBSKRh7TTFzSikiEBCUWkJrSjFSMRhDIRBKMRiJZEaEUjmcZ0iUZEelc1WCWkIpIRAxGAhaQikxIRhwUjlxSjljQilCMCo5KiFSOSFrQjGMWkKcblKla0qucVJ7UjlcMRpuQSkQCAAYCAApGBApGAgxGBBaOSFaOSlSOSlSMSEQCAgYCAhCKRgxIRBKKRhCMSFCKSFLQkI5KRhKOSlMMSk5IRA5IRhKMSEhEAhzSjE5MSljUkoyKSk5MzEpKSFBOzljWlJrWlIwMSprY1opISFaUkpCOTFSSkJKQjmMhGtKSkKUe2Occ1qge2spIRith2+4jHIhIRgYEAh9frXFAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAtlJREFUWIXtlXlz0kAYhyOiaDyqWHtIsaWi0Ja1uKEp6QZoIMdq6aUcVrs0+\/2\/hPsmlCnUUFR2xj\/ym8ywgczzzHsAivJ\/hfNYEAtiQSyYQeBfXckWDAZSBcpAtkAZyGxSIJBYgi8EUocgBD5TBpeXsvhMCMTrQJpACfjK4KckPoMLIksAPQpOPy6k8FmwRZDvfSmCYMjBsdeVwochyxNAg0Y\/1x0ZgmCDQsG3r\/MX+CzY0FBwfiZBAA26FnRPTyTw2Uhw3Ou0581nYQGh4Py0N3fBkB8Ijrtn8\/6eXTcoFBz1v8x5xsMNGgqO253OfGcs+KOzEBx1OxefIx6llE5Fed7v+Wx0w\/lRuxc5YuqKROMdx7ZvG8b4QnB+cjFdEG1wIJOGm\/0JBO2TftSIgd9qNacJLMsaN0zwA8FhZAGtFhNXpEAYlAnBBN8XfzjdfuQK0VaDsSl8yLjgJt8XYbBF3cgVarTqd+DHDf5ouiEcIgSRDaJT23Nb4EO1fhBWM12X2AcGgTun3oJhVvd1fY8QUtGwpnmfDspufYYCFEKGBtEeQPt09yNFtBaaxAzcfR2Xdra3EKLFaoFYlulhbDqapzU\/zMAHAyYOZu8L+3r+3SYagv2c42HOTc4bZKNSzOvFXX2vms\/r1Rqx1yu2rdl2cyY+GDjnbwsIbWbXtjOZN5ntzOrK8nJt6XXFopwvbjBcKu2UXqHVLbS1QilaWlo3HdKcla8ojYaXxqLs3CZCKIte0t0XaGHh+V4N53KcI2STZ2tPVymCT7NV8sSuVDTHmJ0PNRBDFQqsguZxQ1+kjzRX0zQ1zXm9YFqpLCo+dB+I54jjmJgnm3fu\/y1F3eA8LQRcFTuCPS503n2I6B9Xc46TEwG2YRh\/hL6RhHEvaaQSBjC4p3oesLGJg6Q9VRXvJ\/4WPkoqlUgkkwmjXC4bZQNU6TSIuFH+d\/iYB0xCJWRzBceJEycO5BdjwdXq6TDxoAAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

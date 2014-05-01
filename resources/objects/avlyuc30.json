@@ -1,0 +1,28 @@
+{
+    "name": "avlyuc30",
+    "caption": "avlyuc30",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAkFBMVEUA\/\/+dWRguGw6mYiK1ej7CdypKNSYNCQW2cjZVOSggEAieVxRCLBl1PhIpGQ23ZxqQTxM7KBYMLgstWyZoPBImGhAweyoaPxoGJAw5JBQVURoYVx02ZSgLEwkHHAYNPw43cS5QfzQKHg0kVx8zRyoUHQ4MKAwEEwhhhkMbMBYGMgYZSRYmPhyJs14HOwccYiJJr1cUAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAKhJREFUOI3tkNkOgjAQRa8bbrghRUAdVLRose3\/\/53F8NZiEx+N92WSOSczmQH++Sa6rcpJlYJ81hBd3PT1425gpTsExfntWgLVBeeT7aiCoKsjIDSXB9eAPeVGERA8S3elhYkokYS0OYVB8tReIRLicdPPYsodG7ZmSrRZAyxeAVFtG3WhsFwgzObuI9\/fmbHppAO3GQejzwKCoUdgA4\/Q73mE0MN\/NC8OCgzB7LOoMQAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

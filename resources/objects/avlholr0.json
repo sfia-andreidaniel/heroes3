@@ -1,0 +1,28 @@
+{
+    "name": "avlholr0",
+    "caption": "avlholr0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABfVBMVEUA\/\/+EY0JaSilrSjFSQiGllISthHN7a0qMe2N7a1Kcc1qMY0p7UkIQCAjGnIS1lHtjQjEhGAg5KSEQCAAYCAgICABaOSmLe2spGAhLKRgpIRAAAAApIBhzUkIhGBAhEAhyYlNrWkpjQimchFp7YFpZSjkpGBAxIRDOsJS9rYytjHMIAAA5IRCThHN7Y1IxIRhSOSkYEAh7WkpRQDKEc1haSjFKOSlCKRhCMRhCKSE5KRg5IRhrSjljSjlzUjlCMSG1pYxzWkqlgmNzWjlKMSGEY1JMMSlaQimUe2uljGtjUjlaQjFhUEOUc2O1nIyMc2NzY0qljHucjHNrUkK1nISMa0qtlISllHuEa1qUhGulhGuMe1prWjlrWkLGpozEqpytnISchGtrUjmchHOtjHuMc1KUe1pSOSGtlHN7WkKchGN7Y0qtlHuEY0q9pYy1lISce2uUc1pKOSGljHOlhHOMc1qEa0pzWkJSQimUe2N7Y0KEa1JjSjGMa1Kce2MXlNu6AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAuhJREFUOI2tk9FX2zYUxtVu7datXddS1q2hJXQl2ciGHSDQmjhuiMFJHBqHMAiBDKwspo7sDMe9lhXJ\/O2F7qyD7mEv09OV7ne\/o3vO70Pofzjn\/yVIxKcvnE+uXllMr7UjgHdhclUP448ewdmfIz8Bj5FhJD7OuW9PheN\/KIEMOdDBH\/3w3Aki9rcnC1yBI\/vEY\/j4dzvsndIwPDoMmdP9S0CdMDwA0TnbBzjZYzZQwgMIvXe2+5uD0BHGEO52gbbZ\/k7LtpL+cZNE5K23+2ab4It1Gs1W06z3eA3TaugbW+bmMei40hqNJpPRBkeovFMFjPdfe4mml9R2mRaL64p49ZIIbAyjNbRaAFhRjVZYHSyvUaZuLhWVfExLF7+OMKMvUa0g1CqoQjapIUmL8a\/N9i85ZVUz3QXAP4dl9NOGYdShIEvZnkMlZWvRUl9l2nhNy8Li\/ItGA\/34PKNDi5gDqo+bBT0\/l57PS1pmNivnny2n03PIyI5Pn9oe5sJYG5tCqc\/Nz6Se\/JD\/Xi5Kq+nHaaQp37luyfY7VB1LlpmVVstaLjX9KD\/FD9RyegXpmizOFoIAiuXe1vL8Q+nZg0wulcsr4vCkY3UYwsa3T+9\/U6qB9PDF8oySeTCVSuXu5TJK3bWH1LKQL+5+\/dUGLrKm3Jh5NJ2bnrocN4iewcKuJREiul8Qdw4W1X5fX1fWZ6V7s\/lZ4dkTo0aLzKEoUeR6oWy149MKfr7kEwgIMbXdbhDaNvEviKCTQrWJOeAjiuWxtfflF97Ijp\/c7tpgnxuXOB1yKyZEplyQkd+5tUPesD4RXR8DIeySM0KJGevC54MFTvYOoHY\/4YwSwFSYxQ9AxRgrmnKH0vOAeYwlw8hf4hX\/nzBQ3MuabIeIcNvYdsB3+IXFoHIF++pKw7B3j4x4Yn6OBR4GQZtcyxEFsqlXJrpBh30VqFtZoNejNOQ8+cwdcFK6mXC4TN0N418BdSeuH\/FKDJ823gMxHP1sLRNXSAAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

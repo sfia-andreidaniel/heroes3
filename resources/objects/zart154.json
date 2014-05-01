@@ -1,0 +1,29 @@
+{
+    "name": "zart154",
+    "caption": "zart154",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAmVBMVEUA\/\/9QVmV1YUh0ZVd6haWNlKxeOBBNTVM9JwpdWFaIeFRyb3yWfmduTCiqkHRpVkZZZ22dnpuiiHFfTCtpc2qFkHl4e4WGhpFhZGeQh3hOQiSMZzphQxNtThZuQhegbDK\/ljOASBeOXBibaRyAYTSlgCfWv4aVeyd+XCB7f17KhlCcfUn99HSKpXmqqYu3gTnAqlm2lkubg15dlpteAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAcxJREFUSInVlEtz2zAMhNOmdW23SuJadm09A0p8KGKDhf7\/jyvozrRXyjM9FAeNLvsRuwD58PBf1SJgwfJ+p\/xnjBEyA2\/zdI8eqo+BvXeAHdfrkzzaATD0CpH+rvNt17ZN0xIgdbtO76ISfHW9\/DifyumohGYVQU933w9iaOxppM5eX56fijUEBXz7umcLJwOctWE5cR2abH0K4Dyy6BiDFecgtDCvAKQFaEk0CCtG28CgZtAXucOcNQFDFJRjBqMeXE9U+XnMBagDUxBJdCAtaAvU7rZ+zPUQ0dPkhDxiAjgJxNhtKeTOQRfPXtSD9c7rl+2gmGtVZKdYaHpfuiRlUQd+Tk7eKw5FbgeMYQdLMYpTB2N0ZOpTZdqQCXDR0t5YYY6RbYQXP5hyS9n3ATrF0RCnTRIbXaMdUbkZ+joTsNc9qClhdJNI0L0CXdXynGtBPcRYwRoD1ihBxjCxCOc\/TAr4fFRJ0hKsznGCYM7W367zp0ZzNDcA0WMJYMkHKEGf1PJlN9ZN+Hg+Lw4f5GmFXgmagxSXw+FclsdCG0LuCP72oAQqprLYbCT9r9T\/flX1WVfvt7+1eq3bueI4ydf5\/1OaA1IYuE\/+j+oXp6VVP7lanXAAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

@@ -1,0 +1,29 @@
+{
+    "name": "zart162",
+    "caption": "zart162",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAolBMVEUA\/\/9XapskLyQWGBsbIDZTYF4KDB8FBRA1IRz08O1GQ0BugoghEAgIAABEODubobgkCABLMQp8gGLO0tVyYV9gRB1oVCorNTikwdyZhXtNOx2ViIyin6FVQjlWUzxzW1JPOS2EhYVjZV+ssrBoVUZGJQQ5JRA5Nzg2NSMJEAR4a2CglI5RUlglKhAUCAAAAAA2JgQbGBApIR81KSF2cXVNRC4Krd\/bAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAANJJREFUSIml0ssWgiAQBmC6Z1aWWE1pF5HSygwN3v\/Vstq3mH8WwDmcjxkYhIDCWcy\/LHZAU78gb54N5KuHYcryfmvHa1ExfWGMydv8V6YXl+rsdJEpbgGpc6ej1oc9t4BPJHG5KwC\/pc1hveL\/oUhGNtRLbhOFIqXbp1ywfZDO22k3m\/K8HyTuM0+YXVAejb+LkOcjSSOe\/MXWoyHilcT8AKwfzW+J+ohPJfXA\/DXifUldKL9HOeJjmUH1x5Q8EW8p2SDe72TQ\/QUFc8inZfZ3\/w08yxI5tw44hgAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

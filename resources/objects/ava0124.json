@@ -1,0 +1,29 @@
+{
+    "name": "ava0124",
+    "caption": "ava0124",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAC4lBMVEUA\/\/9DRV4rL04hLWUeLGQiK1YcIDAZI0oaJ1UbKF4cKl9ohPRwhudvhudlgetleNRCTXAiK1ERGjcXIT4aI0EdJEYlLlQvPG1JVIhdcL4YOq0aOJcgOowXK3YPJW8WM5IaOZ0hP6slQaAnSK87VbRLYb9jet1jfORoftxid9RgdcpZbb5Ya75UaLg3SY5AToI7RXVCZNQXOJQTMYcZLncWKmoYJnAiKFhXSldzZWpmZF9XVVBOTlJFSVpDSFM6OT05W9UnTdMkTM4hRL0aPa4iLlIqJB8wJiRAMzVjV2FYVldJRUhCQUI7PEA1MTMoISEjIyJVbcQ1WNI1W9kwT8syTaY7TZkZKko3AAClijIjHCVUVV9YWFlOTE1GSURBPzo7NTMwKisjHRoeGRIiJC1QUE\/\/Cg7\/3FL\/1XEtOlwqPHMkNGsmO3YhMmogNoEfNX4lMnGReS7\/+2gmTdAjT+AOQu4cTOsoT8UcPKMRLo0OJGyeeCb\/2koAOPEdS+ZAYuMYN6AWOKoQIlpKWcK\/p5c1W9ceNYoFI32vhVzt6r4uWN8aRdUcT+MjTuJze70AMt4uVdQbROghTuM4Yu\/73oEsTs8XN6bUq2XAzLrgp3AgUfEgTOM9ZvD94ohSVIciMYvaw3uduLKphXImT+wnU+I5YONearwcP7oMH1wELsEkTt0wU9sxT7gVObNpcpgLLJkaQMIiR8ceQKgSLo0IJo4NMqsXPssfR9EjS88jScYdO6YVMZAPOswTReUxW+c8ZdclUNIePagTK4kNKIJAU6fSvnzRxZQpVNkeQK0SL4sPJFwaNp3823n73HFVYKUhR8QRLYwbJlsNKYsQPNAeRd352mhcYrYmMV0PMqQWP8fhwVSzmpFOXKYXL4Pct1ico+QrP5ETIVIGKqDy1JTAzf8EKqsSJmkUQ+YZPbELLqMTNr0fQLEQKoUUL5ofQLUWLXsZOqkSJGQTLYIWNZkaOaMiQat\/c9NpAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAblJREFUSIljYCABfCVFMTbwhVIDPn+iTP\/HD+8pNODdW8oMePP6FWUGvHzx\/BlFBjx98vjRQ0oMeHD\/3su7lBhw5\/atmzco0H\/9xrWrVy5fIt+AixfOn7t69sxpsg04dfLE8WNHbx8h24DDhw4e2L9v7x6yDbi0e9fOHdu3bSXbgC2bN23csX3DerIT07q1a1av2v5u68oVZBqwfvmypUsWL1q4YD6ZBszbMHfO7Fn3Z86YTqYB06ZOmTxp4uIJ\/ceekmfA6b4Fc3p7urs6O2a2k2VA24bbS7taWxbd6zjRTI7+pguNDWvq6yYtrautqSbHgKrKXRXlZaUlxc+LCgvJMaBgWn5ebk52VmZGelpaOun6U1OSkxIT4uNiY6KjIiPCw8JCQ4KDJwQFEm1AQIB\/op+vj3esl6eHu5vrw90NLs5Ojg7EG5Cc5OZnb2drY21laWFuZmry3tjoi7OjoQERWvX1zunqaGtpaqirBaqqqCgrKSrIy1XJtslIS62VJEK\/hL64mKiIiLCQsJCgQJ+WDj8\/v7o6Hy8PNzc33zki9Btcz+Xi5OLkYGcnQjE2wMbKwsLMxIhTHgCou6KXJqRrxgAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

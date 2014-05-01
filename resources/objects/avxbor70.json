@@ -1,0 +1,33 @@
+{
+    "name": "avxbor70",
+    "caption": "avxbor70",
+    "width": 64,
+    "height": 64,
+    "cols": 2,
+    "rows": 2,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ],
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABa1BMVEUA\/\/9aSjlzWkpKOSkNIR4hGBA5KSk5OTGWemVvcGuHaUsMGAaITBsABggACAB7c2NrY1qbYyZzc2PGqY5jUkpza1opIRhQRV1QSUohEBjq17y1momMe2spGBohEiEKGBtrWlIQChsoBQItEAMpL0AbHikYGCEnHTGlmY9GKTlSSkIzKSEGEBBjWlJ7Y1pIQkIpKSFjWkqUg3M5MTGEa2taUkp7Y2NzY1pCMTFKQjlaSkqEa2NzY2NKOTl7a2Pm2dV7a2uEc2uljIKUhHu\/u7Dava9jUlI5MSkhIRoQEBCch3ZCOTnIraVaSkIxISlCOTFSQkIxKSkpISEICAgQBQtrWlqcioWUe3utnJJ7XkcYGA0hGBiMeHNaJw9vNRUYGBj2m4MYBwEIAADueWGbZEVzQhy9UjmlSlI0GBB0TTlGJhkYEAohEAlZOCqWRyfDblWFPyE1IQ5YMCG7YD9FIwz48eSMc2sAAADsjHTP1dvUAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAA8FJREFUWIXtlN1b4lYQh+l3u+222y+roC5sA1LUxRpZkphEgSYxTWxOQj6wJ3KoIKIoUUGGP78He9NLD170Yju5yNXvfd6ZZ+akUv\/X+1izZ+ZhCs8DTB+m\/7HBs2cwGd8\/K393m4xuFo9fD6\/Gs9n4ctE8XA8uL5JZf3a7WBtwfXfe6yfd7uxitAjh7K\/B1c1oNOp0Zsn4kp1wfX03ub9MRn1anSRJWAk0P7g\/v6H5bqc\/7vSThBFAhoP7q5v2fITdbj+hHyMgBZOr09Ner9PpjLtzC9Y8JVze3F6MR6Nxl8Z7MXOeAGD4s9edzXonrSgMWG8KfGh6noucP47j2IagZTESfjcBvCMjdn1d+20KjVa9xpS37eajQYD9wwM7suNAVZkULAVBk3hIbtQirW7X1ca+YzEZSCJtQajG76pxGNkHkSJUVBYA7EV8E3sortsHdmvX\/tWxNJ0JYO2odWyVdV1\/u1fZdpvVWkVmyG\/hTcPmazJfcn4RFbJflDUT77AIEI8ITSFuqq0N246VoVfoPBAWAAwNUXAsUTpWpq5H8lw5+VliMnAdFyFe1OPhG5rm8rlc3GABmJu4ko0VZeofdLj86wLHrYcs90QNjspusB8ivPaG5OYOXMBiYNIl9HgHrWbsdK5QKOQ5DjeqDAACuLISZFVd8OUc90jAMss1eYDddd4SS4of5jguX8jniSwzXBOBobjixNUQ+Y1cubyRLxSIFrEAztzl9W0+tGUS5bifqEMeH247LAa8K6KstBcsNegA54SV1UhkAPjEULJCvIuqKp0BR\/fAfagHTwfQt0TEvIGWUauVo0uwxXFeNkAMAM81XD2ozwnrHPfaNTc8uciwCNi1fpQMVHlbQjXagIkEc6UarT4dQDZdqVKrCqJUCjnO5I2arQfZkAGA+WXLtUohkkLCrRDNrqWL6g8MLZieKPCKUxJjtUmI3TgZDdD3EQPAc\/gdusgl9N3WWVPV8ODb\/kR79XQAmJ51LNH3QP3m65dnmns+Grbbvb2nA0yMDcuo7u7q\/BZAZtgmQ\/gqc8xgcISDEq8oilj+EvzobM304PTFFwwAYqiC9EpGamgDFGGJeNB+wTBEaNI94NGyKqHAhwysEQztzz9jAADBnrIaSRUpDS9jOFoy4TaDnw5I+eanFdHaVuvqO4A6fOJhOD1hyKc+Nk3XCFCtmC7OZ7BJWAGpI4IOs44ShGmANKxhwgqgD6srKNNdOQsQAqYGE1bAIyTWGwAa0PF9dPfhAoDHgkP4gP5OFjH4p2z4V\/ZvtdYpXqOaQU4AAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

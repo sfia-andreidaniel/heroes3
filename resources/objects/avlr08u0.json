@@ -1,0 +1,29 @@
+{
+    "name": "avlr08u0",
+    "caption": "avlr08u0",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAABv1BMVEUA\/\/+thGNSIRDOnGtaSTnYnGtrQiFSMSGMc0+1fU9zWj2lhFqle1J7UjlhORhzUjFbOSp7WjmWY0JrUTucc1K9jGN7UjFCGBBSOSFXRDE8NTDgrHOEY0IpGAg5IRhSQinGjFnIoHN7XkJKMSFKMRgiEBCUe1KMUjEjEABzMRcICABBMSGUeWN+Y0y3bz\/AgE+cYzlrMRBhMRAxGAhjOSEhGAiJUimWSCIQAAB0OSGla0pSKRAxJiOtc0pBKRBCGAhKKRgQEAgIAABjMRgxIRBjKRCKWjFaKRhaMRhrMRg5GAiMSilzQiEpEAhaKRCEUjFCIQiMQiFrORhzORiGPRgQCACESimUWjmaUyl7ORhCKRh1SjFKIRBrQil7SimfWjJKKRBCIRCEQiF7QiEhEAg5IRAhGBClbEJrOSGUa0IxGBBSKRhzSimUVjGlZDgYCAiUYzmlc0q3hFqMY0Kca0JCMRhSMRhaOSEYCAC9lGNjSTGMWjnQlGDWpnO7k2uUc0qEWjlrSikYEAi9jFrGnGusjGOthFpKOCpjQikjGBi1jGOyjFqle1qce1qce1I5KRgQCAiUc1KMa0qEa08pGBDl3EwzAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAqFJREFUSImd1Mlb2kAYBnC62gqt2qJdsLWK1e4uwbqkChgXCCQoIdBgBEMCWkCpqARUthhiChoD+geXgydPk7y5zOX9zTzfPBmDATg3161ms9kCL9yJetVULi8adb39f\/J5U5EaNfFMJyBUK2WlXioWT3UDJ8dlqaAbyKt87ujwILv\/9\/RYF5DJ3eztplPJPzuVbT39RCbOsbE0sxWNbG\/qAfIqF2fpjTD1m90MBbX3yYwQ4Iicf51ZI3zruOa+oOZJjPZ6UNztWl1Zjmk\/gJrPLKkIwbA0wSPMog7AmY8wDrvLvUBHOP+81v4vUiDVOIYwPB+BWTLMzmnrq6pKkrMwDM8g0z93vAgb0XgNU6qTJN14kiHpAGVjoFmbpikm2vtn2ncwOYGjAWzaw\/DRca8WgGsPkCRRnLG7cXgydgTTvrEfhe\/fzr8CAu35fcEyNPOZ\/uSCA7EoSo9uj4kjI9eg\/5SgTn0cTqIw7A1PQJQbT22NzldaLUVRSoBPi8BNnViJSYwOLmM0jrCO9FjheKjZqJcGPwABA+\/j8g6MYu8gdA2eJSj\/xkA\/X1GGspZs9S0I8Oa1FeFTNONAX8GLOEF5+q6cSKjcK1tEsxUEeFmx2YIvfAgEDzMIZiP8ZCKJCWSPF5q3LCW6AYSuuXJryLzJ98m2Q+65T4VU10yeC1OUK\/TsZBzkDCajdGFq9DazcqdziVXjw\/48aXdRrrjn6WgUBHhibNRKFovYKA6+7+pwWA+Cwk3Hwmo8Zd17vAsCXEq19ntuaX\/FTnm3W6ybB+RqTwWjq96cBwQwSBeKJD4qimLB1J9+2FuomfZDvrMchEehQyCgncKDwWKpXjMazcaa1DAerPhM8n07ztpAgdsYJal273adwmlmWmP\/Tli3wfAf8y\/VRn8MimsAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

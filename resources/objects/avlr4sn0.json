@@ -1,0 +1,28 @@
+{
+    "name": "avlr4sn0",
+    "caption": "avlr4sn0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAB6VBMVEUA\/\/\/37\/\/v9\/\/W3uPv+O\/d8fPv5\/fn3uGZnqXO1t57hJTd6OWstb1KSmMxOUpsa4fv9\/chJh48Qkre5\/fW3vO9vdbd5+\/n7\/dTUVHO1tbv7\/\/k5\/\/Gxtbn595CSlpzc3dzc4\/Ozt7v7\/f37\/dra3sQGB+prb0AAAjSxsby3eHU1s5SW3OtssY5NTEZGBzW1t4xMzljbHC9xtMxLyzn7++1vcYAABQQECEdIELn5\/eKk6+1tcaYn4yopKUpKi5KSlpaY2s5OUooMEr39\/85OkIxMUpjaYZJU2MIECEQGC0YGC1CQltrc47e3uekrbVjZ3shKTlCSmMiISlTUVrGzuO+vc7X1ufW1tasrq3v5+Zrc4R+g5xCQlKIjJwXHzkkKUKepL9ZYH1CQT9aY3OUjoy1vdF3e4wpMUJSUm03P1sxOVIICAu8xr2Znq3Axd9kYmLOztbGxs5aWmtXW2MxMVKUlLAACBp2e5TO1OeUlKEICBuss8+FiqW6lL50c4QhITGBhIzGxsZrc3gAAABaWnOaoLVKUlpjY3C9x8bv7+9ra24YIS\/n5+9+e3pKUWylpbV9e4S9vcbv5+\/Ozs6npa339\/cQEBghITmtr7VZW1q9vb3n5+f\/\/\/+ChIJITFKLjYycnZy1tbXe3t6DjZOZAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAqFJREFUOI29kutbEkEUh+mCqd3MDIqujt21TCRMSS0pkmRLDUElLlJCWZBogLKY0nhhaEVhHUH2qMv+pSFWaubXzjPf3nfmmfM7Ryb7vyXlxU3xYLyxDgBCLr8m5jaFf\/BsZlUCurIi8TxNp3LL+4Sl5OoiAPcjAUSC+MJ8fu0vYW4Wb6wAfF+EmBhLzUx\/S+3lU1E2glcEgASASPKTE+H4xm4eCn4NjuPxMaCBURAE6Yvfx3\/exT+NfPzg9XnwcHbyPWw1A++WBd69Iwy5nA7ss7+1LQy6KU8H+q2WPvOb3j\/c1ePqduDX0VezXk+c560xQWA8THL6d2pTpq7QS2x0RV1deIws8kLhE1K3zdOb+yU4jZ0vcChqMD3PYCw+I5QIBPRDYcZqLfJgx5aA2eRT\/CTU7hNzba3WBH2sa5lo3g5r6lFTZxJrfVocKbzw0KJp7F\/j3XxKbXA2JIqGTds5h70m\/GAwjI3qekkSY\/z9mJAxjTTcKwp1tmgYF46xlnVE5u5yINF1K4EeR89Sm+xO+jZnMQdtt8K4yWhgbw7duE4LSeEE6BxOIywU7tcgwlT7r7GRjHGEtWPtVR6olGgE0esXYaYggEZPUbW5bySUcdQ62StZuGxdh0RrYeqQL6ZNiFBQLtUlDbgDu\/wXVRzTBn0JegFa4fyWQAlKKylSnGvxrnZ4k1Vn6yrPpAGp+yrdAMUu6ABFqELFqE\/Ph\/GpkyfMjvZKqLaPGz1wfDtrlCZUj1ScrtyZsVUxZcPsdGmA4bKWUrIz8WOkopnRDZYPBzQcV8a6zEhZQvS71xtqSEV9zD6pHlUKCsVEmZyg5vSetRxQUaJnYvHAUSXhCEJIU7N3b2kJUKI4wnBII5fJ5XIk21fKEnT4kFChUe1HB9ZP3f4F9XZ1M2sAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

@@ -1,0 +1,31 @@
+{
+    "name": "avlr11r0",
+    "caption": "avlr11r0",
+    "width": 32,
+    "height": 64,
+    "cols": 1,
+    "rows": 2,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ],
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABACAMAAABMUIWcAAABPlBMVEUA\/\/+9nIRSQiFbOSlBMRg5IRgPCQmchGulhGsAAAC1pYxKMRgpGBBjSjkxIRDGrZxCKRhjSjE5KRjGrYzOvZxSOSmllHO7pJSEY0paQjFaQiljQjFKMSFrSjnOrZyMc0mUhGt7Y0qki3ubhHN7YzlLKRi9pYScjGuMc1qUe2NzWkJrUjlrUjHczLnGtZQhCAi1lHutnHtSORhjQikYCABkQiGEa0p7WkJrSimEWkJaOSGtjHOlhGOtlHNCKRC1pYSMc1JSMSGtlHuce1pzUjGUc1LRvK29rZRzUjkpGAjGrZRSOSGMa0prSjExGAgrEADPtaWUe1p7WjlSMRice2O9rYyEY0JaQiHOtZx7Y0I5IRCchGO1nHu9pYzGtZyUc1pzWjkqEAjOvaWljHOljGuEa1LZx621nISMa1IhEAgMq+XaAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAudJREFUSIntVGt70kgURq1axQu6q7ZId1d3i13aba21pAtMoJOEhMkwkECnTSYTSJgy5P\/\/AblYtCvh237zfJo57\/ucy3vOTCbz037a\/2jJRI7XE67FKF6DR8NByAO2huB7V3zE1xAu6UXYZ\/00vBe5rtMN00P4UYe0HUk5TcvQIRG2hYvSCJ0WSahrCbNppEWIiK45EAUipcjzJNEbvM75yj5UC5oCW0yCgINVLQRC1lHsN7h0aqsIxHV4FYW9CuRC664gJP9e1hwZBLQqOOcrqqycKRqjALFyrVZvohUpTs8oZgJpZ4JS7DV+JPg+xpqA5ueeUaaV6sl\/8Yj4PUpHcGz5nz7pfXSseLeaJB0\/oi5nff4xIkeNw9CEg+8JdnJEyMkZ5SD8Bx0M988dz1NKS1itxjhpqaen7VoQj8fQ+9vg3CrvfbihSMGbNErUkwpjCHQvFASlHCMoJJ7jR4cBkIOE6NRwGQf8ashiXmXFeCyLCxEDrS7BjOAawVTHppPsOjEzmOzOh2K1atgB+LDT87DCBhwC\/rmjCoTLTrA3L1F1AaMGCy+Nv6gzlREWj5KE1Jj+5\/v3cw12dw3ZYBoqvfvjd88z2lNfy2\/ZeIJ\/K8\/H1CM+HRiwYe3tXB\/oi40tFQpvlZ2JNTvrat6WiCE+Udr29o5XmnYNMtfX+1sNayGzup1nb9BrkNlSlFe2V\/u1y69+ub0sL18M6gtNMi\/bWzKOiyl7PbXc9h54joJUfJrx2cAZrsEzGePFwVr8xvbfPf3uli+NTCRD89uDOO0cd+Xy9iSbbcTjbvOxWFb\/qBKjJSGXLeD+SIpN8XAZ4kFeNtHmV\/z+sw3rmAdFYIbworpwqpXgsflVm5x\/v\/D29YhZ4KrZROFcxEe7uibBTcKNrF3ut\/M5q88vTOjMcKIbELz59lttZN1XdmFYnkwMd6aC38GbfdOEtzu3Kvfu2rnZiRDiahLyVMV93zfuBEysGwkG83\/oCxlPy9sJHv6kAAAAAElFTkSuQmCC",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

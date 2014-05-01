@@ -1,0 +1,28 @@
+{
+    "name": "avlrk4s0",
+    "caption": "avlrk4s0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABvFBMVEUA\/\/8nVikMWgMMQhQTEAg8LiMIKQBCazFCazlQNyNVfU05YzEIAAArShgQEAAxWhgAMQBzZDsbSgAkGBFTWjxReykAQgAbaQwaNhAOOUAqbXQxUiEOQgAsUg0dQhgAGAAQMQAJRT0MLzkYVmY5dDEbUgQIOQAtbxI6VyUJR1UpSgoxZikcSghTWiwATRRTiSwuYxNoYT4YU1MAEAAtWgwIMQA7YylRPTUcQgg7ZCEpWhgIEAApcSQ7bxMQTwAAKQBCYzFia0tTRSYROSREMxgcWg89aykAOQB4TioeShBmek4QTggxWiECIQA\/hCFvUBYEIxEcQhAQOQAbQgB4f01Pazw8OSQIGAApUhgpSCMuLCQICAAUKQCCa048dygnVCEQCAAdUhViW01wbFrGtZxsdz0vRzQxcyEpYyEUKCUTJQiMfnMxJRMUJhGYllpCfDEUExCtmGmmpZBmRSExZiEACAAoGAh3eGM4RyQpREpza02Zk285hCl0gFqgoYHDsZCIk2q0l4CMgU4aNhgVGAgAAACej3+yqYGOe1pnZC0lJBiTfmO1sJSOfWtmTDEVGAAmJBCFllMsPBhSSjfXx1v3AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAn1JREFUOI19kvtXEkEYhsnuF5PMVPASuSKBWmiQhCwQibQKlUutBIGyBo2Kja1jbuxIeFkhXFbc\/YdbLT2h2PvLnDnPc84333tGp6uLqhwe6v6T2oFclfYv5krlV7lUkvYu4uLuzvZW8WexcLGgbkoSFvI\/+I1G\/Lu4jrCAUVXh17hvDYRVEVURhl\/RSk4VSsvn+JK4CDAuCF+yOZDh4OeFs8K6qOxjrsymlfm1uVSBk5L1\/FMirgJcZZWPsVnmw9zmewzqeJQW5QwuQWZFmXnHZ+YW3r6p3zYSptF0eQoxPLXIz6pJDKbqH\/EahiaDk6GJOCW+CiSrGBTDqi738nSXQEHw+7yk1zMxvsu6YQHhMFhK1Da3\/hpZRsJVt+\/FtCeV4PMYQJzPuyIzmW2u9KeCMYAl4bnTQXnoZ\/zCBtgfDY7Ynz5xD08NHQvzbAEjPGizW20RF\/8Yyf6gZcBs90Qg3X\/EcxWg8b0YQfQ9stEm6HrY22P3mnUeE+yGR8J4VkAQZLoII2GIuWMpk985ZO\/UQLqj\/cGRkJgYaQMqI20QRqN1tDNoIwgq9G8H91dUFSjLYU4TtBBWkqjrqDU+TO7sroI9yagNIazWVrshnhTunQp6VwvJk3dlMq\/XqMFgpbsrchlX204Ec3OLJepI0ySN9K19fVaz6U5FK0tgbp8YqPmWy9EesfRAExlMDUTFGlPAQvgmezqk9wYVva6dsJn0Uc5rq4AVUIplzn4ZLSaLzq0TD2SAORS\/iuA54ThiTQYII3QFbTXkvoNsoMQhNo5M5cEG\/LK+y2kuB4ryCOgfQx3nhSbg1bupS14YtEDfZONHhEIxqinlSHu92uU33JPJE8yCN9cAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

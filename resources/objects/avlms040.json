@@ -1,0 +1,28 @@
+{
+    "name": "avlms040",
+    "caption": "avlms040",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAxlBMVEUA\/\/\/DYzi2WjfKi0ZoIQaxWiG2cCqDIwe4jFfMmFiXQhreqXi6iEdaIQcQAAAbAAA5DAAIAAC2eTkhEAjr1sKFVjFtRhTkxq25l1+lcTjLpYTbwKXqxKXbv5bSqHFwNRTJfVfWmXXcqZDhtZnftYzSr4TQqXvJmGOtcEaCPBNgKwcAAAClWji5b0XJkHDKnHDJjFmZSiNvKQVrJhM+GAucWCm2e0a1d1KYWzmEPiFPIQYrDwk+GACpYz2MY0KEUBRNGABBEAnv97IuAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAOZJREFUOI3tkMlSAjEQQKOgKIssUaKkM+BkGQZk1QQ0g2T+\/6e05EhPbtx8VX16r7q6mpB\/UMpw\/D5U2sKXX5\/7nTtYVPvi4327cevVcr14Q\/zcz\/LNNDNayfR1skCCMLYuMSqVUsnV5PyQuc+tM0oJEJynI3zFNNGCA0jgcrlDzgjjl2fBOGO\/M8ICQoZPmQb2yEAo1BNKaT7INJca933qe3SGuz+6vrD4F088hHwf852ObWcRT8LWtUzE+\/LYFiISlGHQ4hApus17AXexHY1eotWtgeripl67vqpVPPFEUycxfRF+ANQqG1MBl82+AAAAAElFTkSuQmCC",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

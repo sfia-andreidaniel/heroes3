@@ -1,0 +1,28 @@
+{
+    "name": "avxsndg0",
+    "caption": "avxsndg0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAdVBMVEUA\/\/8jU00AAAAtGgZRMRXSTCFQKQ2gTSwcEghoQihoNRkVCQCMY0qphl40ThxrSitzViqGbkg1KRSveGWXckxWOR\/RnGAuIRDJj29YRSNEOSM2MR\/PiUKGTyzTq3DtyZmpdUG6jGDJdT2Ue1ruvEzguIGcd1qQXUDPAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAPNJREFUOI2lkt1OwzAMhcNvWQeZCcPFidt4mcv7PyKZ6F3jFokjRb7wF\/s4sXN\/1\/es1xrmYgHzReacpzJawIVTFKYKzdcm8EUDRiT+ZMw5n9fAh2JA0pCISfh9DYiwYAhYkgaaYA1Avc4aGaMkPPk1oKdAzPpWT2EJzSk4JQyiQtqaVRkmQog44FAaFtyr4BmFilaj1LDg3LE\/SFGsJkFaFW566ceOuc5rAc5x50IE6G3A\/KtF5Xk7P5rbsKjbA0r3X2B3iCf7hZYWuxUet\/MH3gY8dw\/OduEdyHj03jWX4QZ4D3APNZglvCd\/Z+d\/EbOBoR8ashV9r945IAAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

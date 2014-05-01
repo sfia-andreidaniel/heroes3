@@ -1,0 +1,29 @@
+{
+    "name": "ava0033",
+    "caption": "ava0033",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAllBMVEUA\/\/\/\/\/\/8YJnAmT+zct1hjfOQAOPFwhucAMt6duLIOJGwELsEbROgOQu7\/3FLAzf\/l6PVBPzqlijIlUNIVObMEKqsNKIILLqMPMqQaPa4FI30WOKoXOJQ4Yu8ZPbENMqs9ZvBohPSco+Q3AACeeCYgUfEQPNAWP8cLLJkcT+MaRdX\/2krt6r794ojhwVROPzoGKqAIJo60x2LBAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAV1JREFUSIm9kg1TwjAMhvGTKZPMKX5MBk3XrpYqo\/\/\/z5nChHnStZM7s7tBkz5v3qYbjf4x7KZZf36YZqXf\/0KrWkrZiKbiyPRyOZRflLrTV2mlBklYXer5j8ybWg1QKGS5+JVU8ZOwkr0eSb\/o5zj+SbLjBZpEDF9o6S2pOkJgpv21R6\/2IWzdN23Zo96G7t0iwxYY66uq8kSBGk8U8N1wV+Ch8RcbHr5Hnef+4vo+fATTJyDEOixgMt4lhDisAKYmKIDcPd\/8NDf7npzywD1YpwsCp62tHTKQtxYIBioFBXYW3Avov7VFRb+04rBNh3nXCmmzY\/AundjbG3DBt+kYnvoS7xDEGVGJdMtdLo6nOVBzBEA2Axgnc447iWiePNAk6cjGQsavScWpYaT\/\/THIhCgwG6eVu73Y43cluBaT9CrdGMmG021cphdJ91McHEKcn4W\/\/r7IxUkGjsUXFqQnrPAX0XAAAAAASUVORK5CYII=",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

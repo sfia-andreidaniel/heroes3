@@ -1,0 +1,33 @@
+{
+    "name": "avldead1",
+    "caption": "avldead1",
+    "width": 64,
+    "height": 64,
+    "cols": 2,
+    "rows": 2,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ],
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA8FBMVEUA\/\/9aOSljUjkhGAgxIRA5MSlrWlJza1JjUkJCIRhKQjlKOTGAc2NjSjmAWkJKOSmAe28YEAiOc2NCMRhaSjk5IRCTe2OPfWs5EBBzUjl7a1o5MSGRiYFCOSljSjFaSjFaQilCMSFCKRhrWkJrSjFCKSExGBBKMSFjQTEpGBA5KRgpIRgpCAhSSjuEa1pSOR9SQjEYCAgxKSFaSkIpGAhrWkpjOSl7a1JKQjEQAABzSjFaQjFzUkJSKSFSKRgIAABKKRghEAhrUjmCc1pSOSkpEBApEAhSQikhCAgxKRh7Y1IxIRhaOSFmPCEQCAgAAACLOfanAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAapJREFUWIXtVUlSwzAQHCDse1jCTkIgQFjNFpwAwRiCbRn1\/3\/DWDYJBw5ofKCoch9klau6eyRNS0QFChQoUOD\/An8sAM0CH3kUNEBxziJUBOk6gIQaSvlINUjsT1r3qxAiYQbvPQwKsuQDit5eE2okFEnq94EXqFBBtBgoeM8xqbAr3gg8PT6I9pE5OmlDQkdqbWx5bGd6VtDcA4CbFADO0r20F5M2bN3RLR+nJRG4ub4KCM4lLs75KKyNeXDPSButOA2FjUD6OcWJUWs66ArzgHaPh\/gY6XZYMFVo7jKio0MWaCSzg30W4Y7+nUBo\/EFBnT+NPdTeUQUs0mB8oLpd8nbh7Gy\/3JosuGS3ELN3bLqFzeN0ZkH+uss4xe4GHHOwNvRB7wN762uSMA6U1n3BdfatADQreR44oLda8XI8kMDKTl1OZ4Hl+lI5EvimI7C4MD\/XmW06InNorWamMTU5Md6yvFEyjJ2NutxHjvKJfFsJIDg06XFmShgp25LRjw1i8yPKEvZLgW\/TUpzGeHhovmZXRlZLNVXTslce8L66UNSMsFn3zwI\/4BNx42acRb3eUgAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

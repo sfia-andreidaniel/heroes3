@@ -1,0 +1,29 @@
+{
+    "name": "avlr15u0",
+    "caption": "avlr15u0",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAB0VBMVEUA\/\/+UY0qla0qcazmte0rQlGCMSil7QhhzUkJrQjE1GACGPRgxGBCcYzmaUylhORi3hFqMUjGyjFqMWjlrMRile1JzWj0yDwZSOSFYQiFaOSG9oYRjOSEhEAhrQiFBKRCtjGtzUjmUc0pjSTHYnGtKKRAYEBCcc1Kcc0qtc0qMY0JCKRhSIRCMQiExJiOnhGt7ORAYEAghGBBxWUs5GBBMIQhjKRBCGAgpEAgjEABrSjFjMRiISiGEQiFCIRA5GAh0OSF7QiFKIRBKMSFaKRBzQiGfWjJrSimWSCJaMRgxGAgQCAhrMRCJUimlbEKUVjGUYzk5IRAQAAAQEAhhMRBrQil7SimUWjmWY0Kca0Ktaj2EUjFSMRgYCAB7ORhzORhzSil7UjGlZDiLYzkICABSKRCKWjGlc0q1fU+EWjnAgE+te1Kca0oIAABKKRi3bz9zUjHGlGMpGAgQCABrORhrOSG9jFrIoHPWpnNaSTkhGAg5KRg8NTBKMRjGjFnGnGvgrHNSOSlBMSExIRCUa0LWpWvOnGu1jGOMa0pXRDFjSilKOCqlhGN7XkK9lGOthFqsjGOEY0JjQil+Y0ylhFKce1KLa0JKOSFrUTt7WjlaUkrxHs4hAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAnJJREFUSImd1N1f0lAYB3B6f9W01MxMM7R8oResDWwOmx4IcKCbEzTZhssJjA6I24i04KgI9iKmhWV\/bdz46aaLbb+rc3F+389zLp5jsxnOn5Pfxi\/\/J7+O6\/WfP6z3jw7r3w9q+9+s9r9++bxXrVV2y1Zn2NneqlcQKhU\/Wet\/3Nz4UCu8zxfLumYJUNe3jwsIodxaNmOpD9Wdd+m8kkomVmUrwApUM2+LCam8HE+JggUAQj629Ca+uBDVIvOc+f4cZNeZVEKKzM6EQxxtHphmYTDg1177JO9SHIAp0wCEkJkElCRL0qsQRZt\/A2ThBOeR\/aQ2TlA0AC\/NAiwcc7toAcf8giy+8NDPa6bqo064ApkxGHs2kSEJfL5ezVWfmug7N5yNCXBO1DWc0Mkn2\/toP41MbCXP8yp0i48FByAwjIMjw\/NDxYPBR8aFh3MsVNcHRNqNkcDpYRZOhvqH7Q\/6qvcNE5DtjfTohFcOAXgvEFOK+e5ypVAq3DUMQJiJRcgBMqSOblJd3kUUD++iEkJGASc\/NkFRHOEXR6buLA93doYV6bBSqlX2jAo8ht3mXAJQ1Z3MyZo9d5RdHOxA7e1po4CbYQKYo0eHqtp2yx7ouLk2mLf355O5pNE3BD2THE0zja2UxS5P61BfDtmLLe39WYPA9A2hmSBFGbIYcI0DSlcQSrQU08mm68aAQIByXMMFHF51BHGa8OtZRVHyaFmJzBocgeTkmSuXbXwQuET9EmhrvtiUunC+oTQZBE4DMNkjy2S3GGrNRltWfed8JgHbpCbifh\/B+SLZrBL1hs32G2FwADS616dFzX9t\/3L2zOnpLyr2u6MH84BoAAAAAElFTkSuQmCC",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

@@ -1,0 +1,29 @@
+{
+    "name": "avltro00",
+    "caption": "avltro00",
+    "width": 64,
+    "height": 32,
+    "cols": 2,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            0,
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAC5VBMVEUA\/\/97Yj0kEQAkEwB8Xz+ghF5VMxIvGgCIakOsj2l\/WS9JLApgSC2SdlKPcT9DKQkqEwCohFyZbUZhQRd6RhyielVzVzeVdkpZOBwmEwBpTSx3RiuedEpyRiBTOBdeVUOdfGU\/HgC3kVRdQSkzGgOEZjQ1HgQ+Hw6je1xFLA5rRA9yWzZYPyB0VR5NLg+YaElfPxMoEwAjEQCTaUdkRypjMAloSR5yPQ8gEQAoIwBgORdTLw9sSBRjNhcbEQBHKwgYEQAxGgAoHwBtQiFRKgmGfDsbDgBkYxpJOAc4PAQWFAArEQBRLApeWCMgHwAdHABFSABDHQFONAUWEQAgFwAkIACBeD9BRgBTVgw1OABeZBxRVg4yLgBnPQs6PAMmJgBEPgw3MgEaEgBhXxMbHQBwbyc5QABGSAtvcSYvIQA7NAR9djsaEwCMjERRWRMxKgBeYxtbYREbGQAxLABKUAZJUgopJgAxNABSUhZubywhJgAhGwBANwUvJwAbEgBxZitZWhIfKAAsKQAhJAA8QQImKgAeIgBHSw9LRw9ydy4aFgBQRxNESQlITwglIgBJTwUxOAA5MgM6NgQ6PgE8NQM0OgAcIAAsJgCCfjY2OQCGhj0\/OgNHQQdmaBs5PgA+QANSTQ1SUxRWVQ9ubiEhHwBSVBE9RQKBgjeHhz5jaCY3NwAbHAB5dU5EQw1ubSQaDwBFRwQaFQBESAt9fTQcFQCIhjtnaiCMikVzdDYhIAB5bzR6ei8eFQBpaRgiJgBHPwddYA5qbyU1NgCCgCuHhi9hZQ45PQB\/fzleWx4fHAA9Pgd5eTY5OgEhHABtayJBQQWSkipaXA9SVAealVU8PQBmZyUnIgBeWxVBRARfYBcnLwAaEAAaEQB8cipFRQVITQBrZh2UkD9WWxYfGwA3OQFDSgsaHAAqLgCDgzlPVxlBRgkaDgBhYx17ezAnKABUXBZ6fDkzNABNWRkeHgBubyUvOQNhYBmymfpeAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAgpJREFUSIljYCAZfCNdCzL4yvCFMgM+f\/r44T1FJrx7+4Yi\/a9fvXxBkQueP3v6hCIXMDx+9PABiL7PcO8uOfrv3L51E0jduP7w2tUrl4nXdwlMXrzA8Pr1s\/PnGM6eOX3q5InjxOs\/dvTIYQaGQwePHbixf9\/eJ7f37H6ya+eO7duI1r\/12MNDwBjYcmzzptcbn2xYv27tmterV60kwQUr3h88z3Dn9fJlS28vWbzo3cInC17PfzhvLrH658yeN2vmjOkM66etODj19ZTXk6dOmvh5Qj\/xDmB43dfb86T7NcPtrvedHXteT26\/09ba0nyIBBOaGpc31Ne9fv36yevamuqu16+rKivKnxOvv2zn69KS4qLXr44VFrzOB5rT9TAvdx4JDmDoyrmdnfX6deatjPTXIJD2JDVlXzIpJiS9PpuYMP31tPi42Ncxr59FR0VGhJOiH2jpybDQ1yHBQYHBwa+72p4dPxNAin4GBn+G236+r4OrfLy9PIM9Et3dXruSZgDIEeu9lgS7OAcDwWsnx9ek6gea4GBvF2xrYx0cbGVpYU66fobgYDPTYBNjI0MD\/WAytINM0NMN1tHW0tRQJ08\/Q7CaqoqykqKCGpn6gX6Ql5OVkZaSJNcAhmAJcTFRETIDAOIEYSFBAfL1A03g5+PlocgAbi5ODnaKTGBjZWGmyAAmxjsoAgC5nN9o6z5BhgAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}

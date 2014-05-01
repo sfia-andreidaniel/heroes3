@@ -1,0 +1,28 @@
+{
+    "name": "avlr14u0",
+    "caption": "avlr14u0",
+    "width": 32,
+    "height": 32,
+    "cols": 1,
+    "rows": 1,
+    "tileWidth": 32,
+    "tileHeight": 32,
+    "frames": 1,
+    "collision": [
+        [
+            1
+        ]
+    ],
+    "hsx": 0,
+    "hsy": 0,
+    "animated": false,
+    "animationGroups": [
+        [
+            0
+        ]
+    ],
+    "frame": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAB5lBMVEUA\/\/+aUymtaj2KWjGMUjG1nHu7k2tXRDFBMSGtjGvIoHNzUjFKMSGlhFqsjGPGnGuyjFqthFqte0rWpnNjQiGce1K9jFrgrHO3bz9rSimfWjI5KRiUVjFBKRCUWjmLa0IYEBCUc0q9lGNSMSG1fU+1jGOMY0KMWjmUa0KlZDite1IhGAhSMRhaSTmca0qESimEWjmcYzmMa0qUa0paQikjGBiNclpzSinGjFl7XkJhORiEUjFbOSqLYzmpkntrSjExGBApGAgpGBBKOCqte1qcc0qUYzlhMRAQAAAiEBAhGBBjQik5GAhjOSFzQiExGAhCIRAQCAgICAh7QiE5IRAIAAAYGBAtIhhaUkpKIRA5IRgxJiOMY0rYnGuMc09xWUtrMRhzORhMIQgQCABjMRgYEAg8NTC9jGPAgE+tc0pKOSFjKRCGPRgYCAgpEAhrORhKKRgQEAiNem6le2PQlGCle1J7Wjl7UjlSOSlrMRCWSCKlc0pbMSEhEAgYCAApIRClbEJ7UjHGlGOUc1JzWj1zUjlaKRBCKRh7SilSKRhKKRBSKRCWY0KEY0LOnGutlHOMSilaMRhrUTuEUjmMQiFzMReEQiF0OSFSOSF1SjGISiFSIRBrOSFaOSExIRB+Y0xrQiljSTFvklKHAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAklJREFUOI1jYCAZLFwwH5\/0vLlzZs9iYJiJU9GM6dOmTpk8aeIEFNH+vl4Ys6e7a3pnR3tbWyuSfEtzU2MDhFk\/o7urrramumpKJUK+orystKQYzCwqLMjPy62rnZKTkw2XL8rqWJiZkQ5mp6WmdOUm5yYlpiS0IVkRHxcbUwRmRddWtiVHpUZ2T5g4sQfFmUD5iKLwsLrahNCQ9tTIyoTguVGYXgwKTA7wTw6ckzw7O9LPdzqyVASYDExO9q9NTk32SUkInlPmjWJDmJcnQ2ohUDLZIznQ390npcHNFVnexTkc6MLCZKeKqOTAVMfIkG4H+7nIJthBqFpvW5tkr7rkhImd9Y3WDRiOjJ5nNSUytTA1JMDB39LCz9wMXYFpYEhuSHJgcluBibGRsaHvggg0BYVec1PaU1NzE2b0lPUYZOp36KFI65qm6nTOs3FyDNXu1dbq0Gzs8C3pQw6KtHCvzvyCGV6pdQu1emwNMxo11NV6VREK0iJmqHh31ToBA2OBZnvGjMZGa2UlxWo1uAIF+cZAP8fUQGA45Ofnqzc0aC2QKzEyskSY4Cwro94uHViXrFPQMUFKslfLViJD3EIF3aut0gUBc6yDUxrlxMr1SmNjRVGlwwIlG0PyRBp9DTSMjJo0XIWVmtEVLJRLCWzvERIUEOYXVFVS4uNFt4LHW4R7kmipUpOikrhwHxcnujwDA0dLb\/MkARUBLnFhYUxZEGBvKrXvVTNQZWPFLs8QrdjLzTJhspYdDnmGNN1eZibGBlzSQICabwFAArFDBaP+egAAAABJRU5ErkJggg==",
+    "objectType": 3,
+    "epx": 0,
+    "epy": 0
+}
