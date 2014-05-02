@@ -10,12 +10,12 @@ class FS extends Events {
 	    super();
 	}
 
-	public add( localFS: string, realPath: string, loadAs: string = 'text' ): FS_File {
+	public add( localFS: string, realPath: string, loadAs: string = 'text', data: {} = null ): FS_File {
 		
 		if ( this.files[ localFS ] )
 			throw "GameFS: File " + localFS + " is allready added!";
 
-		this.files[ localFS ] = new FS_File( realPath, loadAs );
+		this.files[ localFS ] = new FS_File( realPath, loadAs, data );
 
 		this.pending++;
 		this.count++;

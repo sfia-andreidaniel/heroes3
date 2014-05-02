@@ -108,12 +108,13 @@ var FS = (function (_super) {
         this.count = 0;
         this.cache = {};
     }
-    FS.prototype.add = function (localFS, realPath, loadAs) {
+    FS.prototype.add = function (localFS, realPath, loadAs, data) {
         if (typeof loadAs === "undefined") { loadAs = 'text'; }
+        if (typeof data === "undefined") { data = null; }
         if (this.files[localFS])
             throw "GameFS: File " + localFS + " is allready added!";
 
-        this.files[localFS] = new FS_File(realPath, loadAs);
+        this.files[localFS] = new FS_File(realPath, loadAs, data);
 
         this.pending++;
         this.count++;
@@ -245,11 +246,13 @@ var Picture = (function (_super) {
 /// <reference path="../declare/node/node.d.ts" />
 var FS_File = (function (_super) {
     __extends(FS_File, _super);
-    function FS_File(name, readAs) {
+    function FS_File(name, readAs, fileData) {
         if (typeof readAs === "undefined") { readAs = 'text'; }
+        if (typeof fileData === "undefined") { fileData = null; }
         _super.call(this);
         this.name = name;
         this.readAs = readAs;
+        this.fileData = fileData;
         this.data = null;
         this.loaded = false;
     }
@@ -257,33 +260,75 @@ var FS_File = (function (_super) {
         // node wrapper
         if (typeof global !== 'undefined') {
             (function (f) {
-                var fs = require('fs');
+                if (f.fileData === null) {
+                    var fs = require('fs');
 
-                fs.readFile(f.name, function (err, data) {
-                    if (err) {
-                        f.emit('error', 'Failed to open file: ' + f.name);
-                    } else {
+                    fs.readFile(f.name, function (err, data) {
+                        if (err) {
+                            f.emit('error', 'Failed to open file: ' + f.name);
+                        } else {
+                            if (f.readAs == 'json') {
+                                try  {
+                                    f.data = JSON.parse(data.toString('utf8'));
+
+                                    f.emit('ready');
+                                } catch (error) {
+                                    f.data = null;
+
+                                    f.emit('error', 'Failed to decode file contents as json!: ' + error);
+                                    // console.log( data.toString( 'utf8' ) );
+                                }
+                            } else {
+                                f.data = data.toString('utf8');
+                                f.emit('ready');
+                            }
+                        }
+                    });
+                } else {
+                    /* If the file name is not ending in .php, we don't allow
+                    mounting the file */
+                    if (!/\.php$/.test(f.name)) {
+                        console.log('Warning: File: ' + f.name + ' not ending in .php!');
+                        f.data = null;
+                        f.emit('error', 'Failed to mount non-php file!');
+                        return;
+                    }
+
+                    var spawn = require('child_process').spawn, args, proc = spawn('php', args = (function (args) {
+                        var out = [f.name];
+                        for (var k in args) {
+                            out.push(k + '=' + args[k]);
+                        }
+                        return out;
+                    })(f.fileData));
+
+                    console.log("FS.Process: " + f.name + ' ' + args.slice(1).join(' '));
+                    var out = '';
+
+                    proc.stdout.on('data', function (data) {
+                        out += data.toString();
+                    });
+
+                    proc.on('close', function () {
+                        f.data = out;
+
                         if (f.readAs == 'json') {
                             try  {
-                                f.data = JSON.parse(data.toString('utf8'));
-
+                                f.data = JSON.parse(f.data);
                                 f.emit('ready');
-                            } catch (error) {
+                            } catch (Exception) {
                                 f.data = null;
-
-                                f.emit('error', 'Failed to decode file contents as json!: ' + error);
-                                // console.log( data.toString( 'utf8' ) );
+                                f.emit('error', Exception + '');
                             }
                         } else {
-                            f.data = data.toString('utf8');
                             f.emit('ready');
                         }
-                    }
-                });
+                    });
+                }
             })(this);
         } else {
             (function (f) {
-                $.ajax(f.name, {
+                var params = {
                     "success": function (data) {
                         f.data = data;
                         f.emit('ready');
@@ -293,7 +338,13 @@ var FS_File = (function (_super) {
                     },
                     "dataType": f.readAs == 'json' ? 'json' : "text",
                     "cache": false
-                });
+                };
+
+                if (f.fileData !== null) {
+                    params['data'] = f.fileData;
+                }
+
+                $.ajax(f.name, params);
             })(this);
         }
 
@@ -422,7 +473,7 @@ var AdvMap = (function (_super) {
         /* Load filesystem data */
         this.fs.add('tilesets/terrains.json', 'resources/tilesets/terrains.tsx.json', 'json');
         this.fs.add('tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json');
-        this.fs.add('objects/all', 'resources/objects/objects.list', 'json');
+        this.fs.add('objects/all', 'resources/tools/objects.php', 'json', {});
     };
 
     AdvMap.prototype._onFSReady = function () {
@@ -693,6 +744,7 @@ var Objects = (function (_super) {
         this.store = [];
         this._ctx = null;
         this._canvas = null;
+        this._indexes = {};
 
         this.width = data.width;
         this.height = data.height;
@@ -710,6 +762,8 @@ var Objects = (function (_super) {
         (function (me) {
             me.sprite.on('load', function () {
                 for (var i = 0, len = data.objects.length; i < len; i++) {
+                    me._indexes[data.objects[i].id] = i;
+
                     me.store.push(new Objects_Item(data.objects[i], me));
                 }
 
@@ -730,21 +784,17 @@ var Objects = (function (_super) {
         this._ctx = this._canvas.getContext('2d');
     }
     Objects.prototype.getObjectById = function (id) {
-        for (var i = 0, len = this.store.length; i < len; i++) {
-            if (this.store[i].id == id)
-                return this.store[i];
-        }
-        return null;
+        return typeof this._indexes[id] != 'undefined' ? this.store[this._indexes[id]] : null;
     };
 
     Objects.prototype.getObjectBase64Src = function (objectId) {
-        if (!this._ctx || !this.loaded || !this.sprite)
+        if (!this._ctx || !this.loaded || !this.sprite || typeof this._indexes[objectId] == 'undefined')
             return null;
 
-        var sx, sy, sw, sh;
+        var sx, sy, sw, sh, index = this._indexes[objectId];
 
-        sx = (objectId % this.cols) * this.tileWidth;
-        sy = ~~(objectId / this.cols) * this.tileHeight;
+        sx = (index % this.cols) * this.tileWidth;
+        sy = ~~(index / this.cols) * this.tileHeight;
 
         this._canvas.width = this._canvas.width;
 
@@ -797,7 +847,7 @@ var Objects_Item = (function (_super) {
 
         this.readyState = 1;
 
-        var f = new FS_File('resources/objects/' + this.name + '.json', 'json');
+        var f = new FS_File('resources/tools/object.php', 'json', { "id": this.id });
 
         (function (me) {
             f.once('ready', function () {

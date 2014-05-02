@@ -1,0 +1,23 @@
+CREATE TABLE `types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `caption` varchar(255) NOT NULL DEFAULT '',
+  `width` int(11) NOT NULL DEFAULT '0',
+  `height` int(11) NOT NULL DEFAULT '0',
+  `cols` int(11) NOT NULL DEFAULT '0',
+  `rows` int(11) NOT NULL DEFAULT '0',
+  `tileWidth` int(11) NOT NULL DEFAULT '0',
+  `tileHeight` int(11) NOT NULL DEFAULT '0',
+  `frames` int(11) NOT NULL DEFAULT '0',
+  `hsx` int(11) NOT NULL DEFAULT '0',
+  `hsy` int(11) NOT NULL DEFAULT '0',
+  `animated` int(1) NOT NULL DEFAULT '0',
+  `epx` int(11) NOT NULL DEFAULT '0',
+  `epy` int(11) NOT NULL DEFAULT '0',
+  `objectType` int(11) NOT NULL DEFAULT '0',
+  `collision` text,
+  `animationGroups` text,
+  `frame` longtext,
+  `pixmap` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM charset=utf8;

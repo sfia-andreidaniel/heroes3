@@ -110,7 +110,7 @@ class AdvMap extends Events {
         /* Load filesystem data */
         this.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json',     'json' );
         this.fs.add( 'tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json' );
-        this.fs.add( 'objects/all',                'resources/objects/objects.list',            'json');
+        this.fs.add( 'objects/all',                'resources/tools/objects.php',              'json', {});
     }
 
     public _onFSReady() {

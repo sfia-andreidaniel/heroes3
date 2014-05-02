@@ -56,7 +56,7 @@ class Objects_Item extends Events {
 
 		this.readyState = 1;
 
-		var f: FS_File = new FS_File( 'resources/objects/' + this.name + '.json', 'json' );
+		var f: FS_File = new FS_File( 'resources/tools/object.php', 'json', { "id": this.id } );
 
 		( function( me ) {
 			

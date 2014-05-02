@@ -7,7 +7,7 @@ class FS_File extends Events {
     public data   : any   = null;
     public loaded : boolean = false;
 
-	constructor( public name: string, public readAs: string = 'text' ) {
+	constructor( public name: string, public readAs: string = 'text', public fileData: {} = null ) {
 	    super();
 	}
 
@@ -18,6 +18,8 @@ class FS_File extends Events {
 	    if ( typeof global !== 'undefined' ) {
                 
                 ( function( f ) {
+
+                	if ( f.fileData === null ) {
 
 		                var fs = require('fs');
 	                
@@ -56,13 +58,66 @@ class FS_File extends Events {
 
 	                	} );
 
+	                } else {
+
+	                	/* If the file name is not ending in .php, we don't allow
+	                	   mounting the file */
+
+	                	if ( !/\.php$/.test( f.name ) ) {
+	                		console.log( 'Warning: File: ' + f.name + ' not ending in .php!' );
+	                		f.data = null;
+	                		f.emit( 'error', 'Failed to mount non-php file!' );
+	                		return;
+	                	}
+
+	                	var spawn = require( 'child_process' ).spawn,
+	                		args,
+	                	    proc  = spawn( 'php', args = (function(args: {} ) {
+	                	    	var out = [ f.name ];
+	                	    	for ( var k in args ) {
+	                	    		out.push( k + '=' + args[k] );
+	                	    	}
+	                	    	return out;
+	                	    })( f.fileData ) );
+
+	                	console.log( "FS.Process: " + f.name + ' ' + args.slice(1).join( ' ' ) );
+	                	var out: string = '';
+
+	                	proc.stdout.on( 'data', function( data ) {
+	                		out += data.toString();
+	                	});
+
+	                	proc.on( 'close', function() {
+
+	                		f.data = out;
+
+	                		if ( f.readAs == 'json' ) {
+
+	                			try {
+	                				f.data = JSON.parse( f.data );
+	                				f.emit( 'ready' );
+	                			} catch ( Exception ) {
+	                				f.data = null;
+	                				f.emit( 'error', Exception + '' );
+	                			}
+
+	                		} else {
+
+	                			f.emit( 'ready' );
+
+	                		}
+
+	                	});
+
+	                }
+
             	} )( this );
                 
 	    } else {
 
 	    	( function( f ) {
 
-	    		$.ajax( f.name, {
+	    		var params = {
 	    			"success": function( data: string ) {
 	    				f.data = data;
 	    				f.emit( 'ready' );
@@ -72,7 +127,13 @@ class FS_File extends Events {
 	    			},
 	    			"dataType": f.readAs == 'json' ? 'json' : "text",
 	    			"cache": false
-	    		} );
+	    		};
+
+	    		if ( f.fileData !== null ) {
+	    			params['data'] = f.fileData;
+	    		}
+
+	    		$.ajax( f.name, params );
 
 	    	} )( this );
 

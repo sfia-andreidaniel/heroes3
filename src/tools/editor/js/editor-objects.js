@@ -115,9 +115,9 @@ map.on( 'load', function() {
             
             for ( var i=0, len = map.objects.store.length; i<len; i++ ) {
                 
-                tpl.assign( 'id', i + '' );
+                tpl.assign( 'id', map.objects.store[i].id + '' );
                 tpl.assign( 'name', map.objects.store[i].name );
-                tpl.assign( 'src', map.objects.getObjectBase64Src( i ) );
+                tpl.assign( 'src', map.objects.getObjectBase64Src( map.objects.store[i].id ) );
                 
                 tpl.parse( 'object' );
                 

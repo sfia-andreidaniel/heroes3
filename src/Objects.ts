@@ -16,6 +16,7 @@ class Objects extends Events {
 
 	private _ctx   = null; // Canvas 2d Context
 	private _canvas = null; // Canvas
+	private _indexes = {};
 
 	constructor( data: any ) {
 	    super();
@@ -39,6 +40,9 @@ class Objects extends Events {
 
 	    		/* Load all objects */
 	    		for ( var i=0, len = data.objects.length; i<len; i++ ) {
+	    			
+	    			me._indexes[ data.objects[i].id ] = i;
+	    			
 	    			me.store.push( new Objects_Item( data.objects[i] , me) );
 	    		}
 
@@ -66,25 +70,24 @@ class Objects extends Events {
 	}
 
 	public getObjectById( id: number ) {
-		for ( var i=0, len = this.store.length; i<len; i++ ) {
-			if ( this.store[i].id == id )
-				return this.store[i];
-		}
-		return null;
+		return typeof this._indexes[id] != 'undefined'
+			? this.store[ this._indexes[id] ]
+			: null;
 	}
 
 	public getObjectBase64Src( objectId: number ) {
 
-		if ( !this._ctx || !this.loaded || !this.sprite )
+		if ( !this._ctx || !this.loaded || !this.sprite || typeof this._indexes[ objectId ] == 'undefined' )
 			return null;
 
 		var sx: number,
 		    sy: number,
 		    sw: number,
-		    sh: number;
+		    sh: number,
+		    index = this._indexes[ objectId ];
 
-		sx = ( objectId % this.cols ) * this.tileWidth;
-		sy = ~~( objectId / this.cols ) * this.tileHeight;
+		sx = ( index % this.cols ) * this.tileWidth;
+		sy = ~~( index / this.cols ) * this.tileHeight;
 
 		this._canvas.width = this._canvas.width;
 
