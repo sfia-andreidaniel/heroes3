@@ -76,8 +76,8 @@ class Viewport extends Events {
 		// determine the paintables objects
 		var cx = this.x,
 		    cy = this.y,
-		    cx1 = this.x + this.cols,
-		    cy1 = this.y + this.rows,
+		    cx1 = this.x + this.cols + ( this._width % 32 != 0 ? 1 : 0 ),
+		    cy1 = this.y + this.rows + ( this._height % 32 != 0 ? 1 : 0 ),
 		    c: Cell = null;
 
 		this.paintables = [];

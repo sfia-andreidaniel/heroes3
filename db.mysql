@@ -20,4 +20,4 @@ CREATE TABLE `types` (
   `frame` longtext,
   `pixmap` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM charset=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8

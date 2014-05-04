@@ -93,12 +93,16 @@
         $img2 = imagecreatetruecolor( imagesx( $img ) - $much, imagesy( $img ) );
         
         if ( $transparent ) {
-            $color = imagecolorallocate( $img2, $transparent[ 'r' ], $transparent[ 'g' ], $transparent['b'] );
+            $color = imagecolorallocate( $img2, $transparent['r'], $transparent['g'], $transparent['b'] );
             imagefilledrectangle( $img2, 0, 0, imagesx( $img2 ), imagesy( $img2 ), $color );
             imagecolortransparent( $img2, $color );
         }
         
-        imagecopyresized( $img2, $img, 0, 0, 0, 0, imagesx( $img ) - $much, imagesy( $img ), imagesx( $img ) - $much, imagesy( $img ) );
+        imagecopyresized( $img2, $img, 
+            $dst_x = 0, $dst_y = 0, 
+            $src_x = 0, $src_y = 0, 
+            $dst_w = min( imagesx( $img ) - $much, imagesx( $img ) ), $dst_h = imagesy( $img2 ), 
+            $src_w = min( imagesx( $img ) - $much, imagesx( $img ) ), $src_h = imagesy( $img ) );
         
         return $img2;
     }
@@ -135,7 +139,10 @@
             imagecolortransparent( $img2, $color );
         }
         
-        imagecopyresized( $img2, $img, 0, 0, 0, 0, imagesx( $img2 ), imagesy( $img2 ), imagesx( $img ), imagesy( $img ) - $much );
+        imagecopyresized( $img2, $img, 
+            0, 0,
+            0, 0,
+            imagesx( $img2 ), imagesy( $img2 ), imagesx( $img ), min( imagesy( $img ) - $much, imagesy( $img ) ) );
         
         return $img2;
         

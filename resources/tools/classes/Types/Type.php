@@ -99,6 +99,47 @@
             
         }
         
+        public function fix() {
+            
+            $iWidth = $this->imageFrame->width;
+            $iHeight = $this->imageFrame->height;
+            
+            if ( ( $iWidth % 32 ) != 0 || ( $iHeight % 32 ) != 0 ) {
+                
+                $addX = 32  - ( $iWidth % 32 );
+                $addY = 32 - ( $iHeight % 32 );
+                
+                if ( $addX > 0 ) {
+                
+                    $this->imageFrame->trim( 'right', -$addX );
+                    
+                    if ( $this->imagePixmap->width ) {
+                        $this->imagePixmap->trim( 'right', -$addX );
+                    }
+                    
+                    $this->cols = ( $iWidth + $addX ) / 32;
+                    
+                    $this->width += $addX;
+                }
+                
+                if ( $addY > 0 ) {
+                    
+                    $this->imageFrame->trim( 'bottom', -$addY );
+                    
+                    if ( $this->imagePixmap->height ) {
+                        $this->imagePixmap->trim( 'bottom', -$addY );
+                    }
+                    
+                    $this->rows = ( $iHeight + $addY ) / 32;
+                    
+                    $this->height += $addY;
+                }
+                
+                //echo " width = ", $this->width, ", height = ", $this->height, ", cols = ", $this->cols, ", rows = ", $this->rows, ", addX = ", $addX, ", addY = ", $addY, "\n";
+            }
+            
+        }
+        
         public function __set( $propertyName, $propertyValue ) {
             
             if ( !in_array( $propertyName, array_keys( $this->_properties ) ) ) {
@@ -131,8 +172,8 @@
                 case 'epy':
                 case 'objectType':
                     
-                    if ( !is_int( $propertyValue ) )
-                        throw new Exception_Game( 'Illegal property type. Expected (int)!' );
+                    if ( !is_numeric( $propertyValue ) )
+                        throw new Exception_Game( 'Illegal property type (property=' . $propertyName . '). Expected (int)!' );
                     
                     break;
                 
@@ -175,7 +216,6 @@
         }
         
         public function save() {
-            
             $sql = "UPDATE types SET
                         name            = " . Database::string( $this->name ) . ",
                         caption         = " . Database::string( $this->caption ) . ",

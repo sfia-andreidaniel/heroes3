@@ -1975,7 +1975,7 @@ var Viewport = (function (_super) {
 
     Viewport.prototype.updatePaintables = function () {
         // determine the paintables objects
-        var cx = this.x, cy = this.y, cx1 = this.x + this.cols, cy1 = this.y + this.rows, c = null;
+        var cx = this.x, cy = this.y, cx1 = this.x + this.cols + (this._width % 32 != 0 ? 1 : 0), cy1 = this.y + this.rows + (this._height % 32 != 0 ? 1 : 0), c = null;
 
         this.paintables = [];
 

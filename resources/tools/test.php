@@ -6,7 +6,11 @@
     
         $my = new Types();
         
-        print_r( $my->getElementById( 2314 )->imageFrame->getCollisionMatrix( 0, 32, 32 )->getTrim() );
+        foreach ( $my as $obj ) {
+            echo $obj->id, " ";
+            $obj->fix();
+            echo "\n";
+        }
         
     } catch ( Exception_Game $e ) {
         echo $e->explain(), "\n";

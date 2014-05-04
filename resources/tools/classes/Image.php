@@ -4,7 +4,7 @@
     
     class Image extends BaseClass {
         
-        private $_img = NULL;
+        public $_img = NULL;
         private $_updater = NULL;
         
         public function __construct( $dataURI, $numFrames, $transparentColor = NULL, $updater = NULL ) {
@@ -69,25 +69,25 @@
                 switch ( $direction ) {
                     
                     case 'left':
-                        $this->_img = image_shift_left( $this->_img, $much, $this->_properties['transparentColor'] );
+                        $this->_img = image_shift_left( $this->_img, $much, $this->transparentColor );
                         $this->_update();
                         $this->_setAlpha();
                         break;
                     
                     case 'top':
-                        $this->_img = image_shift_top( $this->_img, $much, $this->_properties['transparentColor'] );
+                        $this->_img = image_shift_top( $this->_img, $much, $this->transparentColor );
                         $this->_update();
                         $this->_setAlpha();
                         break;
                     
                     case 'right':
-                        $this->_img = image_shift_right( $this->_img, $much, $this->_properties['transparentColor'] );
+                        $this->_img = image_shift_right( $this->_img, $much, $this->transparentColor );
                         $this->_update();
                         $this->_setAlpha();
                         break;
                     
                     case 'bottom':
-                        $this->_img = image_shift_bottom( $this->_img, $much, $this->_properties['transparentColor'] );
+                        $this->_img = image_shift_bottom( $this->_img, $much, $this->transparentColor );
                         $this->_update();
                         $this->_setAlpha();
                         break;
@@ -98,6 +98,8 @@
                 }
                 
             } else {
+                
+                //echo "oldimgsize: ", $this->width, " framewidth: $this->frameWidth\n";
                 
                 $indexes = [];
                 
@@ -113,7 +115,9 @@
                 
                 // rebuild
                 
-                $img2 = imagecreatetruecolor( count( $indexes ) * $this->_properties[ 'frameWidth' ] - $much, $this->_properties['frameHeight'] );
+                $img2 = imagecreatetruecolor( count( $indexes ) * ( $this->_properties[ 'frameWidth' ] - $much ), $this->_properties['frameHeight'] );
+                
+                //echo "newimagesize: ", imagesx( $img2 ), " framewidth: ", imagesx( $img2 ) / $this->frames;
                 
                 $transparent = $this->_properties[ 'transparentColor' ];
                 
@@ -195,6 +199,107 @@
             else {
                 
                 return new Image_CollisionMatrix( $this, $tileWidth, $tileHeight );
+                
+            }
+            
+        }
+        
+        public function reduce( $tileWidth, $tileHeight, $fixImageFrameToo = FALSE ) {
+            
+            if ( !is_resource( $this->_img ) )
+                return;
+            
+            $width = ( $this->frameWidth % $tileWidth ) == 0
+                ? $this->frameWidth
+                : $this->frameWidth + ( $this->frameWidth % $tileWidth );
+            
+            $height = ( $this->height % $tileHeight ) == 0
+                ? $this->height
+                : $this->height + ( $this->height % $tileHeight );
+            
+            //echo "frameWidth: $width, frameHeight: $height\n";
+            
+            $cols = $width / $tileWidth;
+            $rows = $height / $tileHeight;
+            
+            $out = [
+                'left' => $cols,
+                'right' => $cols,
+                'top' => $rows,
+                'bottom' => $rows
+            ];
+            
+            for ( $i = 0; $i < $this->frames; $i++ ) {
+            
+                $m = $this->getCollisionMatrix( $i, $tileWidth, $tileHeight )->getTrim();
+                
+                //echo floor( $i / ( $this->frames / 100 ) ) . '% ';
+                
+                if ( $m[ 'left' ] < $out[ 'left' ] )
+                    $out[ 'left' ] = $m[ 'left' ];
+                
+                if ( $m[ 'right' ] < $out[ 'right' ] )
+                    $out[ 'right' ] = $m[ 'right' ];
+                
+                if ( $m[ 'top' ] < $out[ 'top' ] )
+                    $out[ 'top' ] = $m[ 'top' ];
+                
+                if ( $m[ 'bottom' ] < $out[ 'bottom' ] )
+                    $out[ 'bottom' ] = $m[ 'bottom' ];
+            }
+            
+            //echo "diffX: ", $width - $this->frameWidth, ", diffY: ", $height- $this->frameHeight, "\n";
+            
+            $trimLeftWidth = $tileWidth * $m[ 'left' ];
+            $trimRightWidth = ( $tileWidth * $m[ 'right' ] );
+            $trimTopWidth = $tileHeight * $m[ 'top' ];
+            $trimBottomWidth = ( $tileHeight * $m[ 'bottom' ] );
+            
+            //echo "\n";
+            
+            $reduce = [
+                'top' => $trimTopWidth,
+                'right' => $trimRightWidth,
+                'bottom' => $trimBottomWidth,
+                'left' => $trimLeftWidth,
+            ];
+            
+            if ( $reduce[ 'top' ] )
+                $this->trim( 'top', $reduce[ 'top' ] );
+            
+            if ( $reduce[ 'right' ])
+                $this->trim( 'right', $reduce[ 'right' ] );
+            
+            if ( $reduce[ 'bottom' ] )
+                $this->trim( 'bottom', $reduce[ 'bottom' ] );
+            
+            if ( $reduce[ 'left' ] )
+                $this->trim( 'left', $reduce[ 'left' ] );
+            
+            if ( $this->_updater !== NULL ) {
+                
+                $obj = $this->_updater[ 0 ];
+                
+                if ( $fixImageFrameToo ) {
+                    
+                    if ( $reduce[ 'top' ] )
+                        $obj->imageFrame->trim( 'top', $reduce[ 'top' ] );
+                    
+                    if ( $reduce[ 'right' ] )
+                        $obj->imageFrame->trim( 'right', $reduce[ 'right' ] );
+                    
+                    if ( $reduce[ 'bottom' ] )
+                        $obj->imageFrame->trim( 'bottom', $reduce[ 'bottom' ] );
+                    
+                    if ( $reduce ['left'] )
+                        $obj->imageFrame->trim( 'left', $reduce ['left'] );
+                    
+                }
+                
+                $obj->width = (int)( $width - $reduce[ 'left' ] - $reduce[ 'right' ] );
+                $obj->height= (int)( $height- $reduce[ 'top' ] - $reduce[ 'bottom' ] );
+                $obj->cols = (int)($obj->width / $tileWidth);
+                $obj->rows = (int)($obj->height / $tileHeight);
                 
             }
             

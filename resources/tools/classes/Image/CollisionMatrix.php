@@ -19,9 +19,9 @@
             if ( $img->height % $tileHeight > 0 )
                 $this->_rows++;
             
-            $this->_cols = floor( $img->width / $tileWidth ); // + ( ( $img->width % $tileWidth ) > 0 ) ? 1 : 0;
+            $this->_cols = floor( $img->frameWidth / $tileWidth ); // + ( ( $img->width % $tileWidth ) > 0 ) ? 1 : 0;
             
-            if ( $img->width % $tileWidth > 0 )
+            if ( $img->frameWidth % $tileWidth > 0 )
                 $this->_cols++;
             
             for ( $y = 0; $y < $this->_rows; $y++ ) {
