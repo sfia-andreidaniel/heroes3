@@ -144,7 +144,7 @@ body {
 #objects > .scroller > .object {
     display: inline-block;
     width: 64px;
-    height: 80px;
+    height: 100px;
     margin: 4px;
     font-size: 10px;
     text-align: center;
@@ -212,7 +212,7 @@ div.object-player {
     position: relative;
     margin: 20px auto;
     border: 1px solid black;
-    
+    overflow: hidden;
 }
 
 div.object-player > div.hotspot {

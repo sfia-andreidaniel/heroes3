@@ -10,6 +10,7 @@
                 "SELECT id, 
                         name, 
                         caption, 
+                        keywords, 
                         width, 
                         height, 
                         cols, 
@@ -25,7 +26,8 @@
                         objectType, 
                         collision,
                         animationGroups
-                 FROM types"
+                 FROM types
+                 WHERE objectType=3"
             );
             
             while ( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) )
@@ -138,7 +140,8 @@
                     'width' => $object->width,
                     'height' => $object->height,
                     'type' => $object->objectType,
-                    'caption' => $object->caption
+                    'caption' => $object->caption,
+                    'keywords' => $object->keywords
                 ];
                 
                 $id++;

@@ -815,6 +815,7 @@ var Objects_Item = (function (_super) {
         this.id = 0;
         this.name = '';
         this.caption = '';
+        this.keywords = null;
         this.cols = 0;
         this.rows = 0;
         this.width = 0;
@@ -840,6 +841,7 @@ var Objects_Item = (function (_super) {
         this.height = data.height;
         this.type = data.type;
         this.caption = data.caption;
+        this.keywords = data.keywords;
     }
     Objects_Item.prototype.load = function () {
         if (this.readyState != 0)
@@ -861,6 +863,8 @@ var Objects_Item = (function (_super) {
                 me.animationGroups = this.data.animationGroups || [[0]];
                 me.epx = this.data.epx || 0;
                 me.epy = this.data.epy || 0;
+                me.hsx = this.data.hsx || 0;
+                me.hsy = this.data.hsy || 0;
 
                 me.sprite = new Picture(this.data.pixmap ? this.data.pixmap : this.data.frame);
 

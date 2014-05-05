@@ -15,7 +15,7 @@
                 <tbody>
                     <tr>
                         <td>Name:</td>
-                        <td><input type="text" data-property-name="name" value="{name}" /></td>
+                        <td><input type="text" data-property-name="name" value="{name}" disabled /></td>
                     </tr>
                     <tr>
                         <td>Caption:</td>
@@ -23,14 +23,20 @@
                     </tr>
                     <tr>
                         <td>Type:</td>
-                        <td><input type="number" data-property-name="type" value="{objectType}" /></td>
+                        <td><input type="number" data-property-name="type" value="{objectType}" disabled /></td>
                     </tr>
                     <tr>
                         <td>Dimensions (px):</td>
                         <td style="text-align: left" >
-                            <input type="number" style="width: 80px" data-property-name="width" min="0" value="{width}" />
+                            <input type="number" style="width: 80px" data-property-name="width" min="0" value="{width}" disabled />
                             ,
-                            <input type="number" style="width: 80px" data-property-name="height" min="0" value="{height}"/>
+                            <input type="number" style="width: 80px" data-property-name="height" min="0" value="{height}" disabled />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Keywords:</td>
+                        <td>
+                            <input type="text" data-property-name="keywords" value="{keywords}" />
                         </td>
                     </tr>
                 </tbody>

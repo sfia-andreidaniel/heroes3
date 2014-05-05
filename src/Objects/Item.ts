@@ -8,6 +8,7 @@ class Objects_Item extends Events {
 	public id               : number = 0;      // the unique id of the object type
 	public name             : string = '';     // the name of the object
 	public caption          : string = '';     // the human visible name of the object
+	public keywords			: string[] = null; // keywords in this object
 	
 	public cols             : number = 0;      // # of tiles widh occupying on the map
 	public rows             : number = 0;      // # of tiles height occupying on the map
@@ -47,6 +48,7 @@ class Objects_Item extends Events {
 		this.height = data.height;
 		this.type = data.type;
 		this.caption = data.caption;
+		this.keywords = data.keywords;
 	}
 
 	public load() {
@@ -72,6 +74,8 @@ class Objects_Item extends Events {
 				me.animationGroups = this.data.animationGroups || [ [ 0 ] ];
 				me.epx             = this.data.epx        || 0;
 				me.epy             = this.data.epy        || 0;
+				me.hsx 			   = this.data.hsx		  || 0;
+				me.hsy			   = this.data.hsy		  || 0;
 
 
 				me.sprite = new Picture( this.data.pixmap ? this.data.pixmap : this.data.frame );

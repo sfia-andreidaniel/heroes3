@@ -27,6 +27,7 @@
             $this->_properties[ 'objectType' ] = (int)$row['objectType'];
             $this->_properties[ 'collision' ] = json_decode( $row[ 'collision' ], TRUE );
             $this->_properties[ 'animationGroups' ] = json_decode( $row[ 'animationGroups' ], TRUE );
+            $this->_properties[ 'keywords' ] = preg_split( '/(([\s]+)?,([\s]+)?)+/', trim( $row['keywords'], ', ' ) );
         }
         
         public function __get( $propertyName ) {
@@ -147,7 +148,7 @@
             }
             
             if ( $propertyName == 'id' && $propertyValue !== $this->_properties[ 'id' ] ) {
-                throw new Exception( 'Property read-only!' );
+                throw new Exception( 'Property id is read-only!' );
             }
             
             switch ( $propertyName ) {
@@ -157,6 +158,16 @@
                     if ( !is_string( $propertyValue ) )
                         throw new Exception_Game( 'Illegal property type! Expected (string)' );
                     
+                    break;
+
+                case 'keywords':
+                    if ( is_string( $propertyValue ) ) {
+                        $propertyValue = preg_split( '/(([\s]+)?,([\s]+)?)+/', trim( $propertyValue, ', ' ) );
+                    } else {
+                        if ( is_array( $propertyValue ) ) {
+                        } else
+                        throw new Exception_Game( 'Illegal property type! Expected array[string] or string' );
+                    }
                     break;
                 
                 case 'width':
@@ -219,6 +230,7 @@
             $sql = "UPDATE types SET
                         name            = " . Database::string( $this->name ) . ",
                         caption         = " . Database::string( $this->caption ) . ",
+                        keywords        = " . Database::string( implode( ', ', $this->keywords ) ) . ",
                         width           = " . Database::int( $this->width ) . ",
                         height          = " . Database::int( $this->height ) . ",
                         cols            = " . Database::int( $this->cols ) . ",
@@ -239,7 +251,8 @@
                     WHERE id = " . $this->id . " LIMIT 1";
             
             Database('main')->query( $sql );
-            
+
+            $this->_dirty = FALSE;
         }
         
         public function __destruct() {
