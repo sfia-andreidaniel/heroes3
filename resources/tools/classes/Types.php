@@ -27,7 +27,7 @@
                         collision,
                         animationGroups
                  FROM types
-                 WHERE objectType=3"
+                 WHERE objectType IN( 3, 4 )"
             );
             
             while ( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) )
@@ -95,7 +95,11 @@
                 $oWidth = $object->width;
                 $oHeight= $object->height;
                 
-                $scale  = min( $tileWidth, $tileHeight ) / max( $oWidth, $oHeight );
+                if ( $oWidth < $tileWidth && $oHeight < $tileHeight ) {
+                    $scale = 1;
+                } else {
+                    $scale  = min( $tileWidth, $tileHeight ) / max( $oWidth, $oHeight );
+                }
                 
                 $thumbW = $oWidth * $scale;
                 $thumbH = $oHeight * $scale;

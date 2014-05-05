@@ -161,10 +161,24 @@ body {
     color: white;
 }
 
-#objects > .scroller {
+#objects > .filterer {
     position: absolute;
     left: 20px;
     top: 0px;
+    right: 0px;
+    height: 60px;
+    display: block;
+}
+
+#objects-filter,
+#objects-keyword {
+    width: 280px;
+}
+
+#objects > .scroller {
+    position: absolute;
+    left: 20px;
+    top: 60px;
     right: 0px;
     bottom: 0px;
     overflow-y: scroll;
@@ -201,6 +215,7 @@ div.form > label {
 div.form > label > span.label {
     display: inline-block;
     width: 80px;
+    font-size: 12px;
 }
 
 
