@@ -38,6 +38,8 @@
     $cols = isset( $_POST['cols'] ) ? (int)$_POST['cols'] : error('Which post.cols?' );
     $rows = isset( $_POST['rows'] ) ? (int)$_POST['rows'] : error('Which post.rows?' );
     
+    $objectClass = isset( $_POST['objectClass'] ) ? $_POST['objectClass'] : error( 'Which post.objectClass?' );
+    
     $keywords = isset( $_POST['keywords'] ) ? $_POST['keywords'] : error( 'Which post.keywords?' );
     
     if ( $crop['top'] > 0 || $crop['left'] > 0 || $crop['bottom'] > 0 || $crop['right'] > 0 ) {
@@ -81,6 +83,8 @@
     $object->caption = $caption;
     
     $object->keywords = $keywords;
+    
+    $object->objectClass = $objectClass;
     
     $object->save();
     

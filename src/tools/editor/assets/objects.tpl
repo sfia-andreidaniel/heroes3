@@ -9,16 +9,17 @@
         <div class="form">
             <label>
                 <span class="label">Object type:</span>
-                <select id="objects-keyword">
-                    <option value="">Any</option>
-                    <option value="artifact">Artifact</option>
+                <select id="objects-types">
+                    <option value="*">Any</option>
+                    <option value="">Not set</option>
+                    <!-- BEGIN: object_type --><option value="{objectType}">{objectType}</option><!-- END: object_type -->
                 </select>
             </label>
         </div>
     </div>
     <div class="scroller">
         <!-- BEGIN: object -->
-        <div class="object" data-object-id="{id}">
+        <div class="object" data-object-id="{id}" data-object-type="{type}">
             <img src="{src}" /><br />
             {name}
         </div>

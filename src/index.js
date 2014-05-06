@@ -831,6 +831,7 @@ var Objects_Item = (function (_super) {
         this.epx = 0;
         this.epy = 0;
         this.type = 0;
+        this.objectClass = null;
         this.sprite = null;
 
         this.id = data.id;
@@ -842,6 +843,7 @@ var Objects_Item = (function (_super) {
         this.type = data.type;
         this.caption = data.caption;
         this.keywords = data.keywords;
+        this.objectClass = data.objectClass;
     }
     Objects_Item.prototype.load = function () {
         if (this.readyState != 0)

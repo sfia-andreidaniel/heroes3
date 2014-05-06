@@ -33,6 +33,7 @@ class Objects_Item extends Events {
 	public epy				: number   = 0;    // entry point Y, used when hero is visiting the object
 
 	public type             : number   = 0;    // object type
+	public objectClass      : string   = null; // the class of the object
 
 	public sprite           : Picture  = null; // object sprite, containing all frames
 
@@ -49,6 +50,7 @@ class Objects_Item extends Events {
 		this.type = data.type;
 		this.caption = data.caption;
 		this.keywords = data.keywords;
+		this.objectClass = data.objectClass;
 	}
 
 	public load() {

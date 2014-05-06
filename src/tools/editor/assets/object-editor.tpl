@@ -2,7 +2,7 @@
     <div class="tabs object-editor">
         <ul>
             <li><a href="#o-general-{object_id}">General</a></li>
-            <li><a href="#o-animation-{object_id}">Frames</a></li>
+            <li><a href="#o-animation-{object_id}">Frames ({object_frames})</a></li>
         </ul>
         <div id="o-general-{object_id}" class="object-editor-sheet">
             <table class="property-grid" cellpadding=0 cellspacing=0 width="100%" >
@@ -37,6 +37,25 @@
                         <td>Keywords:</td>
                         <td>
                             <input type="text" data-property-name="keywords" value="{keywords}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Object Class:</td>
+                        <td>
+                            <select data-property-name="objectClass">
+                                <option value="">- Not set -</option>
+                                <option value="AdventureItem">Adventure Item</option>
+                                <option value="Artifact">Artifact</option>
+                                <option value="Castle">Castle</option>
+                                <option value="Creature_Adventure">Creature Adventure</option>
+                                <option value="Creature_Combat">Creature Combat</option>
+                                <option value="Dwelling">Dwelling</option>
+                                <option value="Hero">Hero</option>
+                                <option value="Hero_Embarked">Hero (on water)</option>
+                                <option value="Mine">Mine</option>
+                                <option value="Resource">Resource</option>
+                                <option value="Tileset">Tileset</option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>

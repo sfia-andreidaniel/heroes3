@@ -28,6 +28,7 @@
             $this->_properties[ 'collision' ] = json_decode( $row[ 'collision' ], TRUE );
             $this->_properties[ 'animationGroups' ] = json_decode( $row[ 'animationGroups' ], TRUE );
             $this->_properties[ 'keywords' ] = preg_split( '/(([\s]+)?,([\s]+)?)+/', trim( $row['keywords'], ', ' ) );
+            $this->_properties[ 'objectClass' ] = strlen( $row['objectClass'] ) ? $row[ 'objectClass' ] : NULL;
         }
         
         public function __get( $propertyName ) {
@@ -181,11 +182,17 @@
                 case 'hsy':
                 case 'epx':
                 case 'epy':
+
                 case 'objectType':
                     
                     if ( !is_numeric( $propertyValue ) )
                         throw new Exception_Game( 'Illegal property type (property=' . $propertyName . '). Expected (int)!' );
                     
+                    break;
+                
+                case 'objectClass':
+                    if ( !is_string( $propertyValue ) || $propertyValue == '' )
+                        $propertyValue = NULL;
                     break;
                 
                 case 'animated':
@@ -244,6 +251,7 @@
                         epx             = " . Database::int( $this->epx ) . ",
                         epy             = " . Database::int( $this->epy ) . ",
                         objectType      = " . Database::int( $this->objectType ) . ",
+                        objectClass     = " . Database::string( $this->objectClass, TRUE ) . ",
                         collision       = " . Database::json( $this->collision, TRUE ) . ",
                         animationGroups = " . Database::json( $this->animationGroups, TRUE ) . ",
                         frame           = " . Database::string( $this->frame, TRUE ) . ",

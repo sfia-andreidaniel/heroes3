@@ -35,16 +35,32 @@ map.on( 'load', function() {
         "type": "GET",
         "success": function( buffer ) {
             
-            var tpl = new XTemplate( buffer );
+            var tpl = new XTemplate( buffer ),
+                objectTypes = {};
             
             for ( var i=0, len = map.objects.store.length; i<len; i++ ) {
                 
                 tpl.assign( 'id', map.objects.store[i].id + '' );
+                
+                tpl.assign( 'type', map.objects.store[i].objectClass );
+                
+                objectTypes[ map.objects.store[i].objectClass || '' ] = true;
+                
                 tpl.assign( 'name', map.objects.store[i].caption );
                 tpl.assign( 'src', map.objects.getObjectBase64Src( map.objects.store[i].id ) );
                 
                 tpl.parse( 'object' );
                 
+            }
+            
+            for ( var t in objectTypes ) {
+                
+                if ( objectTypes.hasOwnProperty( t ) && t ) {
+                
+                    tpl.assign( 'objectType', t );
+                    tpl.parse( 'object_type' );
+                
+                }
             }
             
             tpl.parse();
@@ -77,6 +93,56 @@ map.on( 'load', function() {
                 }
                 
             } );
+            
+            var applyFilter = $.debounce(500, function () {
+                
+                var keywords = $('#objects-filter').val().toLowerCase(),
+                    type     = $('#objects-types').val();
+                
+                keywords = keywords.replace( /(^[\s]+|[\s]+$)/g, '' ).replace( /[\s]+/g, ' ' ).split( ' ' );
+                
+                keywords = keywords[0] ? keywords : null;
+                
+                $('#objects > .scroller > div.object[data-object-id]').each( function() {
+                    
+                    var oid = ~~$(this).attr('data-object-id'),
+                        obj = map.objects.getObjectById( oid ),
+                        tp  = obj.objectClass,
+                        kw  = obj.keywords,
+                        
+                        visible = true;
+                    
+                    if ( type == '*' || ( type == '' && tp === null ) || tp == type ) {
+                        
+                        // visible = true
+                        
+                    } else {
+                        
+                        visible = false;
+                        
+                    }
+                    
+                    if ( visible && keywords ) {
+                        
+                        for ( var i=0, len = keywords.length; i<len; i++ ) {
+                            
+                            if ( kw.indexOf( keywords[i] ) == -1 ) {
+                                visible = false;
+                                break;
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    $(this)[ visible ? 'show' : 'hide' ]();
+                    
+                } );
+                
+            } );
+            
+            $('#objects-types').on( 'change', applyFilter );
+            $('#objects-filter').on( 'keyup', applyFilter );
             
             $('#objects > .scroller > div.object').on( 'dblclick', function() {
                 
@@ -214,6 +280,7 @@ map.on( 'load', function() {
                                     $(this).find( 'input[data-property-name=crop_top]'    ).on('change', update_crop_region );
                                     $(this).find( 'input[data-property-name=crop_bottom]' ).on('change', update_crop_region );
                                     
+                                    $(this).find( 'select[data-property-name=objectClass]').val( object.objectClass || '' );
                                     
                                     update_hotspot();
                                     update_enterpoint();
@@ -242,6 +309,7 @@ map.on( 'load', function() {
                                             new_rows    = object.rows - crop_top  - crop_bottom,
                                             new_width   = new_cols * 32,
                                             new_height  = new_rows * 32,
+                                            objectClass = $(this).find( 'select[data-property-name=objectClass]').val() || null,
                                             questions   = [];
                                         
                                         keywords = keywords.split( ',' );
@@ -317,6 +385,8 @@ map.on( 'load', function() {
                                                 'cols': new_cols,
                                                 'rows': new_rows,
                                                 
+                                                'objectClass': objectClass || null,
+                                                
                                                 'keywords': keywords.join( ', ' )
                                                 
                                             },
@@ -343,6 +413,8 @@ map.on( 'load', function() {
                                                     object.caption= caption;
                                                     
                                                     object.keywords = keywords;
+                                                    
+                                                    object.objectClass = objectClass;
                                                     
                                                     $(dlg).find( 'canvas[data-property-name=player]' ).get(0).stop();
                                                     $(dlg).remove();

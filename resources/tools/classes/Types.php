@@ -7,23 +7,24 @@
         public function __construct( ) {
             
             $result = Database( 'main' )->query( 
-                "SELECT id, 
-                        name, 
-                        caption, 
-                        keywords, 
-                        width, 
-                        height, 
-                        cols, 
-                        rows, 
-                        tileWidth, 
-                        tileHeight, 
-                        frames, 
-                        hsx, 
-                        hsy, 
-                        animated, 
-                        epx, 
-                        epy, 
-                        objectType, 
+                "SELECT id,
+                        name,
+                        caption,
+                        keywords,
+                        width,
+                        height,
+                        cols,
+                        rows,
+                        tileWidth,
+                        tileHeight,
+                        frames,
+                        hsx,
+                        hsy,
+                        animated,
+                        epx,
+                        epy,
+                        objectType,
+                        objectClass,
                         collision,
                         animationGroups
                  FROM types
@@ -145,7 +146,8 @@
                     'height' => $object->height,
                     'type' => $object->objectType,
                     'caption' => $object->caption,
-                    'keywords' => $object->keywords
+                    'keywords' => $object->keywords,
+                    'objectClass' => $object->objectClass
                 ];
                 
                 $id++;
