@@ -25,12 +25,29 @@ body {
 #toolbar {
     position: absolute;
     left: 0px;
-    right: 0px;
+    right: 100px;
     height: 30px;
     top: 0px;
     background-color: #ddd;
     display: block;
     -webkit-user-select: none;
+}
+
+#cell {
+    position: absolute;
+    right: 0px;
+    height: 30px;
+    top: 0px;
+    width: 100px;
+    background-color: #ddd;
+    display: block;
+}
+
+#cell > div {
+    display: block;
+    padding: 9px 5px;
+    font-size: 12px;
+    text-align: right;
 }
 
 #editor {
@@ -84,7 +101,7 @@ body {
 }
 
 #tools .ui-tabs-panel.ui-widget-content {
-    height: 200px;
+    height: 280px;
     overflow-y: scroll;
 }
 
@@ -98,13 +115,18 @@ body {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    height: 28px;
+}
+
+#tools .terrain-group > li > button {
+    float: right;
 }
 
 #tools .terrain-group > li > img {
     vertical-align: middle;
     padding: 2px;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
 }
 
 #tools .terrain-group > li:hover {
@@ -118,7 +140,6 @@ body {
     font-size: 12px;
     
     padding: 25px;
-    text-align: center;
     border: 1px outset #888;
     margin: 10px;
     border-radius: 5px;
@@ -183,6 +204,15 @@ body {
     bottom: 0px;
     overflow-y: scroll;
     display: block;
+}
+
+/* ERASER TOOL */
+#erase > div.form {
+    padding: 0px 15px;
+}
+
+#erase label > select {
+    width: 270px;
 }
 
 /* OBJECT EDITOR */
@@ -469,4 +499,17 @@ div.joystick > .c  { left: 16px; top: 16px; background-position: 50% 50%; }
 
 #btn-set-entrypoint {
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gQeCjcRVoZUgwAAAOhJREFUOMulUzsKAjEUnARLwcZC8AoewBN4E9HGE9h5Ay28gBcQwVoQK7Gws7ARERF0s41ZNj9jISu6ZuOKA49AyMw83psAf4LkeWStdZMJQeEHM+sypz7XtPN0IdHu79/uqKflj75ZFIOr2C+QRQaA8JtAQp6v3ANkXIBr4RZIyIPxGevD+XVwSYFFMa6pDgqv5O5oh4BRVMoEzeEG1VIRXCpEUoFL/ThdAgkCRiGMwvaoIYzBKbxA3jSEUc/SN+Ndm621JrbRW9ocyBapd2bPR75yRjm1RkKIP+3Ule+8fyQzib+K/IU7fwvOTNbA3EAAAAAASUVORK5CYII= );
+}
+
+/* Tabbing behaviour */
+body.panel-paint #btn-paint,
+body.panel-objects #btn-objects,
+body.panel-layers #btn-layers,
+body.panel-erase #btn-eraser {
+    background-color: #333;
+    color: white;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 20px;
+    margin-top: 0px;
 }

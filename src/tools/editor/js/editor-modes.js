@@ -202,6 +202,14 @@ map.on( 'load', function() {
 
     map.on( 'selection-changed', function( cell ) {
         
+        if ( cell ) {
+            $('#cell > div').text( cell.x() + ' : ' + cell.y() + ' (' + cell.index + ')' );
+        }
+        
+    } );
+
+    map.on( 'selection-changed', function( cell ) {
+        
         switch ( editorMode) {
             
             case modes.paint:

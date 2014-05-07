@@ -12,6 +12,7 @@
                 <li class="terrain" data-brush="{layer_id}x{terrain_id}">
                     <img src="{terrain_icon}" />
                     {terrain_name}
+                    <button class="tileset-search" data-terrain-name="{terrain_name}" title="show compatible tileset objects">...</button>
                 </li>
                 <!-- END: terrain -->
             </ul>
@@ -19,6 +20,6 @@
         <!-- END: tab -->
     </div>
     <div id="paintbrush">
-        <b>Brush:</b> <span id="brush-info">No brush selected</span>
+        <b>Brush:</b> <span id="brush-info">No brush selected</span><br />
     </div>
 </div>

@@ -33,6 +33,21 @@ map.on( 'load', function() {
 
             $('#editor > div').append( tpl.text + '' );
             
+            $('#tools').on('click','button.tileset-search', function( btn ) {
+                var keyword = $(this).attr( 'data-terrain-name' ).replace(/[^a-zA-Z]+/g, ' ').toLowerCase();
+                
+                if ( !keyword )
+                    return;
+                
+                $('#objects-filter').val( keyword );
+                $('#objects-types').val( 'Tileset' );
+                
+                $('#objects-types').change();
+                
+                $('#btn-objects').click();
+                
+            } );
+            
             $('#tools .tabs').tabs();
             
             /* Setup brush selector tool */
@@ -99,6 +114,9 @@ map.on( 'load', function() {
                 } );
                 
             } );
+
+            $('#btn-paint').click();
+
         }
         
     } );

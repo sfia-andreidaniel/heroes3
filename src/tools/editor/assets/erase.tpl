@@ -1,8 +1,9 @@
 <div class="widget panel-erase" id="erase">
 
-    <fieldset>
+    <div class="form">
     
-        <label>Erase on: 
+        <label>
+            <span class="label">Erase on:</span>
             <select id="eraser-scope">
                 <option value="*">All visible layers</option>
                 <option value="">All layers (including invisible ones)</option>
@@ -10,8 +11,9 @@
                 <option value="{layer_id}">{layer_name}</option>
                 <!-- END: scope -->
             </select>
-        </label><br />
-        <label>Rubber size:
+        </label>
+        <label>
+            <span class="label">Rubber size:</span>
             <select id="eraser-size">
                 <option value="0">1x1 - Small</option>
                 <option value="1">3x3 - Medium</option>
@@ -20,6 +22,6 @@
             </select>
         </label>
     
-    </fieldset>
+    </div>
     
 </div>
