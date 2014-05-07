@@ -1927,6 +1927,10 @@ var Viewport = (function (_super) {
                 x1 = x - oh.hsx;
                 y1 = y - oh.hsy;
 
+                if (oh.bitmap && oh.bitmap.loaded) {
+                    this.ctx.drawImage(oh.bitmap.node, 0, 0, this.tileWidth * oh.cols, this.tileHeight * oh.rows, x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight);
+                }
+
                 this.ctx.fillStyle = 'rgba(' + (oh.supported ? '0,255,0' : '255,0,0') + ',.3)';
                 this.ctx.fillRect(x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight);
             }

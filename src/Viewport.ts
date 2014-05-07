@@ -12,8 +12,8 @@ class Viewport extends Events {
 	public x   : number = 0; // tile start x
 	public y   : number = 0; // tile start y
 
-	public tileWidth = 0;
-	public tileHeight = 0;
+	public tileWidth: number = 0;
+	public tileHeight: number = 0;
 
 	public paintables: Cell[] = [];
 
@@ -222,6 +222,22 @@ class Viewport extends Events {
 			
 			x1 = x - oh.hsx;
 			y1 = y - oh.hsy;
+
+			if ( oh.bitmap && oh.bitmap.loaded ) {
+
+				this.ctx.drawImage( 
+					oh.bitmap.node,
+					0, 							// sx
+					0, 							// sy
+					this.tileWidth * oh.cols,	// sw
+					this.tileHeight * oh.rows,	// sh
+					x1 * this.tileWidth,		// dx
+					y1 * this.tileHeight,		// dy
+					oh.cols * this.tileWidth,	// dw
+					oh.rows * this.tileHeight	// dh
+				);
+
+			}
 
 			this.ctx.fillStyle = 'rgba(' + ( oh.supported ? '0,255,0' : '255,0,0' ) + ',.3)';
 			this.ctx.fillRect( x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight );

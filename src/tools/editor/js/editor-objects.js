@@ -24,7 +24,8 @@ map.on( 'load', function() {
             "rows": currentObject.rows,
             "hsx": currentObject.hsx,
             "hsy": currentObject.hsy,
-            "supported": true
+            "supported": true,
+            "bitmap": currentObject.sprite
         }
 
         
@@ -285,10 +286,82 @@ map.on( 'load', function() {
                                     update_hotspot();
                                     update_enterpoint();
                                     update_crop_region();
+                                    
+                                    $(this).find( 'td > .joystick > div' ).on( 'click', function() {
+                                        
+                                        var dir = $(this).attr('class'),
+                                            x = 0,
+                                            y = 0;
+                                        
+                                        switch ( dir ) {
+                                            case 'n':
+                                                x = .5;
+                                                y = 0;
+                                                break;
+                                            case 's':
+                                                x = .5;
+                                                y = 1;
+                                                break;
+                                            case 'w':
+                                                x = 0;
+                                                y = .5;
+                                                break;
+                                            case 'e':
+                                                x = 1;
+                                                y = .5;
+                                                break;
+                                            case 'nw':
+                                                x = 0;
+                                                y = 0;
+                                                break;
+                                            case 'ne':
+                                                x = 1;
+                                                y = 0;
+                                                break;
+                                            case 'sw':
+                                                x = 0;
+                                                y = 1;
+                                                break;
+                                            case 'se':
+                                                x = 1;
+                                                y = 1;
+                                                break;
+                                            case 'c':
+                                                x = .5;
+                                                y = .5;
+                                                break;
+                                        }
+                                        
+                                        var cx = ~~$('input[data-property-name=crop_left]').val() + 
+                                                 ~~$('input[data-property-name=crop_right]').val(),
+                                            cy = ~~$('input[data-property-name=crop_top]').val() +
+                                                 ~~$('input[data-property-name=crop_bottom]').val();
+                                        
+                                        x *= ( object.cols - 1 - cx );
+                                        y *= ( object.rows - 1 - cy );
+                                        
+                                        x = ~~x;
+                                        y = ~~y;
+                                        
+                                        object.hsx = x;
+                                        object.hsy = y;
+                                        object.epx = x;
+                                        object.epy = y;
+                                        
+                                        $('input[data-property-name=hsx], input[data-property-name=epx]').val( x + '' );
+                                        $('input[data-property-name=hsy], input[data-property-name=epy]').val( y + '' );
+                                        
+                                        update_hotspot();
+                                        update_enterpoint();
+                                        
+                                    } );
+                                    
                                 },
                                 "close": function() {
                                     
                                     $(this).find( 'canvas[data-property-name=player]' ).get(0).stop();
+                                    
+                                    $('#objects > .scroller > .object[data-object-id=' + object.id + '] > span' ).text( object.caption );
                                     
                                     $(this).remove();
                                 },
@@ -418,6 +491,8 @@ map.on( 'load', function() {
                                                     
                                                     $(dlg).find( 'canvas[data-property-name=player]' ).get(0).stop();
                                                     $(dlg).remove();
+                                                    
+                                                    $('#objects > .scroller > .object[data-object-id=' + object.id + '] > span' ).text( object.caption );
                                                 }
                                                 
                                             },
@@ -426,11 +501,49 @@ map.on( 'load', function() {
                                             }
                                         } );
                                     },
+                                    "Delete": function() {
+                                        if ( !confirm( "Are you sure you want to delete this object?" ) )
+                                            return;
+                                        
+                                        var dlg = this;
+                                        
+                                        $.ajax( 'resources/tools/delete-object.php', {
+                                            
+                                            'type': "POST",
+                                            'data': {
+                                                "id": object.id
+                                            },
+                                            "success": function( response ) {
+                                                
+                                                if ( response && response.ok ) {
+                                                    
+                                                    $(dlg).remove();
+                                                    
+                                                    $('#objects > .scroller > .object[data-object-id=' + object.id + ']' ).remove();
+
+                                                    
+                                                } else {
+                                                    alert( ( response && response.error ) ? response.error : 'unknown server error while deleting object!' );
+                                                }
+                                                
+                                            },
+                                            "error": function() {
+                                                alert( 'server error while deleting object!' );
+                                            }
+                                            
+                                        } );
+                                        
+                                        $(this).remove();
+                                        
+                                        $('#objects > .scroller > .object[data-object-id=' + object.id + '] > span' ).text( object.caption );
+                                    },
                                     "Cancel": function() {
                                         
                                         $(this).find( 'canvas[data-property-name=player]' ).get(0).stop();
                                         
                                         $(this).remove();
+                                        
+                                        $('#objects > .scroller > .object[data-object-id=' + object.id + '] > span' ).text( object.caption );
                                     }
                                 },
                                 "resize": function() {

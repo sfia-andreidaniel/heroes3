@@ -4,4 +4,5 @@ interface IObjectHandle {
 	hsx: number;
 	hsy: number;
 	supported: number;
+	bitmap?: Picture;
 }

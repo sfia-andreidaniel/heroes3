@@ -20,8 +20,7 @@
     <div class="scroller">
         <!-- BEGIN: object -->
         <div class="object" data-object-id="{id}" data-object-type="{type}">
-            <img src="{src}" /><br />
-            {name}
+            <img src="{src}" /><span>{name}</span>
         </div>
         <!-- END: object -->
     </div>

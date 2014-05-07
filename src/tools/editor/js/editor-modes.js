@@ -27,7 +27,8 @@ function setEditorMode( mode ) {
                 "rows": currentObject.rows,
                 "hsx": currentObject.hsx,
                 "hsy": currentObject.hsy,
-                "supported": true
+                "supported": true,
+                "bitmap": currentObject.sprite
             }
             
         }

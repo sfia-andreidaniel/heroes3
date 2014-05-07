@@ -86,20 +86,34 @@
                 <div class="hotspot"></div>
                 <div class="enterpoint"></div>
             </div>
-            <table class="property-grid" cellpadding="0" cellspacing="0">
+            <table class="property-grid cols-3" cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
                         <td>Property</td>
                         <td>Value</td>
+                        <td>&nbsp</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Hotspot point:</td>
-                        <td style="text-align: left">
+                        <td style="width: 20%">Hotspot point:</td>
+                        <td style="width: 20%; text-align: left">
                             <input type="number" style="width: 80px" data-property-name="hsx" min="0" max="{maxc}" value="{hsx}"/>
                             :
                             <input type="number" style="width: 80px" data-property-name="hsy" min="0" max="{maxr}" value="{hsy}"/>
+                        </td>
+                        <td style="width: 60%" rowspan="2">
+                            <div class="joystick">
+                                <div class="n"></div>
+                                <div class="s"></div>
+                                <div class="w"></div>
+                                <div class="e"></div>
+                                <div class="nw"></div>
+                                <div class="ne"></div>
+                                <div class="sw"></div>
+                                <div class="se"></div>
+                                <div class="c"></div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -112,7 +126,7 @@
                     </tr>
                     <tr>
                         <td>Crop:</td>
-                        <td style="text-align: left">
+                        <td style="text-align: left" colspan="2">
                             <input type="number" style="width: 80px" data-property-name="crop_left" min=0 max="{maxc}" value="0" title="left" />
                             ,
                             <input type="number" style="width: 80px" data-property-name="crop_right" min=0 max="{maxc}" value="0" title="right" />

@@ -203,6 +203,11 @@ body {
     text-align: center;
 }
 
+.property-grid.cols-3 tr > td:nth-child(2) {
+    width: 40%;
+    text-align: center;
+}
+
 .property-grid tr > td:nth-child(2) > input[type=text],
 .property-grid tr > td:nth-child(2) > input[type=number],
 .property-grid tr > td:nth-child(2) > select {
@@ -402,6 +407,40 @@ div.button.pressed {
 div.button:active {
     background-color: #888;
 }
+
+div.joystick {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    vertical-align: center;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+div.joystick > div {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGvgAABr4B176uHwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMaSURBVGiB7ZlPaBVXFMZ/n4kxxCf557IBKQXbheJGSECI7hQpiBsXttaldmXWLhoQBXFhaMlaulCi6LJUMSoiilJotYXWQOtKEKytNS1RY+LnYmbC9DmT5M1ceQ68Dx7MPXfuOd93//DOnSPbVBkrmk2gLCovoD3dkHQIGMx5d9b2vkacS/oU6LJ9tsFxO4Avcrpv2x5LGgsCJHUDJ4GHwF8ZA182SOIgMB496hPbow0M7wM+zrD3A3sknbL9DADbxAe5BzBwILEV/QEHgdfAOWAs9jsawO+B2FdPYmsnMFIzfw74zPacJANfSaLBlVgSQQVIWgscAyaAz23PA9gekQQwKKnd9lyomEEF2H4iaRD4PSGf6huRtDIkeQgsAMD21CJ9r0LHS/8PzANTwNPQQd4lVKVUQtJ6YAg4Y3sWKiYgC5VPJVoCmo2WgGajJSAPkvok3ZJ0SVJXCT8rFhufK0DSYUnrigYGNgCbgWHgoxJ+xoFLkmqZvTl590mivPtQyfz9Z+B8SR/bgRfADaD2Vv8i5I8UCNYNbEu17wITqfYQ0BFSRP2Lx2PyRwvO1hVgFpgELgLTwKP4+RowB1wouRJX0/b6dHon8CRehSJ4DgjojMkKaIvbHal2EfwG/Al8+D9rncotwL/APaC/wCx1ApsW2UJbgc4CfgeAB8BjYMNSZyAR8RPQV/IAhjjEHwB/ZJHPFFAnYrJE4GHgFdG+3VjCz26ic/QWedv59wFJW4AZ2z8W2K9I6gO+iydil+2ZIn5iXzXb/2X25QmoClq5ULPREtBstAQ0GwsCJHVI2h9/PKoM0ivQBZwCtjWJy5KQtEfSfUlrElvVtlAvsJ5URhtcgKSOHHtN0kDoeEEFSOoFfpD0ZZ29BnwPXJYU9JN+6PrANPALMC6pzfY3KfKbiZK697fAYXteUlIe/VrSaqJbXkL+Ysh4kMpG4zLrP+SXWU/YPr0sp1Ib8C2wl6g82xB5SXeAVRld/UQXnB7HZdaFFbD9TNII+YXuv5dLILUS14Ffbd9c7tgYU0R36CzcTshD6z7QfFRewBu/MeU2vDy1NQAAAABJRU5ErkJggg==);
+}
+
+div.joystick > div:hover {
+    background-color: #888;
+    cursor: default;
+}
+
+div.joystick > .n  { left: 16px; top: 0px; background-position: 50% 0%; }
+div.joystick > .s  { left: 16px; bottom: 0px; background-position: 50% 100%; }
+div.joystick > .w  { left: 0px; top: 16px; background-position: 0% 50%; }
+div.joystick > .e  { right: 0px; top: 16px; background-position: 100% 50%; }
+div.joystick > .nw { left: 0px; top: 0px; }
+div.joystick > .ne { right: 0px; top: 0px; background-position: 100% 0%; }
+div.joystick > .sw { left: 0px; bottom: 0px; background-position: 0% 100%; }
+div.joystick > .se { right: 0px; bottom: 0px; background-position: 100% 100%; }
+div.joystick > .c  { left: 16px; top: 16px; background-position: 50% 50%; }
 
 #btn-save,
 #btn-save-object {
