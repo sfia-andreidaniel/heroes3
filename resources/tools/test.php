@@ -2,18 +2,10 @@
 
     require_once __DIR__ . '/bootstrap.php';
     
-    try {
+    $my = new Maps();
     
-        $my = new Types();
-        
-        foreach ( $my as $obj ) {
-            echo $obj->id, " ";
-            $obj->fix();
-            echo "\n";
-        }
-        
-    } catch ( Exception_Game $e ) {
-        echo $e->explain(), "\n";
-    }
+    $map = $my->getElementById( 9 );
+
+    echo $map->layers[0], "\n";
 
 ?>

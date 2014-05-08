@@ -1,6 +1,6 @@
 <?php
     
-    class Database {
+    class Database extends BaseClass {
         
         // database connection names
         private static $dcns = [
@@ -16,7 +16,7 @@
         ];
         
         private $dcn  = NULL;
-        private $conn = NULL;
+        public $conn = NULL;
         
         public function __construct( $dcn ) {
         
