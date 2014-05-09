@@ -4,8 +4,8 @@
     
     $my = new Maps();
     
-    $map = $my->getElementById( 9 );
+    $map = $my->getElementById( 2 );
 
-    echo $map->layers[0], "\n";
+    echo $map->width, "\n";
 
 ?>

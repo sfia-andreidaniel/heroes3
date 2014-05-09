@@ -215,6 +215,71 @@ body {
     width: 270px;
 }
 
+/* SAVE AND OPEN MAP DIALOG */
+
+.dialog-save > #maps-list,
+.dialog-load > #maps-list {
+    
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    right: 5px;
+    bottom: 60px;
+    background-color: white;
+    overflow: auto;
+    display: block;
+    border: 1px inset #ddd;
+}
+
+.dialog-save > #maps-list > div.map,
+.dialog-load > #maps-list > div.map {
+
+    display: block;
+    margin: 5px;
+    padding: 4px 5px 8px 26px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-position: 5px 50%;
+
+    color: black;
+    cursor: default;
+
+    background-image: url(data:image/gif;base64,R0lGODlhEAAQAOYAAG9vb7vFpFyNypC5avf396GhoXudWt3sroqyv3O19Xt7e5mZmb3PyJ2uq9Lhw2qg653DcouLi5bU7r/Zke3w56PD1YSkYMnaxn/K+mSg0prAcOnu5Ym24XR0dKjLeufxv9Dlo26r7667p4ODg5OTk2Kc0IyrZpS8bbnLq9DrznrH/Wio1qXJeMjIyKqqqu32vdvsxb/Ko8bemHCu8aW6fnq88+b3ta3Oe2uXxZa72vDz7Iyta2Wk1W2n7n7M/Or1v87exK/PgoqoZLvQyl6SzITO+o664Gqt2MXOogAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAHAP8ALAAAAAAQABAAAAewgC0Fg4SFhYIEiYqLi4MEIQ8PAj2UPTgcOUYECwsEM5REM6IVDUOmm50JqiWqNRciQEAOmyQEPBk8uTwIAb0BMQQktSrEKyoYMB9IP8wEEREEEhI+R0UpLzImLCwyztAgBy8ozBMs2tvOIzrbQTQTHvDnLAQj6kL3+Pn3BAoKFBAaNFgIGHCgBgj8FGw4wdDAgIcDHA44QaBDh4UPJWaEWLEDo4+KALgAQLKkSZMuAgEAOw==);
+    
+    -webkit-user-select: none;
+}
+
+.dialog-save > #maps-list > div.map.focused,
+.dialog-load > #maps-list > div.map.focused {
+    background-color: #333;
+    color: white;
+}
+
+.dialog-save > .map-name,
+.dialog-load > .map-name {
+    
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 20px;
+    display: block;
+    height: 30px;
+    
+}
+
+.dialog-save > .map-name > span.text,
+.dialog-load > .map-name > span.text {
+    display: inline-block;
+    width: 100px;
+    color: black;
+    font-size: 12px;
+}
+
+.dialog-save > .map-name > #map-name,
+.dialog-load > .map-name > #map-name {
+    width: 60%;
+}
+
 /* OBJECT EDITOR */
 .object-editor-sheet {
     height: 470px;
@@ -471,6 +536,10 @@ div.joystick > .ne { right: 0px; top: 0px; background-position: 100% 0%; }
 div.joystick > .sw { left: 0px; bottom: 0px; background-position: 0% 100%; }
 div.joystick > .se { right: 0px; bottom: 0px; background-position: 100% 100%; }
 div.joystick > .c  { left: 16px; top: 16px; background-position: 50% 50%; }
+
+#btn-open {
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABPklEQVR42mNkoBAwUssAXyDWxCL/GYjnA/EPfAaIt9UwPMvLYmBiYIaK/APi/wwMjx4xMGiZM9QDecux6H0BsgCkXHHxdIZ7MWHYbdi+lYHhwweIgWDMAKFXb2N4vX43gxLEgD6gAQGk+X3BWgaGxFKYAU1AAzwxFYEt/YvwLCMjItQWbgEa0Ag1YF4Ow70oO4gCRiaE4v9AE36xMjAwsUDlGBFyh64yMCS0MSxi1NNgODIli8FaRxIowYKkGKiWiZ2BgcsUtzdKahi+MhZnMHzuqWPgIScNuEcynGB0sWY4tnsRgyWpmkHhI2XBMItRgJdh4tujDHlMTKQZ8OodMAHZMeSCvBp5dRXDMi1F0gzYf4aBwSmTwRFkgFxVDMO9EDtwOiQaLNvL8LdnJYMMLC8YArECicFwH4gvUJwbAe79UNqnlWyYAAAAAElFTkSuQmCC );
+}
 
 #btn-save,
 #btn-save-object {

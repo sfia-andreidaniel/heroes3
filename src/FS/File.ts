@@ -13,8 +13,33 @@ class FS_File extends Events {
 
     public open() {
 	    
+	    var query: string;
+
+	    if ( this.name.indexOf( '?' ) != -1 ) {
+
+	    	this.fileData = this.fileData || {};
+
+	    	if ( typeof global !== 'undefined' ) {
+
+	    		var url = require( 'url' ),
+	    		    parse = url.parse,
+	    		    parsedData = parse( this.name, true );
+
+	    		parsedData.query = parsedData.query || {};
+
+	    		this.name = parsedData.pathname || this.name;
+
+	    		for ( var k in parsedData.query ) {
+	    			if ( parsedData.query.hasOwnProperty( k ) ) {
+	    				this.fileData[ k ] = this.fileData[ k ] || parsedData.query[ k ];
+	    			}
+	    		}
+
+    		}
+
+	    }
+
 	    // node wrapper
-	    
 	    if ( typeof global !== 'undefined' ) {
                 
                 ( function( f ) {

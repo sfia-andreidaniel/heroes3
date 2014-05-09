@@ -24,6 +24,84 @@
             
         }
         
+        public function loadFromFile( $filePath ) {
+            
+            if ( !file_exists( $filePath ) ) 
+                throw new Exception_Game( "File $filePath doesn't exist!");
+            
+            $data = @file_get_contents( $filePath );
+            
+            if ( !is_string( $data ) || !strlen( $data ) )
+                throw new Exception_Game( "Failed to read file: '$filePath'" );
+            
+            $data = @json_decode( $data, TRUE );
+            
+            if ( !is_array( $data ) )
+                throw new Exception_Game("Uninterpretable file: '$filePath'" );
+            
+            foreach ( [ 'width', 'height', 'layers' ] as $property ) {
+                
+                if ( !isset( $data[ $property ] ) )
+                    throw new Exception_Game( "Property '$property' doesn't exist in file '$filePath'!" );
+            }
+            
+            $this->width  = $data['width'];
+            $this->height = $data['height'];
+            $this->type   = isset( $data['type'] ) && is_int( $data['type'] )
+                ? $data['type']
+                : 0;
+            
+            $this->_properties[ 'layers' ] = is_array( $data['layers'] )
+                ? $data['layers']
+                : [];
+            
+            $this->_numLayers = count( $data['layers'] );
+            
+            $this->_properties['id'] = isset( $data['id'] ) && is_int( $data['id'] )
+                ? $data['id']
+                : 0;
+            
+            $this->name = isset( $data['name'] ) && is_string( $data['name'] )
+                ? $data['name']
+                : 'map loaded on ' . time();
+            
+            $this->_isDirty = TRUE;
+            $this->_loaded = TRUE;
+
+        }
+        
+        public function loadFromObject( $data ) {
+            
+            if ( !is_array( $data ) )
+                throw new Exception_Game( "1st argument not array!" );
+            
+            if ( !isset( $data['width'] ) || !is_int( $data['width'] ) )
+                throw new Exception_Game( "Which data.width?" );
+            
+            if ( !isset( $data['height'] ) || !is_int( $data['height'] ) )
+                throw new Exception_Game( "Which data.height?" );
+            
+            if ( !isset( $data['name'] ) || !is_string( $data['name'] ) || !strlen( $data['name'] ) )
+                throw new Exception_Game( "Which data.name?" );
+            
+            if ( !isset( $data['layers'] ) || !is_array( $data['layers'] ) )
+                throw new Exception_Game( "data.layers not array or not set!" );
+            
+            if ( !isset( $data['type'] ) || !is_int( $data['type'] ) || $data['type'] < 0 )
+                $data['type'] = 0;
+            
+            $this->_properties[ 'type' ] = $data['type'];
+            $this->_properties[ 'width'] = $data['width'];
+            $this->_properties[ 'height' ] = $data['height'];
+            $this->_properties[ 'name' ] = $data['name'];
+            $this->_properties[ 'layers' ] = $data['layers'];
+            
+            $this->_numLayers = count( $data['layers'] );
+            
+            $this->_isDirty = TRUE;
+            $this->_loaded = TRUE;
+        }
+        
         private function _load() {
             
             if ( $this->_loaded )

@@ -257,6 +257,26 @@ var FS_File = (function (_super) {
         this.loaded = false;
     }
     FS_File.prototype.open = function () {
+        var query;
+
+        if (this.name.indexOf('?') != -1) {
+            this.fileData = this.fileData || {};
+
+            if (typeof global !== 'undefined') {
+                var url = require('url'), parse = url.parse, parsedData = parse(this.name, true);
+
+                parsedData.query = parsedData.query || {};
+
+                this.name = parsedData.pathname || this.name;
+
+                for (var k in parsedData.query) {
+                    if (parsedData.query.hasOwnProperty(k)) {
+                        this.fileData[k] = this.fileData[k] || parsedData.query[k];
+                    }
+                }
+            }
+        }
+
         // node wrapper
         if (typeof global !== 'undefined') {
             (function (f) {
@@ -365,10 +385,10 @@ f.open();
 */
 var AdvMap = (function (_super) {
     __extends(AdvMap, _super);
-    function AdvMap(_iniCols, _iniRows, mapFile) {
+    function AdvMap(mapId, _iniCols, _iniRows) {
+        if (typeof mapId === "undefined") { mapId = null; }
         if (typeof _iniCols === "undefined") { _iniCols = 0; }
         if (typeof _iniRows === "undefined") { _iniRows = 0; }
-        if (typeof mapFile === "undefined") { mapFile = null; }
         _super.call(this);
         this._iniCols = _iniCols;
         this._iniRows = _iniRows;
@@ -384,6 +404,8 @@ var AdvMap = (function (_super) {
         this._activeCell = null;
         this._objectHandle = null;
         this.mapObjects = [];
+        this.id = 0;
+        this.name = '';
 
         (function (me) {
             me.fs.on('ready', function () {
@@ -391,15 +413,21 @@ var AdvMap = (function (_super) {
             });
         })(this);
 
-        if (mapFile === null) {
+        if (mapId === null) {
             this._loadFS();
+
+            (function (me) {
+                setInterval(function () {
+                    me.tick();
+                }, 200);
+            })(this);
         } else {
-            console.log("Loading map file: ", 'resources/maps/' + mapFile);
+            console.log("Loading map file: #" + mapId);
 
             this._iniCols = 0;
             this._iniRows = 0;
 
-            var load = new FS_File('resources/maps/' + mapFile, 'json');
+            var load = new FS_File('resources/tools/get-map.php?id=' + mapId, 'json');
 
             (function (me) {
                 load.once('ready', function () {
@@ -409,11 +437,14 @@ var AdvMap = (function (_super) {
                     me._iniRows = this.data.height;
                     me._iniLayers = this.data.layers;
 
+                    me.id = this.data.id || 0;
+                    me.name = this.data.name || '';
+
                     me._loadFS();
                 });
 
                 load.once('error', function () {
-                    throw "Failed to initialize map! Map file " + mapFile + " failed to load!";
+                    throw "Failed to initialize map! Map id " + mapId + " failed to load!";
                 });
 
                 load.open();
@@ -614,6 +645,13 @@ var AdvMap = (function (_super) {
             "layers": []
         };
 
+        if (this.name) {
+            data['name'] = this.name;
+        }
+
+        if (this.id)
+            data['id'] = this.id;
+
         for (var i = 0, len = this.layers.length; i < len; i++) {
             data.layers.push(this.layers[i].getData());
         }
@@ -621,14 +659,89 @@ var AdvMap = (function (_super) {
         return data;
     };
 
-    AdvMap.prototype.save = function (fname, callback) {
+    AdvMap.prototype.save = function (callback, id) {
+        if (typeof id === "undefined") { id = null; }
+        callback = callback || function (reason) {
+            if (reason) {
+                console.log("Failed to save map: " + reason);
+            } else {
+                console.log("Map saved");
+            }
+        };
+
+        if (id === null) {
+            if (this.id !== null) {
+                id = this.id;
+            }
+        }
+
+        if (id === null) {
+            /* Generate a random file name, save it to disk. Import the
+            random file.
+            */
+            var fname = 'resources/maps/' + (this.name = ('map-' + (new Date()).getTime() + ".map"));
+
+            console.log("About to save the map to disk as: ", fname);
+
+            (function (me) {
+                me.saveToDisk(me.name, function (err) {
+                    if (err) {
+                        callback(err);
+                        return;
+                    }
+
+                    var f = new FS_File('resources/tools/load-map.php?file=' + (typeof global == 'undefined' ? '../../' : '') + fname, 'json');
+
+                    f.once('ready', function () {
+                        if (this.data.error || !this.data.ok || !this.data.id)
+                            callback(this.data.error || 'unknown save error');
+                        else {
+                            console.log("Map saved as id: " + this.data.id);
+                            me.id = this.data.id;
+                            callback();
+                        }
+                    });
+
+                    f.once('error', function (reason) {
+                        callback('Error saving file: ' + (reason || 'unknown filesystem reason'));
+                    });
+
+                    f.open();
+                }, true);
+            })(this);
+        } else {
+            if (typeof global != 'undefined') {
+                throw "Saving maps by id under node environments is not implemented!";
+            } else {
+                $.ajax('resources/tools/save-map-by-id.php', {
+                    "type": "POST",
+                    "data": {
+                        "id": this.id,
+                        "data": JSON.stringify(this.getData())
+                    },
+                    "success": function (response) {
+                        if (!response.ok) {
+                            callback(response.error || "Unknown save error");
+                        } else
+                            callback();
+                    },
+                    "error": function () {
+                        callback("Unknown map save error!");
+                    }
+                });
+            }
+        }
+    };
+
+    AdvMap.prototype.saveToDisk = function (fname, callback, absolutePath) {
+        if (typeof absolutePath === "undefined") { absolutePath = false; }
         var data = this.getData();
 
         // saves the map to disk.
         if (typeof global != 'undefined') {
             var fs = require('fs');
 
-            fs.writeFile('resources/maps/' + fname, JSON.stringify(data), function (err) {
+            fs.writeFile((absolutePath ? '' : 'resources/maps/') + fname, JSON.stringify(data), function (err) {
                 callback(err);
             });
         } else {
@@ -2094,7 +2207,7 @@ var Viewport = (function (_super) {
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
-var map = new AdvMap(64, 64, 'test.map');
+var map = new AdvMap(null, 64, 64);
 
 if (typeof window !== 'undefined')
     window['map'] = map;
