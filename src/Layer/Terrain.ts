@@ -225,7 +225,7 @@ class Layer_Terrain extends Layer {
 
 		if ( this.visible ) {
 			var tileId = this._tilesList[ cellRow * this.map.rows + cellCol ] ;
-				if ( tileId ) {
+				if ( tileId !== null ) {
 					this.tileset.paintTile( tileId, ctx, x, y );
 				}
 		}

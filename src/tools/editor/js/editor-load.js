@@ -106,9 +106,17 @@ map.on( 'load', function() {
                                         
                                     }
                                     
-                                    console.log( 'Load map: ' + id );
-                                    
-                                    $(this).remove();
+                                    ( function( me ) {
+                                        map.loadMap( id, function( err ) {
+                                            
+                                            if ( err ) {
+                                                alert( err );
+                                            } else {
+                                                $(me).remove();
+                                            }
+                                        
+                                        } );
+                                    })( this );
                                     
                                 },
                                 "Cancel": function() {

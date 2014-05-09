@@ -14,7 +14,8 @@
             
             $out[] = [
                 'id' => $map->id,
-                'name' => $map->name
+                'name' => $map->name,
+                'isTemplate' => $map->isTemplate ? 1 : 0
             ];
             
         }

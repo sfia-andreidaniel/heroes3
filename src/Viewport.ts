@@ -19,6 +19,8 @@ class Viewport extends Events {
 
 	private _joystick = 0;
 
+	public disabled: boolean = false; // if the viewport is disabled, it doesn't render
+
 	constructor( width: number, height: number, map: AdvMap ) {
 	    super();
 	    
@@ -131,6 +133,10 @@ class Viewport extends Events {
 		( function( me ) {
 
 			$(me.canvas).on( 'mousemove', function( evt ) {
+
+				if ( me.disabled )
+					return;
+
 				var x = evt.offsetX,
 				    y = evt.offsetY,
 				    col = ~~( x / me.tileWidth ) + me.x,
@@ -142,10 +148,16 @@ class Viewport extends Events {
 			});
 
 			$(me.canvas).on( 'mouseout', function() {
+				if ( me.disabled )
+					return;
 				me.map.activeCell = null;
 			});
 
 			me.canvas.addEventListener( 'mousewheel', function(evt ) {
+
+				if ( me.disabled )
+					return;
+
 				var delta = evt.wheelDelta || -evt.detail;
 
 				delta = Math.abs( delta ) >= 40 ? -( ~~(delta / 40) ) : delta;
@@ -194,6 +206,9 @@ class Viewport extends Events {
 				me.loopPaint();
 			} );
 		})( this );
+
+		if ( this.disabled )
+			return;
 
 		this.ctx.fillStyle = 'rgb(255,255,255)';
 		this.ctx.fillRect( 0, 0, this._width, this._height );

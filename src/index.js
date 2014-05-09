@@ -406,6 +406,7 @@ var AdvMap = (function (_super) {
         this.mapObjects = [];
         this.id = 0;
         this.name = '';
+        this._loadedOnce = false;
 
         (function (me) {
             me.fs.on('ready', function () {
@@ -581,6 +582,64 @@ var AdvMap = (function (_super) {
         }
     };
 
+    AdvMap.prototype.loadMap = function (mapId, callback) {
+        if (!this._loadedOnce)
+            throw "The loadMap method should be used only after the first 'load' event occurs!";
+
+        if (!mapId || mapId < 0)
+            throw "Please specify a number gt 0";
+
+        var f = new FS_File('resources/tools/get-map.php?id=' + mapId, 'json');
+
+        (function (me) {
+            f.once('ready', function () {
+                var i, len;
+
+                for (i = 0, len = me.viewports.length; i < len; i++) {
+                    me.viewports[i].disabled = true;
+                    me.viewports[i].renderables = []; // empty the renderables of the viewports
+                }
+
+                // Re-load all the map data
+                me.id = this.data.id || null;
+                me.name = this.data.name || null;
+
+                // Clear all existing objects
+                me.mapObjects = [];
+
+                me.setSize(me._iniCols = this.data.width, me._iniRows = this.data.height);
+
+                /* Reset layers data */
+                me._iniLayers = this.data.layers || [];
+
+                for (i = 0, len = me.layers.length; i < len; i++) {
+                    me.layers[i].interactive = false;
+                    me.layers[i].setData(me._iniLayers[i] || null);
+                    me.layers[i].interactive = true;
+                }
+
+                for (i = 0, len = me.viewports.length; i < len; i++) {
+                    me.viewports[i].x = 0;
+                    me.viewports[i].y = 0;
+                    me.viewports[i].updatePaintables();
+                    me.viewports[i].disabled = false;
+                }
+
+                (callback || function () {
+                    console.log("Map loaded");
+                })();
+            });
+        })(this);
+
+        f.once('error', function (reason) {
+            (callback || function (reason) {
+                console.log("Failed to load map: " + (reason || "Unknown reason"));
+            })(reason);
+        });
+
+        f.open();
+    };
+
     AdvMap.prototype.setSize = function (columns, rows) {
         this.cols = columns;
         this.rows = rows;
@@ -602,7 +661,11 @@ var AdvMap = (function (_super) {
         }
 
         this.emit('resize', columns, rows);
-        this.emit('load');
+
+        if (!this._loadedOnce) {
+            this.emit('load');
+            this._loadedOnce = true;
+        }
     };
 
     AdvMap.prototype.cellAt = function (column, row, strict) {
@@ -1369,7 +1432,7 @@ var Layer_Terrain = (function (_super) {
     Layer_Terrain.prototype.paint = function (cellCol, cellRow, x, y, ctx) {
         if (this.visible) {
             var tileId = this._tilesList[cellRow * this.map.rows + cellCol];
-            if (tileId) {
+            if (tileId !== null) {
                 this.tileset.paintTile(tileId, ctx, x, y);
             }
         }
@@ -1862,17 +1925,6 @@ var AdvMap_Tileset = (function (_super) {
             sx = ~~(tileId % this.tileCols) * this.tileWidth;
             sy = ~~(tileId / this.tileCols) * this.tileHeight;
 
-            /*
-            console.log( "paintTile: ", tileId, "ctx2d.drawImage( ... ",
-            sx,
-            sy,
-            sw = this.tileWidth,
-            sh = this.tileHeight,
-            x,
-            y,
-            sw,
-            sh, ")" );
-            */
             ctx2d.drawImage(this.sprite.node, sx, sy, sw = this.tileWidth, sh = this.tileHeight, x, y, sw, sh);
         }
     };
@@ -2008,12 +2060,16 @@ var Viewport = (function (_super) {
         this.tileHeight = 0;
         this.paintables = [];
         this._joystick = 0;
+        this.disabled = false;
         this.loopPaint = function () {
             (function (me) {
                 window.requestAnimationFrame(function () {
                     me.loopPaint();
                 });
             })(this);
+
+            if (this.disabled)
+                return;
 
             this.ctx.fillStyle = 'rgb(255,255,255)';
             this.ctx.fillRect(0, 0, this._width, this._height);
@@ -2143,6 +2199,9 @@ var Viewport = (function (_super) {
 
         (function (me) {
             $(me.canvas).on('mousemove', function (evt) {
+                if (me.disabled)
+                    return;
+
                 var x = evt.offsetX, y = evt.offsetY, col = ~~(x / me.tileWidth) + me.x, row = ~~(y / me.tileHeight) + me.y, cell = me.map.cellAt(col, row, false);
 
                 if (cell != me.map.activeCell)
@@ -2150,10 +2209,15 @@ var Viewport = (function (_super) {
             });
 
             $(me.canvas).on('mouseout', function () {
+                if (me.disabled)
+                    return;
                 me.map.activeCell = null;
             });
 
             me.canvas.addEventListener('mousewheel', function (evt) {
+                if (me.disabled)
+                    return;
+
                 var delta = evt.wheelDelta || -evt.detail;
 
                 delta = Math.abs(delta) >= 40 ? -(~~(delta / 40)) : delta;

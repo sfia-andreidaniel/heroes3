@@ -98,18 +98,6 @@ class AdvMap_Tileset extends Events {
 	    	sx = ~~( tileId % this.tileCols ) * this.tileWidth;
 			sy = ~~( tileId / this.tileCols ) * this.tileHeight;
 
-			/*
-			console.log( "paintTile: ", tileId, "ctx2d.drawImage( ... ", 
-				sx,
-				sy,
-				sw = this.tileWidth,
-				sh = this.tileHeight,
-				x,
-				y,
-				sw,
-				sh, ")" );
-			*/
-
 			ctx2d.drawImage( 
 				this.sprite.node,
 				sx,

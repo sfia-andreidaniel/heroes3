@@ -17,7 +17,8 @@
                 'width' => $data['width'],
                 'height' => $data['height'],
                 'type' => $data['type'],
-                'layers' => NULL
+                'layers' => NULL,
+                'isTemplate' => $data['isTemplate'] ? TRUE : FALSE
             ];
             
             $this->_numLayers = $data['numLayers'];
@@ -65,6 +66,10 @@
                 ? $data['name']
                 : 'map loaded on ' . time();
             
+            $this->isTemplate = isset( $data['isTemplate'] ) ? (
+                $data['isTemplate'] ? TRUE : FALSE
+            ) : FALSE;
+            
             $this->_isDirty = TRUE;
             $this->_loaded = TRUE;
 
@@ -90,11 +95,15 @@
             if ( !isset( $data['type'] ) || !is_int( $data['type'] ) || $data['type'] < 0 )
                 $data['type'] = 0;
             
+            if ( !isset( $data['isTemplate'] ) || !is_bool( $data['isTemplate'] ) )
+                $data['isTemplate'] = FALSE;
+            
             $this->_properties[ 'type' ] = $data['type'];
             $this->_properties[ 'width'] = $data['width'];
             $this->_properties[ 'height' ] = $data['height'];
             $this->_properties[ 'name' ] = $data['name'];
             $this->_properties[ 'layers' ] = $data['layers'];
+            $this->_properties[ 'isTemplate' ] = $data['isTemplate'];
             
             $this->_numLayers = count( $data['layers'] );
             
@@ -153,6 +162,10 @@
                 
                 case 'name':
                     $this->_properties[ 'name' ] = "$propertyValue";
+                    break;
+                
+                case 'isTemplate':
+                    $this->_properties[ 'isTemplate' ] = $propertyValue ? TRUE : FALSE;
                     break;
                 
                 case 'layers':
@@ -230,6 +243,7 @@
             if ( $this->_properties[ 'id' ] > 0 ) {
                 
                 $sql = [ "UPDATE maps SET
+                            is_template = " . Database::boolint( $this->_properties['isTemplate'] ) . ",
                             name = " . Database::string( $this->_properties['name'] ) . ",
                             width= " . Database::int( $this->_properties['width'] ) . ",
                             height=" . Database::int( $this->_properties['height'] ) . ",
@@ -253,6 +267,7 @@
             } else {
                 
                 $sql = [ "INSERT INTO maps (
+                            is_template,
                             name,
                             width,
                             height,
@@ -269,6 +284,7 @@
                             layer_8,
                             layer_9
                         ) VALUES (
+                            " . Database::boolint( $this->_properties[ 'isTemplate'] ) . ",
                             " . Database::string( $this->_properties['name'] ) . ",
                             " . Database::int   ( $this->_properties[ 'width' ] ) . ",
                             " . Database::int   ( $this->_properties[ 'height' ] ) . ",

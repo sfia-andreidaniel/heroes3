@@ -22,6 +22,8 @@ class AdvMap extends Events {
     public id           : number = 0;  // the id of the map on the server
     public name         : string = ''; // the name of the map on the server
 
+    private _loadedOnce : boolean = false;
+
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
         super();
@@ -210,6 +212,77 @@ class AdvMap extends Events {
         }
 
     }
+
+    public loadMap( mapId: number, callback ) {
+
+        if ( !this._loadedOnce )
+            throw "The loadMap method should be used only after the first 'load' event occurs!";
+
+        if ( !mapId || mapId < 0 )
+            throw "Please specify a number gt 0";
+
+        var f: FS_File = new FS_File( 'resources/tools/get-map.php?id=' + mapId, 'json' );
+
+        ( function( me ) {
+
+            f.once( 'ready', function() {
+                
+                var i: number,
+                    len: number;
+
+                // Setup all viewports to disabled, and clear their renderables
+                for ( i=0, len = me.viewports.length; i<len; i++ ) {
+
+                    me.viewports[i].disabled = true;
+                    me.viewports[i].renderables = []; // empty the renderables of the viewports
+
+                }
+
+                // Re-load all the map data
+
+                me.id = this.data.id || null;
+                me.name = this.data.name || null;
+
+                // Clear all existing objects
+                me.mapObjects = [];
+
+                me.setSize( me._iniCols = this.data.width, me._iniRows = this.data.height );
+
+                /* Reset layers data */
+                me._iniLayers = this.data.layers || [];
+
+                for ( i=0, len = me.layers.length; i<len; i++ ) {
+                    me.layers[i].interactive = false;
+                    me.layers[i].setData( me._iniLayers[i] || null );
+                    me.layers[i].interactive = true;
+                }
+
+                for ( i=0, len = me.viewports.length; i<len; i++ ) {
+
+                    me.viewports[i].x = 0;
+                    me.viewports[i].y = 0;
+                    me.viewports[i].updatePaintables();
+                    me.viewports[i].disabled = false;
+
+                }
+
+                ( callback || function() { console.log( "Map loaded" ); } )();
+
+            });
+
+        } )( this );
+
+        f.once( 'error', function( reason ) {
+
+            ( callback || function( reason ) {
+                console.log( "Failed to load map: " + ( reason || "Unknown reason" ) );
+            } )( reason );
+
+        });
+
+        f.open();
+
+    }
     
     public setSize( columns: number, rows: number ) {
         this.cols = columns;
@@ -234,7 +307,12 @@ class AdvMap extends Events {
         }
 
         this.emit( 'resize', columns, rows );
-        this.emit( 'load' );
+        
+        if ( !this._loadedOnce ){
+            this.emit( 'load' );
+            this._loadedOnce = true;    
+        }
+        
     }
 
     public cellAt( column: number, row: number, strict: boolean = true ): Cell {
