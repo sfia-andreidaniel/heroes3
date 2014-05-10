@@ -139,10 +139,4 @@ map.on( 'load', function() {
         
     } );
 
-    setTimeout( function() {
-        
-        $('#btn-open').click();
-        
-    }, 100 );
-
 } );

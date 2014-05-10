@@ -513,6 +513,7 @@ class AdvMap extends Events {
 
     public addViewport( vp: Viewport ) /*: HTMLCanvasObject */ {
         this.viewports.push( vp );
+        this.emit( 'add-viewport', vp );
         return vp;
     }
 }

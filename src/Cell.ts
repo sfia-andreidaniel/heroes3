@@ -34,7 +34,7 @@ class Cell {
 	}
 
 	public y(): number {
-		return ~~( this.index / this.map.rows );
+		return ~~( this.index / this.map.cols );
 	}
 
 	get neighbours(): CellNeighbours {

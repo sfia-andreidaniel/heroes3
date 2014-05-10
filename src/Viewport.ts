@@ -4,8 +4,8 @@ class Viewport extends Events {
 	public ctx:    any    = null; // Canvas context
 	public map:    AdvMap = null; // AdvMap
 
-	private _width: number = 0;
-	private _height: number = 0;
+	public _width: number = 0; // Physical viewport dimensions in pixels
+	public _height: number = 0;
 
 	public cols: number = 0; // number of tiles horizontaly
 	public rows: number = 0; // number of tiles verticaly
@@ -20,6 +20,7 @@ class Viewport extends Events {
 	private _joystick = 0;
 
 	public disabled: boolean = false; // if the viewport is disabled, it doesn't render
+	public minimaps: Viewport_Minimap[] = [];
 
 	constructor( width: number, height: number, map: AdvMap ) {
 	    super();
@@ -99,6 +100,8 @@ class Viewport extends Events {
 			}
 		}
 
+		this.emit( 'update' );
+
 	}
 
 	public resize( width: number, height: number ) {
@@ -122,6 +125,26 @@ class Viewport extends Events {
 				+ this._width + "x" + this._height + "px, cols=" 
 				+ this.cols + ", rows=" + this.rows
 				+ ", " + this.paintables.length + " paintables in paint loop" );
+
+	}
+
+	public scrollToXY( x: number, y: number ) {
+		this.x = x;
+		this.y = y;
+
+		if ( this.x + this.cols > this.map.cols - 1)
+			this.x = this.map.cols - this.cols - 1;
+
+		if ( this.x < 0 )
+			this.x = 0;
+
+		if ( this.y + this.rows > this.map.rows - 1)
+			this.y = this.map.rows - this.rows - 1;
+
+		if ( this.y < 0 )
+			this.y = 0;
+
+		this.updatePaintables();
 
 	}
 
@@ -171,27 +194,12 @@ class Viewport extends Events {
 
 				if ( evt.shiftKey ) {
 
-					me.x += delta;
-
-					if ( me.x + me.cols >= me.map.cols - 1 )
-						me.x = me.map.cols - me.cols - 1;
-
-					if ( me.x < 0 )
-						me.x = 0;
+					me.scrollToXY( me.x+delta, me.y );
 
 				} else {
 
-					me.y += delta;
-
-					if ( me.y + me.rows >= me.map.rows )
-						me.y = me.map.rows - me.rows - 1;
-
-					if ( me.y < 0 )
-						me.y = 0;
-
+					me.scrollToXY( me.x, me.y + delta );
 				}
-
-				me.updatePaintables();
 
 			}, true);
 
@@ -258,6 +266,14 @@ class Viewport extends Events {
 			this.ctx.fillRect( x1 * this.tileWidth, y1 * this.tileHeight, oh.cols * this.tileWidth, oh.rows * this.tileHeight );
 
 		}
+	}
+
+	public addMiniMap( width: number, height: number ) {
+
+		var mini = new Viewport_Minimap( width, height, this );
+		this.minimaps.push( mini );
+		return mini;
+
 	}
 
 }

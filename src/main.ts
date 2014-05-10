@@ -19,8 +19,9 @@
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
+///<reference path="Viewport/Minimap.ts" />
 
-var map = new AdvMap( null, 64, 64 );
+var map = new AdvMap( null, 128, 128 );
 
 if ( typeof window !== 'undefined' )
 	window[ 'map' ] = map;

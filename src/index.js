@@ -840,6 +840,7 @@ var AdvMap = (function (_super) {
 
     AdvMap.prototype.addViewport = function (vp) {
         this.viewports.push(vp);
+        this.emit('add-viewport', vp);
         return vp;
     };
     return AdvMap;
@@ -1780,7 +1781,7 @@ var Cell = (function () {
     };
 
     Cell.prototype.y = function () {
-        return ~~(this.index / this.map.rows);
+        return ~~(this.index / this.map.cols);
     };
 
     Object.defineProperty(Cell.prototype, "neighbours", {
@@ -1950,10 +1951,12 @@ var AdvMap_TilesetTerrain = (function () {
         this.tileset = tileset;
         this._validNeighbours = [];
         this._tiles = [];
+        this.color = null;
         this.name = config.name;
         this.defaultTile = config.defaultTile;
         this.id = config.id;
         this.hash = config.hash;
+        this.color = config.color || null;
     }
     AdvMap_TilesetTerrain.prototype.toString = function () {
         return this.id.toString();
@@ -2061,6 +2064,7 @@ var Viewport = (function (_super) {
         this.paintables = [];
         this._joystick = 0;
         this.disabled = false;
+        this.minimaps = [];
         this.loopPaint = function () {
             (function (me) {
                 window.requestAnimationFrame(function () {
@@ -2171,6 +2175,8 @@ var Viewport = (function (_super) {
                     this.paintables.push(c);
             }
         }
+
+        this.emit('update');
     };
 
     Viewport.prototype.resize = function (width, height) {
@@ -2191,6 +2197,25 @@ var Viewport = (function (_super) {
         this.updatePaintables();
 
         console.log("resized viewport to: " + this._width + "x" + this._height + "px, cols=" + this.cols + ", rows=" + this.rows + ", " + this.paintables.length + " paintables in paint loop");
+    };
+
+    Viewport.prototype.scrollToXY = function (x, y) {
+        this.x = x;
+        this.y = y;
+
+        if (this.x + this.cols > this.map.cols - 1)
+            this.x = this.map.cols - this.cols - 1;
+
+        if (this.x < 0)
+            this.x = 0;
+
+        if (this.y + this.rows > this.map.rows - 1)
+            this.y = this.map.rows - this.rows - 1;
+
+        if (this.y < 0)
+            this.y = 0;
+
+        this.updatePaintables();
     };
 
     Viewport.prototype._setupMouseEvents = function () {
@@ -2228,28 +2253,231 @@ var Viewport = (function (_super) {
                     return;
 
                 if (evt.shiftKey) {
-                    me.x += delta;
-
-                    if (me.x + me.cols >= me.map.cols - 1)
-                        me.x = me.map.cols - me.cols - 1;
-
-                    if (me.x < 0)
-                        me.x = 0;
+                    me.scrollToXY(me.x + delta, me.y);
                 } else {
-                    me.y += delta;
-
-                    if (me.y + me.rows >= me.map.rows)
-                        me.y = me.map.rows - me.rows - 1;
-
-                    if (me.y < 0)
-                        me.y = 0;
+                    me.scrollToXY(me.x, me.y + delta);
                 }
-
-                me.updatePaintables();
             }, true);
         })(this);
     };
+
+    Viewport.prototype.addMiniMap = function (width, height) {
+        var mini = new Viewport_Minimap(width, height, this);
+        this.minimaps.push(mini);
+        return mini;
+    };
     return Viewport;
+})(Events);
+var Viewport_Minimap = (function (_super) {
+    __extends(Viewport_Minimap, _super);
+    function Viewport_Minimap(width, height, parent) {
+        _super.call(this);
+        this.width = width;
+        this.height = height;
+        this.parent = parent;
+        this.canvas = null;
+        this.ctx = null;
+        this.$node = null;
+        this.$nodeIn = null;
+        this.$nodeVp = null;
+        this.x = 0;
+        this.y = 0;
+        this.realWidth = 0;
+        this.realHeight = 0;
+
+        this.canvas = typeof document != 'undefined' ? document.createElement('canvas') : (function () {
+            var Canvas = require('canvas');
+            return new Canvas();
+        })();
+
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+
+        this.ctx = this.canvas.getContext('2d');
+
+        (function (me) {
+            me.parent.on('update', function () {
+                me.update();
+            });
+        })(this);
+
+        this.realWidth = width;
+        this.realHeight = height;
+
+        if (typeof document != 'undefined') {
+            this.$node = document.createElement('div');
+
+            $(this.$node).css({
+                "width": this.width + "px",
+                "height": this.height + "px",
+                "position": "relative"
+            });
+
+            $(this.$node).addClass('minimap-dom');
+
+            this.$nodeIn = this.$node.appendChild(document.createElement('div'));
+
+            $(this.$nodeIn).css({
+                "display": "block",
+                "margin": "0",
+                "position": "relative",
+                "width": this.width + "px",
+                "height": this.height + "px",
+                "overflow": "hidden",
+                "background-color": "#111"
+            });
+
+            this.$nodeIn.appendChild(this.canvas);
+
+            $(this.canvas).css({
+                "position": "absolute",
+                "left": "0px",
+                "right": "0px",
+                "top": "0px",
+                "bottom": "0px",
+                "display": "block",
+                "z-index": "1"
+            });
+
+            this.$nodeVp = this.$nodeIn.appendChild(document.createElement('div'));
+
+            $(this.$nodeVp).css({
+                "z-index": "3",
+                "cursor": "move",
+                "outline": "2px solid red",
+                "display": "block",
+                "width": "10px",
+                "height": "10px",
+                "position": "absolute",
+                "top": "0px",
+                "left": "0px"
+            });
+
+            (function (me) {
+                $(me.$nodeVp)['draggable']({
+                    "containment": "parent",
+                    "drag": function () {
+                        var y = ~~(me.parent.map.rows * me.$nodeVp.offsetTop / me.realHeight), x = ~~(me.parent.map.cols * me.$nodeVp.offsetLeft / me.realWidth);
+
+                        me.parent.scrollToXY(x, y);
+                    }
+                });
+            })(this);
+        }
+
+        this.computeSizes();
+    }
+    // on computeSizes method, we're determining the
+    // dimensions of the canvas and $node* elements
+    Viewport_Minimap.prototype.computeSizes = function () {
+        var mapPxWidth = this.parent.map.cols * this.parent.tileWidth, mapPxHeight = this.parent.map.rows * this.parent.tileHeight, scale = 0, placeX = 0, placeY = 0;
+
+        if (mapPxWidth < this.width && mapPxHeight < this.height) {
+            scale = 1;
+        } else {
+            scale = Math.min(this.width, this.height) / Math.max(mapPxWidth, mapPxHeight);
+        }
+
+        this.realWidth = mapPxWidth * scale;
+        this.realHeight = mapPxHeight * scale;
+
+        placeX = ~~((this.width - this.realWidth) / 2);
+        placeY = ~~((this.height - this.realHeight) / 2);
+
+        if (this.$nodeIn) {
+            $(this.$nodeIn).css({
+                "width": ~~this.realWidth + "px",
+                "height": ~~this.realHeight + "px",
+                "marginLeft": placeX + "px",
+                "marginTop": placeY + "px"
+            });
+        }
+
+        this.canvas.width = ~~this.realWidth;
+        this.canvas.height = ~~this.realHeight;
+
+        this.update();
+    };
+
+    Viewport_Minimap.prototype.update = function () {
+        // Basically, we're triggering this event when
+        // the viewport changes it's paintables.
+        if (!this.$nodeVp)
+            return;
+
+        var mapPxWidth = this.parent.map.cols * this.parent.tileWidth, mapPxHeight = this.parent.map.rows * this.parent.tileHeight;
+
+        this.$nodeVp.style.width = ~~(this.realWidth / (mapPxWidth / this.parent._width)) + "px";
+        this.$nodeVp.style.height = ~~(this.realHeight / (mapPxHeight / this.parent._height)) + "px";
+
+        this.$nodeVp.style.top = ~~(this.realHeight / ((mapPxHeight / this.parent.tileHeight)) * this.parent.y) + "px";
+
+        this.$nodeVp.style.left = ~~(this.realWidth / ((mapPxWidth / this.parent.tileWidth)) * this.parent.x) + "px";
+    };
+
+    Viewport_Minimap.prototype.paint = function () {
+        /* The paint method paints the surface of the canvas
+        according to the map terrain */
+        var mapPxWidth = this.parent.map.cols * this.parent.tileWidth, mapPxHeight = this.parent.map.rows * this.parent.tileHeight, localTileWidth = this.realWidth / mapPxWidth, localTileHeight = this.realHeight / mapPxHeight, cell, layers = [], colors = [], col, cols, row, rows, i, len, k, n, index, shouldAddTileset = false, x, y, x1 = Math.round(-localTileWidth), y1 = Math.round(-localTileHeight);
+
+        x1 = x1 == 0 ? -1 : x1;
+        y1 = y1 == 0 ? -1 : y1;
+
+        var x2 = -x1, y2 = -y1;
+
+        for (i = 0, len = this.parent.map.layers.length; i < len; i++) {
+            if (this.parent.map.layers[i]['tileset']) {
+                shouldAddTileset = true;
+                colors = [];
+
+                for (k = 0, n = this.parent.map.layers[i]['tileset'].terrains.length; k < n; k++) {
+                    if (!this.parent.map.layers[i]['tileset'].terrains[k].color) {
+                        shouldAddTileset = false;
+                        break;
+                    } else {
+                        colors.push(this.parent.map.layers[i]['tileset'].terrains[k].color);
+                    }
+                }
+
+                if (shouldAddTileset)
+                    layers.push({
+                        "t": this.parent.map.layers[i]['tileset'],
+                        "i": i,
+                        "colors": colors
+                    });
+            }
+        }
+
+        this.ctx.fillStyle = '#000';
+        this.ctx.fillRect(0, 0, this.realWidth, this.realHeight);
+
+        n = layers.length - 1;
+
+        console.log(localTileWidth, localTileHeight);
+
+        for (col = 0, cols = this.parent.map.cols; col < cols; col++) {
+            for (row = 0, rows = this.parent.map.rows; row < rows; row++) {
+                cell = this.parent.map.cellAt(col, row);
+
+                for (k = n; k >= 0; k--) {
+                    index = cell.getData(layers[n].i);
+
+                    if (index !== null) {
+                        // draw rectangle on minimap
+                        this.ctx.fillStyle = layers[n].colors[index];
+
+                        x = ~~(col * localTileWidth);
+                        y = ~~(col * localTileHeight);
+
+                        this.ctx.fillRect(x - x1, y - y1, x2 * 2, y2 * 2);
+
+                        break;
+                    }
+                }
+            }
+        }
+    };
+    return Viewport_Minimap;
 })(Events);
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="IObjectHandle.ts" />
@@ -2271,7 +2499,8 @@ var Viewport = (function (_super) {
 ///<reference path="AdvMap/Tileset/Terrains.ts" />
 ///<reference path="AdvMap/Tileset/RoadsRivers.ts" />
 ///<reference path="Viewport.ts" />
-var map = new AdvMap(null, 64, 64);
+///<reference path="Viewport/Minimap.ts" />
+var map = new AdvMap(null, 128, 128);
 
 if (typeof window !== 'undefined')
     window['map'] = map;
