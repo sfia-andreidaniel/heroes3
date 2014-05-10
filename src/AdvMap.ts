@@ -24,14 +24,34 @@ class AdvMap extends Events {
 
     private _loadedOnce : boolean = false;
 
+    private minimapsPaintDebouncer = null;
+
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
         super();
         
         ( function( me ) {
+            
+
             me.fs.on( 'ready', function() {
                 me._onFSReady();
             } );
+
+            if ( window && window['$'] && window['$']['debounce'] ) {
+
+
+                me.minimapsPaintDebouncer = $['debounce']( 250, function() {
+
+                    for ( var i=0, len = me.viewports.length; i<len; i++ ) {
+                        for ( var j = 0, n = me.viewports[i].minimaps.length; j < n; j++ ) {
+                            me.viewports[i].minimaps[j].paint();
+                        }
+                    }
+
+                });
+
+            }
+
         } )( this );
 
         if ( mapId === null ) {
@@ -267,6 +287,8 @@ class AdvMap extends Events {
                 }
 
                 ( callback || function() { console.log( "Map loaded" ); } )();
+
+                me.renderMinimaps();
 
             });
 
@@ -515,5 +537,10 @@ class AdvMap extends Events {
         this.viewports.push( vp );
         this.emit( 'add-viewport', vp );
         return vp;
+    }
+
+    public renderMinimaps() {
+        if ( this.minimapsPaintDebouncer )
+            this.minimapsPaintDebouncer();
     }
 }

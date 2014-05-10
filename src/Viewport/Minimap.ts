@@ -181,8 +181,8 @@ class Viewport_Minimap extends Events {
 
 		var mapPxWidth = this.parent.map.cols * this.parent.tileWidth,
 		    mapPxHeight= this.parent.map.rows * this.parent.tileHeight,
-		    localTileWidth = this.realWidth / mapPxWidth,
-		    localTileHeight= this.realHeight / mapPxHeight,
+		    localTileWidth = this.realWidth / this.parent.map.cols,
+		    localTileHeight= this.realHeight / this.parent.map.rows,
 		    cell: Cell,
 		    layers = [],
 		    colors = [],
@@ -193,15 +193,15 @@ class Viewport_Minimap extends Events {
 
 		    x: number,
 		    y: number,
-		    x1: number = Math.round( -localTileWidth ),
-		    y1: number = Math.round( -localTileHeight );
+		    x1: number = Math.round( -localTileWidth * .5 ),
+		    y1: number = Math.round( -localTileHeight * .5 );
 
 		    x1 = x1 == 0 ? -1 : x1;
 		    y1 = y1 == 0 ? -1 : y1;
 
 		    var
-		    x2: number = -x1,
-		    y2: number = -y1;
+		    x2: number = -x1 * 2 + 1,
+		    y2: number = -y1 * 2 + 1;
 
 		for ( i=0, len = this.parent.map.layers.length; i<len; i++ ) {
 			if ( this.parent.map.layers[i]['tileset'] ) {
@@ -232,8 +232,6 @@ class Viewport_Minimap extends Events {
 
 		n = layers.length - 1;
 
-		console.log( localTileWidth, localTileHeight );
-
 		for ( col = 0, cols = this.parent.map.cols; col < cols; col++ ) {
 			for ( row = 0, rows = this.parent.map.rows; row < rows; row++ ) {
 
@@ -248,9 +246,9 @@ class Viewport_Minimap extends Events {
 						this.ctx.fillStyle = layers[n].colors[index];
 
 						x = ~~( col * localTileWidth );
-						y = ~~( col * localTileHeight );
+						y = ~~( row * localTileHeight );
 
-						this.ctx.fillRect( x - x1, y - y1, x2 * 2, y2 * 2 );
+						this.ctx.fillRect( x - x1, y - y1, x2, y2 );
 
 
 						break;

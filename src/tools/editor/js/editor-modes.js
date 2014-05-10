@@ -153,7 +153,11 @@ function eraseTerrain() {
 
 map.on( 'load', function() {
 
-    $( window.viewport.canvas ).on( 'mousedown', function() {
+    $( window.viewport.canvas ).on( 'mousedown', function( evt ) {
+        
+        if ( evt.which != 1 )
+            return;
+        
         isDragging = true;
         
         switch ( editorMode ) {

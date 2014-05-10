@@ -1,5 +1,5 @@
-src2/node_modules
 src/node_modules
 db.mysql.gz
 db.mysql
 resources/maps/map-*.map
+src/index.js

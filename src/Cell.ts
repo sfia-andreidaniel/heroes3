@@ -24,9 +24,11 @@ class Cell {
 			: this.$layerData[ layerIndex ];
 	}
 
-	public setData( layerIndex: number, data: any ) {
+	public setData( layerIndex: number, data: any, noTriggers: boolean = false ) {
 		this.$layerData[ layerIndex ] = data;
-		this.map.layers[ layerIndex ].emit( 'change', this.x(), this.y(), data );
+
+		if ( !noTriggers )
+			this.map.layers[ layerIndex ].emit( 'change', this.x(), this.y(), data, noTriggers );
 	}
 
 	public x(): number {
@@ -84,18 +86,30 @@ class Cell {
 	}
 
 	public getTerrainTypeIndex() {
-		if ( this.$layerData[0] !== null ) {
-			return this.$layerData[0];
-		} else {
-			// determine terrain type based on the layer bits
-			var bits = this.map.layers[0]['tiles'][ this.index ];
+		var bits = this.map.layers[0]['tiles'][ this.index ];
+		
+		if ( bits === null )
+			return 4; //Abyss. Sorry for hardcoding
 
-			bits =  bits === null ? null : ( bits.indexOf( 4 /* CT_ABYSS */ ) >= 0 ? 4 : (bits.indexOf( 9 /* CT_WATER */ ) >= 0 ? 9 : bits[0] ) );
+		var o = {},
+		    ret = [];
 
-			if ( bits != null )
-				this.$layerData[0] = bits; // correct map
-
-			return bits;
+		for ( var i=0, len = bits.length; i<len; i++ ) {
+			o[ bits[i] ] = o[ bits[i] ] || 1;
 		}
+
+		for ( var k in o ) {
+			ret.push( {
+				"t": k,
+				"v": o[k]
+			} );
+		}
+
+		ret.sort( function(a,b){
+			return a.v - b.v;
+		});
+
+		return ret[0].t;
+	
 	}
 }

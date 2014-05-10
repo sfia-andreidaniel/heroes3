@@ -57,6 +57,8 @@ class Layer_Terrain extends Layer {
 				? this.tileset.getTileIdByHash( this.bits2hash( bits ) )
 				: null;
 		}
+
+		this.map.renderMinimaps();
 	}
 
 	private getBits( x, y, defaultBits ) {
@@ -103,7 +105,8 @@ class Layer_Terrain extends Layer {
 
 	private writeMatrix( x, y, matrix ) {
 
-		var bits: any;
+		var bits: any,
+			cell: Cell;
 
 		for ( var row1 = -2, row = 0; row1 <= 2; row1++, row++ ) {
 			for ( var col1 = -2, col = 0; col1 <= 2; col1++, col++ ) {
@@ -117,6 +120,10 @@ class Layer_Terrain extends Layer {
 
 				this.setBits( x + col1, y + row1, bits );
 
+				cell = this.map.cellAt( x + col1, y + row1, false );
+
+				if ( cell )
+					cell.setData( 0, cell.getTerrainTypeIndex(), true );
 			}
 		}
 	}
@@ -143,7 +150,7 @@ class Layer_Terrain extends Layer {
 
 
 		// @data is a tileset terrain id
-		this.on( 'change', function( x, y, data ) {
+		this.on( 'change', function( x, y, data, noTriggers: boolean = false ) {
 			
 			if ( !this._interactive )
 				return;
