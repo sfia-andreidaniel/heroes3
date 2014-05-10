@@ -21,6 +21,7 @@ class Viewport extends Events {
 
 	public disabled: boolean = false; // if the viewport is disabled, it doesn't render
 	public minimaps: Viewport_Minimap[] = [];
+	private vpTickPaint: number = 0;
 
 	constructor( width: number, height: number, map: AdvMap ) {
 	    super();
@@ -217,6 +218,12 @@ class Viewport extends Events {
 
 		if ( this.disabled )
 			return;
+
+		this.vpTickPaint++;
+
+		if ( this.vpTickPaint != 3 )
+			return;
+		else this.vpTickPaint = 0;
 
 		this.ctx.fillStyle = 'rgb(255,255,255)';
 		this.ctx.fillRect( 0, 0, this._width, this._height );
