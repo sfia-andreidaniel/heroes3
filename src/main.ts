@@ -10,6 +10,16 @@
 ///<reference path="Objects.ts" />
 ///<reference path="Objects/Item.ts" />
 ///<reference path="Objects/Entity.ts" />
+///<reference path="Objects/Entity/Hero.ts" />
+///<reference path="Objects/Entity/Hero/Embarked.ts" />
+///<reference path="Objects/Entity/AdventureItem.ts" />
+///<reference path="Objects/Entity/Artifact.ts" />
+///<reference path="Objects/Entity/Castle.ts" />
+///<reference path="Objects/Entity/Tileset.ts" />
+///<reference path="Objects/Entity/Mine.ts" />
+///<reference path="Objects/Entity/Resource.ts" />
+///<reference path="Objects/Entity/Creature/Adventure.ts" />
+///<reference path="Objects/Entity/Dwelling.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="Layer/Entities.ts" />

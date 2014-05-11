@@ -5,6 +5,9 @@
         private $_maps      = NULL;
         private $_loaded    = FALSE;
         private $_numLayers = 0;
+        
+        private $_objects   = NULL;
+        
         private $_isDirty   = FALSE;
         
         public function __construct( Maps &$collection, $data ) {
@@ -111,6 +114,15 @@
             $this->_loaded = TRUE;
         }
         
+        private function _getObjects() {
+            
+            if ( $this->_objects === NULL )
+                return $this->_objects = new Maps_Map_Objects( $this );
+            else
+                return $this->_objects;
+            
+        }
+        
         private function _load() {
             
             if ( $this->_loaded )
@@ -151,7 +163,8 @@
             switch ( $propertyName ) {
                 
                 case 'id':
-                    throw new Exception_Game( 'The id property of a map is read-only!' );
+                case 'objects':
+                    throw new Exception_Game( 'The ' . $propertyName . ' property of a map is read-only!' );
                     break;
                 
                 case 'width':
@@ -190,6 +203,10 @@
         public function __get( $propertyName ) {
             
             switch ( $propertyName ) {
+                
+                case 'objects':
+                    return $this->_getObjects();
+                    break;
                 
                 case 'layers':
 
@@ -236,9 +253,19 @@
             $this->_properties[ 'layers' ][ $layerIndex ] = $layerData;
         }
         
+        public function _setDirty() {
+            $this->_isDirty = TRUE;
+        }
+        
         public function save() {
-            if ( !$this->_isDirty )
+        
+            if ( !$this->_isDirty ) {
+                
+                if ( $this->_objects !== NULL )
+                    $this->_objects->save();
+                
                 return;
+            }
             
             if ( $this->_properties[ 'id' ] > 0 ) {
                 
@@ -303,6 +330,9 @@
                 $result = Database('main')->query( $sql );
                 
                 $this->_properties[ 'id' ] = mysql_insert_id( Database('main')->conn );
+
+                if ( $this->_objects !== NULL )
+                    $this->_objects->save();
                 
             }
         }
@@ -312,7 +342,11 @@
             if ( !$this->_loaded )
                 $this->_load();
             
-            return $this->_properties;
+            $out = $this->_properties;
+            
+            $out[ 'objects' ] = $this->objects->toJSON;
+            
+            return $out;
         }
         
         public function __destruct() {

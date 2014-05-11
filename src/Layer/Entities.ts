@@ -27,15 +27,90 @@ class Layer_Entities extends Layer {
 			if ( !this._interactive )
 				return;
 
-			var index: number;
+			var index		 : number,
+			    obj 		 : Objects_Item = null,
+			    dataTypeId 	 : number,
+			    dataServerId : number = null;
 
 			if ( this._objects[  index = ( y * this.map.rows + x ) ] ) {
 				this._objects[ index ].destroy();
 			}
 
-			this._objects[  index ] = data !== null
-				? new Objects_Entity( data, x, y, this )
-				: null;
+			if ( data === null ) {
+			
+				this._objects[ index ] = null;
+			
+			} else {
+
+				switch ( typeof data ) {
+					case 'number':
+						dataTypeId = data;
+						break;
+					case 'object':
+						dataTypeId = data.typeId;
+						dataServerId = data.id || null;
+						break;
+					default:
+						throw "Invalid data type!";
+						break;
+				}
+
+				obj = this.map.objects.getObjectById( dataTypeId );
+
+				if ( !obj )
+					throw "Failed to get object #" + data + " from map objects";
+
+				switch ( obj.objectClass ) {
+
+					case 'Hero':
+						this._objects[ index ] = new Objects_Entity_Hero( data, x, y, this );
+						break;
+
+					case 'Hero_Embarked':
+						this._objects[ index ] = new Objects_Entity_Hero_Embarked( data, x, y, this );
+						break;
+
+					case 'AventureItem':
+						this._objects[ index ] = new Objects_Entity_AdventureItem( data, x, y, this );
+						break;
+
+					case 'Artifact':
+						this._objects[ index ] = new Objects_Entity_Artifact( data, x, y, this );
+						break;
+
+					case 'Castle':
+						this._objects[ index ] = new Objects_Entity_Castle( data, x, y, this );
+						break;
+
+					case 'Dwelling':
+						this._objects[ index ] = new Objects_Entity_Dwelling( data, x, y, this );
+						break;
+
+					case 'Tileset':
+						this._objects[ index ] = new Objects_Entity_Tileset( data, x, y, this );
+						break;
+
+					case 'Mine':
+						this._objects[ index ] = new Objects_Entity_Mine( data, x, y, this );
+						break;
+
+					case 'Resource':
+						this._objects[ index ] = new Objects_Entity_Resource( data, x, y, this );
+						break;
+
+					case 'Creature_Adventure':
+						this._objects[ index ] = new Objects_Entity_Creature_Adventure( data, x, y, this );
+						break;
+
+					default:
+						this._objects[ index ] = new Objects_Entity( data, x, y, this );
+						break;
+
+				}
+
+				this._objects[ index ].setServerInstanceId( dataServerId );
+
+			}
 
 		});
 
@@ -44,8 +119,8 @@ class Layer_Entities extends Layer {
 	public getData() {
 		var out = [];
 		
-		for ( var i=0, len = this.map.cells.length; i<len; i++ ) {
-			out.push( this.map.cells[i].getData( this.index ) );
+		for ( var i=0, len = this._objects.length; i<len; i++ ) {
+			out.push( this._objects[i] ? this._objects[i].serialize() : null );
 		}
 
 		return {

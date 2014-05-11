@@ -5,7 +5,7 @@
     $my = new Maps();
     
     $map = $my->getElementById( 2 );
-
-    echo $map->width, "\n";
+    
+    echo json_encode( $map->toJSON, JSON_PRETTY_PRINT ), "\n";
 
 ?>

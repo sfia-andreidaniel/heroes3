@@ -5,15 +5,21 @@ class Objects_Entity extends Events {
 	// public row: number = 0;
 	// public layer: Layer_Entities;
 
-	public instance: Objects_Item = null;
-	public frameIndex: number = 0;
+	public instance: Objects_Item = null;		// pointer to animation object
+	public frameIndex: number = 0;				// current animation frame index
+	
+	public $id = null; 							// server side entity ID
 
 	private _animationIndex = null;
 	private _animationFrames: number[] = [ 0 ];
 	private _animationNumFrames: number = 0;
 
-	constructor ( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities  ) {
+	constructor ( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super();
+
+		if ( this.$sinchronizable() ) {
+			console.log( "Create entity sinchronizable on server!" );
+		}
 
 		this.instance = this.layer.map.objects.getObjectById( this.itemTypeId );
 
@@ -40,6 +46,23 @@ class Objects_Entity extends Events {
 
 		this.layer.map.emit( 'entity-create', this );
 
+	}
+
+	public $sinchronizable(): boolean {
+		return false;
+	}
+
+	public setServerInstanceId( instanceId: number = null ) {
+		this.$id = instanceId;
+		console.log( 'debug: set object instance id: ' + this.$id );
+	}
+
+	/* Serialize the entity in order to be able to store it on server */
+	public serialize(): any {
+		return this.$sinchronizable() ? {
+			'typeId': this.itemTypeId,
+			'id': this.$id
+		} : this.itemTypeId;
 	}
 
 	public paint( ctx2d, x: number, y: number ) {
