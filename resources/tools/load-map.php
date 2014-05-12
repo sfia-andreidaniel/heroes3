@@ -17,6 +17,9 @@
     
         $new_map->save();
         
+        // unlink file after loading it from disk
+        unlink( $_GET['file'] );
+        
         echo json_encode( [
                 'ok' => TRUE,
                 'id' => $new_map->id

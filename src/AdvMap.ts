@@ -26,6 +26,8 @@ class AdvMap extends Events {
 
     private minimapsPaintDebouncer = null;
 
+    public uniqueId: number = 0;
+
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
         super();
@@ -268,6 +270,9 @@ class AdvMap extends Events {
 
                 me.setSize( me._iniCols = this.data.width, me._iniRows = this.data.height );
 
+                /* Restore auto increment id */
+                me.uniqueId = this.data.uniqueId || 0;
+
                 /* Reset layers data */
                 me._iniLayers = this.data.layers || [];
 
@@ -376,6 +381,7 @@ class AdvMap extends Events {
         var data = {
             "width": this.cols,
             "height": this.rows,
+            "uniqueId": this.uniqueId,
             "layers": [
             ]
         };
@@ -405,14 +411,13 @@ class AdvMap extends Events {
             }
         }
 
-        if ( id === null ) {
-
-            if ( this.id !== null ) {
-                id = this.id;
-            }
-        }
+        this.id = id;
 
         if ( id === null ) {
+
+                /* Invalidate all map objects */
+                for ( var i=0, len = this.mapObjects.length; i < len; i++ )
+                    this.mapObjects[i].setServerInstanceId( null );
 
                 /* Generate a random file name, save it to disk. Import the
                    random file.
@@ -463,7 +468,9 @@ class AdvMap extends Events {
         } else {
 
             if ( typeof global != 'undefined' ) {
+            
                 throw "Saving maps by id under node environments is not implemented!";
+            
             } else {
 
                 $.ajax( 'resources/tools/save-map-by-id.php', {

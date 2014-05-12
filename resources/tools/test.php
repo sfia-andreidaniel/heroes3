@@ -4,8 +4,15 @@
     
     $my = new Maps();
     
-    $map = $my->getElementById( 2 );
+    $map = $my->getElementById( 1 );
     
-    echo json_encode( $map->toJSON, JSON_PRETTY_PRINT ), "\n";
+    
+    echo $map->objects[0]->id, "\n";
+    
+    echo $map->objects->getElementById( 2 )->typeId, "\n";
+    
+    $map->objects->getElementById( 2 )->typeId = 2;
+    
+    
 
 ?>

@@ -2,101 +2,69 @@
     
     class Maps_Map_Objects_Object extends BaseClass {
         
-        private $_objects = NULL;
-        private $_isDirty = FALSE;
-        private $_deleted = FALSE;
+        private $_map           = NULL;
+        private $_mapLayerIndex = NULL;
+        private $_objectIndex   = NULL;
         
-        public function __construct( Maps_Map_Objects $objects, array $properties ) {
-            
-            $this->_objects = $objects;
-            
-            $this->_properties = [
-                'id'     => isset( $properties[ 'id' ] ) ? $properties[ 'id' ] : NULL,
-                'typeId' => $properties[ 'typeId' ]
-            ];
-            
-            $this->_isDirty = $this->_properties[ 'id' ] === NULL;
-            
-        }
+        private $_id            = NULL;
         
-        public function save() {
+        private $_deleted       = FALSE;
+        
+        public function __construct( $map, $mapLayerIndex, $objectIndex, $objectId ) {
+            $this->_map = $map;
+            $this->_mapLayerIndex = $mapLayerIndex;
+            $this->_objectIndex = $objectIndex;
             
-            if ( $this->_isDirty === FALSE || $this->_deleted === TRUE )
-                return;
-            
-            if ( $this->_properties[ 'id' ] === NULL ) {
-                
-                Database( 'main' )->query(
-                    "INSERT INTO maps_objects ( map_id, type_id )
-                     VALUES ( " . Database::int( $this->_objects->getMapId() ) . ",
-                              " . Database::int( $this->_properties[ 'typeId' ] ) . " )" );
-                
-                $this->_properties[ 'id' ] = (int)mysql_insert_id( Database( 'main' )->conn );
-                
-            } else {
-                
-                Database( 'main' )->query(
-                    "UPDATE map_objects SET
-                        type_id = " . Database::int( $this->_properties[ 'typeId' ] ) . "
-                     WHERE id = " . Database::int( $this->_properties[ 'id' ] ) . "
-                     LIMIT 1"
-                );
-                
-            }
-            
-            $this->_isDirty = FALSE;
-            
+            $this->_id = $objectId;
         }
         
         public function delete() {
-            
-            // Delefe from db if id not null
-            
-            if ( $this->_properties[ 'id' ] !== NULL ) {
-                
-                Database( 'main' )->query( "DELETE FROM maps_objects WHERE id = " . Database::int( $this->_properties[ 'id' ] ) . " LIMIT 1" );
-                
-            }
-            
             $this->_deleted = TRUE;
-            
+            $this->_map->_layers[ $this->_mapLayerIndex ][ 'data' ][ $this->_objectIndex ] = NULL;
+            $this->_map->_setDirty();
         }
         
-        private function _toJSON() {
+        public function toJSON() {
             
-            return $this->_properties;
+            if ( $this->_deleted )
+                return NULL;
             
+            return $this->_map->_layers[ $this->_mapLayerIndex ][ 'data' ][ $this->_objectIndex ];
         }
         
         public function __get( $propertyName ) {
-            switch ( $propertyName ) {
-                case 'toJSON':
-                    return $this->_toJSON();
-                    break;
-                default:
-                    return parent::__get( $propertyName );
-                    break;
+            
+            if ( $propertyName == 'id' )
+                return $this->_id;
+            else {
+            
+                if ( $this->_deleted )
+                    return NULL;
+                
+                if ( isset(  $this->_map->_layers[ $this->_mapLayerIndex ][ 'objects' ][ $this->_objectIndex ][ $propertyName ] ) )
+                    return $this->_map->_layers[ $this->_mapLayerIndex ][ 'objects' ][ $this->_objectIndex ][ $propertyName ];
+                else return NULL;
+            
             }
+            
+            
+            
         }
         
         public function __set( $propertyName, $propertyValue ) {
+        
+            if ( $propertyName == 'id' ) {
+                throw new Exception_Game( "Property id is read-only!" );
+            } else {
+        
+                if ( $this->_deleted ) {
+                    throw new Exception_Game( "Attempted to set a property on a deleted object!" );
+                }
             
-            switch ( $propertyName ) {
-                
-                case 'typeId':
-                    
-                    if ( !is_int( $propertyValue ) || $propertyValue < 1 )
-                        throw new Exception_Game( "Property typeId should be of type int gte 1" );
-                    
-                    $this->_properties[ 'typeId' ] = $propertyValue;
-                    
-                    break;
-                
-                default:
-                    parent::__set( $propertyName, $propertyValue );
-                    break;
+                $this->_map->_layers[ $this->_mapLayerIndex ][ 'objects' ][ $this->_objectIndex ][ $propertyName ] = $propertyValue;
+                $this->_map->_setDirty();
+            
             }
-            
         }
         
     }

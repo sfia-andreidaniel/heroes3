@@ -8,6 +8,8 @@
         
         private $_objects   = NULL;
         
+        public  $_layers     = NULL;
+        
         private $_isDirty   = FALSE;
         
         public function __construct( Maps &$collection, $data ) {
@@ -20,8 +22,8 @@
                 'width' => $data['width'],
                 'height' => $data['height'],
                 'type' => $data['type'],
-                'layers' => NULL,
-                'isTemplate' => $data['isTemplate'] ? TRUE : FALSE
+                'isTemplate' => $data['isTemplate'] ? TRUE : FALSE,
+                'uniqueId' => $data[ 'uniqueId' ]
             ];
             
             $this->_numLayers = $data['numLayers'];
@@ -51,11 +53,16 @@
             
             $this->width  = $data['width'];
             $this->height = $data['height'];
+            
+            $this->uniqueId = isset( $data['uniqueId'] ) && is_int( $data['uniqueId'] )
+                ? $data[ 'uniqueId' ]
+                : 0;
+            
             $this->type   = isset( $data['type'] ) && is_int( $data['type'] )
                 ? $data['type']
                 : 0;
             
-            $this->_properties[ 'layers' ] = is_array( $data['layers'] )
+            $this->_layers = is_array( $data['layers'] )
                 ? $data['layers']
                 : [];
             
@@ -101,12 +108,16 @@
             if ( !isset( $data['isTemplate'] ) || !is_bool( $data['isTemplate'] ) )
                 $data['isTemplate'] = FALSE;
             
+            if ( !isset( $data['uniqueId'] ) || !is_int( $data['uniqueId'] ) )
+                $data[ 'uniqueId' ] = 0;
+            
             $this->_properties[ 'type' ] = $data['type'];
             $this->_properties[ 'width'] = $data['width'];
             $this->_properties[ 'height' ] = $data['height'];
             $this->_properties[ 'name' ] = $data['name'];
-            $this->_properties[ 'layers' ] = $data['layers'];
+            $this->_layers = $data['layers'];
             $this->_properties[ 'isTemplate' ] = $data['isTemplate'];
+            $this->_properties[ 'uniqueId' ] = $data['uniqueId'];
             
             $this->_numLayers = count( $data['layers'] );
             
@@ -139,17 +150,17 @@
                 
                 $row = mysql_fetch_array( $result, MYSQL_ASSOC );
                 
-                $this->_properties[ 'layers' ] = [];
+                $this->_layers = [];
                 
                 for ( $i=0; $i<$this->_numLayers; $i++ ) {
                     
-                    $this->_properties[ 'layers' ][] = json_decode( $row[ 'layer_' . $i ], TRUE );
+                    $this->_layers[] = json_decode( $row[ 'layer_' . $i ], TRUE );
                     
                 }
                 
             } else {
                 
-                $this->_properties[ 'layers' ] = [];
+                $this->_layers = [];
                 $this->_numLayers = 0;
                 
             }
@@ -170,6 +181,7 @@
                 case 'width':
                 case 'height':
                 case 'type':
+                case 'uniqueId':
                     $this->_properties[ $propertyName ] = (int)$propertyValue;
                     break;
                 
@@ -213,7 +225,7 @@
                     if ( !$this->_loaded )
                         $this->_load();
 
-                    return $this->_properties[ 'layers' ];
+                    return $this->_layers;
 
                     break;
 
@@ -247,10 +259,10 @@
             
             while ( $this->_numLayers <= $layerIndex ) {
                 $this->_numLayers++;
-                $this->_properties[ 'layers' ][] = NULL;
+                $this->_layers[] = NULL;
             }
             
-            $this->_properties[ 'layers' ][ $layerIndex ] = $layerData;
+            $this->_layers[ $layerIndex ] = $layerData;
         }
         
         public function _setDirty() {
@@ -271,6 +283,7 @@
                 
                 $sql = [ "UPDATE maps SET
                             is_template = " . Database::boolint( $this->_properties['isTemplate'] ) . ",
+                            unique_id   = " . Database::int( $this->_properties[ 'uniqueId' ] ) . ",
                             name = " . Database::string( $this->_properties['name'] ) . ",
                             width= " . Database::int( $this->_properties['width'] ) . ",
                             height=" . Database::int( $this->_properties['height'] ) . ",
@@ -279,7 +292,7 @@
                 
                 for ( $i=1; $i<=10; $i++ ) {
                     
-                    $sql[] = "layer_" . ( $i - 1 ) ." = " . Database::string( $i <= $this->_numLayers ? json_encode( $this->_properties['layers'][ $i - 1 ] ) : NULL ) . ', ';
+                    $sql[] = "layer_" . ( $i - 1 ) ." = " . Database::string( $i <= $this->_numLayers ? json_encode( $this->_layers[ $i - 1 ] ) : NULL ) . ', ';
                     
                 }
                 
@@ -295,6 +308,7 @@
                 
                 $sql = [ "INSERT INTO maps (
                             is_template,
+                            unique_id,
                             name,
                             width,
                             height,
@@ -312,6 +326,7 @@
                             layer_9
                         ) VALUES (
                             " . Database::boolint( $this->_properties[ 'isTemplate'] ) . ",
+                            " . Database::int   ( $this->_properties[ 'uniqueId'] ) . ",
                             " . Database::string( $this->_properties['name'] ) . ",
                             " . Database::int   ( $this->_properties[ 'width' ] ) . ",
                             " . Database::int   ( $this->_properties[ 'height' ] ) . ",
@@ -321,7 +336,7 @@
                 
                 for ( $i = 0; $i < 10; $i++ ) {
                     
-                    $sql[] = ", " . Database::string( $i < $this->_numLayers ? json_encode( $this->_properties['layers'][$i] ) : NULL, TRUE );
+                    $sql[] = ", " . Database::string( $i < $this->_numLayers ? json_encode( $this->_layers[$i] ) : NULL, TRUE );
                     
                 }
                 
@@ -331,10 +346,8 @@
                 
                 $this->_properties[ 'id' ] = mysql_insert_id( Database('main')->conn );
 
-                if ( $this->_objects !== NULL )
-                    $this->_objects->save();
-                
             }
+
         }
         
         private function _toJSON() {
@@ -344,7 +357,7 @@
             
             $out = $this->_properties;
             
-            $out[ 'objects' ] = $this->objects->toJSON;
+            $out[ 'layers' ] = $this->_layers;
             
             return $out;
         }

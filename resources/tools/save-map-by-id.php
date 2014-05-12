@@ -28,8 +28,11 @@
         
         $map->loadFromObject( $data );
         
+        $map->save();
+        
         echo json_encode( [
-                'ok' => TRUE
+                'ok' => TRUE,
+                'id' => $map->id
             ], JSON_PRETTY_PRINT
         );
     

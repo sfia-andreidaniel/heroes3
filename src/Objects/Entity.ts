@@ -53,7 +53,18 @@ class Objects_Entity extends Events {
 	}
 
 	public setServerInstanceId( instanceId: number = null ) {
-		this.$id = instanceId;
+		
+		if ( instanceId === null ) {
+
+			this.layer.map.uniqueId++;
+			this.$id = this.layer.map.uniqueId;
+
+		} else {
+
+			this.$id = instanceId;
+
+		}
+		
 		console.log( 'debug: set object instance id: ' + this.$id );
 	}
 

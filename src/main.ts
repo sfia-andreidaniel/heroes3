@@ -31,7 +31,7 @@
 ///<reference path="Viewport.ts" />
 ///<reference path="Viewport/Minimap.ts" />
 
-var map = new AdvMap( null, 64, 64 );
+var map = new AdvMap( null, 5, 5 );
 
 if ( typeof window !== 'undefined' )
 	window[ 'map' ] = map;

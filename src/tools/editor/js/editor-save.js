@@ -113,7 +113,7 @@ map.on( 'load', function() {
                                     
                                         if ( id ) {
                                         
-                                            map.id = id;
+                                            // map.id = id;
                                             map.name = name;
                                             
                                             map.save( function( err ) {
@@ -124,11 +124,11 @@ map.on( 'load', function() {
                                                     return;
                                                 } else $(dlg).remove();
                                                 
-                                            } );
+                                            }, id );
                                         
                                         } else {
                                             
-                                            map.id = null;
+                                            // map.id = null;
                                             
                                             map.save( function( err ) {
                                                 
@@ -144,11 +144,11 @@ map.on( 'load', function() {
                                                         if ( err ) {
                                                             alert( 'Error saving map: ' + err );
                                                         } else $(dlg).remove();
-                                                    } );
+                                                    }, map.id );
                                                     
                                                 }
                                                 
-                                            } );
+                                            }, null );
                                             
                                         }
                                     

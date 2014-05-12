@@ -2,75 +2,55 @@
     
     class Maps_Map_Objects extends BaseClass {
         
-        private $_map = NULL;
-        private $_isDirty = FALSE;
+        public  $_map = NULL;
         
         public function __construct( Maps_Map $map ) {
             
             $this->_map = $map;
             
-            if ( $map->id ) {
+            $index = 0;
+            
+            if ( is_array( $map->layers[2]['objects'] ) ) {
                 
-                $result = Database('main')->query( 
-                    "SELECT id, type_id 
-                     FROM maps_objects
-                     WHERE map_id = $map->id"
-                );
+                for ( $i=0, $len = count( $map->layers[2][ 'objects' ] ); $i < $len; $i++ ) {
+                    
+                    if ( is_array( $map->_layers[2]['objects'][ $i ] ) ) {
+                        
+                        $this->_properties[] = new Maps_Map_Objects_Object( $map, 2, $i, $index );
+                        
+                        $index++;
+                        
+                    }
+                    
+                }
                 
-                while ( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) )
-                    $this->_properties[] = new Maps_Map_Objects_Object( $this, [
-                        'id' => (int)$row['id'],
-                        'typeId' => (int)$row['type_id']
-                    ] );
+            }
+
+            if ( is_array( $map->layers[3]['objects'] ) ) {
+                
+                for ( $i=0, $len = count( $map->layers[3][ 'objects' ] ); $i < $len; $i++ ) {
+                    
+                    if ( is_array( $map->_layers[3]['objects'][ $i ] ) ) {
+                        
+                        $this->_properties[] = new Maps_Map_Objects_Object( $map, 3, $i, $map->_layers[3]['objects'][ $i ][ 'id' ] );
+                        
+                        $index++;
+                        
+                    }
+                    
+                }
                 
             }
             
         }
         
-        public function create( $objectTypeId ) {
-            
-            if ( $this->_map->id === NULL )
-                throw new Exception_Game( "Cannot create a map object on unsaved maps!" );
-            
-            $this->_properties[] = ( $ret = new Maps_Map_Objects_Object( $this, [
-                
-                'id' => NULL,
-                'typeId' => $objectTypeId
-                
-            ] ) );
-            
-            $this->_isDirty = TRUE;
-            
-            return $ret;
-        }
-        
-        public function getMapId() {
-            $id = $this->_map->id;
-            
-            if ( $id === NULL )
-                throw new Exception_Game( "Cannot return mapId, map is not saved (yet)" );
-            
-            return $id;
-        }
-        
-        public function save() {
-            
-            if ( $this->_isDirty ) {
-                
-                foreach ( $this->_properties as $object )
-                    $object->save();
-                
-                $this->_isDirty = FALSE;
-            }
-            
-        }
         
         private function _toJSON() {
             
             $out = [];
             
             foreach ( $this->_properties as $property ) {
-                $out[] = $property->toJSON;
+                $out[] = $property->toJSON();
             }
             
             return $out;
@@ -94,11 +74,6 @@
             
         }
         
-        public function __destruct() {
-        
-            $this->save();
-        
-        }
     }
     
     
