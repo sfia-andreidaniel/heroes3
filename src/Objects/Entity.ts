@@ -52,6 +52,10 @@ class Objects_Entity extends Events {
 		return false;
 	}
 
+	public $focusable(): boolean {
+		return false;
+	}
+
 	public setServerInstanceId( instanceId: number = null ) {
 		
 		if ( instanceId === null ) {

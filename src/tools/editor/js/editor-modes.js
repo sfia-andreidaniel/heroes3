@@ -1,13 +1,16 @@
 var modes = {
         "paint": 1,
         "erase": 2,
-        "object": 3
+        "object": 3,
+        "interactive": 4
     },
     editorMode = null,
     isDragging = false;
     
 
 function setEditorMode( mode ) {
+    
+    map.viewports[0].interactive = mode == modes.interactive;
     
     if ( editorMode === mode )
         return;

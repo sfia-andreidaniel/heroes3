@@ -31,7 +31,7 @@ map.on( 'load', function() {
         
     }
     
-    $.ajax( 'tools/editor/assets/objects.tpl?_=' + ( new Date() ).getTime(), {
+    $.ajax( 'tools/editor/assets/objects.tpl', {
         
         "type": "GET",
         "success": function( buffer ) {

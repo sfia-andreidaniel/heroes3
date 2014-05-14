@@ -8,4 +8,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 		return true;
 	}
 
+	public $focusable():boolean {
+		return true;
+	}
+
 }

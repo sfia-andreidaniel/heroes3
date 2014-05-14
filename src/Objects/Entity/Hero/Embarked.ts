@@ -4,8 +4,4 @@ class Objects_Entity_Hero_Embarked extends Objects_Entity_Hero {
 		super( itemTypeId, col, row, layer );
 	}
 
-	public $sinchronizable(): boolean {
-		return true;
-	}
-
 }

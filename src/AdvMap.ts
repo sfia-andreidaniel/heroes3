@@ -28,7 +28,9 @@ class AdvMap extends Events {
 
     public uniqueId: number = 0;
 
-    public _movementType: string = '';
+    public _activeObject: Objects_Entity = null;
+    public _movementType: string = 'walk';
+
 
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
@@ -123,6 +125,15 @@ class AdvMap extends Events {
     set movementType( mType: string ) {
         this._movementType = mType;
         this.emit( 'movement-type-changed', mType );
+    }
+
+    get activeObject(): Objects_Entity {
+        return this._activeObject;
+    }
+
+    set activeObject( obj: Objects_Entity ) {
+        this._activeObject = obj;
+        this.emit( 'object-focus', obj );
     }
 
     /* Method where the animations are hooked */

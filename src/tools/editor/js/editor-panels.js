@@ -2,7 +2,8 @@ var panels = [
     "paint",
     "erase",
     "objects",
-    "layers"
+    "layers",
+    "events"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

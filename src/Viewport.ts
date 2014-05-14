@@ -23,6 +23,12 @@ class Viewport extends Events {
 	public minimaps: Viewport_Minimap[] = [];
 	private vpTickPaint: number = 0;
 
+	/* Weather a click on the viewport determine selection
+	   of the object under mouse cursor on the map or
+	   not 
+	*/
+	private _interactive: boolean = false;
+
 	constructor( width: number, height: number, map: AdvMap ) {
 	    super();
 	    
@@ -41,6 +47,14 @@ class Viewport extends Events {
 
 	    this.loopPaint();
 
+	}
+
+	public get interactive():boolean {
+		return this._interactive;
+	}
+
+	public set interactive( value: boolean ) {
+		this._interactive = !!value;
 	}
 
 	/* Adds the cell to the paint loop */
@@ -203,6 +217,88 @@ class Viewport extends Events {
 				}
 
 			}, true);
+
+			me.canvas.oncontextmenu = function( evt ) {
+				evt.preventDefault();
+				evt.stopPropagation();
+				
+			}
+
+			$(me.canvas).on( 'mousedown', function( evt ) {
+				
+				if ( !me.interactive )
+					return;
+
+				evt.preventDefault();
+				evt.stopPropagation();
+
+				var clickX = evt.offsetX,
+				    clickY = evt.offsetY,
+				    obj: Objects_Entity = null,
+				    i: number,
+				    j: number,
+				    len: number,
+				    o: any,
+				    obj1: Objects_Entity,
+				    x1: number,
+				    y1: number,
+				    x2: number,
+				    y2: number,
+				    x: number,
+				    y: number,
+				    vx: number = me.x + ~~( clickX / me.tileWidth ),
+				    vy: number = me.y + ~~( clickY / me.tileHeight ),
+				    noObjects = false;
+
+				/* Determine the object on which the click was triggered */
+				for ( i=0, len = me.paintables.length; i<len; i++ ) {
+
+					for ( j = 4; j >= 2; j-- ) {
+						
+						o = me.paintables[ i ].getData( j );
+
+						if ( o ) {
+
+							obj1 = me.map.layers[ j ][ '_objects' ][
+								me.paintables[ i ].y() * me.map.cols + me.paintables[ i ].x()
+							];
+
+							if ( !obj1 ) {
+								throw "Inconsistency!";
+							}
+
+							x = obj1.col;
+							y = obj1.row;
+
+							x1 = x - obj1.instance.hsx;
+							y1 = y - obj1.instance.hsy;
+
+							x2 = x1 + obj1.instance.cols - 1;
+							y2 = y1 + obj1.instance.rows - 1;
+
+							if ( vx >= x1 && vx <= x2 && vy >= y1 && vy <= y2 ) {
+								
+								me.map.emit( 'object-click', obj1, evt.which, ( x == vx && y == vy ) );
+								noObjects = true;
+								break;
+
+							}
+
+						}
+
+						if ( noObjects )
+							break;
+
+					}
+
+					if ( noObjects )
+						break;
+
+				}
+
+				me.map.emit( 'cell-click', me.map.cellAt( vx, vy ), evt.which );
+
+			} );
 
 		})( this );
 
