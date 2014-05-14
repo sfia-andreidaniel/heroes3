@@ -10,37 +10,67 @@
             "name": "Road (Pavement)",
             "defaultTile": 71,
             "id": 0,
-            "hash": 1
+            "hash": 1,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly" : [ 1, 1 ]
+            }
         },
         {
             "name": "Road (Stone)",
             "defaultTile": 137,
             "id": 1,
-            "hash": 2
+            "hash": 2,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly" : [ 1, 1 ]
+            }
         },
         {
             "name": "River",
             "defaultTile": 361,
             "id": 2,
-            "hash": 4
+            "hash": 4,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly" : [ 1, 1 ]
+            }
         },
         {
             "name": "River (Icy)",
             "defaultTile": 201,
             "id": 3,
-            "hash": 8
+            "hash": 8,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly" : [ 1, 1 ]
+            }
         },
         {
             "name": "River (Lava)",
             "defaultTile": 264,
             "id": 4,
-            "hash": 16
+            "hash": 16,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly":  [ 1, 1 ]
+            }
         },
         {
             "name": "River (Mud)",
             "defaultTile": 316,
             "id": 5,
-            "hash": 32
+            "hash": 32,
+            "movements": {
+                "walk": [ 1, 1 ],
+                "swim": [ 0, 0 ],
+                "fly" : [ 1, 1 ]
+            }
         }
     ],
     "tiles": {

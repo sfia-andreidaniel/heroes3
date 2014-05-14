@@ -3,6 +3,7 @@
         <ul>
             <li><a href="#o-general-{object_id}">General</a></li>
             <li><a href="#o-animation-{object_id}">Frames ({object_frames})</a></li>
+            <li><a href="#o-dynamics-{object_id}">Dynamics</a></li>
         </ul>
         <div id="o-general-{object_id}" class="object-editor-sheet">
             <table class="property-grid" cellpadding=0 cellspacing=0 width="100%" >
@@ -138,6 +139,21 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div id="o-dynamics-{object_id}">
+            <p>Select how this object affects the movement of the other objects</p>
+            <p><label>
+                <input type="checkbox" data-property-name="dynamics_walk" /> Other objects can <b>walk</b> over this object
+               </label>
+            </p>
+            <p><label>
+                <input type="checkbox" data-property-name="dynamics_swim" /> Other objects can <b>swim</b> over this object
+               </label>
+            </p>
+            <p><label>
+                <input type="checkbox" data-property-name="dynamics_fly" /> Other objects can <b>fly</b> over this object
+                </label>
+            </p>
         </div>
     </div>
 </div>

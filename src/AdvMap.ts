@@ -28,6 +28,8 @@ class AdvMap extends Events {
 
     public uniqueId: number = 0;
 
+    public _movementType: string = '';
+
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
         super();
@@ -112,6 +114,15 @@ class AdvMap extends Events {
             map.mapObjects.splice( map.mapObjects.indexOf( entity ), 1 );
         });
 
+    }
+
+    get movementType(): string {
+        return this._movementType;
+    }
+
+    set movementType( mType: string ) {
+        this._movementType = mType;
+        this.emit( 'movement-type-changed', mType );
     }
 
     /* Method where the animations are hooked */
@@ -199,12 +210,21 @@ class AdvMap extends Events {
                 me._onLayersReady();
             } ));
 
-            me.layers.push( ( new Layer_Entities( me, 2, 'Static objects' ) ).on( 'load', function() {
+            me.layers.push( ( new Layer_Entities( me, 2, 'Tileset objects' ) ).on( 'load', function() {
                 me._onLayersReady();
             } ));
 
-            me.layers.push( ( new Layer_Entities( me, 3, 'Moveable objects' ) ).on( 'load', function() {
+            me.layers.push( ( new Layer_Entities( me, 3, 'Moving objects' ) ).on( 'load', function() {
                 me._onLayersReady();
+            } ));
+
+            me.layers.push( ( new Layer_Entities( me, 4, 'Flying objects' ) ).on( 'load', function() {
+                me._onLayersReady();
+            }) )
+
+            me.layers.push( ( new Layer_Movement( me, 5 ) ).on( 'load', function() {
+                me._onLayersReady();
+                me.emit( 'movement-type-changed', me.movementType );
             } ));
 
         } )( this );

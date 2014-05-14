@@ -23,6 +23,7 @@
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="Layer/Entities.ts" />
+///<reference path="Layer/Movement.ts" />
 ///<reference path="Cell.ts" />
 ///<reference path="AdvMap/Tileset.ts" />
 ///<reference path="AdvMap/TilesetTerrain.ts" />
@@ -31,7 +32,7 @@
 ///<reference path="Viewport.ts" />
 ///<reference path="Viewport/Minimap.ts" />
 
-var map = new AdvMap( null, 5, 5 );
+var map = new AdvMap( null, 256, 256 );
 
 if ( typeof window !== 'undefined' )
 	window[ 'map' ] = map;

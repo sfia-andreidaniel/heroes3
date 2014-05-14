@@ -24,6 +24,8 @@ class Layer_Entities extends Layer {
 
 		this.on( 'change', function( x, y, data ) {
 
+			this.map.emit( 'movement-type-changed', this.map._movementType );
+
 			if ( !this._interactive )
 				return;
 

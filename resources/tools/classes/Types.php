@@ -26,7 +26,10 @@
                         objectType,
                         objectClass,
                         collision,
-                        animationGroups
+                        animationGroups,
+                        dynamics_walk,
+                        dynamics_fly,
+                        dynamics_swim
                  FROM types
                  WHERE objectType IN( 3, 4 )"
             );
@@ -147,7 +150,8 @@
                     'type' => $object->objectType,
                     'caption' => $object->caption,
                     'keywords' => $object->keywords,
-                    'objectClass' => $object->objectClass
+                    'objectClass' => $object->objectClass,
+                    'dynamics' => $object->dynamics
                 ];
                 
                 $id++;

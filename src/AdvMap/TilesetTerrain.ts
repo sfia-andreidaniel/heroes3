@@ -8,15 +8,18 @@ class AdvMap_TilesetTerrain {
 	private _validNeighbours = [];
 	private _tiles = [];
 
+	public movements: {};
+
 	public color: string = null;
 
 	constructor ( config, public tileset: AdvMap_Tileset ) {
 
-		this.name        = config.name;
-		this.defaultTile = config.defaultTile;
-		this.id          = config.id;
-		this.hash        = config.hash;
-		this.color       = config.color || null;
+		this.name         = config.name;
+		this.defaultTile  = config.defaultTile;
+		this.id           = config.id;
+		this.hash         = config.hash;
+		this.color        = config.color || null;
+		this.movements = config.movements || {};
 
 	}
 

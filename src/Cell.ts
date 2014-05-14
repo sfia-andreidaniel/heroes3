@@ -91,6 +91,14 @@ class Cell {
 		if ( bits === null )
 			return 4; //Abyss. Sorry for hardcoding
 
+		// if any of the bits is: water, abyss, return water or abyss
+		if ( bits.indexOf( 4 ) >= 0 ) //Abyss. Sorry for hardcoding
+			return 4;
+
+		if ( bits.indexOf( 9 ) >= 0 ) //Water. Sorry for hardcoding
+			return 9;
+
+
 		var o = {},
 		    ret = [];
 
@@ -105,8 +113,8 @@ class Cell {
 			} );
 		}
 
-		ret.sort( function(a,b){
-			return a.v - b.v;
+		ret = ret.sort( function(a,b){
+			return b.v - a.v;
 		});
 
 		return ret[0].t;

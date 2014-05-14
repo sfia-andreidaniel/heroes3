@@ -152,6 +152,8 @@ class Layer_Terrain extends Layer {
 		// @data is a tileset terrain id
 		this.on( 'change', function( x, y, data, noTriggers: boolean = false ) {
 			
+			this.map.emit( 'movement-type-changed', this.map._movementType );
+
 			if ( !this._interactive )
 				return;
 
