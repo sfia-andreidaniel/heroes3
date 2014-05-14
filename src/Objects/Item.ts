@@ -37,6 +37,8 @@ class Objects_Item extends Events {
 
 	public sprite           : Picture  = null; // object sprite, containing all frames
 
+	public dynamics         = { "walk": false, "swim": false, "fly": false };
+
 	constructor( data: any, public store: Objects ) {
 
 		super();
@@ -51,6 +53,7 @@ class Objects_Item extends Events {
 		this.caption = data.caption;
 		this.keywords = data.keywords;
 		this.objectClass = data.objectClass;
+		this['dynamics'] = data.dynamics;
 	}
 
 	public load() {
@@ -114,6 +117,29 @@ class Objects_Item extends Events {
 
 	/* Returns the layer on which this object can be placed */
 	public getDestinationLayerIndex(): number {
+
+		switch(  this.objectClass ) {
+
+			case 'Tileset':
+				return 2;
+				break;
+
+			case 'Hero_Embarked':
+			case 'Hero':
+			case 'AdventureItem':
+			case 'Artifact':
+			case 'Castle':
+			case 'Dwelling':
+			case 'Mine':
+			case 'Resource':
+				return 3;
+				break;
+
+			default:
+				return 3;
+
+		}
+
 		switch ( this.type ) {
 			case 4: // adventure map item
 				return 3; // moveable objects

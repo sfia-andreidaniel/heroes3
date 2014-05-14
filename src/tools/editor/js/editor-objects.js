@@ -206,6 +206,10 @@ map.on( 'load', function() {
                                         $(this).height() - 80
                                     );
                                     
+                                    $(this).find( 'input[data-property-name=dynamics_walk]').get(0).checked = object.dynamics.walk;
+                                    $(this).find( 'input[data-property-name=dynamics_swim]').get(0).checked = object.dynamics.swim;
+                                    $(this).find( 'input[data-property-name=dynamics_fly]').get(0).checked = object.dynamics.fly;
+                                    
                                     $(this).find( 'canvas[data-property-name=player]' ).objectplayer(
                                         object,
                                         $(this).find( 'input[data-property-name=pause_play]' ).get(0),
@@ -383,7 +387,12 @@ map.on( 'load', function() {
                                             new_width   = new_cols * 32,
                                             new_height  = new_rows * 32,
                                             objectClass = $(this).find( 'select[data-property-name=objectClass]').val() || null,
-                                            questions   = [];
+                                            questions   = [],
+                                            dynamics    = {
+                                                "walk": $(this).find( 'input[data-property-name=dynamics_walk]').get(0).checked,
+                                                "swim": $(this).find( 'input[data-property-name=dynamics_swim]').get(0).checked,
+                                                "fly" : $(this).find( 'input[data-property-name=dynamics_fly]').get(0).checked
+                                            };
                                         
                                         keywords = keywords.split( ',' );
                                         
@@ -460,7 +469,8 @@ map.on( 'load', function() {
                                                 
                                                 'objectClass': objectClass || null,
                                                 
-                                                'keywords': keywords.join( ', ' )
+                                                'keywords': keywords.join( ', ' ),
+                                                'dynamics': JSON.stringify( dynamics )
                                                 
                                             },
                                             'success': function( response ) {
@@ -489,7 +499,10 @@ map.on( 'load', function() {
                                                     
                                                     object.objectClass = objectClass;
                                                     
+                                                    object.dynamics = dynamics;
+                                                    
                                                     $(dlg).find( 'canvas[data-property-name=player]' ).get(0).stop();
+                                                    
                                                     $(dlg).remove();
                                                     
                                                     $('#objects > .scroller > .object[data-object-id=' + object.id + '] > span' ).text( object.caption );

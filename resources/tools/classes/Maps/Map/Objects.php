@@ -8,33 +8,17 @@
             
             $this->_map = $map;
             
-            $index = 0;
-            
-            if ( is_array( $map->layers[2]['objects'] ) ) {
+            for ( $l = 2; $l <= 4; $l++ ) {
                 
-                for ( $i=0, $len = count( $map->layers[2][ 'objects' ] ); $i < $len; $i++ ) {
+                if ( is_array( $map->layers[ $k ][ 'objects' ] ) ) {
                     
-                    if ( is_array( $map->_layers[2]['objects'][ $i ] ) ) {
+                    for ( $i = 0, $len = count( $map->layers[ $l ][ 'objects' ] ); $i<$len; $i++ ) {
                         
-                        $this->_properties[] = new Maps_Map_Objects_Object( $map, 2, $i, $index );
-                        
-                        $index++;
-                        
-                    }
-                    
-                }
-                
-            }
-
-            if ( is_array( $map->layers[3]['objects'] ) ) {
-                
-                for ( $i=0, $len = count( $map->layers[3][ 'objects' ] ); $i < $len; $i++ ) {
-                    
-                    if ( is_array( $map->_layers[3]['objects'][ $i ] ) ) {
-                        
-                        $this->_properties[] = new Maps_Map_Objects_Object( $map, 3, $i, $map->_layers[3]['objects'][ $i ][ 'id' ] );
-                        
-                        $index++;
+                        if ( is_array( $map->layers[ $l ][ 'objects' ][ $i ] ) ) {
+                            
+                            $this->_properties[] = new Maps_Map_Objects_Object( $map, $l, $i, $map->_layers[ $l ][ 'objects' ][ $i ][ 'id' ] );
+                            
+                        }
                         
                     }
                     

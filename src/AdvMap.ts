@@ -210,15 +210,19 @@ class AdvMap extends Events {
                 me._onLayersReady();
             } ));
 
-            me.layers.push( ( new Layer_Entities( me, 2, 'Static objects' ) ).on( 'load', function() {
+            me.layers.push( ( new Layer_Entities( me, 2, 'Tileset objects' ) ).on( 'load', function() {
                 me._onLayersReady();
             } ));
 
-            me.layers.push( ( new Layer_Entities( me, 3, 'Moveable objects' ) ).on( 'load', function() {
+            me.layers.push( ( new Layer_Entities( me, 3, 'Moving objects' ) ).on( 'load', function() {
                 me._onLayersReady();
             } ));
 
-            me.layers.push( ( new Layer_Movement( me, 4 ) ).on( 'load', function() {
+            me.layers.push( ( new Layer_Entities( me, 4, 'Flying objects' ) ).on( 'load', function() {
+                me._onLayersReady();
+            }) )
+
+            me.layers.push( ( new Layer_Movement( me, 5 ) ).on( 'load', function() {
                 me._onLayersReady();
                 me.emit( 'movement-type-changed', me.movementType );
             } ));

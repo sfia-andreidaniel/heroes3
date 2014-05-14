@@ -42,6 +42,8 @@
     
     $keywords = isset( $_POST['keywords'] ) ? $_POST['keywords'] : error( 'Which post.keywords?' );
     
+    $dynamics = isset( $_POST['dynamics' ] ) ? json_decode( $_POST['dynamics'], TRUE ) : error('Which dynamics?' );
+    
     if ( $crop['top'] > 0 || $crop['left'] > 0 || $crop['bottom'] > 0 || $crop['right'] > 0 ) {
         
         $imgs = [];
@@ -85,6 +87,8 @@
     $object->keywords = $keywords;
     
     $object->objectClass = $objectClass;
+    
+    $object->dynamics = $dynamics;
     
     $object->save();
     

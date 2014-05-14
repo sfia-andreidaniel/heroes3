@@ -29,6 +29,11 @@
             $this->_properties[ 'animationGroups' ] = json_decode( $row[ 'animationGroups' ], TRUE );
             $this->_properties[ 'keywords' ] = preg_split( '/(([\s]+)?,([\s]+)?)+/', trim( $row['keywords'], ', ' ) );
             $this->_properties[ 'objectClass' ] = strlen( $row['objectClass'] ) ? $row[ 'objectClass' ] : NULL;
+            $this->_properties[ 'dynamics' ] = [
+                'walk' => (int)$row['dynamics_walk'] ? TRUE : FALSE,
+                'fly'  => (int)$row['dynamics_fly' ] ? TRUE : FALSE,
+                'swim' => (int)$row['dynamics_swim'] ? TRUE : FALSE
+            ];
         }
         
         public function __get( $propertyName ) {
@@ -171,6 +176,19 @@
                     }
                     break;
                 
+                case 'dynamics':
+                    if ( !is_array( $propertyValue ) || !isset( $propertyValue['walk'] ) ||
+                         !isset( $propertyValue['fly'] ) || !isset( $propertyValue[ 'swim'] )
+                    ) throw new Exception_Game( 'Illegal property value!. Expected interface: { "walk": <bool>, "swim": <bool>, "fly": <bool> }' );
+                    
+                    $propertyValue = [ 
+                        'walk' => $propertyValue['walk'] ? TRUE : FALSE,
+                        'swim' => $propertyValue['swim'] ? TRUE : FALSE,
+                        'fly' => $propertyValue['fly'] ? TRUE : FALSE
+                    ];
+                    
+                    break;
+                
                 case 'width':
                 case 'height':
                 case 'cols':
@@ -255,7 +273,10 @@
                         collision       = " . Database::json( $this->collision, TRUE ) . ",
                         animationGroups = " . Database::json( $this->animationGroups, TRUE ) . ",
                         frame           = " . Database::string( $this->frame, TRUE ) . ",
-                        pixmap          = " . Database::string( $this->pixmap, TRUE ) . "
+                        pixmap          = " . Database::string( $this->pixmap, TRUE ) . ",
+                        dynamics_walk   = " . Database::boolint( $this->dynamics['walk'] ) . ",
+                        dynamics_swim   = " . Database::boolint( $this->dynamics['swim'] ) . ",
+                        dynamics_fly    = " . Database::boolint( $this->dynamics['fly'] ) . "
                     WHERE id = " . $this->id . " LIMIT 1";
             
             Database('main')->query( $sql );
