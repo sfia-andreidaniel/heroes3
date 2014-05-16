@@ -1,34 +1,67 @@
 class AdvMap extends Events {
     
+    // all map tilesets
     public tilesets     : AdvMap_Tileset[] = [];        // Array of AdvMap_Tileset
+    
+    // map objects factory
     public objects      : Objects       = null;
+    
+    // map filesystem
     public fs           : FS            = new FS();
     
+    // columns and rows
     public cols         : number        = 0;
     public rows         : number        = 0;
 
+    // layers of the map
     public layers       : Layer[]       = [];
+
+    // cells of the map
     public cells        : Cell[]        = [];
 
+
+    // All these 3 variables are used internally by the map,
+    // when loading data.
+
+    // public _iniCols
+    // public _iniLayers
     public _iniLayers   : any           = null;
 
+    // all map viewports are stored here
     public viewports    : Viewport[]    = [];
 
+    // active cell ( cell under mouse cursor )
     private _activeCell : Cell          = null;
+
+    // internal object handle structure, used to paint - under -cursor
+    // an object in edit mode
     private _objectHandle : IObjectHandle = null;
 
+    // all the objects of the map are stored in this array
     public  mapObjects  : Objects_Entity[] = [];
 
-    public id           : number = 0;  // the id of the map on the server
-    public name         : string = ''; // the name of the map on the server
+    // the id of the map on the server    
+    public id           : number = 0;  
 
+    // the name of the map on the server
+    public name         : string = ''; 
+
+    // internal flag, determining if the map has been loaded at least one time
     private _loadedOnce : boolean = false;
 
+    // a debounced function which paints the minimaps
     private minimapsPaintDebouncer = null;
 
+    // an internal variable used to assign ID's on objects when they are created
+    // on the map
     public uniqueId: number = 0;
 
+    // The active object of the map. This is typically the object on which
+    // the user clicks on
     public _activeObject: Objects_Entity = null;
+
+    // the type of the movement. Please use the getter / setter "movementType" and
+    // not this variable directly
     public _movementType: string = 'walk';
 
 

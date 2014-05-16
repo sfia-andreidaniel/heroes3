@@ -5,6 +5,7 @@
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
 ///<reference path="FS/File.ts" />
+///<reference path="Faction.ts" />
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
