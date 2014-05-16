@@ -1,4 +1,4 @@
 heroes3
 =======
 
-Heroes 3 like game
+Trying to implement a game like heroes 3 in javascript.
