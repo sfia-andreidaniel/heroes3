@@ -7,7 +7,10 @@ class AdvMap extends Events {
     public objects      : Objects       = null;
     
     // map filesystem
-    public fs           : FS            = new FS();
+
+    public entitiesLoad : number          = 2;
+    public fs           : FS              = new FS();
+    public fm           : Faction_Manager = new Faction_Manager();
     
     // columns and rows
     public cols         : number        = 0;
@@ -60,6 +63,9 @@ class AdvMap extends Events {
     // the user clicks on
     public _activeObject: Objects_Entity = null;
 
+    // The active faction of the map.
+    public _activeFaction: Faction = null;
+
     // the type of the movement. Please use the getter / setter "movementType" and
     // not this variable directly
     public _movementType: string = 'walk';
@@ -73,8 +79,18 @@ class AdvMap extends Events {
             
 
             me.fs.on( 'ready', function() {
-                me._onFSReady();
+                me.entitiesLoad--;
+
+                if ( me.entitiesLoad == 0)
+                    me._onRequirementsReady();
             } );
+
+            me.fm.on( 'load', function() {
+                me.entitiesLoad--;
+
+                if ( me.entitiesLoad == 0 )
+                    me._onRequirementsReady();
+            });
 
             if ( window && window['$'] && window['$']['debounce'] ) {
 
@@ -169,6 +185,26 @@ class AdvMap extends Events {
         this.emit( 'object-focus', obj );
     }
 
+    get activeFaction(): Faction {
+        return this._activeFaction;
+    }
+
+    set activeFaction( faction: Faction ) {
+        this._activeFaction = faction;
+
+        if ( !faction.loaded )
+            faction.load();
+
+        this.emit( 'faction-changed', faction );
+    }
+
+    public setFaction( factionId: number ) {
+        var f = this.fm.getFactionById( factionId );
+        if ( f ) {
+            this.activeFaction = f;
+        } else throw "Faction #" + factionId + " not found!";
+    }
+
     /* Method where the animations are hooked */
     public tick() {
         for ( var i=0, len = this.mapObjects.length; i<len; i++ ) {
@@ -203,7 +239,7 @@ class AdvMap extends Events {
         this.fs.add( 'objects/all',                'resources/tools/objects.php',              'json', {});
     }
 
-    public _onFSReady() {
+    public _onRequirementsReady() {
         
         ( function( me ) {
 

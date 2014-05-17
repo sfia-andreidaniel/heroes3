@@ -39,7 +39,7 @@
                         'gems',
                         'sulfur',
                         'mercury',
-                        'myrthril'
+                        'mithril'
                     ] ):
                     
                     if ( !is_int( $propertyValue ) )
@@ -78,7 +78,7 @@
                         mercury,
                         sulfur,
                         gems,
-                        myrthril
+                        mithril
                     ) VALUES (
                         " . Database::string( $this->name ) . ",
                         " . Database::int( $this->gold ) . ",
@@ -88,7 +88,7 @@
                         " . Database::int( $this->mercury ) . ",
                         " . Database::int( $this->sulfur ) . ",
                         " . Database::int( $this->gems ) . ",
-                        " . Database::int( $this->myrthril ) . "
+                        " . Database::int( $this->mithril ) . "
                     )"
                 );
                 
@@ -106,7 +106,7 @@
                         mercury  = " . Database::int( $this->mercury ) . ",
                         sulfur   = " . Database::int( $this->sulfur ) . ",
                         gems     = " . Database::int( $this->gems ) . ",
-                        myrthril = " . Database::int( $this->myrthril ) . "
+                        mithril  = " . Database::int( $this->mithril ) . "
                     WHERE id = " . Database::int( $this->id ) . "
                     LIMIT 1"
                 );

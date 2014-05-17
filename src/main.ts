@@ -1,11 +1,13 @@
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="IObjectHandle.ts" />
+///<reference path="IResources.ts" />
 
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
 ///<reference path="FS/File.ts" />
 ///<reference path="Faction.ts" />
+///<reference path="Faction/Manager.ts" />
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />

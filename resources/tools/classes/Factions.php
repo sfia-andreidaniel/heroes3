@@ -15,7 +15,7 @@
                     gems,
                     sulfur,
                     mercury,
-                    myrthril
+                    mithril
                  FROM factions'
             );
             
@@ -31,7 +31,7 @@
                         'gems'     => (int)$row['gems'],
                         'sulfur'   => (int)$row['sulfur'],
                         'mercury'  => (int)$row['mercury'],
-                        'myrthril' => (int)$row['myrthril']
+                        'mithril'  => (int)$row['mithril']
                     ]
                 );
             }
@@ -43,7 +43,10 @@
             $out = [];
             
             foreach ( $this->_properties as $faction ) {
-                $out[] = $faction->toJSON;
+                $out[] = [
+                    'id' => $faction->id,
+                    'name' => $faction->name
+                ];
             }
             
             return $out;
