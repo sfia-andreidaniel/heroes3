@@ -29,10 +29,11 @@ class Layer_Entities extends Layer {
 			if ( !this._interactive )
 				return;
 
-			var index		 : number,
-			    obj 		 : Objects_Item = null,
-			    dataTypeId 	 : number,
-			    dataServerId : number = null;
+			var index		   : number,
+			    obj 		   : Objects_Item = null,
+			    dataTypeId 	   : number,
+			    dataServerId   : number = null,
+			    dataSerialized : any = null;
 
 			if ( this._objects[  index = ( y * this.map.rows + x ) ] ) {
 				this._objects[ index ].destroy();
@@ -51,6 +52,7 @@ class Layer_Entities extends Layer {
 					case 'object':
 						dataTypeId = data.typeId;
 						dataServerId = data.id || null;
+						dataSerialized= data.data || null;
 						break;
 					default:
 						throw "Invalid data type!";
@@ -111,6 +113,7 @@ class Layer_Entities extends Layer {
 				}
 
 				this._objects[ index ].setServerInstanceId( dataServerId );
+				this._objects[ index ].unserialize( dataSerialized );
 
 			}
 

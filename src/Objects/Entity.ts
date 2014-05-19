@@ -72,6 +72,11 @@ class Objects_Entity extends Events {
 		console.log( 'debug: set object instance id: ' + this.$id );
 	}
 
+	public unserialize( data: any ) {
+		// this method is necesarry for loading data from a map
+		// serialized structure, and should be implemented on ancestors.
+	}
+
 	/* Serialize the entity in order to be able to store it on server */
 	public serialize(): any {
 		return this.$sinchronizable() ? {
@@ -236,6 +241,11 @@ class Objects_Entity extends Events {
 				: this.frameIndex;
 		}
 
+	}
+
+	public edit() {
+		// should be overrided by ancestors.
+		console.log( "edit object: ", this );
 	}
 
 }
