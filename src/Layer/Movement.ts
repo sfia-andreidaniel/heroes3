@@ -4,6 +4,7 @@ class Layer_Movement extends Layer {
 	
 	public _currentMode: string = '';
 	public _throttlerCompute: any = null;
+	public _graph: AStar_Graph = null;
 
 	constructor ( public map: AdvMap, public index: number ) {
 		super( map, index );
@@ -40,9 +41,12 @@ class Layer_Movement extends Layer {
 
 			me.map.on( 'resize', function( cols, rows ) {
 				me._cells = [];
+
 				for ( var i=0, len = cols*rows; i<len; i++ ) {
 					me._cells.push( 0 );
 				}
+
+				me._graph = new AStar_Graph( me );
 			});
 
 		})(this);
@@ -92,15 +96,15 @@ class Layer_Movement extends Layer {
 	/* @param mode: string, can be "walk", "swim", "fly"
 	 */
 
-	 private yes( x, y ) {
+	private yes( x, y ) {
 	 	var index = y * this.map.cols + x;
 	 	return !!(this._cells[ index ] && this._cells[ index ][0]);
-	 }
+	}
 
-	 private no( x, y ) {
+	private no( x, y ) {
 	 	var index = y * this.map.cols + x;
 	 	return !!( !this._cells[ index ] || !this._cells[index][0] );
-	 }
+	}
 
 	public doCompute( mode: string ) {
 

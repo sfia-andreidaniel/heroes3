@@ -29,6 +29,7 @@
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="Layer/Entities.ts" />
 ///<reference path="Layer/Movement.ts" />
+///<reference path="AStar/Algorithm.ts" />
 ///<reference path="Cell.ts" />
 ///<reference path="AdvMap/Tileset.ts" />
 ///<reference path="AdvMap/TilesetTerrain.ts" />

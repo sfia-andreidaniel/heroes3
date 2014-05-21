@@ -8,22 +8,13 @@ class AStar_Algorithm {
 
 	}
 
-	public init( grid ) {
-        for(var x = 0, xl = grid.length; x < xl; x++) {
-            for(var y = 0, yl = grid[x].length; y < yl; y++) {
-                var node = grid[x][y];
-                node.f = 0;
-                node.g = 0;
-                node.h = 0;
-                node.cost = node.type;
-                node.visited = false;
-                node.closed = false;
-                node.parent = null;
-            }
-        }
+	public init( grid: AStar_Graph ) {
+
+		grid.reset();
+
 	}
 
-    private pathTo( node: AStar_GraphNode ) {
+    private pathTo( node: AStar_GraphNode ): AStar_GraphNode[] {
         var curr = node;
         var path = [];
         while(curr.parent) {
@@ -41,7 +32,7 @@ class AStar_Algorithm {
     //   closest: boolean specifying whether to return closest node if
     //            target is unreachable
     // }
-    public search( grid, start: AStar_GraphNode, end: AStar_GraphNode, options ) {
+    public search( grid: AStar_Graph, start: AStar_GraphNode, end: AStar_GraphNode, options ): AStar_GraphNode[] {
         this.init(grid);
 
         options = options || {};
@@ -146,51 +137,52 @@ class AStar_Algorithm {
         return (D * (d1 + d2)) + ((D2 - (2 * D)) * Math.min(d1, d2));
     }
 
-    public neighbors( grid, node: AStar_GraphNode, diagonals: boolean ): AStar_GraphNode[] {
+    public neighbors( grid: AStar_Graph, node: AStar_GraphNode, diagonals: boolean ): AStar_GraphNode[] {
         var ret: AStar_GraphNode[] = [];
         var x = node.x;
         var y = node.y;
+        var node: AStar_GraphNode = null;
 
         // West
-        if(grid[x-1] && grid[x-1][y]) {
-            ret.push(grid[x-1][y]);
+        if( node = grid.get( x-1, y) ) {
+            ret.push( node );
         }
 
         // East
-        if(grid[x+1] && grid[x+1][y]) {
-            ret.push(grid[x+1][y]);
+        if( node = grid.get( x+1, y ) ) {
+            ret.push( node );
         }
 
         // South
-        if(grid[x] && grid[x][y-1]) {
-            ret.push(grid[x][y-1]);
+        if( node = grid.get( x, y-1 ) ) {
+            ret.push( node );
         }
 
         // North
-        if(grid[x] && grid[x][y+1]) {
-            ret.push(grid[x][y+1]);
+        if( node = grid.get( x, y+1 ) ) {
+            ret.push( node );
         }
 
         if (diagonals) {
 
             // Southwest
-            if(grid[x-1] && grid[x-1][y-1]) {
-                ret.push(grid[x-1][y-1]);
+            if( node = grid.get( x-1, y-1 ) ) {
+                ret.push( node );
             }
 
             // Southeast
-            if(grid[x+1] && grid[x+1][y-1]) {
-                ret.push(grid[x+1][y-1]);
+            if( node = grid.get( x+1, y-1) ) {
+                ret.push( node );
             }
 
             // Northwest
-            if(grid[x-1] && grid[x-1][y+1]) {
-                ret.push(grid[x-1][y+1]);
+            if( node = grid.get( x-1, y+1) ) {
+                ret.push( node );
             }
 
             // Northeast
-            if(grid[x+1] && grid[x+1][y+1]) {
-                ret.push(grid[x+1][y+1]);
+            if( node = grid.get( x+1, y+1) ) {
+                ret.push( node );
             }
 
         }

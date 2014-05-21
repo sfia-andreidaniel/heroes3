@@ -1,4 +1,5 @@
 /// <reference path="IPos.ts" />
+/// <reference path="../Layer/Movement.ts" />
 
 class AStar_GraphNode {
 	
@@ -22,17 +23,31 @@ class AStar_GraphNode {
 	public cost 	: number = 0;
 	public closed	: boolean = false;
 
-	constructor( public x: number, public y: number, public type ) {
+	// public _index   : number = 0;
+
+	constructor( public x: number, public y: number, public grid: Layer_Movement, public _index: number ) {
 		this.pos.x = x;
 		this.pos.y = y;
 	}
 
-	public toString() {
-		return "[" + this.x + " " + this.y + "]";
+	public type(): number {
+		return this.grid._cells[ this._index ]
+			? this.grid._cells[ this._index ][ 0 ]
+			: 0;
 	}
 
 	public isWall() {
-		return this.type === 0;
+		return this.type() === 0;
+	}
+
+	public reset() {
+        this.f = 0;
+        this.g = 0;
+        this.h = 0;
+        this.cost = this.type();
+        this.visited = false;
+        this.closed = false;
+        this.parent = null;
 	}
 
 }
