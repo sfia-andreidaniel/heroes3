@@ -8,6 +8,8 @@
 ///<reference path="FS/File.ts" />
 ///<reference path="Faction.ts" />
 ///<reference path="Faction/Manager.ts" />
+///<reference path="Hero.ts" />
+///<reference path="Hero/Manager.ts" />
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
@@ -35,7 +37,7 @@
 ///<reference path="Viewport.ts" />
 ///<reference path="Viewport/Minimap.ts" />
 
-var map = new AdvMap( null, 256, 256 );
+var map = new AdvMap( 1, null, null );
 
 if ( typeof window !== 'undefined' )
 	window[ 'map' ] = map;

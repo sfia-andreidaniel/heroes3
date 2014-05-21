@@ -243,6 +243,21 @@ class Objects_Entity extends Events {
 
 	}
 
+	public scrollIntoView() {
+
+		for ( var i = 0, len = this.layer.map.viewports.length; i<len; i++ ) {
+
+			this.layer.map.viewports[i].scrollToXY(
+
+				this.col - ~~( this.layer.map.viewports[i].cols / 2 ),
+				this.row - ~~( this.layer.map.viewports[i].rows / 2 )
+
+			);
+
+		}
+
+	}
+
 	public edit() {
 		// should be overrided by ancestors.
 		console.log( "edit object: ", this );

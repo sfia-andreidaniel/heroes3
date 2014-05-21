@@ -144,8 +144,8 @@ class Viewport extends Events {
 	}
 
 	public scrollToXY( x: number, y: number ) {
-		this.x = x;
-		this.y = y;
+		this.x = x < 0 ? 0 : x;
+		this.y = y < 0 ? 0 : y;
 
 		if ( this.x + this.cols > this.map.cols - 1)
 			this.x = this.map.cols - this.cols - 1;

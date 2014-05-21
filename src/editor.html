@@ -18,24 +18,14 @@
             <div id="btn-paint" class="button"   data-panels="paint"   data-editor-mode="1">Terrain</div>
             <div id="btn-objects" class="button" data-panels="objects" data-editor-mode="3">Objects</div>
             <div id="btn-layers" class="button" data-panels="layers" data-editor-mode="0">Layers</div>
-            <div id="btn-walkmode" class="button" data-editor-mode="4" data-panels="events" >
-                Events
-                <img src="data:image/gif;base64,R0lGODlhEAAQAJEAABxHrjqC9P///wAAACH5BAUUAAIALAAAAAAQABAAAAIilI+py+0PowK0WmtA2LxvcGheByLiWCYnl07kI7YNJdVOAQA7" />
-                <div>
-                    <div class="option icon" id="opt-walk">Walk</div>
-                    <div class="option icon" id="opt-fly">Fly</div>
-                    <div class="option icon" id="opt-swim">Swim</div>
-                </div>
-            </div>
+            <div id="btn-walkmode" class="button" data-editor-mode="4" data-panels="events" >Events</div>
             <div id="btn-eraser" class="button"  data-panels="erase"   data-editor-mode="2">Erase</div>
+            <div id="btn-game"   class="button" data-panels="game" data-editor-mode="5">Game</div>
         </div>
     </div>
     <div id="cell" title="editor active cell">
         <div>
         </div>
-    </div>
-    <div id="minimap">
-
     </div>
     <div id="map">
         <div>
@@ -69,7 +59,6 @@
     <!-- EDITOR CODE GOES HERE -->
     <script type="text/javascript" src="tools/editor/js/editor.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-viewport.js"></script>
-    <script type="text/javascript" src="tools/editor/js/editor-minimap.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-modes.js"></script>
 
     <script type="text/javascript" src="tools/editor/js/object-player.js"></script>
@@ -80,8 +69,8 @@
     <script type="text/javascript" src="tools/editor/js/editor-objects.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-layers.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-save.js"></script>
-    <script type="text/javascript" src="tools/editor/js/editor-walkmode.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-events.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-game.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-load.js"></script>
     
 </body>

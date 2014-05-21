@@ -3,7 +3,8 @@ var panels = [
     "erase",
     "objects",
     "layers",
-    "events"
+    "events",
+    "game"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

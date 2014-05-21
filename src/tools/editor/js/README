@@ -1,0 +1,7 @@
+This file contains developing thaughts
+
+1. Add a tab to editor:
+
+- need to modify vars:
+    window.modes in editor-modes.js
+    window.panels in editor-panels.js

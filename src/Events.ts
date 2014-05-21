@@ -1,6 +1,7 @@
 class Events {
 
 		public _listeners = {};
+		private _firedEvents = {};
 
 		private _createListener( event: string ) {
 			this._listeners[ event ] = this._listeners[ event ] || {
@@ -65,6 +66,8 @@ class Events {
 
 		emit( event: string, ...args: any[] ) {
 
+			this._firedEvents[ event ] = args;
+
 			var anyCalled = false;
 
 			if ( this._listeners[ event ] ) {
@@ -83,6 +86,13 @@ class Events {
 			}
 
 			return anyCalled;
+		}
+
+		afterFire( event: string, listener ) {
+			if ( typeof this._firedEvents[ event ] == 'undefined' )
+				this.once( event, listener );
+			else
+				listener.apply( this, this._firedEvents[ event ] );
 		}
 
 		static listenerCount( emitter: Events, event: string ) {

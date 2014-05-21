@@ -8,9 +8,10 @@ class AdvMap extends Events {
     
     // map filesystem
 
-    public entitiesLoad : number          = 2;
+    public entitiesLoad : number          = 3;
     public fs           : FS              = new FS();
     public fm           : Faction_Manager = new Faction_Manager();
+    public hm           : Hero_Manager    = new Hero_Manager();
     
     // columns and rows
     public cols         : number        = 0;
@@ -92,6 +93,13 @@ class AdvMap extends Events {
                     me._onRequirementsReady();
             });
 
+            me.hm.on( 'load', function () {
+                me.entitiesLoad--;
+
+                if ( me.entitiesLoaded == 0 )
+                    me._onRequirementsReady();
+            });
+
             if ( window && window['$'] && window['$']['debounce'] ) {
 
 
@@ -106,6 +114,10 @@ class AdvMap extends Events {
                 });
 
             }
+
+            me.afterFire( 'load', function() {
+                me.renderMinimaps();
+            });
 
         } )( this );
 
@@ -182,6 +194,10 @@ class AdvMap extends Events {
 
     set activeObject( obj: Objects_Entity ) {
         this._activeObject = obj;
+
+        if ( obj )
+            obj.scrollIntoView();
+
         this.emit( 'object-focus', obj );
     }
 
@@ -351,6 +367,11 @@ class AdvMap extends Events {
                 
                 var i: number,
                     len: number;
+
+                // Reset all factions heroes
+                for ( i=0, len = me.fm.items.length; i<len; i++ ) {
+                    me.fm.items[i].reset();
+                }
 
                 // Setup all viewports to disabled, and clear their renderables
                 for ( i=0, len = me.viewports.length; i<len; i++ ) {

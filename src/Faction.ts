@@ -13,6 +13,8 @@ class Faction extends Events {
 		"mithril" : 0
 	} */
 
+	public heroesList: Objects_Entity_Hero[] = [];
+
 	constructor( public id: number, public name: string ) {
 		super();
 	}
@@ -52,7 +54,7 @@ class Faction extends Events {
 							me.loaded = true;
 
 							me.emit( 'load' );
-							me.emit( 'estate-change' );
+							me.emit( 'estates-changed' );
 						}
 					},
 					"error": function() {
@@ -96,7 +98,7 @@ class Faction extends Events {
 						else {
 
 							me.resources[ resource ] += amount;
-							me.emit( 'estate-change', resource, me.resources[ resource ] );
+							me.emit( 'estates-changed', resource, me.resources[ resource ] );
 
 							callback();
 						}
@@ -110,6 +112,30 @@ class Faction extends Events {
 
 		} else {
 			callback( "not implemented under node.");
+		}
+
+	}
+
+	// used after loading a map.
+	public reset() {
+		this.heroesList = [];
+		this.emit( 'heroes-list-changed' );
+	}
+
+	public addHero( hero: Objects_Entity_Hero ) {
+
+		if ( this.heroesList.indexOf( hero ) == -1 ) {
+			this.heroesList.push( hero );
+			this.emit( 'heroes-list-changed' );
+		}
+
+	}
+
+	public removeHero( hero: Objects_Entity_Hero ) {
+
+		if ( this.heroesList.indexOf( hero ) >= 0 ) {
+			this.heroesList.splice( this.heroesList.indexOf( hero ), 1 );
+			this.emit( 'heroes-list-changed' );
 		}
 
 	}

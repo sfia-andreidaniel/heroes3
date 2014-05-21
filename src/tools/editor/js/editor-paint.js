@@ -44,8 +44,6 @@ map.on( 'load', function() {
                 
                 $('#objects-types').change();
                 
-                $('#btn-objects').click();
-                
             } );
             
             $('#tools .tabs').tabs();

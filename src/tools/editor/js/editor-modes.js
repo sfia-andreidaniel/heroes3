@@ -2,7 +2,8 @@ var modes = {
         "paint": 1,
         "erase": 2,
         "object": 3,
-        "interactive": 4
+        "interactive": 4,
+        "game": 5
     },
     editorMode = null,
     isDragging = false;
