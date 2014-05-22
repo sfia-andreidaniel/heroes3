@@ -131,13 +131,10 @@ class Layer_Movement extends Layer {
 				x2 = x1 + layer._objects[i].instance.cols - 1;
 				y2 = y1 + layer._objects[i].instance.rows - 1;
 
-				hsx = x1 + layer._objects[i].instance.hsx;
-				hsy = y1 + layer._objects[i].instance.hsy;
-
 				for ( y = y1; y <= y2; y++ ) {
 					for ( x = x1; x <= x2; x++ ) {
 
-						if ( x >= 0 && x < maxX && y >= 0 && y < maxY && !( x == hsx && y == hsy ) ) {
+						if ( x >= 0 && x < maxX && y >= 0 && y < maxY ) {
 								
 							index = ( y * maxX ) + x;
 
