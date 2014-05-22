@@ -17,10 +17,12 @@ class Picture extends Events {
 	public error  : string = null;
 
 	public node    : any; // should be of type DOM.Image or NodeJS.Image
+	public nodeX   : any = null; // the flipped version of the image ( HTMLCanvasElement, under browser only )
+
 	public width  : number = 0;
 	public height : number = 0;
 
-	constructor( src ) {
+	constructor( src, allowFlippingX: boolean = false ) {
 
 	    super();
 	     // Content
@@ -32,9 +34,31 @@ class Picture extends Events {
 		    ( function( self ) {
 				
 				self.node.onload = function() {
-					self.loaded = true;
 					self.width = self.node.width;
 					self.height= self.node.height;
+
+					if ( allowFlippingX ) {
+
+						var canvas = document.createElement( 'canvas' );
+						canvas.width = self.width;
+						canvas.height= self.height;
+						var context = canvas.getContext( '2d' );
+
+						context.save();
+						context.scale( -1, 1 );
+
+						context.drawImage(
+							self.node,
+							-self.width, 0
+						);
+
+						context.restore();
+
+						self.nodeX = canvas;
+
+					} else self.nodeX = null;
+
+					self.loaded = true;
 					self.emit( 'load' );
 		    	};
 
@@ -60,8 +84,10 @@ class Picture extends Events {
 
 		    this.loaded = true;
 		    
+		    this.nodeX = null; // we don't need this under node.
+
 		    (function(me){
-			    setTimeout( function() {me.emit( 'load' ); }, 30 );
+			    setTimeout( function() {me.emit( 'load' ); }, 1 );
  			})( this );
 		}
 	}

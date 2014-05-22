@@ -14,6 +14,10 @@ class Objects_Entity extends Events {
 	private _animationFrames: number[] = [ 0 ];
 	private _animationNumFrames: number = 0;
 
+	public  mirrored: boolean = false;
+	public  shiftX:   number = 0; // for shifted painting
+	public  shiftY:   number = 0;
+
 	constructor ( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super();
 
@@ -88,19 +92,24 @@ class Objects_Entity extends Events {
 	public paint( ctx2d, x: number, y: number ) {
 		if ( this.instance.loaded ) {
 			
-			var sx: number = this._animationFrames[ this.frameIndex ] * this.instance.width,
+			var sx: number = ( 
+					this.mirrored ? ( this.instance.frames - 1 ) - this._animationFrames[ this.frameIndex ] 
+							      : this._animationFrames[ this.frameIndex ]
+				) * this.instance.width,
 			    sy: number = 0,
 			    sw: number = this.instance.width,
 			    sh: number = this.instance.height;
 
 			ctx2d.drawImage( 
-				this.instance.sprite.node,
+				this.mirrored
+					? this.instance.sprite.nodeX
+					: this.instance.sprite.node,
 				sx,
 				sy,
 				sw,
 				sh,
-				x,
-				y,
+				x + this.shiftX,
+				y + this.shiftY,
 				sw,
 				sh
 			);
@@ -142,6 +151,8 @@ class Objects_Entity extends Events {
 
 		this.layer._objects[ newIndex ] = this;
 		this.layer._objects[ actualIndex ] = null;
+
+		this.layer.map.cellAt( this.col, this.row ).setData( this.layer.index, null, true );
 
 		this.col = x;
 		this.row = y;
@@ -223,13 +234,12 @@ class Objects_Entity extends Events {
 			if ( this.instance.animationGroups[ animationIndex ] ) {
 				this._animationFrames = this.instance.animationGroups[ animationIndex ];
 				this._animationNumFrames = this._animationFrames.length;
-			} else throw "Invalid animation index.";
+			} else throw "Invalid animation index: " + JSON.stringify( animationIndex );
 		}
 
 		this._animationIndex = animationIndex;
 
 		this.frameIndex = 0;
-
 	}
 
 	public tick() {
@@ -256,6 +266,13 @@ class Objects_Entity extends Events {
 
 		}
 
+	}
+
+	public setDestinationCell( cell: Cell ) {
+	}
+
+	public move() {
+		// should be overrided by capable moving objects
 	}
 
 	public edit() {

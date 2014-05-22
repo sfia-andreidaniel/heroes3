@@ -63,6 +63,7 @@ class AdvMap extends Events {
     // The active object of the map. This is typically the object on which
     // the user clicks on
     public _activeObject: Objects_Entity = null;
+    public _activeMovingObject: Objects_Entity = null;
 
     // The active faction of the map.
     public _activeFaction: Faction = null;
@@ -70,7 +71,6 @@ class AdvMap extends Events {
     // the type of the movement. Please use the getter / setter "movementType" and
     // not this variable directly
     public _movementType: string = 'walk';
-
 
     constructor(  mapId: number = null, public _iniCols: number = 0, public _iniRows: number = 0 ) {
             
@@ -116,8 +116,32 @@ class AdvMap extends Events {
             }
 
             me.afterFire( 'load', function() {
+                
                 me.renderMinimaps();
+
+                me.on( 'cell-click', function( cell ) {
+
+                    if ( !map.activeObject )
+                        return;
+
+                    switch ( true ) {
+
+                        case map.activeObject instanceof Objects_Entity_Hero:
+
+                            map.activeObject.setDestinationCell( cell );
+
+                            break;
+
+                    }
+
+                } );
+
+                setInterval( function() {
+                    me.moveObjects();
+                }, 50 );
+
             });
+
 
         } )( this );
 
@@ -126,7 +150,7 @@ class AdvMap extends Events {
             this._loadFS();
 
             (function( me ) {
-                setInterval( function() { me.tick(); }, 200 );    
+                setInterval( function() { me.tick(); }, 100 );
             })( this );
             
 
@@ -151,6 +175,8 @@ class AdvMap extends Events {
 
                     me.id = this.data.id || 0;
                     me.name = this.data.name || '';
+
+                    me.uniqueId = this.data.uniqueId || 0;
 
                     me._loadFS();
                 } );
@@ -199,6 +225,10 @@ class AdvMap extends Events {
             obj.scrollIntoView();
 
         this.emit( 'object-focus', obj );
+        
+        try {
+            this.layers[ 5 ]['_throttlerCompute']();
+        } catch ( none ) {}
     }
 
     get activeFaction(): Faction {
@@ -227,6 +257,12 @@ class AdvMap extends Events {
             if ( this.mapObjects[i].instance.animated )
                 this.mapObjects[i].tick();
         }
+    }
+
+    /* Method where the heroes are moved */
+    public moveObjects() {
+        if ( this._activeMovingObject )
+            this._activeMovingObject.move();
     }
 
     get activeCell(): Cell {
@@ -271,7 +307,7 @@ class AdvMap extends Events {
                     me._onTilesetsReady();
                 });
 
-            ( new Objects( me.fs.open( 'objects/all' ).data ) )
+            ( new Objects( me.fs.open( 'objects/all' ).data, me ) )
                 .once( 'load', function(){
                     me.objects = this;
                     me._onTilesetsReady();

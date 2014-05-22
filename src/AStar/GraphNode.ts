@@ -31,9 +31,15 @@ class AStar_GraphNode {
 	}
 
 	public type(): number {
-		return this.grid._cells[ this._index ]
+		
+		var ret: number =  this.grid._cells[ this._index ]
 			? this.grid._cells[ this._index ][ 0 ]
 			: 0;
+
+		if ( ret != 0 )
+			ret = 100 - ret;
+
+		return ret;
 	}
 
 	public isWall() {

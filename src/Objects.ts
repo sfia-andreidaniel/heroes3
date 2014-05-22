@@ -18,7 +18,7 @@ class Objects extends Events {
 	private _canvas = null; // Canvas
 	private _indexes = {};
 
-	constructor( data: any ) {
+	constructor( data: any, public map: AdvMap ) {
 	    super();
 
 	    this.width = data.width;

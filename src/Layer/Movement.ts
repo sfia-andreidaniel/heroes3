@@ -106,6 +106,52 @@ class Layer_Movement extends Layer {
 	 	return !!( !this._cells[ index ] || !this._cells[index][0] );
 	}
 
+	private computeLayer( layer: Layer_Entities ) {
+
+		var x1: number,
+		    y1: number,
+		    x2: number,
+		    y2: number,
+		    hsx: number,
+		    hsy: number,
+
+		    maxX: number = this.map.cols,
+		    maxY: number = this.map.rows,
+
+		    x: number,
+		    y: number,
+		    index: number;
+
+		for ( var i=0, len = layer._objects.length; i<len; i++ ) {
+
+			if ( layer._objects[i] && layer._objects[i] != this.map._activeObject ) {
+
+				x1 = layer._objects[i].col - layer._objects[i].instance.hsx;
+				y1 = layer._objects[i].row - layer._objects[i].instance.hsy;
+				x2 = x1 + layer._objects[i].instance.cols - 1;
+				y2 = y1 + layer._objects[i].instance.rows - 1;
+
+				hsx = x1 + layer._objects[i].instance.hsx;
+				hsy = y1 + layer._objects[i].instance.hsy;
+
+				for ( y = y1; y <= y2; y++ ) {
+					for ( x = x1; x <= x2; x++ ) {
+
+						if ( x >= 0 && x < maxX && y >= 0 && y < maxY && !( x == hsx && y == hsy ) ) {
+								
+							index = ( y * maxX ) + x;
+
+							this._cells[ index ] = null;
+						}
+					}
+				}
+
+			}
+
+		}
+
+	}
+
 	public doCompute( mode: string ) {
 
 		// build movement type matrixes
@@ -161,6 +207,27 @@ class Layer_Movement extends Layer {
 					}
 
 				}
+
+			}
+
+			switch ( mode ) {
+
+				case 'walk':
+				case 'swim':
+
+					/* L2 + L3 */
+
+					this.computeLayer( <Layer_Entities> this.map.layers[2] );
+					this.computeLayer( <Layer_Entities> this.map.layers[3] );
+
+					break;
+
+				case 'fly':
+
+					/* L4 */
+					this.computeLayer( <Layer_Entities> this.map.layers[4] );
+					break;
+
 
 			}
 

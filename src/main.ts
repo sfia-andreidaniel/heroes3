@@ -1,6 +1,7 @@
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="IObjectHandle.ts" />
 ///<reference path="IResources.ts" />
+///<reference path="IDirection.ts" />
 
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />

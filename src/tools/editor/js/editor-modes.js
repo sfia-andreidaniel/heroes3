@@ -11,7 +11,7 @@ var modes = {
 
 function setEditorMode( mode ) {
     
-    map.viewports[0].interactive = mode == modes.interactive;
+    map.viewports[0].interactive = ( ( mode == modes.interactive ) || ( mode == modes.game ) );
     
     if ( editorMode === mode )
         return;

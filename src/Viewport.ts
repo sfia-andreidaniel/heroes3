@@ -86,8 +86,10 @@ class Viewport extends Events {
 	   if the cell is outside but still needs to be painted
 	 */
 	public shouldRenderCell( cell: Cell ): boolean {
-		return cell.x() >= this.x && cell.x() <= this.x + this.cols &&
-			   cell.y() >= this.y && cell.y() <= this.y + this.rows;
+		if ( cell ) {
+			return cell.x() >= this.x && cell.x() <= this.x + this.cols &&
+				   cell.y() >= this.y && cell.y() <= this.y + this.rows;
+		} else return false;
 	}
 
 	public updatePaintables() {

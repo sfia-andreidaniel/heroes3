@@ -83,7 +83,10 @@ class Objects_Item extends Events {
 				me.hsy			   = this.data.hsy		  || 0;
 
 
-				me.sprite = new Picture( this.data.pixmap ? this.data.pixmap : this.data.frame );
+				me.sprite = new Picture( 
+					this.data.pixmap ? this.data.pixmap : this.data.frame, 
+					[ "Hero", "Hero_Embarked" ].indexOf( me.objectClass ) >= 0
+				);
 
 				me.sprite.once( 'load', function() {
 					me.readyState = 2;
@@ -94,8 +97,11 @@ class Objects_Item extends Events {
 				me.sprite.once( 'error', function() {
 					me.readyState = 3;
 					me.emit( 'error', 'The object has been loaded, but it\'s sprite not' );
-				})
+				});
 
+				try {
+					<Layer_Movement> (me.store.map.layers[ 5 ])._throttlerCompute();
+				} catch ( none ) {}
 
 			} );
 
