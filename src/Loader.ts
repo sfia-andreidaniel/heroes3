@@ -48,6 +48,8 @@ class Loader {
 
 		this.chain.push( config );
 
+		console.log( config.type || "GET", config.url );
+
 		this.update();
 
 	}
@@ -90,8 +92,9 @@ class Loader {
 
 							console.error( "Request \"" + me.chain[k].url + "\" failed: ", reason );
 
-							if ( me.chain[k].error )
+							if ( me.chain[k].error ) {
 								me.chain[k].error();
+							}
 
 						} catch ( err ) {
 
@@ -100,13 +103,13 @@ class Loader {
 						me.chain.splice( k, 1 );
 						me.activeRequests -= 1;
 
+						me.update();
+
 						break;
 
 					}
 
 				}
-
-				me.update();
 
 			};
 
@@ -119,11 +122,37 @@ class Loader {
 						if ( me.chain[ k ].__requestID__ != multiResponse[i].id )
 							continue;
 
+						try {
+
+							if ( multiResponse[i].error ) {
+
+								if ( me.chain[k].error )
+									me.chain[k].error( multiResponse[i].error );
+
+								console.error( "Request: \"" + me.chain[k].url + "\" failed: " + multiResponse[i].error );
+
+							} else {
+
+								if ( me.chain[k].success )
+									me.chain[k].success( multiResponse[i].data );
+
+								console.log( "Request \"" + me.chain[k].url + "\" completed!" );
+
+							}
+						} catch( err ) {
+
+						}
+
+						me.chain.splice( k, 1 );
+						me.activeRequests -= 1;
+						me.update();
+
+						break;
+
 					}
 
 				}
 
-				me.update();
 			};
 
 			$.ajax( 'resources/tools/multi-request.php', {

@@ -87,17 +87,17 @@
             }
             
             $parsed = [
-                'get' => $get,
-                'post' => $post,
+                // 'get' => $get,
+                // 'post' => $post,
                 'url' => $url,
                 'id' => $request[ 'id' ]
             ];
             
-            $rFilePath = realpath( __DIR__ . '/../../' . $url );
+            $rFilePath = realpath( $fPath = ( __DIR__ . '/../../' . $url ) );
             
-            if ( $rFilePath === NULL ) {
+            if ( !$rFilePath ) {
                 
-                $parsed[ 'error' ] = 'File not found!';
+                $parsed[ 'error' ] = 'File ' . $fPath . ' not found!';
                 $out[ 'data' ][] = $parsed;
                 
                 continue;
@@ -121,12 +121,19 @@
                     
                     if ( count( array_keys( $post ) ) ) {
                         
-                        $postFilePath = '/tmp/postfile-' . time() . '-' . rand( 0, 1024 ) . '-' . rand( 0, 1024 ) . '-' . rand( 0, 1024 ) . '.post';
+                        $postFilePath = 'post-' . time() . '-' . rand( 0, 1024 ) . '-' . rand( 0, 1024 ) . '-' . rand( 0, 1024 ) . '.post';
 
-                        file_put_contents( $postFilePath, json_encode( $post ) );
+                        $postData = json_encode( $post );
+
+                        if ( memcache_file_put_contents( $postFilePath, $postData ) === FALSE ) {
+                            
+                            $parsed[ 'error' ] = 'Failed to write file: ' . $postFilePath;
+                            
+                            break;
+                        }
                         
                         $cmdLine .= ( ' ' . escapeshellarg( '--post=' . $postFilePath ) );
-                        
+
                     }
                     
                     $buffer = `$cmdLine`;
@@ -141,6 +148,16 @@
                 default:
                     
                     $parsed[ 'data' ] = file_get_contents( $rFilePath );
+                    
+                    switch ( TRUE ) {
+                        
+                        case preg_match( '/\.json$/', $rFilePath ) ? TRUE : FALSE:
+                            $parsed[ 'data' ] = json_decode( $parsed[ 'data' ], TRUE );
+                            break;
+                        
+                        default:
+                            break;
+                    }
                     
                     break;
                 

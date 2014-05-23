@@ -86,6 +86,7 @@
 
     } );
 
+    require_once __DIR__ . '/lib/memcache_write.php';
     require_once __DIR__ . '/classes/Error.php';
     require_once __DIR__ . '/classes/Request.php';
     require_once __DIR__ . '/classes/Database.php';

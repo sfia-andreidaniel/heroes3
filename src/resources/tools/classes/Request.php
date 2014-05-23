@@ -29,20 +29,33 @@
                     
                     } else {
                         
-                        if ( strlen( $arg[1] ) ) {
+                        if ( strlen( $postFile = $arg[1] ) ) {
+                            
+                            $contents = memcache_file_get_contents( $postFile );
                         
-                            $postFileContents = file_get_contents( $arg[1] );
-                        
-                            unlink( $arg[1] );
-                        
-                            throw new Exception( $postFileContents );
-                        
+                            if ( $contents === FALSE )
+                                throw new Exception( "Failed to read file: " . $postFile . ", I am: " . `whoami` );
+                            
+                            $postFileContents = json_decode( $contents, TRUE );
+                            
+                            if ( !is_array( $postFileContents ) ) {
+                                
+                                throw new Exception( $postFileContents );
+                                
+                                throw new Exception_Game( "Failed to decode \$_POST file: " . $arg[1] );
+                            }
+                            
+                            foreach ( array_keys( $postFileContents ) as $var )
+                                $_POST[ $var ] = $postFileContents[ $var ];
+                            
                         }
                         
                         
                     }
                     
                 }
+                
+                $argv = [];
                 
             }
             

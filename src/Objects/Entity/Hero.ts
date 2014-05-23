@@ -8,7 +8,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 	public _isMoving : boolean = false;
 	public _direction: string = "S";
 	public _movePath : AStar_IPos[] = [];
-	public speed     : number = 8;
+	public speed     : number = 16;
 
 	private _interractWith: Objects_Entity = null;
 
@@ -325,7 +325,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 				"type": "POST",
 				"cache": false,
 				"success": function( html ) {
-					
+
 					var tpl = new XTemplate( html );
 					
 					tpl.assign( 'hero_id', hero.$id + '' );
