@@ -2,6 +2,9 @@
 ///<reference path="IObjectHandle.ts" />
 ///<reference path="IResources.ts" />
 ///<reference path="IDirection.ts" />
+///<reference path="Canvas2dContextHelper.ts" />
+///<reference path="XTemplate.ts" />
+///<reference path="Loader.ts" />
 
 ///<reference path="Events.ts" />
 ///<reference path="FS.ts" />

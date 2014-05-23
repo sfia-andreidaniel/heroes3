@@ -102,10 +102,15 @@ map.on( 'load', function() {
                         
                         /* Mark the object as active */
                         
-                        // $(this).parent().find( '> div' ).removeClass( 'active' );
-                        // $(this).addClass( 'active' );
-                        
                         map.activeObject = this.object;
+                        
+                    } );
+
+                    $('#faction-objects > div.heroes').on( 'dblclick', '> div', function() {
+                        
+                        /* Mark the object as active */
+                        
+                        this.object.edit();
                         
                     } );
                     

@@ -21,10 +21,6 @@ class Objects_Entity extends Events {
 	constructor ( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super();
 
-		if ( this.$sinchronizable() ) {
-			console.log( "Create entity sinchronizable on server!" );
-		}
-
 		this.instance = this.layer.map.objects.getObjectById( this.itemTypeId );
 
 		if ( this.instance.loaded ) {
@@ -72,8 +68,6 @@ class Objects_Entity extends Events {
 			this.$id = instanceId;
 
 		}
-		
-		console.log( 'debug: set object instance id: ' + this.$id );
 	}
 
 	public unserialize( data: any ) {
@@ -123,6 +117,18 @@ class Objects_Entity extends Events {
 		}
 	}
 
+	public remove() {
+		
+		// remove from map
+		this.destroy();
+		
+		// remove from layer
+		if ( this.layer ) {
+			this.layer.map.cellAt( this.col, this.row ).setData( this.layer.index, null );
+		}
+
+	}
+
 	public destroy() {
 		this.layer.map.emit( 'entity-destroy', this );
 	}
@@ -135,7 +141,8 @@ class Objects_Entity extends Events {
 		var actualIndex: number =  this.row * this.layer.map.cols + this.col,
 		    newIndex:    number =  y * this.layer.map.cols + x,
 		    viewports : Viewport[] = this.getVisibleViewports(),
-			cell: Cell;
+			cell: Cell,
+			tmp: any;
 
 		if ( actualIndex == newIndex )
 			return;
@@ -152,10 +159,14 @@ class Objects_Entity extends Events {
 		this.layer._objects[ newIndex ] = this;
 		this.layer._objects[ actualIndex ] = null;
 
+		tmp = this.layer.map.cellAt( this.col, this.row ).getData( this.layer.index );
+
 		this.layer.map.cellAt( this.col, this.row ).setData( this.layer.index, null, true );
 
 		this.col = x;
 		this.row = y;
+
+		this.layer.map.cellAt( this.col, this.row ).setData( this.layer.index, tmp, true );
 
 		viewports = this.getVisibleViewports();
 
@@ -268,16 +279,57 @@ class Objects_Entity extends Events {
 
 	}
 
-	public setDestinationCell( cell: Cell ) {
+	/* The role of this function is to "make" the param @obj
+	   to "move" in the front ( hsx, hsy + 1 ) position of
+	   this object.
+	 */
+
+	public callObjectAtMyself( obj: Objects_Entity ) {
+
+		if ( obj == this )
+			return;
+
+		// test if the movement layer allows movement @pos hsx, hsy + 1
+		var targetX = this.col,
+		    targetY = this.row + 1,
+		    index   = this.layer.map.cols * targetY + targetX;
+
+		if ( targetX < 0 || targetY < 0 || targetX >= this.layer.map.cols || targetY >= this.layer.map.rows )
+			return; // target call position outside map.
+		
+
+		switch ( true ) {
+
+			case obj instanceof Objects_Entity_Hero:
+
+				obj.setDestinationCell( this.layer.map.cellAt( targetX, targetY ), this );
+
+				break;
+
+		}
+
 	}
 
+	public interractWith( obj: Objects_Entity_Hero ) {
+		console.log( this, "Interract with: ", obj );
+	}
+
+	/* Tries to make the object to "move" to the target cell
+	 */
+	public setDestinationCell( cell: Cell, whenReachInterractWith: Objects_Entity = null ) {
+		// should be overrided by children ( Heroes for now )
+	}
+
+	/* Move tick function, that animates movement
+	 */
 	public move() {
 		// should be overrided by capable moving objects
 	}
 
+	/* Not implemented for now
+	 */
 	public edit() {
 		// should be overrided by ancestors.
-		console.log( "edit object: ", this );
 	}
 
 }

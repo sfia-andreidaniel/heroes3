@@ -11,7 +11,8 @@ class Faction_Manager extends Events {
 
 			(function( me ) {
 				
-				$.ajax( 'resources/tools/faction.php', {
+				$$.ajax( {
+				        "url": 'resources/tools/faction.php',
 					"type": "GET",
 					"data": {
 						"do": "list"

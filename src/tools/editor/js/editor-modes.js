@@ -6,12 +6,24 @@ var modes = {
         "game": 5
     },
     editorMode = null,
-    isDragging = false;
+    isDragging = false,
+    l5VisibilitySave = true;
     
 
 function setEditorMode( mode ) {
     
-    map.viewports[0].interactive = ( ( mode == modes.interactive ) || ( mode == modes.game ) );
+    if ( ( mode == modes.interactive ) || ( mode == modes.game ) ) {
+        
+        l5VisibilitySave = map.layers[5].visible;
+        map.layers[5].visible = false;
+        map.viewports[0].interactive = true;
+    
+    } else {
+        
+        map.layers[5].visible = l5VisibilitySave;
+        map.viewports[0].interactive = false;
+        
+    }
     
     if ( editorMode === mode )
         return;

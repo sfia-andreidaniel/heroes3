@@ -2,11 +2,15 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 	public _faction  : Faction = null;
 	public _heroType : Hero    = null;
+	public _xp       : number  = 0;
+	public _level    : number  = 1;
 
 	public _isMoving : boolean = false;
 	public _direction: string = "S";
 	public _movePath : AStar_IPos[] = [];
 	public speed     : number = 8;
+
+	private _interractWith: Objects_Entity = null;
 
 	// public rw faction  : number
 	// public rw heroType : number
@@ -78,7 +82,6 @@ class Objects_Entity_Hero extends Objects_Entity {
 		}
 	}
 
-
 	get heroType(): number {
 		return this._heroType ? this._heroType.id : null;
 	}
@@ -111,7 +114,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 	get name(): string {
 		return this._heroType !== null
 			? this._heroType.name
-			: '';
+			: 'Hero';
 	}
 
 	get icon(): string {
@@ -127,7 +130,9 @@ class Objects_Entity_Hero extends Objects_Entity {
 			"faction"  : this.faction,
 			"heroType" : this.heroType,
 			"isMoving" : this._isMoving,
-			"direction": this._direction
+			"direction": this._direction,
+			"xp"       : this._xp,
+			"level"    : this._level
 		};
 
 		return out;
@@ -141,34 +146,54 @@ class Objects_Entity_Hero extends Objects_Entity {
 			this.heroType   = data.heroType;
 			this._isMoving  = !!data.isMoving;
 			this._direction = data.direction || "S";
+			this._xp        = data.xp || 0;
+			this._level     = data.level || 1;
 		}
 
 	}
 
-	public setDestinationCell( cell: Cell ) {
+	public setDestinationCell( cell: Cell, whenReachInterractWith: Objects_Entity = null ) {
 
-		var dx = cell.x(),
-		    dy = cell.y();
+		this._interractWith = whenReachInterractWith === this ? null : whenReachInterractWith;
 
-		if ( dx == this.col && dy == this.row )
-			return;
+		if ( !( cell.x() == this.col && cell.y() == this.row ) ) {
 
-		var start = map.layers[5]['_graph'].get( this.col, this.row ),
-		    stop  = map.layers[5]['_graph'].get( dx, dy ),
-		    astar = new AStar_Algorithm(),
-		    path  = astar.search( map.layers[5]['_graph'], start, stop, { "diagonal": true } );
+			var dx = cell.x(),
+			    dy = cell.y();
 
-		if ( !path.length )
-			return; // Not moveable
+			var start = map.layers[5]['_graph'].get( this.col, this.row ),
+			    stop  = map.layers[5]['_graph'].get( dx, dy ),
+			    astar = new AStar_Algorithm(),
+			    path  = astar.search( map.layers[5]['_graph'], start, stop, { "diagonal": true } );
 
-		this._movePath = [];
+			if ( !path.length ) {
+				return; // Not moveable
+			}
 
-		for ( var i=0, len = path.length; i<len; i++ ) {
-			this._movePath.push( path[i].pos );
+			this._movePath = [];
+
+			for ( var i=0, len = path.length; i<len; i++ ) {
+				this._movePath.push( path[i].pos );
+			}
+
+			this.moving = true;
+		
+		} else {
+			this._onReachedDestination();
 		}
 
-		if ( this._movePath.length )
-			this.moving = true;
+	}
+
+	/* Triggered when the hero reached it's movement destination
+	 */
+	public _onReachedDestination() {
+
+		if ( !this._interractWith )
+			return;
+
+		this._interractWith.interractWith( this );
+		this._interractWith = null;
+
 	}
 
 	public move() {
@@ -241,8 +266,10 @@ class Objects_Entity_Hero extends Objects_Entity {
 						this.moveTo( this._movePath[0].x, this._movePath[0].y );
 						this._movePath.splice( 0, 1 );
 
-						if ( !this._movePath.length )
+						if ( !this._movePath.length ) {
 							this.moving = false;
+							this._onReachedDestination();
+						}
 
 					}
 
@@ -250,6 +277,94 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 			}
 		}
+	}
+
+	public paint( ctx2d, x: number, y: number ) {
+
+		if ( this == this.layer.map._activeObject ) {
+
+			ctx2d.setStrokeColor( '#0f0' );
+			ctx2d.lineWidth = 3;
+			
+			Canvas2dContextHelper.drawEllipseByCenter(
+				ctx2d, 
+				x + this.instance.hsx * 32 + 16 + this.shiftX, 
+				y + this.instance.hsy * 32 + 32 + this.shiftY, 
+				48, 24 
+			);
+
+		}
+
+		super.paint( ctx2d, x, y );
+	}
+
+	public remove() {
+
+		// stop hero if it's moving
+		if ( this.moving )
+			this.moving = false;
+
+		// if hero is active, blur it
+		if ( this.layer.map._activeObject == this )
+			this.layer.map.activeObject = null;
+
+		// remove hero from it's faction
+		if ( this._faction )
+			this._faction.removeHero( this );
+
+
+		super.remove();
+	}
+
+	public edit() {
+
+		( function( hero ){
+
+			$$.ajax( {
+			    "url": 'tools/game/hero/editor.tpl',
+				"type": "POST",
+				"cache": false,
+				"success": function( html ) {
+					
+					var tpl = new XTemplate( html );
+					
+					tpl.assign( 'hero_id', hero.$id + '' );
+
+					tpl.parse('');
+
+					$(tpl.text + '')['dialog']({
+						"width": 400,
+						"height": 400,
+						"modal": true,
+						"buttons": {
+
+							"Ok": function() {
+
+							}
+
+						},
+						"close": function() {
+
+							$(this).remove();
+
+						},
+						"open": function() {
+							$(this).find( ".tabs" )[ 'tabs' ]();
+						},
+						"title": hero.name
+					});
+
+				},
+				"error": function() {
+
+					alert( 'Error editing hero' );
+
+				}
+
+			} );
+
+		})( this );
+
 	}
 
 }

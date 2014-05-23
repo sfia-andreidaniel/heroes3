@@ -30,7 +30,8 @@ class Faction extends Events {
 
 			( function( me ) {
 
-				$.ajax( 'resources/tools/faction.php', {
+				$$.ajax({
+				        "url": 'resources/tools/faction.php',
 					"type": "GET",
 					"data": {
 						"do": "load-faction",
@@ -84,7 +85,8 @@ class Faction extends Events {
 		if ( typeof window != 'undefined' && window['$'] ) {
 			( function( me ) {
 
-				$.ajax( 'resources/tools/faction.php', {
+				$$.ajax( {
+				        "url": 'resources/tools/faction.php',
 					"type": "GET",
 					"data": {
 						"do": "add-resource",

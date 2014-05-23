@@ -250,7 +250,8 @@ class Viewport extends Events {
 				    y: number,
 				    vx: number = me.x + ~~( clickX / me.tileWidth ),
 				    vy: number = me.y + ~~( clickY / me.tileHeight ),
-				    noObjects = false;
+				    noObjects = false,
+				    deferredEmitters = [];
 
 				/* Determine the object on which the click was triggered */
 				for ( i=0, len = me.paintables.length; i<len; i++ ) {
@@ -280,25 +281,45 @@ class Viewport extends Events {
 
 							if ( vx >= x1 && vx <= x2 && vy >= y1 && vy <= y2 ) {
 								
-								me.map.emit( 'object-click', obj1, evt.which, ( x == vx && y == vy ) );
-								noObjects = true;
-								break;
+								deferredEmitters.push({
+									"object": obj1,
+									"which":  evt.which,
+									"isHotSpot": ( x == vx && y == vy ),
+									"vx": x,
+									"vy": y
+								});
+
+								//me.map.emit( 'object-click', obj1, evt.which, ( x == vx && y == vy ) );
+								
+								// noObjects = true;
+								// break;
 
 							}
 
 						}
 
-						if ( noObjects )
-							break;
+						// if ( noObjects )
+						//	break;
 
 					}
 
-					if ( noObjects )
-						break;
+					// if ( noObjects )
+					//	break;
 
 				}
 
-				me.map.emit( 'cell-click', me.map.cellAt( vx, vy ), evt.which );
+				
+				if ( deferredEmitters.length ) {
+
+					deferredEmitters.sort( function( a,b ) {
+						return ( a.isHotSpot ? 1 : 0 ) - ( b.isHotSpot ? 1 : 0 );
+					});
+					// console.log( deferredEmitters );
+
+					me.map.emit( "object-click", deferredEmitters[0].object, deferredEmitters[0].which, deferredEmitters[0].isHotSpot );
+				} else {
+					me.map.emit( 'cell-click', me.map.cellAt( vx, vy ), evt.which );
+				}
 
 			} );
 
@@ -338,12 +359,12 @@ class Viewport extends Events {
 		for ( var i=0, len = this.paintables.length; i<len; i++ ) {
 			x = ( this.paintables[i].x() - this.x ) * this.tileWidth;
 			y = ( this.paintables[i].y() - this.y ) * this.tileHeight;
-			this.paintables[i].paintAt( x, y, this.ctx, 1 );
+			this.paintables[i].paintAt( x, y, this.ctx, 1, !this._interactive );
 		}
 
 
 		/* Paint the objectHandle if is set */
-		if ( ( oh = this.map.objectHandle ) && ( ac = this.map.activeCell ) )  {
+		if ( ( oh = this.map.objectHandle ) && ( ac = this.map.activeCell ) && !this._interactive )  {
 			
 			x = ( ac.x() - this.x );
 			y = ( ac.y() - this.y );

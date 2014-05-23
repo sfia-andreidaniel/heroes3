@@ -76,6 +76,10 @@ class AdvMap extends Events {
             
         super();
         
+        try {
+            document.body.appendChild( $$.node );
+        } catch ( e ) {}
+
         ( function( me ) {
             
 
@@ -136,6 +140,30 @@ class AdvMap extends Events {
 
                 } );
 
+                me.on( 'object-click', function( obj ) {
+
+                    if ( !map.activeObject )
+                        return;
+
+                    switch ( true ) {
+
+                        case obj instanceof Objects_Entity_Hero:
+                        case obj instanceof Objects_Entity_Castle:
+                        case obj instanceof Objects_Entity_Creature_Adventure:
+                        case obj instanceof Objects_Entity:
+                        case obj instanceof Objects_Entity_Artifact:
+                        case obj instanceof Objects_Entity_Resource:
+                        case obj instanceof Objects_Entity_Dwelling:
+                        case obj instanceof Objects_Entity_Mine:
+
+                            obj.callObjectAtMyself( map.activeObject );
+
+                            break;
+
+                    }
+
+                });
+
                 setInterval( function() {
                     me.moveObjects();
                 }, 50 );
@@ -194,13 +222,13 @@ class AdvMap extends Events {
         }
 
         this.on( 'entity-create', function( entity ) {
-            if ( entity )
-            map.mapObjects.push( entity );
+            if ( entity && map.mapObjects.indexOf( entity ) == -1 )
+                map.mapObjects.push( entity );
         });
 
         this.on( 'entity-destroy', function( entity ) {
-            if ( entity )
-            map.mapObjects.splice( map.mapObjects.indexOf( entity ), 1 );
+            if ( entity && map.mapObjects.indexOf( entity ) > -1 )
+                map.mapObjects.splice( map.mapObjects.indexOf( entity ), 1 );
         });
 
     }
@@ -219,6 +247,11 @@ class AdvMap extends Events {
     }
 
     set activeObject( obj: Objects_Entity ) {
+        
+        if ( this._activeObject && this._activeObject['moving'] && this._activeObject != obj ) {
+            this._activeObject['moving'] = false;
+        }
+
         this._activeObject = obj;
 
         if ( obj )
@@ -630,7 +663,8 @@ class AdvMap extends Events {
             
             } else {
 
-                $.ajax( 'resources/tools/save-map-by-id.php', {
+                $$.ajax( {
+                    "url": 'resources/tools/save-map-by-id.php',
                     "type": "POST",
                     "data": {
                         "id": this.id,
@@ -668,7 +702,8 @@ class AdvMap extends Events {
         } else {
 
             // JQuery submit to server
-            $.ajax( 'tools/save-map.php', {
+            $$.ajax( {
+                'url': 'tools/save-map.php',
                 'type': 'POST',
                 'data': {
                     "data": JSON.stringify( data ),

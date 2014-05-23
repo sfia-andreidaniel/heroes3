@@ -63,7 +63,7 @@ class Cell {
 	// Paints the cell at x, y pixels on a canvas.
 	// Painting is done in two phases, so the phase parameter should
 	// be used ( 0 or 1 ).
-	public paintAt( x: number, y: number, ctx, phase: number ) {
+	public paintAt( x: number, y: number, ctx, phase: number, paintActiveBorder: boolean = true ) {
 		var _x = this.x(),
 		    _y = this.y();
 
@@ -78,7 +78,7 @@ class Cell {
 				this.map.layers[i].paint( _x, _y, x, y, ctx );
 			}
 
-			if ( this == this.map.activeCell ) {
+			if ( this == this.map.activeCell && paintActiveBorder ) {
 				ctx.lineWidth = 1;
 				ctx.strokeStyle = '#f00';
 				ctx.strokeRect( x + 1, y + 1, this.map.tilesets[0].tileWidth - 3, this.map.tilesets[0].tileHeight - 3 );

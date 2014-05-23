@@ -151,14 +151,15 @@ class FS_File extends Events {
 	    				f.emit( 'error', 'Failed to load file: ' + f.name, error );
 	    			},
 	    			"dataType": f.readAs == 'json' ? 'json' : "text",
-	    			"cache": false
+	    			"cache": false,
+	    			"url": f.name
 	    		};
 
 	    		if ( f.fileData !== null ) {
 	    			params['data'] = f.fileData;
 	    		}
 
-	    		$.ajax( f.name, params );
+	    		$$.ajax( params );
 
 	    	} )( this );
 
