@@ -12,6 +12,8 @@ class Loader {
 	private inner: any = null;
 	private bar: any = null;
 
+	private _id = 0;
+
 	constructor() {
 
 		this.node  = document.createElement( 'div' );
@@ -27,7 +29,7 @@ class Loader {
 				if ( me.pendingRequests > 0 && me.activeRequests == 0 )
 					me.next();
 
-			}, 10 );
+			}, 250 );
 
 		} )( this );
 
@@ -40,6 +42,10 @@ class Loader {
 		this.numRequests++;
 		this.pendingRequests++;
 
+		this._id++;
+
+		config.__requestID__ = this._id;
+
 		this.chain.push( config );
 
 		this.update();
@@ -48,6 +54,114 @@ class Loader {
 
 	public next() {
 
+		var data = [];
+
+		for ( var i=0, len = this.chain.length; i<len; i++ ) {
+
+			data.push( {
+				'url': this.chain[i].url,
+				'data': this.chain[i].data || null,
+				'type': this.chain[i].type || 'GET',
+				'id': this.chain[i].__requestID__,
+				'dataType': this.chain[i].dataType || null
+			} );
+
+		}
+
+		this.activeRequests = data.length;
+		this.pendingRequests -= data.length;
+		this.update();
+
+
+		( function( me ) {
+	
+			var onError = function( reason: string = '' ) {
+				
+				console.log( me );
+
+				for ( var i=0, len = data.length; i<len; i++ ) {
+
+					for ( var k=0, n = me.chain.length; k < n; k++ ) {
+
+						if ( me.chain[k].__requestID__ != data[i].id )
+							continue;
+
+						try {
+
+							console.error( "Request \"" + me.chain[k].url + "\" failed: ", reason );
+
+							if ( me.chain[k].error )
+								me.chain[k].error();
+
+						} catch ( err ) {
+
+						}
+
+						me.chain.splice( k, 1 );
+						me.activeRequests -= 1;
+
+						break;
+
+					}
+
+				}
+
+				me.update();
+
+			};
+
+			var onSuccess = function( multiResponse ) {
+
+				for ( var i=0, len = multiResponse.length; i<len; i++ ) {
+
+					for ( var k = 0, n = me.chain.length; k<n; k++ ) {
+
+						if ( me.chain[ k ].__requestID__ != multiResponse[i].id )
+							continue;
+
+					}
+
+				}
+
+				me.update();
+			};
+
+			$.ajax( 'resources/tools/multi-request.php', {
+				"type": "POST",
+				"data": {
+					"data": JSON.stringify( data ) 
+				},
+				"success": function( response ) {
+
+					if ( !response ) {
+						
+						onError( null );
+					
+					} else {
+						
+						if ( response.error || !response.ok || !response.data ) {
+							
+							onError( response.error || 'Unknown server error' );
+						
+						} else {
+
+							onSuccess( response.data );
+
+						}
+					}	
+
+
+				},
+				"error": function( ) {
+					onError();
+				}
+			} );
+
+
+		})( this );
+
+
+		/*
 		this.activeRequests++;
 		this.pendingRequests--;
 
@@ -109,6 +223,8 @@ class Loader {
 		})( this );
 
 		$.ajax( cfg.url, cfg );
+
+		*/
 
 	}
 

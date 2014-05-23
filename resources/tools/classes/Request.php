@@ -23,7 +23,24 @@
                     
                     $arg = explode( '=', $arg );
                     
-                    $_GET[ $arg[0] ] = isset( $arg[1] ) ? $arg[1] : '';
+                    if ( $arg[0] != '--post' ) {
+                    
+                        $_GET[ $arg[0] ] = isset( $arg[1] ) ? $arg[1] : '';
+                    
+                    } else {
+                        
+                        if ( strlen( $arg[1] ) ) {
+                        
+                            $postFileContents = file_get_contents( $arg[1] );
+                        
+                            unlink( $arg[1] );
+                        
+                            throw new Exception( $postFileContents );
+                        
+                        }
+                        
+                        
+                    }
                     
                 }
                 
