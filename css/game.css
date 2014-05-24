@@ -1,0 +1,380 @@
+div.g-sk {
+    background-image: url( img/skills-indexed.png );
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    width: 58px;
+    height: 64px;
+    display: inline-block;
+    
+    outline: 1px inset brown;
+    background-color: #4d2f0c;
+}
+
+div.g-sk.small {
+    -webkit-transform: scale( 0.5, 0.5 );
+    -moz-transform: scale( 0.5, 0.5 );
+    -o-transform: scale( 0.5, 0.5 );
+    -ms-transform: scale( 0.5, 0.5 ):
+    transform: scale(0.5,0.5);
+    margin: -14px -16px;
+}
+
+.g-sk.archery {
+    background-position: 0px -64px;
+}
+
+.g-sk.archery.advanced {
+    background-position: -58px -64px;
+}
+
+.g-sk.archery.expert {
+    background-position: -116px -64px;
+}
+
+.g-sk.balistics {
+    background-position: 0px -128px;
+}
+
+.g-sk.balistics.advanced {
+    background-position: -58px -128px;
+}
+
+.g-sk.balistics.expert {
+    background-position: -116px -128px;
+}
+
+.g-sk.diplomacy {
+    background-position: 0px -192px;
+}
+
+.g-sk.diplomacy.advanced {
+    background-position: -58px -192px;
+}
+
+.g-sk.diplomacy.expert {
+    background-position: -116px -192px;
+}
+
+.g-sk.eagle-eye {
+    background-position: 0px -256px;
+}
+
+.g-sk.eagle-eye.advanced {
+    background-position: -58px -256px;
+}
+
+.g-sk.eagle-eye.expert {
+    background-position: -116px -256px;
+}
+
+.g-sk.estates {
+    background-position: 0px -320px;
+}
+
+.g-sk.estates.advanced {
+    background-position: -58px -320px;
+}
+
+.g-sk.estates.expert {
+    background-position: -116px -320px;
+}
+
+.g-sk.leadership {
+    background-position: 0px -384px;
+}
+
+.g-sk.leadership.advanced {
+    background-position: -58px -384px;
+}
+
+.g-sk.leadership.expert {
+    background-position: -116px -384px;
+}
+
+.g-sk.logistics {
+    background-position: 0px -448px;
+}
+
+.g-sk.logistics.advanced {
+    background-position: -58px -448px;
+}
+
+.g-sk.logistics.expert {
+    background-position: -116px -448px;
+}
+
+.g-sk.luck {
+    background-position: 0px -512px;
+}
+
+.g-sk.luck.advanced {
+    background-position: -58px -512px;
+}
+
+.g-sk.luck.expert {
+    background-position: -116px -512px;
+}
+
+.g-sk.misticism {
+    background-position: 0px -576px;
+}
+
+.g-sk.misticism.advanced {
+    background-position: -58px -576px;
+}
+
+.g-sk.misticism.expert {
+    background-position: -116px -576px;
+}
+
+.g-sk.navigation {
+    background-position: 0px -640px;
+}
+
+.g-sk.navigation.advanced {
+    background-position: -58px -640px;
+}
+
+.g-sk.navigation.expert {
+    background-position: -116px -640px;
+}
+
+.g-sk.necromancy {
+    background-position: 0px -704px;
+}
+
+.g-sk.necromancy.advanced {
+    background-position: -58px -704px;
+}
+
+.g-sk.necromancy.expert {
+    background-position: -116px -704px;
+}
+
+.g-sk.pathfinding {
+    background-position: 0px -768px;
+}
+
+.g-sk.pathfinding.advanced {
+    background-position: -58px -768px;
+}
+
+.g-sk.pathfinding.expert {
+    background-position: -116px -768px;
+}
+
+.g-sk.scouting {
+    background-position: 0px -832px;
+}
+
+.g-sk.scouting.advanced {
+    background-position: -58px -832px;
+}
+
+.g-sk.scouting.expert {
+    background-position: -116px -832px;
+}
+
+.g-sk.wisdom {
+    background-position: 0px -896px;
+}
+
+.g-sk.wisdom.advanced {
+    background-position: -58px -896px;
+}
+
+.g-sk.wisdom.expert {
+    background-position: -116px -896px;
+}
+
+.g-sk.fire-magic {
+    background-position: 0px -960px;
+}
+
+.g-sk.fire-magic.advanced {
+    background-position: -58px -960px;
+}
+
+.g-sk.fire-magic.expert {
+    background-position: -116px -960px;
+}
+
+.g-sk.air-magic {
+    background-position: 0px -1024px;
+}
+
+.g-sk.air-magic.advanced {
+    background-position: -58px -1024px;
+}
+
+.g-sk.air-magic.expert {
+    background-position: -116px -1024px;
+}
+
+.g-sk.water-magic {
+    background-position: 0px -1088px;
+}
+
+.g-sk.water-magic.advanced {
+    background-position: -58px -1088px;
+}
+
+.g-sk.water-magic.expert {
+    background-position: -116px -1088px;
+}
+
+.g-sk.earth-magic {
+    background-position: 0px -1152px;
+}
+
+.g-sk.earth-magic.advanced {
+    background-position: -58px -1152px;
+}
+
+.g-sk.earth-magic.expert {
+    background-position: -116px -1152px;
+}
+
+.g-sk.schoolar {
+    background-position: 0px -1216px;
+}
+
+.g-sk.schoolar.advanced {
+    background-position: -58px -1216px;
+}
+
+.g-sk.schoolar.expert {
+    background-position: -116px -1216px;
+}
+
+.g-sk.tactics {
+    background-position: 0px -1280px;
+}
+
+.g-sk.tactics.advanced {
+    background-position: -58px -1280px;
+}
+
+.g-sk.tactics.expert {
+    background-position: -116px -1280px;
+}
+
+.g-sk.artilery {
+    background-position: 0px -1344px;
+}
+
+.g-sk.artilery.advanced {
+    background-position: -58px -1344px;
+}
+
+.g-sk.artilery.expert {
+    background-position: -116px -1344px;
+}
+
+.g-sk.learning {
+    background-position: 0px -1408px;
+}
+
+.g-sk.learning.advanced {
+    background-position: -58px -1408px;
+}
+
+.g-sk.learning.expert {
+    background-position: -116px -1408px;
+}
+
+.g-sk.offence {
+    background-position: 0px -1472px;
+}
+
+.g-sk.offence.advanced {
+    background-position: -58px -1472px;
+}
+
+.g-sk.offence.expert {
+    background-position: -116px -1472px;
+}
+
+.g-sk.armourer {
+    background-position: 0px -1536px;
+}
+
+.g-sk.armourer.advanced {
+    background-position: -58px -1536px;
+}
+
+.g-sk.armourer.expert {
+    background-position: -116px -1536px;
+}
+
+.g-sk.intelligence {
+    background-position: 0px -1600px;
+}
+
+.g-sk.intelligence.advanced {
+    background-position: -58px -1600px;
+}
+
+.g-sk.intelligence.expert {
+    background-position: -116px -1600px;
+}
+
+.g-sk.sorcery {
+    background-position: 0px -1664px;
+}
+
+.g-sk.sorcery.advanced {
+    background-position: -58px -1664px;
+}
+
+.g-sk.sorcery.expert {
+    background-position: -116px -1664px;
+}
+
+.g-sk.resistence {
+    background-position: 0px -1728px;
+}
+
+.g-sk.resistence.advanced {
+    background-position: -58px -1728px;
+}
+
+.g-sk.resistence.expert {
+    background-position: -116px -1728px;
+}
+
+.g-sk.healing {
+    background-position: 0px -1792px;
+}
+
+.g-sk.healing.advanced {
+    background-position: -58px -1792px;
+}
+
+.g-sk.healing.expert {
+    background-position: -116px -1792px;
+}
+
+.g-sk.attack {
+    background-position: 0px -1856px;
+}
+
+.g-sk.defence {
+    background-position: -58px -1856px;
+}
+
+.g-sk.spell-power {
+    background-position: -116px -1856px;
+}
+
+.g-sk.knowledge {
+    background-position: 0px -1920px;
+}
+
+.g-sk.experience {
+    background-position: -58px -1920px;
+}
+
+.g-sk.spell-points {
+    background-position: -116px -1920px;
+}

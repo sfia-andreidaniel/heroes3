@@ -123,6 +123,14 @@ class Objects_Entity_Hero extends Objects_Entity {
 			: '';
 	}
 
+	get level(): number {
+		return this._level;
+	}
+
+	get xp(): number {
+		return this._xp;
+	}
+
 	public serialize(): any {
 		var out = super.serialize();
 
@@ -329,6 +337,10 @@ class Objects_Entity_Hero extends Objects_Entity {
 					var tpl = new XTemplate( html );
 					
 					tpl.assign( 'hero_id', hero.$id + '' );
+					tpl.assign( 'icon',    hero.icon );
+					tpl.assign( 'name',    hero.name );
+					tpl.assign( 'level',   hero._level + '' );
+					tpl.assign( 'xp',      hero._xp + '' );
 
 					tpl.parse('');
 
@@ -338,7 +350,13 @@ class Objects_Entity_Hero extends Objects_Entity {
 						"modal": true,
 						"buttons": {
 
+							"Dismiss": function() {
+								hero.remove();
+								$(this)['remove']();
+							},
+
 							"Ok": function() {
+								$(this)['remove']();
 
 							}
 
