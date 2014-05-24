@@ -1,3 +1,5 @@
+///<reference path="Events.ts" />
+
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="IObjectHandle.ts" />
 ///<reference path="IResources.ts" />
@@ -6,14 +8,12 @@
 ///<reference path="XTemplate.ts" />
 ///<reference path="Loader.ts" />
 
-///<reference path="Events.ts" />
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />
 ///<reference path="FS/File.ts" />
 ///<reference path="Faction.ts" />
 ///<reference path="Faction/Manager.ts" />
-///<reference path="Hero.ts" />
-///<reference path="Hero/Manager.ts" />
+
 ///<reference path="AdvMap.ts" />
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
@@ -21,6 +21,16 @@
 ///<reference path="Objects/Entity.ts" />
 ///<reference path="Objects/Entity/Hero.ts" />
 ///<reference path="Objects/Entity/Hero/Embarked.ts" />
+
+///<reference path="Hero.ts" />
+///<reference path="Hero/Manager.ts" />
+
+///<reference path="Hero/Skill/IValue.ts" />
+///<reference path="Hero/Skill.ts" />
+///<reference path="Hero/Skill/Secondary.ts" />
+///<reference path="Hero/SkillsManager.ts" />
+
+
 ///<reference path="Objects/Entity/AdventureItem.ts" />
 ///<reference path="Objects/Entity/Artifact.ts" />
 ///<reference path="Objects/Entity/Castle.ts" />

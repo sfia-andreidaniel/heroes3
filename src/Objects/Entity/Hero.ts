@@ -10,6 +10,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 	public _movePath : AStar_IPos[] = [];
 	public speed     : number = 16;
 
+	public skills    : Hero_SkillsManager;
+
 	private _interractWith: Objects_Entity = null;
 
 	// public rw faction  : number
@@ -19,8 +21,24 @@ class Objects_Entity_Hero extends Objects_Entity {
 	// public rw moving   : boolean
 	// public rw direction: number
 
+	public static xp_levels: number[] = [
+		45, 1000, 2000, 3200, 4500, 6000, 7700, 9000, 11000,
+		13200, 15500, 18500, 22100, 26420, 31604, 37824, 45288,
+		54244, 64991, 77887, 93362, 111932, 134216, 160956, 193044,
+		231549, 277755, 333202, 399738, 479581, 575392, 690365, 828332,
+		993892, 1192564, 1430970, 1717057, 2060361, 2472325, 2966681,
+		3559908, 4271780, 5126026, 6151121, 7381235, 8857371, 10628734,
+		12754369, 15305131, 18366045, 22039141, 26446856, 31736114,
+		38083223, 45699753, 54839589, 65807395, 78968755, 94762390,
+		113714752, 136457586, 163748986, 196498666, 235798282, 282957821,
+		339549267, 407459002, 488950684, 586740702, 704088723, 844906348,
+		1013887498, 1216664878, 1459997734, 1751997161
+	];
+
 	constructor( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super( itemTypeId, col, row, layer );
+
+		this.skills = new Hero_SkillsManager( this );
 
 		( function( me ) {
 
@@ -129,6 +147,22 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 	get xp(): number {
 		return this._xp;
+	}
+
+	set xp( newVal: number ) {
+		/* Determine if the actual level of the client
+		   is "behind" the value of the actual XP.
+		 */
+		this._xp = newVal < 0 ? 0 : newVal;
+
+		for ( var i=0, len = Objects_Entity_Hero.xp_levels.length; i<len; i++ ) {
+			if ( this._xp >= Objects_Entity_Hero.xp_levels[i] ) {
+				if ( this._level < ( i + 1 ) ) {
+					this.onLevelUP( i + 1 );
+					break;
+				}
+			} else break;
+		}
 	}
 
 	public serialize(): any {
@@ -322,6 +356,16 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 
 		super.remove();
+	}
+
+	public onLevelUP( newLevel: number ) {
+
+		console.log( "LEVEL UP!" );
+		
+		this._level = newLevel;
+
+		this.xp = this.xp;
+
 	}
 
 	public edit() {
