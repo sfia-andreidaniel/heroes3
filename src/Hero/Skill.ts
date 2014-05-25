@@ -16,4 +16,14 @@ class Hero_Skill {
 		return this;
 	}
 
+	public getPropertyName() {
+		var out = this.name.split( '-' );
+
+		for ( var i = 1, len = out.length; i<len; i++ ) {
+			out[ i ] = out[i].charAt(0).toUpperCase() + out[i].substr(1);
+		}
+		
+		return out.join( '' );
+	}
+
 }

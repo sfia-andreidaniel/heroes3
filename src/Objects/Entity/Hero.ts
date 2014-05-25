@@ -174,7 +174,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 			"isMoving" : this._isMoving,
 			"direction": this._direction,
 			"xp"       : this._xp,
-			"level"    : this._level
+			"level"    : this._level,
+			"skills"   : this.skills.serialize()
 		};
 
 		return out;
@@ -190,6 +191,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 			this._direction = data.direction || "S";
 			this._xp        = data.xp || 0;
 			this._level     = data.level || 1;
+
+			this.skills.unserialize( data.skills || null );
 		}
 
 	}
@@ -360,12 +363,144 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 	public onLevelUP( newLevel: number ) {
 
-		console.log( "LEVEL UP!" );
-		
 		this._level = newLevel;
 
-		this.xp = this.xp;
+		var primarySkill = this.skills.purposePrimarySkillLevelUP();
+		primarySkill.learn( true, 1 );
 
+		var secondarySkills = this.skills.purposeSecondarySkillsLevelUP();
+		
+		if ( secondarySkills.length == 1 ) {
+			secondarySkills[0].learn( true, 1 );
+		}
+
+		( function( hero ) {
+			$$.ajax( { 
+				"url": 'tools/game/hero/levelup.tpl',
+				"type": "GET",
+				"success": function( html ) {
+
+					var tpl = new XTemplate( html );
+
+					tpl.assign( 'hero_id', hero.$id + '' );
+					tpl.assign( 'icon', hero.icon );
+					tpl.assign( 'name', hero.name );
+					tpl.assign( 'level', hero._level + '' );
+
+					tpl.assign( 'primary_skill', primarySkill.name );
+
+					switch ( true ) {
+
+						case secondarySkills.length == 0:
+							tpl.parse( 'no_skills' );
+							break;
+
+						case secondarySkills.length == 1:
+							
+							tpl.assign( 'secondary_skill', secondarySkills[0].name );
+
+							switch ( secondarySkills[0]._value.native ) {
+								case 1:
+									tpl.assign( 'secondary_skill_level', 'basic' );
+									break;
+								case 2:
+									tpl.assign( 'secondary_skill_level', 'advanced' );
+									break;
+
+								case 3:
+									tpl.assign( 'secondary_skill_level', 'expert' );
+									break;
+							}
+
+							tpl.parse( 'one_skill' );
+							break;
+
+						default:
+
+							for ( var i=0; i<2; i++ ) {
+
+								( function( skill ) {
+
+									tpl.assign( 'secondary_skill', skill.name );
+									tpl.assign( 'secondary_skill_prop_name', skill.getPropertyName() );
+
+									switch ( skill._value.native ) {
+										case 0:
+											tpl.assign( 'secondary_skill_level', 'basic' );
+											break;
+										case 1:
+											tpl.assign( 'secondary_skill_level', 'advanced' );
+											break;
+										default:
+											tpl.assign( 'secondary_skill_level', 'expert' );
+											break;
+									}
+
+									tpl.parse( 'two_skills.skill' );
+
+								})( secondarySkills[i] );
+
+							}
+
+							tpl.parse( 'two_skills' );
+							break;
+
+							// two skills, player must choose which skill to upgrade
+
+
+					}
+
+					tpl.parse('');
+
+					$( tpl.text + '' )[ 'dialog' ]({
+						"title": hero.name + " has gained a new level",
+						"width": 400,
+						"height": 440,
+						"buttons": {
+							"Ok": function() {
+
+								if ( !$(this).find( 'td.selectable-skill' ).length ) {
+
+									$(this).remove();
+
+									hero.xp = hero.xp;
+
+									return;
+								}
+
+								var skillName = null;
+
+								$(this).find( 'td.selectable-skill.selected' ).each( function() {
+									skillName = $(this).find( 'div.g-sk' ).attr( 'data-skill-name' );
+								});
+
+								if ( skillName === null )
+									return;
+
+								hero.skills.get( skillName ).learn( true, 1 );
+
+								$(this).remove();
+
+								hero.xp = hero.xp;
+
+							}
+						},
+						"open": function() {
+							/* Remove the dialog close button */
+							$(this).parent().find( 'button.ui-dialog-titlebar-close' ).remove();
+							/* Make selectable skills "clickable" */
+							$(this).find( 'td.selectable-skill').on( 'click', function() {
+								$(this).parent().find( 'td.selectable-skill' ).removeClass( 'selected' );
+								$(this).addClass( 'selected' );
+							});
+						},
+						"modal": true,
+						"resizable": false
+					});
+
+				}
+			});
+		})( this );
 	}
 
 	public edit() {
@@ -385,6 +520,35 @@ class Objects_Entity_Hero extends Objects_Entity {
 					tpl.assign( 'name',    hero.name );
 					tpl.assign( 'level',   hero._level + '' );
 					tpl.assign( 'xp',      hero._xp + '' );
+					tpl.assign( 'race',    hero._heroType ? hero._heroType.race : '' );
+
+					tpl.assign( 'sk_attack', hero.skills.attack.value + '' );
+					tpl.assign( 'sk_defense', hero.skills.defense.value + '' );
+					tpl.assign( 'sk_spell_power', hero.skills.spellPower.value + '' );
+					tpl.assign( 'sk_knowledge', hero.skills.knowledge.value + '' );
+
+					var sk = hero.skills.getActiveSecondarySkills();
+
+					for ( var i=0, len = sk.length; i<len; i++ ) {
+
+						( function( skill ) {
+
+							tpl.assign( 'skill_name', skill.name );
+							tpl.assign( 'skill_level', ( 
+								skill._value.native == 1
+									? 'basic'
+									: (
+										skill._value.native == 2
+											? 'advanced'
+											: 'expert'
+									)
+							));
+
+							tpl.parse( 'secondary_skill' );
+
+						})( sk[i] );
+
+					}
 
 					tpl.parse('');
 

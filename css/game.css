@@ -151,15 +151,15 @@ div.g-sk.small {
     background-position: -116px -704px;
 }
 
-.g-sk.pathfinding {
+.g-sk.path-finding {
     background-position: 0px -768px;
 }
 
-.g-sk.pathfinding.advanced {
+.g-sk.path-finding.advanced {
     background-position: -58px -768px;
 }
 
-.g-sk.pathfinding.expert {
+.g-sk.path-finding.expert {
     background-position: -116px -768px;
 }
 
@@ -283,15 +283,15 @@ div.g-sk.small {
     background-position: -116px -1408px;
 }
 
-.g-sk.offence {
+.g-sk.offense {
     background-position: 0px -1472px;
 }
 
-.g-sk.offence.advanced {
+.g-sk.offense.advanced {
     background-position: -58px -1472px;
 }
 
-.g-sk.offence.expert {
+.g-sk.offense.expert {
     background-position: -116px -1472px;
 }
 
@@ -343,15 +343,15 @@ div.g-sk.small {
     background-position: -116px -1728px;
 }
 
-.g-sk.healing {
+.g-sk.first-aid {
     background-position: 0px -1792px;
 }
 
-.g-sk.healing.advanced {
+.g-sk.first-aid.advanced {
     background-position: -58px -1792px;
 }
 
-.g-sk.healing.expert {
+.g-sk.first-aid.expert {
     background-position: -116px -1792px;
 }
 
@@ -359,7 +359,7 @@ div.g-sk.small {
     background-position: 0px -1856px;
 }
 
-.g-sk.defence {
+.g-sk.defense {
     background-position: -58px -1856px;
 }
 

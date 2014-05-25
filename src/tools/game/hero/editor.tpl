@@ -5,11 +5,17 @@
             height: 320px;
         }
         
-        .hero-{hero_id}-skills-list {
-            display: block;
-            height: 135px;
-            overflow-x: hidden;
-            overflow-y: scroll;
+        .hero-{hero_id}-skills-list > div.secondary-skill {
+            display: inline-block;
+            float: left;
+            width: 45%;
+            margin: 5px;
+            height: 32px;
+        }
+        
+        .hero-{hero_id}-skills-list > div.secondary-skill > div.g-sk {
+            float: left;
+            margin-right: -4px;
         }
         
     </style>
@@ -47,8 +53,10 @@
                         <td>
                             <table style="width: 100%">
                                 <tr>
-                                    <td align="center" style="vertical-align: bottom" >
-                                        Level
+                                    <td align="center" rowspan="2" >
+                                        Level<br />
+                                        {level}<br />
+                                        {race}
                                     </td>
                                     <td>
                                         <div class="g-sk experience small" title="Experience"></div>
@@ -57,7 +65,7 @@
                                         <div class="g-sk attack small" title="Attack"></div>
                                     </td>
                                     <td>
-                                        <div class="g-sk defence small" title="Defence"></div>
+                                        <div class="g-sk defense small" title="Defense"></div>
                                     </td>
                                     <td>
                                         <div class="g-sk spell-power small" title="Spell Power"></div>
@@ -68,16 +76,13 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        {level}
-                                    </td>
-                                    <td align="center">
                                         {xp}
                                     </td>
                                     <td align="center">
                                         {sk_attack}
                                     </td>
                                     <td align="center">
-                                        {sk_defence}
+                                        {sk_defense}
                                     </td>
                                     <td align="center">
                                         {sk_spell_power}
@@ -90,79 +95,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <table style="width: 100%" cellpadding="3">
-                                <tr>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                    <td style="width: 5%">
-                                        <div class="g-sk archery advanced small"></div>
-                                    </td>
-                                    <td>
-                                        Advanced<br />archery
-                                    </td>
-                                </tr>
-                            </table>
+                        <td colspan="2" class="hero-{hero_id}-skills-list">
+                            <!-- BEGIN: secondary_skill -->
+                            <div class="secondary-skill">
+                                <div class="g-sk {skill_name} {skill_level} small"></div>
+                                {skill_level}<br />{skill_name}
+                            </div>
+                            <!-- END: secondary_skill -->
                         </td>
                     </tr>
                 </tbody>
