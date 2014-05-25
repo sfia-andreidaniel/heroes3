@@ -15,7 +15,8 @@
                         heroes_types.castle_type           AS castleTypeId,
                         heroes_types.pri_skills_adv_lt_10  AS primarySkillsAdvancementLt10,
                         heroes_types.pri_skills_adv_gte_10 AS primarySkillsAdvancementGTE10,
-                        heroes_types.object_type_id        AS objectTypeId
+                        heroes_types.object_type_id        AS objectTypeId,
+                        heroes_types.skills_advancement    AS skillsAdvancement
                  FROM heroes
                  LEFT JOIN heroes_types ON heroes.type = heroes_types.id"
             );
@@ -31,6 +32,8 @@
                     'lt10' => json_decode( $row[ 'primarySkillsAdvancementLt10' ], TRUE ),
                     'gte10'=> json_decode( $row[ 'primarySkillsAdvancementGTE10' ], TRUE )
                 ];
+                
+                $row[ 'skillsAdvancement' ] = json_decode( $row[ 'skillsAdvancement' ], TRUE );
                 
                 unset( $row[ 'primarySkillsAdvancementLt10' ] );
                 unset( $row[ 'primarySkillsAdvancementGTE10' ] );

@@ -25,6 +25,8 @@ class Hero extends Events {
 		"gte10": [ 25, 25, 25, 25 ]
 	};
 
+	public secondarySkillsAdvancement: any = null;
+
 	constructor ( conf, public manager: Hero_Manager ) {
 		super();
 
@@ -43,6 +45,8 @@ class Hero extends Events {
 		};
 
 		this.objectTypeId = conf.objectTypeId || 10;
+
+		this.secondarySkillsAdvancement = conf.skillsAdvancement;
 	}
 
 	public getMapObject() {
