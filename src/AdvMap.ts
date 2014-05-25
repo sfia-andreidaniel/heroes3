@@ -11,7 +11,7 @@ class AdvMap extends Events {
     public entitiesLoad : number          = 3;
     public fs           : FS              = new FS();
     public fm           : Faction_Manager = new Faction_Manager();
-    public hm           : Hero_Manager    = new Hero_Manager();
+    public hm           : Hero_Manager    = new Hero_Manager( this );
     
     // columns and rows
     public cols         : number        = 0;

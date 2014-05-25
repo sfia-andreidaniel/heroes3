@@ -1,23 +1,12 @@
 map.on( 'load', function() {
     
-    $.ajax( 'tools/editor/assets/game.tpl', {
+    $$.ajax(  {
+        "url": 'tools/editor/assets/game.tpl',
         "type": "GET",
         "cache": false,
         "success": function( buffer ) {
             
             var tpl = new XTemplate( buffer );
-            
-            /* Parse the factions selector */
-            
-            for ( var i=0, len = map.fm.items.length; i<len; i++ ) {
-                
-                tpl.assign( 'id', map.fm.items[i].id );
-                tpl.assign( 'name', map.fm.items[i].name );
-                tpl.parse( 'faction' );
-                
-            }
-            
-            /* End of parsing the factions selector */
             
             tpl.parse();
             
@@ -116,7 +105,7 @@ map.on( 'load', function() {
                     
                 } );
                 
-                $(this).find( '#faction-selector select' ).on( 'change', function() {
+                $('#faction-selector select' ).on( 'change', function() {
                     
                     if ( map.activeFaction ) {
                         /* Unbind the estate-changed from the active faction */
@@ -129,7 +118,7 @@ map.on( 'load', function() {
                     
                 } );
                 
-                $(this).find( '#faction-selector select').change();
+                $('#faction-selector select').change();
                 
                 map.on( 'object-focus', function( object ) {
                     

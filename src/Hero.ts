@@ -11,6 +11,9 @@ class Hero extends Events {
 	public typeName		: string    = '';
 	public castleTypeId : number    = 0;
 
+	public objectTypeId : number    = null;
+	public mapItem      : Objects_Item = null;
+
 	/* How this hero will advance through primary skills,
      * below and after it's 10th level.
      * indexes are representing the chances to gain 
@@ -39,6 +42,12 @@ class Hero extends Events {
 			"gte10": [ 25, 25, 25, 25 ]
 		};
 
+		this.objectTypeId = conf.objectTypeId || 10;
+	}
+
+	public getMapObject() {
+
+		return this.manager.map.objects.getObjectById( this.objectTypeId );
 	}
 
 }

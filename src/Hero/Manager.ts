@@ -3,7 +3,7 @@ class Hero_Manager extends Events {
 	public loaded: boolean = false;
 	public items: Hero[] = [];
 
-	constructor() {
+	constructor( public map: AdvMap ) {
 		super();
 
 		var f: FS_File = new FS_File( 'resources/tools/heroes.php', 'json', {} );

@@ -1,7 +1,7 @@
 map.on( 'load', function() {
 
-    $.ajax( 'tools/editor/assets/tools.tpl', {
-        
+    $$.ajax( {
+        "url": 'tools/editor/assets/tools.tpl',
         "type": "POST",
         "success": function( html ) {
             var tpl = new XTemplate( html );

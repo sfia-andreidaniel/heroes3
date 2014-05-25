@@ -1,3 +1,9 @@
+var currentObject = null;
+var currentObjectConfig = null;
+
+
+
+
 var modes = {
         "paint": 1,
         "erase": 2,
@@ -8,7 +14,23 @@ var modes = {
     editorMode = null,
     isDragging = false,
     l5VisibilitySave = true;
-    
+
+
+function editor_load_object( obj ) {
+
+    currentObject = obj;
+
+    if ( editorMode && editorMode == modes.object )
+    map.objectHandle = {
+        "cols": currentObject.cols,
+        "rows": currentObject.rows,
+        "hsx": currentObject.hsx,
+        "hsy": currentObject.hsy,
+        "supported": true,
+        "bitmap": currentObject.sprite
+    }
+
+}
 
 function setEditorMode( mode ) {
     
@@ -85,6 +107,26 @@ function paintObject() {
         return;
     
     map.activeCell.setData( destinationLayer, currentObject.id );
+    
+    if ( currentObjectConfig ) {
+        
+        /* Get back object from the map */
+        //var paintedObject = map.activeCell.getData( destinationLayer );
+        //console.log( paintedObject, destinationLayer );
+        
+        var paintedObject = map.layers[ destinationLayer ]._objects[
+            
+            map.activeCell.y() * map.cols + map.activeCell.x()
+            
+        ];
+        
+        for ( var prop in currentObjectConfig ) {
+            
+            paintedObject[ prop ] = currentObjectConfig[ prop ];
+            
+        }
+        
+    }
     
 }
 

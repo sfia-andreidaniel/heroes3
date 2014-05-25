@@ -216,15 +216,7 @@ body {
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAQCAYAAADnEwSWAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gURERsj0hAb2gAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAUZSURBVDjLjVVtTFNnFH7u7b3tbW9vS4v9UmnHhwNmBRFNHMuC/pJAWIzZdGPRPxr8oLofdTFG58qAmGWr8gNd4jTLEk38Y7IZx5ZoI3NEM7Oqk8GU0FpXlNbWS5F+3N723rsfMmIUkz3/zvvmnOc957znOQRegs/ng8/nw+HDh50cx8mNje/MDg9fSTGMDjabBY2Na0zXrl2XPJ7O2a6uAZw44cHA1z/hwq8XyFVvrirx+z08XgNiocOjR49ui8Vi33Mch9paNxwOuxIOPyOcTq0CSEShIA9fCUR+OX5sT99/Pv1f/tATiT38o//4Jz/+LzKv1wu/349du3ZFC4XCUo7jQFEUnM4ysJpKMKwBfDyF5Q00bg7nsLbZeHck+IS0LSqTHz58Zv30s1aH1zsAv9+zIJnqRePGjRvYv3//MUVRNhQKBUiSBI7jIAh5xBPj0DBlqK1ajuTMLHR6MygqZ2N11dZsUbER9N3pS5cG+6enHxButxtDQ0Ovkvl8vvmL7u5uayaTuSCKIrRaLXQ6HRiGAUmSUKs1mObvQcuVYu3q1XDXLUFZ2RsQpTRo+jE4zmC8fPnK55FIROru7r42MDBADA4OvlrGI0eObCFJch/DMPTVq1fXqFQqGAwGVFVVgaZpKIqMYtEIvdqGykoH2jatg5Z53oHw+CP8dj2EUPgvbN78Lu7c+RMzMzPnPR7PRy9nRp48edKl0+nOi6LYRFHUGrfbjampKYyNjWF0dBTJZBIkqYLFQqLUkYUgxyAV5fkAmUwR69ZVYM+eTWBZPRoaGpBOp5sAoL+/HwBw+vTp52Vsb2//QBTF96xWG/R6DhbLIlRUVICmady/fx88z0Ov10Or00ESNXAseRs0nYdSJDAzm0X8iYCcIKKkRA1JksEwDFKplLGjo8PndDqnmpubTTt27Ah3dXVB1dTUFGQYjcyyRoLjWLAsC4PBALvdDpvNhkwmg5GREcRij9DYuBFarRah0E2EQhLsdjWyWQnRyRTKyzmQJIVQKIRoNIpisagkEon2ZDK5TafT/X727NkJ6unTp1XT0+SEXm9CLidCr3/+Iex2OywWC0pLS2E2m2E2lyObIhAY6sVihwM0XUB5ZR4jIyPI8EtxbvIBLl4cwMaNm2A2W+B21xJWqxWKoqC+vv7n1tbWpfNztnev59zixUs6yspcMJmMYBgGkiQBABKJGYyNPUD8yd8wGsxwOBxgWS2sVjvC4TBOffsN1JQOH76/Ezs9W8AwGmSzubmeZpDP55VAIEBQc8NM+P3+j71e7z1RFL9YtqwaDMOAoijkcjnYbCWgKBdqajbAbreDoigoigJFUbB+/XoEg0HcuhXE48QYCoUCisUiCIIAQRDQaDRQqVSEw+EACQB+v1/xer1wuVy9TU2ryNu3g8lgMKgAAMMwyOdF8DwPlmUhyzJEUZwPKggCtm7dCllWUFdXB4qiQFEUaJpGsVhEJpPB+Pg4ksnkq9o4l6Vy4MCBCMuy+pqamlJZlpFOp9HS0gJJkuYekIdGo0GhUIAgCNi9ezc6Ojpgs9kwMRFRJicjd3meV8XjcdXKlSu/6unp+W5BIT506BDR19entLW1vVVbWzuq0WgUl8tFrFhRryQSMSKdzkAQBOTzeVAUBVmWEQgE9pnNZq3BYIBaTad6e/tOvbxNiNcp9Pbt23HmzBl0dnayJpMpzfM8zGYzrFZrSTQa5eLxOARBQHV1NYxGI3nw4MF/FlpVL+JfAZMiwVL97+sAAAAASUVORK5CYII= );
 }
 
-/* Game panel */
-
-#minimap {
-    display: block;
-    width: 250px;
-    height: 250px;
-    background-color: black;
-    margin: 0px auto 17px auto;
-}
+/* Faction selector panel */
 
 #faction-selector {
     display: block;
@@ -239,6 +231,25 @@ body {
 #faction-selector span {
     font-size: 12px;
 }
+
+/* Game panel */
+
+.widget.panel-game {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 48px;
+    bottom: 0px;
+}
+
+#minimap {
+    display: block;
+    width: 250px;
+    height: 250px;
+    background-color: black;
+    margin: 0px auto 17px auto;
+}
+
 
 #faction-objects {
     
@@ -288,12 +299,12 @@ body {
 
 /* Objects panel */
 #objects {
-    
     display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    
+    position: absolute;
+    top: 48px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 
 #objects > .scroller > .object {
@@ -651,6 +662,55 @@ body.panel-game div.panel-game {
     display: block !important;
 }
 
+div.panel-heroes {
+    display: none !important;
+}
+
+body.panel-heroes div.panel-heroes {
+    display: block !important;
+}
+
+div.panel-faction-selector {
+    display: none !important;
+}
+
+body.panel-game div.panel-faction-selector,
+body.panel-heroes div.panel-faction-selector,
+body.panel-objects div.panel-faction-selector {
+    display: block !important;
+}
+
+/* PANEL HEROES */
+
+#heroes {
+    position: absolute;
+    display: block;
+    top: 48px;
+    right: 0px;
+    bottom: 0px;
+    left: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#heroes > h3 {
+    margin: 0px 10px 10px 10px;
+}
+
+#heroes > .hero {
+    display: inline-block;
+    width: 80px;
+    height: 100px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#heroes > .hero.active {
+    background-color: #333;
+    color: white;
+}
+
 /* PANEL EVENTS */
 #events {
     position: absolute;
@@ -807,6 +867,10 @@ div.joystick > .c  { left: 16px; top: 16px; background-position: 50% 50%; }
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADKElEQVR42o2TbWhTVxjH/+fcm7fWm8REm9oiUVur7YLYlBLH1o3V+imwKYigWBCpCLYdxVmpSpV+8oOi0Iofhgwmw+2LsE0tE/1SSqsmTdXaF1trTNMXk7aLSdokNy/3XG+viAoOdj4d/s95fuf/nPM8BP9zfdfPDkyN+KL+I9XdH+vk/ebFGjhlQk5ShlpGcV2i8pXyMAIrsdJuZqw0554/GhycDjbtcH0CGCrgdhFGThKKuo8DEsAIwy3GyZ17r4nuWhs5/k+/T9Gpe7blgwviP/i9lInFIAYDNBsOKZKsBqjegIzewAZ0hbh45gH7wc7zN3sGwBHiCbZ+cEEm9uyU0y8nwJdsYfzGUqQCfkqU5NB0UHo5Nkp/a75NgptrsL+E4tf7A7Ct0iCTg3vsp3cuyIi7Rk4H/MguhMBb1sJSf5j1/X4D0ZkgHXHuw9/1v6g3NVTwuNrthU3QwmrQeHoat6suyJM6l5xZnEdmbkY9uK6hEbeudiGtE/DzCR+WhUJVb3FqcOFPD9YqDjZZ9JiOZNzDp6u7ifebSllKJhAJT+HmVxJ6qzgs0TSEpXzlFesRM7WDUSOaFcDlvzxKCVqsX61DKs08/a1VLtLn2rqc5OT8szWTYLUmOBw65OcBiSVg6mEaocF1mLXcxaHtVly740WhUYsCQaO6SojMTforKiwXvg3cHq0Vvix1FeNYQQM633RgKJqCJabU6+Hwan43dlVdwh/3vCg26yDoORWQk5hXbaTydrI4t1NjdZWUo9KcB78Yhi+aQHJhGbbnOYjjq/CFI4A7yjfarTrwHF1Jfs3zXKsKcJwi8lydjDK7E0UGA+JSErPJZWTnIxAmIkhMAsX2KB56B7HGyGcZQ1dK1nREunbEVcC242QxVa2xhtZnIBreNUheErAuEBQFtHj1Ro7bTKHxZ08fJ7RE25S4XjPyySyUtZHOIqutWSyXsEBjYDJDvsihKG1CYo5iOBfqirXhx88NmQownYPZLJHeig02h90pQG+kEOMM40NL8IXCw3HIX6MNsf8EqJDzWE1ldPBZHKAE1izFv6ION5JGtOPo55NX1luHBkfvDXGsngAAAABJRU5ErkJggg== );
 }
 
+#btn-heroes {
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAADAFBMVEUAAAAAAFUAAKoAAP8AJAAAJFUAJKoAJP8ASQAASVUASaoASf8AbQAAbVUAbaoAbf8AkgAAklUAkqoAkv8AtgAAtlUAtqoAtv8A2wAA21UA26oA2/8A/wAA/1UA/6oA//8kAAAkAFUkAKokAP8kJAAkJFUkJKokJP8kSQAkSVUkSaokSf8kbQAkbVUkbaokbf8kkgAkklUkkqokkv8ktgAktlUktqoktv8k2wAk21Uk26ok2/8k/wAk/1Uk/6ok//9JAAD///9JAKpJAP9JJABJJFVJJKpJJP9JSQBJSVVJSapJSf9JbQBJbVVJbapJbf9JkgBJklVJkqpJkv9JtgBJtlVJtqpJtv9J2wBJ21VJ26pJ2/9J/wBJ/1VJ/6pJ//9tAABtAFVtAKptAP9tJABtJFVtJKptJP9tSQBtSVVtSaptSf9tbQBtbVVtbaptbf9tkgBtklVtkqptkv9ttgBttlVttqpttv9t2wBt21Vt26pt2/9t/wBt/1Vt/6pt//+SAACSAFWSAKqSAP+SJACSJFWSJKqSJP+SSQCSSVWSSaqSSf+SbQCSbVWSbaqSbf+SkgCSklWSkqqSkv+StgCStlWStqqStv+S2wCS21WS26qS2/+S/wCS/1WS/6qS//+2AAC2AFW2AKq2AP+2JAC2JFW2JKq2JP+2SQC2SVW2Saq2Sf+2bQC2bVW2baq2bf+2kgC2klW2kqq2kv+2tgC2tlW2tqq2tv+22wC221W226q22/+2/wC2/1W2/6q2///bAADbAFXbAKrbAP/bJADbJFXbJKrbJP/bSQDbSVXbSarbSf/bbQDbbVXbbarbbf/bkgDbklXbkqrbkv/btgDbtlXbtqrbtv/b2wDb21Xb26rb2//b/wDb/1Xb/6rb////AAD/AFX/AKr/AP//JAD/JFX/JKr/JP//SQD/SVX/Sar/Sf//bQD/bVX/bar/bf//kgD/klX/kqr/kv//tgD/tlX/tqr/tv//2wD/21X/26r/2////wD//1X//6r////0bZVPAAABAHRSTlP//////////////////////////////////////////////////////////////////////////////////////wD/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////e7LwGAAAAAlwSFlzAAAPYQAAD2EBqD+naQAAAJNJREFUeJxFj7ENwzAMBH8YLWKAw3zjPdiw0R4qMsqnUOM93CaknNgUBIoH8vnCtgIZK2+4ao6wfOKDH2hqfEC2+3DLtC+AKWMeTfQjAagwURbi0QsMpqYNmuvYCygAM2uAeq2FC2SQBufygaBeHHKoqlqr3ON6Xx7qztSFn3GDoXRF8Q+ypdScz8hS05rB/Xdc6QvfqVH362T4WwAAAABJRU5ErkJggg== );
+}
+
 #btn-layers {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIXRFWHRTb2Z0d2FyZQBBZGFtIE5ham1hbm93aWN6IFRHQTJQTkdywFGBAAABSUlEQVR4nM2SIVIDMRSGv3YQdY2sIxLHyjr2CHuE5QQsNygOx3KDHGFxyOAqi6sMDvnL50BsdtvtlEFgeDPJm7zky8v/T+CPMTsttNuNZFoCYEJDNoA+ayv82n2EOvqLE3gntPSr4qiqfjaBQRc63Nq9hTqWAPMjOMp07d3vMFANJ+ZjZ9PN+c79qod5Aaqujho9aLeNdtISy1oFGKCsO9eLNdSLhEPoE5zj3te0ExNTrAosBVc01ywcg5GY+hcpkWLAOd58zdSDFKvSDfBERh6mEQbqUcKPnTM0jPTa4hzvQOVr0niBtlWhFDtMl/2Ts33GJLQoCdogedK+A3jYdc1m4kETvhoZT+XVCWyHi7vwjLsqb+NjESYeZHhzFmYKA2HYn5/Ay7OwZdj3cHw8/JdZE77a3f79btDfm3fIytmtinsWtMfw/4hv5Q/UZzwXIn8AAAAASUVORK5CYII=);
 }
@@ -837,7 +901,8 @@ body.panel-objects #btn-objects,
 body.panel-layers #btn-layers,
 body.panel-erase #btn-eraser,
 body.panel-events #btn-walkmode,
-body.panel-game #btn-game {
+body.panel-game #btn-game,
+body.panel-heroes #btn-heroes {
     background-color: #333;
     color: white;
     border-bottom-left-radius: 0;

@@ -1,7 +1,7 @@
 map.on( 'load', function() {
 
-    $.ajax( 'tools/editor/assets/erase.tpl', {
-        
+    $$.ajax({
+        "url": 'tools/editor/assets/erase.tpl',
         "type": "POST",
         "success": function( html ) {
             

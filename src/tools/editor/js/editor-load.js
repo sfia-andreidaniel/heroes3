@@ -2,8 +2,8 @@ map.on( 'load', function() {
 
     $('#btn-open').on( 'click', function() {
         
-        $.ajax('tools/editor/assets/load.tpl?t=' + ( new Date() ).getTime(), {
-            
+        $$.ajax( {
+            "url": 'tools/editor/assets/load.tpl',
             "success": function( buffer ) {
                 
                 $.ajax( 'resources/tools/maps-list.php', {

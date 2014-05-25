@@ -390,7 +390,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 					$(tpl.text + '')['dialog']({
 						"width": 400,
-						"height": 400,
+						"height": 500,
 						"modal": true,
 						"buttons": {
 

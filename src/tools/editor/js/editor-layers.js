@@ -1,6 +1,7 @@
 map.on( 'load', function() {
     
-    $.ajax( 'tools/editor/assets/layers.tpl', {
+    $$.ajax(  {
+        "url": 'tools/editor/assets/layers.tpl',
         "success": function( buffer ) {
             
             var tpl = new XTemplate( buffer );

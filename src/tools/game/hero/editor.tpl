@@ -2,7 +2,7 @@
     <style>
         
         .hero-{hero_id}-editor-panel.ui-tabs-panel {
-            height: 220px;
+            height: 320px;
         }
         
         .hero-{hero_id}-skills-list {
@@ -40,24 +40,129 @@
             <table style="width: 100%">
                 <tbody>
                     <tr>
-                        <td style="width: 90px">
-                            <img src="{icon}" border="0" />
-                        </td>
-                        <td style="width: 115px">
+                        <td style="width: 90px" align="center">
+                            <img src="{icon}" border="0" /><br />
                             {name}
                         </td>
-                        <td style="width: 100px">
-                            Level: {level}<br />
-                            XP: {xp}<br />
+                        <td>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td align="center" style="vertical-align: bottom" >
+                                        Level
+                                    </td>
+                                    <td>
+                                        <div class="g-sk experience small" title="Experience"></div>
+                                    </td>
+                                    <td>
+                                        <div class="g-sk attack small" title="Attack"></div>
+                                    </td>
+                                    <td>
+                                        <div class="g-sk defence small" title="Defence"></div>
+                                    </td>
+                                    <td>
+                                        <div class="g-sk spell-power small" title="Spell Power"></div>
+                                    </td>
+                                    <td>
+                                        <div class="g-sk knowledge small" title="Knowledge"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        {level}
+                                    </td>
+                                    <td align="center">
+                                        {xp}
+                                    </td>
+                                    <td align="center">
+                                        {sk_attack}
+                                    </td>
+                                    <td align="center">
+                                        {sk_defence}
+                                    </td>
+                                    <td align="center">
+                                        {sk_spell_power}
+                                    </td>
+                                    <td align="center">
+                                        {sk_knowledge}
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            Skills:<br />
-                            
-                            <div class="hero-{hero_id}-skills-list">
-                            </div>
-                            
+                        <td colspan="2">
+                            <table style="width: 100%" cellpadding="3">
+                                <tr>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                    <td style="width: 5%">
+                                        <div class="g-sk archery advanced small"></div>
+                                    </td>
+                                    <td>
+                                        Advanced<br />archery
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </tbody>

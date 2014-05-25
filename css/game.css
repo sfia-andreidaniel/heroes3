@@ -16,7 +16,7 @@ div.g-sk.small {
     -o-transform: scale( 0.5, 0.5 );
     -ms-transform: scale( 0.5, 0.5 ):
     transform: scale(0.5,0.5);
-    margin: -14px -16px;
+    margin: -14px -19px -14px -12px;
 }
 
 .g-sk.archery {

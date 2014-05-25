@@ -1,6 +1,7 @@
 map.on( 'load', function() {
     
-    $.ajax( 'tools/editor/assets/events.tpl', {
+    $$.ajax(  {
+        "url": 'tools/editor/assets/events.tpl',
         
         "type": "GET",
         

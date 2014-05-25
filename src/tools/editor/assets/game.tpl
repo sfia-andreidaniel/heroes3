@@ -5,15 +5,6 @@
         <div class="option icon" id="opt-fly">Fly</div>
         <div class="option icon" id="opt-swim">Swim</div>
     </div>
-    <div id="faction-selector">
-        <label>
-            <span>Faction</span>
-            <select>
-                <!-- BEGIN: faction --><option value="{id}">{name}</option>
-                <!-- END: faction -->
-            </select>
-        </label>
-    </div>
     <div id="faction-objects">
         <div class="heroes">
         </div>

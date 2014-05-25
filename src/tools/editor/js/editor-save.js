@@ -2,8 +2,8 @@ map.on( 'load', function() {
 
     $('#btn-save').on( 'click', function() {
         
-        $.ajax( 'tools/editor/assets/save.tpl?t=' + ( new Date() ).getTime(), {
-            
+        $$.ajax(  {
+            "url": 'tools/editor/assets/save.tpl',
             "success": function( buffer ) {
                 
                 

@@ -1,5 +1,3 @@
-var currentObject   = null
-
 var htmlentities = ( function() {
     
     var d = document.createElement( 'div' );
@@ -12,27 +10,12 @@ var htmlentities = ( function() {
     
 } )();
 
+
 map.on( 'load', function() {
 
-    function editor_load_object( obj ) {
-        
-        currentObject = obj;
-        
-        if ( editorMode && editorMode == modes.object )
-        map.objectHandle = {
-            "cols": currentObject.cols,
-            "rows": currentObject.rows,
-            "hsx": currentObject.hsx,
-            "hsy": currentObject.hsy,
-            "supported": true,
-            "bitmap": currentObject.sprite
-        }
-
-        
-    }
     
-    $.ajax( 'tools/editor/assets/objects.tpl', {
-        
+    $$.ajax( {
+        "url": 'tools/editor/assets/objects.tpl',
         "type": "GET",
         "success": function( buffer ) {
             
@@ -78,6 +61,8 @@ map.on( 'load', function() {
                 
                 objectId = ~~$(this).attr('data-object-id'),
                 obj      = map.objects.getObjectById( objectId );
+                
+                currentObjectConfig = null;
                 
                 if ( !obj.loaded ) {
                 
