@@ -24,6 +24,13 @@ map.on( 'load', function() {
             
             for ( var i=0, len = map.objects.store.length; i<len; i++ ) {
                 
+                if ( [
+                    'Hero',
+                    'Hero_Embarked',
+                    'Artifact'
+                ].indexOf( map.objects.store[i].objectClass ) >= 0 )
+                    continue;
+                
                 tpl.assign( 'id', map.objects.store[i].id + '' );
                 
                 tpl.assign( 'type', map.objects.store[i].objectClass );
@@ -52,7 +59,11 @@ map.on( 'load', function() {
             $('#editor > div').append( tpl.text + '' );
             
             $('#objects > .scroller > div.object').on( 'click', function() {
-                
+
+                map.objectHandle = null;
+                currentObject = null;
+                currentObjectConfig = null;
+
                 var objectId,
                     obj;
                 
@@ -61,8 +72,6 @@ map.on( 'load', function() {
                 
                 objectId = ~~$(this).attr('data-object-id'),
                 obj      = map.objects.getObjectById( objectId );
-                
-                currentObjectConfig = null;
                 
                 if ( !obj.loaded ) {
                 

@@ -5,7 +5,8 @@ var panels = [
     "layers",
     "events",
     "game",
-    "heroes"
+    "heroes",
+    "artifacts"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

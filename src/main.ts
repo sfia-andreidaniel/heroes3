@@ -15,6 +15,7 @@
 ///<reference path="Faction/Manager.ts" />
 
 ///<reference path="AdvMap.ts" />
+
 ///<reference path="Layer.ts" />
 ///<reference path="Objects.ts" />
 ///<reference path="Objects/Item.ts" />
@@ -33,6 +34,10 @@
 
 ///<reference path="Objects/Entity/AdventureItem.ts" />
 ///<reference path="Objects/Entity/Artifact.ts" />
+
+///<reference path="Artifact.ts" />
+///<reference path="Artifacts/Manager.ts" />
+
 ///<reference path="Objects/Entity/Castle.ts" />
 ///<reference path="Objects/Entity/Tileset.ts" />
 ///<reference path="Objects/Entity/Mine.ts" />

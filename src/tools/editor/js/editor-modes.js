@@ -34,6 +34,25 @@ function editor_load_object( obj ) {
 
 function setEditorMode( mode ) {
     
+    /* Remove all focused items in the panels:
+       #objects .object,
+       #heroes  .hero,
+       #artifacts .artifact,
+       
+       and set: map.objectHandle    to NULL,
+                currentObject       to NULL
+                currentObjectConfig to NULL
+     */
+    
+    $('#objects .object, #heroes .hero, #artifacts .artifact').removeClass( 'active' ).removeClass( 'focused' );
+    
+    map.objectHandle = null;
+
+    currentObject = null;
+    currentObjectConfig = null;
+    
+    
+    
     if ( ( mode == modes.interactive ) || ( mode == modes.game ) ) {
         
         l5VisibilitySave = map.layers[5].visible;

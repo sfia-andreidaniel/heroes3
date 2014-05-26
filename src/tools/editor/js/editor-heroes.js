@@ -33,7 +33,13 @@ map.on( 'load', function() {
             
             $('#heroes').on( 'click', 'div.hero', function() {
                 
-                $(this).parent().find( '.hero' ).removeClass( 'active' );
+                map.objectHandle = null;
+
+                currentObject = null;
+                currentObjectConfig = null;
+
+                
+                $(this).parent().find( '.hero.active' ).removeClass( 'active' );
                 $(this).addClass( 'active' );
                 
                 var heroId = ~~$(this).attr('data-hero-id');
