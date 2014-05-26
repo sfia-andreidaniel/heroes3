@@ -177,7 +177,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 			"direction": this._direction,
 			"xp"       : this._xp,
 			"level"    : this._level,
-			"skills"   : this.skills.serialize()
+			"skills"   : this.skills.serialize(),
+			"artifacts": this.artifacts.serialize()
 		};
 
 		return out;
@@ -195,6 +196,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 			this._level     = data.level || 1;
 
 			this.skills.unserialize( data.skills || null );
+			this.artifacts.unserialize( data.artifacts || null );
 		}
 
 	}
@@ -554,32 +556,243 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 					tpl.parse('');
 
+					// artifacts updater is a callback, defined when
+					// the dialog opens, which is mapped on hero.on( 'artifacts-changed', slotName )
+					var artifactsUpdater: any;
+
 					$(tpl.text + '')['dialog']({
 						"width": 400,
-						"height": 500,
+						"height": 570,
 						"modal": true,
 						"buttons": {
 
 							"Dismiss": function() {
+								// unbind the artifactsUpdater from hero
+								hero.removeListener( 'artifacts-changed', artifactsUpdater );
+
 								hero.remove();
+
 								$(this)['remove']();
 							},
 
 							"Ok": function() {
-								$(this)['remove']();
+								// unbind the artifactsUpdater from hero
+								hero.removeListener( 'artifacts-changed', artifactsUpdater );
 
+								$(this)['remove']();
 							}
 
 						},
 						"close": function() {
+							// unbind the artifactsUpdater from hero
+							hero.removeListener( 'artifacts-changed', artifactsUpdater );
 
+							// and close the dialog
 							$(this).remove();
 
 						},
 						"open": function() {
+
 							$(this).find( ".tabs" )[ 'tabs' ]();
+
+							var activeArtifact = null,
+							    dlg            = this;
+
+							$(this).find( 'div.slot.backpack .scroll-left').on( 'click', function( e ) {
+
+								if ( activeArtifact && activeArtifact.slot == 'backPack' )
+									activeArtifact = null;
+
+								hero.artifacts.backPack.scrollArtifacts( 1 );
+
+							});
+
+							$(this).find( 'div.slot.backpack .scroll-right').on( 'click', function( e ) {
+
+								if ( activeArtifact && activeArtifact.slot == 'backPack' )
+									activeArtifact = null;
+
+								hero.artifacts.backPack.scrollArtifacts( -1 );
+
+							});
+
+							/* Artifacts manager tab */
+							var slotsDOM = {
+								"head":         $(this).find( "div.slot.head" ),
+								"neck":         $(this).find( "div.slot.neck" ),
+								"torso":        $(this).find( "div.slot.torso" ),
+								"feet":         $(this).find( "div.slot.feets" ),
+								"spellBook":    $(this).find( "div.slot.spellBook" ),
+								"shoulders":    $(this).find( "div.slot.shoulders" ),
+								"misc":         $(this).find( "div.slot.misc-1, div.slot.misc-2, div.slot.misc-3, div.slot.misc-4, div.slot.misc-5" ),
+								"leftHand":     $(this).find( "div.slot.leftHand" ),
+								"rightHand":    $(this).find( "div.slot.rightHand" ),
+								"finger":       $(this).find( "div.slot.ring-1, div.slot.ring-2" ),
+								"ballista":     $(this).find( "div.slot.ballista" ),
+								"catapult":     $(this).find( "div.slot.catapult" ),
+								"firstAidTent": $(this).find( "div.slot.firstAid" ),
+								"ammoCart":     $(this).find( "div.slot.ammoCart"),
+								"backPack":     $(this).find( "div.slot.backpack > div > .contents" )
+							},
+							i: number,
+							len: number,
+							slot: string,
+
+							updateSlot = function( slotName: string ) {
+
+								if ( typeof slotsDOM[ slotName ] == 'undefined' ) {
+									throw "Invalid slot: " + slotName;
+								}
+
+								if ( slotName != 'backPack' ) {
+
+									slotsDOM[ slotName ].each( function( index: number ) {
+										
+										$(this).html(
+											hero.artifacts[ slotName ].items[ index ]
+												? '<div class="g-art id-' 
+												  + hero.artifacts[ slotName ].items[ index ].id 
+												  + '" data-id="' 
+												  + hero.artifacts[ slotName ].items[ index ].id 
+												  + '" data-index="' + index + '"></div>'
+												: ''
+										);
+
+									} );
+
+								} else {
+
+									var arts = [];
+
+									for ( var i=0, len = hero.artifacts.backPack.items.length; i<len; i++ ) {
+										if ( hero.artifacts.backPack.items[ i ] )
+											arts.push( 
+												'<div class="g-art id-'
+												+ hero.artifacts.backPack.items[ i ].id
+												+ '" data-id="' 
+												+ hero.artifacts.backPack.items[ i ].id
+												+ ' "data-index="' + i + '"></div>'
+											);
+									}
+
+									slotsDOM.backPack.html( arts.join( '' ) );
+
+								}
+
+							};
+
+							// bind artifactsUpdater
+							artifactsUpdater = function( whichSlotToRefresh: string ) {
+								console.log( "UpdateSlot: ", whichSlotToRefresh );
+								updateSlot( whichSlotToRefresh );
+							};
+
+							// bind the artifactsUpdater
+							hero.on( 'artifacts-changed', artifactsUpdater );
+
+
+							for ( var i: number = 0, len: number = Hero_ArtifactsManager.slots.length; i<len; i++ ){
+								
+								updateSlot( Hero_ArtifactsManager.slots[ i ] );
+								
+								slotsDOM[ Hero_ArtifactsManager.slots[i] ].on( 'click', function( evt ) {
+									var target = evt.target || null,
+									    targetIndex: number = null,
+									    targetId   : number = null,
+									    slotName   : string = null;
+									
+									if ( target && $(target).hasClass( 'g-art' ) ) {
+										targetIndex = ~~$(target).attr( 'data-index' );
+									    targetId    = ~~$(target).attr( 'data-id' );
+									} else {
+										targetIndex = ~~$(this).attr('data-index');
+									}
+
+									slotName = $(this).attr( 'data-slot-name' );
+
+									console.log( slotName, targetIndex, targetId );
+
+									if ( activeArtifact ) {
+
+										// If clicked two consecutive times on the same artifact,
+										// then do nothing
+										if ( activeArtifact.slot == slotName && activeArtifact.index == targetIndex ) {
+
+											// unselect previous selection
+											$(dlg).find( '.g-art.active').removeClass( 'active' );
+
+											// set activeArtifact to NULL
+											activeArtifact = null;
+
+										} else {
+
+											try {
+
+												if ( activeArtifact.slot == slotName ) {
+													// we want to swap an artifact in the same slot
+													console.log( "swap artifact: ", slotName, 
+														" from index: ", activeArtifact.index, 
+														" to index :", targetIndex );
+
+													hero.artifacts[ slotName ].swapArtifacts(
+														activeArtifact.index,
+														targetIndex
+													);
+
+												} else {
+													// we want to move an artifact
+													console.log( "move artifact: ", activeArtifact.slot, 
+														activeArtifact.index, " to ", 
+														slotName, " ", targetIndex );
+
+													hero.artifacts[ activeArtifact.slot ].transferArtifactToAnotherSlot(
+														activeArtifact.index,
+														slotName,
+														targetIndex
+													);
+
+												}
+
+											} catch ( ArtifactMoveError ) {
+												
+												alert( ArtifactMoveError );
+
+											}
+
+											// unselect everything
+											$(dlg).find( '.g-art.active' ).removeClass( 'active' );
+
+											// set activeArtifact to NULL
+											activeArtifact = null;
+
+										}
+
+									} else {
+
+										if ( targetId ) {
+											
+											// unselect previous selection
+											$(dlg).find('.g-art.active').removeClass( 'active' );
+											
+											// select targeted artifact
+											$(target).addClass( 'active' );
+											
+											// save active artifact
+											activeArtifact = {
+												"slot": slotName,
+												"index": targetIndex
+											};
+										}
+
+									}
+
+								});
+
+							}
+
 						},
-						"title": hero.name
+						"title": hero.name,
+						"resizable": false
 					});
 
 				},

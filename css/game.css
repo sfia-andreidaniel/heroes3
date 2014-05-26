@@ -1068,7 +1068,7 @@ div.hero-artifacts-panel {
 .hero-artifacts-panel > .slot {
     width: 40px;
     height: 40px;
-    outline: 1px solid white;
+    outline: 1px solid #333;
     display: block;
     position: absolute;
 }
@@ -1095,13 +1095,13 @@ div.hero-artifacts-panel {
 }
 
 .hero-artifacts-panel > .slot.leftHand {
-    top: 42px;
-    left: 10px;
+    top: 164px;
+    left: 190px;
 }
 
 .hero-artifacts-panel > .slot.rightHand {
-    top: 164px;
-    left: 190px;
+    top: 42px;
+    left: 10px;
 }
 
 .hero-artifacts-panel > .slot.ring-1 {
@@ -1185,9 +1185,12 @@ div.hero-artifacts-panel {
     left: 0px;
     top: 0px;
     bottom: 0px;
-    width: 16px;
+    width: 18px;
     outline: 1px solid white;
     background-color: rgb(61, 22, 22);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAbCAYAAABMU775AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAHYQAAB2EBlcO4tgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC0SURBVDiNndM7TkJhFATgkRAaOktrezfgClwCvZUbEHywELfgDtwAC6C3tTJUNiR8NtyE3PC4/5lkyi+Z4pwrpJBl0NqlAnq3Twm1wDe9DEGvfTQEHkWX4MspdA6eRafg4hI6BgehPpwPRYfwuQV1sBnBKMmk8h7d1CfsWqd2nWFbgcED/iowuMemAoM7/FRgcIvvCgxusK7A4BqrCgym+KrAYILPCgxG+IBx44Xukjwm+f0HjEif7uW3TegAAAAASUVORK5CYII= );
 }
 
 .hero-artifacts-panel > .slot.backpack > div > .scroll-right {
@@ -1195,15 +1198,18 @@ div.hero-artifacts-panel {
     right: 0px;
     top: 0px;
     bottom: 0px;
-    width: 16px;
+    width: 18px;
     outline: 1px solid white;
     background-color: rgb(61, 22, 22);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAbCAYAAABMU775AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAHYQAAB2EBlcO4tgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAACxSURBVDiNndE7TkJhEAbQ8YbY2EFHTe8GWIFLcAtsQF5a29uxBXfgBlwAPS2lFQUkHApCgoT7+OdLpjzJNzOBT0TphHNWqDIQvvGYgfCDpwyEX/QzENYYZiBsMMpA2OI5A+EP4wyEHV4yEA54zUA4YoLoRVkeIuIrIgZVIbxkX1oV3jI7TiWOM5N4xz/UFc5vURd4F7XBRR1qgo2oDi7b0D343gXdws7oGn6UoAssRogTp9q5L0o50uYAAAAASUVORK5CYII= );
 }
 
 .hero-artifacts-panel > .slot.backpack > div > .contents {
     position: absolute;
-    left: 22px;
-    right: 18px;
+    left: 23px;
+    right: 23px;
     top: 0px;
     bottom: 0px;
 }
@@ -1212,6 +1218,17 @@ div.hero-artifacts-panel {
 .hero-artifacts-panel > .slot > div > .contents > .g-art {
     -webkit-transform: scale( 0.65 );
     outline: none;
-    margin: -12px -11px -12px -12px;
+    margin: -12px -8px -12px -12px;
     background-color: rgb(61, 22, 22);
+    display: inline-block;
+}
+
+.hero-artifacts-panel > .slot > .g-art.active,
+.hero-artifacts-panel > .slot > div > .contents > .g-art.active {
+    background-color: red;
+}
+
+.hero-artifacts-panel > .slot > div > .contents {
+    overflow: hidden;
+    white-space: nowrap;
 }

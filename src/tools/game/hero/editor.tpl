@@ -2,7 +2,11 @@
     <style>
         
         .hero-{hero_id}-editor-panel.ui-tabs-panel {
-            height: 320px;
+            height: 380px;
+        }
+        
+        .hero-{hero_id}-editor-panel.ui-tabs-panel > .hero-artifacts-panel {
+            margin: auto;
         }
         
         .hero-{hero_id}-skills-list > div.secondary-skill {
@@ -108,6 +112,34 @@
             </table>
         </div>
         <div id="hero-{hero_id}-artifacts" class="hero-{hero_id}-editor-panel" >
+            <div class="hero-artifacts-panel">
+                <div class="slot misc-1" data-slot-name="misc" data-index="0"></div>
+                <div class="slot misc-2" data-slot-name="misc" data-index="1"></div>
+                <div class="slot misc-3" data-slot-name="misc" data-index="2"></div>
+                <div class="slot misc-4" data-slot-name="misc" data-index="3"></div>
+                <div class="slot misc-5" data-slot-name="misc" data-index="4"></div>
+                <div class="slot leftHand" data-slot-name="leftHand"></div>
+                <div class="slot ring-1" data-slot-name="finger" data-index="0"></div>
+                <div class="slot rightHand" data-slot-name="rightHand"></div>
+                <div class="slot ring-2" data-slot-name="finger" data-index="1"></div>
+                <div class="slot head" data-slot-name="head"></div>
+                <div class="slot neck" data-slot-name="neck"></div>
+                <div class="slot torso" data-slot-name="torso"></div>
+                <div class="slot feets" data-slot-name="feets"></div>
+                <div class="slot shoulders" data-slot-name="shoulders"></div>
+                <div class="slot spellBook" data-slot-name="spellBook"></div>
+                <div class="slot ballista" data-slot-name="ballista"></div>
+                <div class="slot catapult" data-slot-name="catapult"></div>
+                <div class="slot ammoCart" data-slot-name="ammoCart"></div>
+                <div class="slot firstAid" data-slot-name="firstAidTent"></div>
+                <div class="slot backpack">
+                    <div>
+                        <div class="scroll-left"></div>
+                        <div class="contents" data-slot-name="backPack" ></div>
+                        <div class="scroll-right"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="hero-{hero_id}-armies" class="hero-{hero_id}-editor-panel" >
         </div>

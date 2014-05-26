@@ -43,4 +43,11 @@ class Objects_Entity_Artifact extends Objects_Entity {
 		}
 	}
 
+	public interractWith( obj: Objects_Entity_Hero ) {
+		if ( this._artifactType ) {
+			obj.artifacts.backPack.equip( this._artifactType );
+			this.remove();
+		}
+	}
+
 }
