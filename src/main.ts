@@ -37,6 +37,8 @@
 
 ///<reference path="Artifact.ts" />
 ///<reference path="Artifacts/Manager.ts" />
+///<reference path="Hero/ArtifactsManager.ts" />
+///<reference path="Hero/ArtifactsManager/Slot.ts" />
 
 ///<reference path="Objects/Entity/Castle.ts" />
 ///<reference path="Objects/Entity/Tileset.ts" />

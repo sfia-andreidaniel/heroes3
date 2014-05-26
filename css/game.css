@@ -1053,3 +1053,165 @@ div.g-art {
 .g-art.id-1 {
     background-position: 0px -3520px;
 }
+
+/* Artifacts Panel */
+div.hero-artifacts-panel {
+    width: 284px;
+    height: 393px;
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url( img/hero-artifacts-sheet-indexed.png );
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.hero-artifacts-panel > .slot {
+    width: 40px;
+    height: 40px;
+    outline: 1px solid white;
+    display: block;
+    position: absolute;
+}
+
+.hero-artifacts-panel > .slot.misc-1 {
+    top: 130px;
+    left: 10px;
+}
+.hero-artifacts-panel > .slot.misc-2 {
+    top: 180px;
+    left: 23px;
+}
+.hero-artifacts-panel > .slot.misc-3 {
+    top: 230px;
+    left: 39px;
+}
+.hero-artifacts-panel > .slot.misc-4 {
+    top: 280px;
+    left: 56px;
+}
+.hero-artifacts-panel > .slot.misc-5 {
+    top: 280px;
+    left: 10px;
+}
+
+.hero-artifacts-panel > .slot.leftHand {
+    top: 42px;
+    left: 10px;
+}
+
+.hero-artifacts-panel > .slot.rightHand {
+    top: 164px;
+    left: 190px;
+}
+
+.hero-artifacts-panel > .slot.ring-1 {
+    top: 42px;
+    left: 54px;
+}
+
+.hero-artifacts-panel > .slot.ring-2 {
+    top: 164px;
+    right: 10px;
+}
+
+.hero-artifacts-panel > .slot.head {
+    left: 135px;
+    top: 10px;
+}
+
+.hero-artifacts-panel > .slot.neck {
+    left: 135px;
+    top: 54px;
+}
+
+.hero-artifacts-panel > .slot.feets {
+    left: 135px;
+    top: 280px;
+}
+
+.hero-artifacts-panel > .slot.torso {
+    left: 135px;
+    top: 113px;
+}
+
+.hero-artifacts-panel > .slot.shoulders {
+    left: 190px;
+    top: 230px;
+}
+
+.hero-artifacts-panel > .slot.spellBook {
+    right: 10px;
+    top: 280px;
+}
+
+.hero-artifacts-panel > .slot.ballista {
+    left: 190px;
+    top: 10px;
+}
+
+.hero-artifacts-panel > .slot.firstAid {
+    top: 10px;
+    right: 10px;
+}
+
+.hero-artifacts-panel > .slot.ammoCart {
+    right: 10px;
+    top: 54px;
+}
+
+.hero-artifacts-panel > .slot.catapult {
+    right: 10px;
+    top: 98px;
+}
+
+.hero-artifacts-panel > .slot.backpack {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    bottom: 10px;
+    outline: none;
+}
+
+.hero-artifacts-panel > .slot.backpack > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    padding: 0;
+}
+
+.hero-artifacts-panel > .slot.backpack > div > .scroll-left {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 16px;
+    outline: 1px solid white;
+    background-color: rgb(61, 22, 22);
+}
+
+.hero-artifacts-panel > .slot.backpack > div > .scroll-right {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 16px;
+    outline: 1px solid white;
+    background-color: rgb(61, 22, 22);
+}
+
+.hero-artifacts-panel > .slot.backpack > div > .contents {
+    position: absolute;
+    left: 22px;
+    right: 18px;
+    top: 0px;
+    bottom: 0px;
+}
+
+.hero-artifacts-panel > .slot > .g-art,
+.hero-artifacts-panel > .slot > div > .contents > .g-art {
+    -webkit-transform: scale( 0.65 );
+    outline: none;
+    margin: -12px -11px -12px -12px;
+    background-color: rgb(61, 22, 22);
+}

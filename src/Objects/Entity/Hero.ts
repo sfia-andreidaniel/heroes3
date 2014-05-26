@@ -11,6 +11,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 	public speed     : number = 16;
 
 	public skills    : Hero_SkillsManager;
+	public artifacts : Hero_ArtifactsManager;
 
 	private _interractWith: Objects_Entity = null;
 
@@ -39,6 +40,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 		super( itemTypeId, col, row, layer );
 
 		this.skills = new Hero_SkillsManager( this );
+		this.artifacts = new Hero_ArtifactsManager( this );
 
 		( function( me ) {
 
