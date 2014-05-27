@@ -6,7 +6,7 @@ class Artifacts_Manager extends Events {
 	constructor( public map: AdvMap ) {
 		super();
 
-		var f: FS_File = new FS_File( 'resources/tools/artifacts-list.php', 'json', {} );
+		var f: FS_File = new FS_File( 'resources/tools/artifacts-list.json', 'json' );
 
 		( function( me ) {
 

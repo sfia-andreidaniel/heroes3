@@ -3,3 +3,4 @@ db.mysql.gz
 db.mysql
 resources/maps/map-*.map
 src/index.js
+resources/tools/*.json

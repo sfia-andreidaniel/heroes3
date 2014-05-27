@@ -8,11 +8,12 @@ class AdvMap extends Events {
     
     // map filesystem
 
-    public entitiesLoad : number             = 4;
+    public entitiesLoad : number             = 5;
     public fs           : FS                 = new FS();
     public fm           : Faction_Manager    = new Faction_Manager();
     public hm           : Hero_Manager       = new Hero_Manager( this );
     public am           : Artifacts_Manager  = new Artifacts_Manager( this );
+    public cm           : Creatures_Manager  = new Creatures_Manager( this );
     
     // columns and rows
     public cols         : number        = 0;
@@ -106,6 +107,13 @@ class AdvMap extends Events {
             });
 
             me.am.on( 'load', function() {
+                me.entitiesLoad--;
+
+                if ( me.entitiesLoad == 0 )
+                    me._onRequirementsReady();
+            });
+
+            me.cm.on( 'load', function() {
                 me.entitiesLoad--;
 
                 if ( me.entitiesLoad == 0 )
@@ -329,7 +337,7 @@ class AdvMap extends Events {
         /* Load filesystem data */
         this.fs.add( 'tilesets/terrains.json',     'resources/tilesets/terrains.tsx.json',     'json' );
         this.fs.add( 'tilesets/roads-rivers.json', 'resources/tilesets/roads-rivers.tsx.json', 'json' );
-        this.fs.add( 'objects/all',                'resources/tools/objects.php',              'json', {});
+        this.fs.add( 'objects/all',                'resources/tools/objects-list.json',        'json' );
     }
 
     public _onRequirementsReady() {

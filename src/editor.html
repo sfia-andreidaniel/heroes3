@@ -15,16 +15,17 @@
 <body>
     <div id="toolbar">
         <div>
-            <div id="btn-open"      class="button">Open</div>
-            <div id="btn-save"      class="button">Save</div>
+            <div id="btn-open"      class="button" title="Open"></div>
+            <div id="btn-save"      class="button" title="Save"></div>
             <div id="btn-paint"     class="button" data-panels="paint"     data-editor-mode="1">Terrain</div>
             <div id="btn-objects"   class="button" data-panels="objects"   data-editor-mode="3">Objects</div>
             <div id="btn-heroes"    class="button" data-panels="heroes"    data-editor-mode="3">Heroes</div>
             <div id="btn-artifacts" class="button" data-panels="artifacts" data-editor-mode="3">Artifacts</div>
-            <div id="btn-layers"    class="button" data-panels="layers"    data-editor-mode="0">Layers</div>
-            <div id="btn-walkmode"  class="button" data-panels="events"    data-editor-mode="4">Events</div>
-            <div id="btn-eraser"    class="button" data-panels="erase"     data-editor-mode="2">Erase</div>
-            <div id="btn-game"      class="button" data-panels="game"      data-editor-mode="5">Game</div>
+            <div id="btn-creatures" class="button" data-panels="creatures" data-editor-mode="3">Creatures</div>
+            <div id="btn-layers"    class="button" data-panels="layers"    data-editor-mode="0" title="Layers"></div>
+            <div id="btn-walkmode"  class="button" data-panels="events"    data-editor-mode="4" title="Events"></div>
+            <div id="btn-eraser"    class="button" data-panels="erase"     data-editor-mode="2" title="Eraser"></div>
+            <div id="btn-game"      class="button" data-panels="game"      data-editor-mode="5" title="Switch to game mode">Game</div>
         </div>
     </div>
     <div id="cell" title="editor active cell">
@@ -76,6 +77,7 @@
     <script type="text/javascript" src="tools/editor/js/editor-objects.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-heroes.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-artifacts.js"></script>
+    <script type="text/javascript" src="tools/editor/js/editor-creatures.js"></script>
     
     <script type="text/javascript" src="tools/editor/js/editor-layers.js"></script>
     <script type="text/javascript" src="tools/editor/js/editor-save.js"></script>

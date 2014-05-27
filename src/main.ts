@@ -45,6 +45,12 @@
 ///<reference path="Objects/Entity/Mine.ts" />
 ///<reference path="Objects/Entity/Resource.ts" />
 ///<reference path="Objects/Entity/Creature/Adventure.ts" />
+
+///<reference path="Creature.ts" />
+///<reference path="Creatures/Manager.ts" />
+///<reference path="Creatures/IDamage.ts" />
+///<reference path="Creatures/IResource.ts" />
+
 ///<reference path="Objects/Entity/Dwelling.ts" />
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />

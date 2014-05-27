@@ -12,11 +12,13 @@ class Faction_Manager extends Events {
 			(function( me ) {
 				
 				$$.ajax( {
-				        "url": 'resources/tools/faction.php',
+				    "url": 'resources/tools/factions-list.json',
 					"type": "GET",
+					/*
 					"data": {
 						"do": "list"
 					},
+					*/
 					"success": function( data ) {
 						if ( !data || data.error || !data.length )
 							me.emit( 'error', 'Bad response from server' );

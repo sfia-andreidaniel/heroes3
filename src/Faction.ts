@@ -31,7 +31,7 @@ class Faction extends Events {
 			( function( me ) {
 
 				$$.ajax({
-				        "url": 'resources/tools/faction.php',
+				    "url": 'resources/tools/faction.php',
 					"type": "GET",
 					"data": {
 						"do": "load-faction",

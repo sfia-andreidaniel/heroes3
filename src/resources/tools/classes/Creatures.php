@@ -42,6 +42,7 @@
                 $row[ 'shots' ] = (int)$row[ 'shots' ];
                 $row[ 'hexSize' ] = (int)$row[ 'hexSize' ];
                 $row[ 'defense' ] = (int)$row[ 'defense' ];
+                $row[ 'attack' ] = (int)$row[ 'attack' ];
                 $row[ 'damage' ] = [
                     'min' => (int)$row[ 'damageMin' ],
                     'max' => (int)$row[ 'damageMax' ]
