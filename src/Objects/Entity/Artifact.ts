@@ -2,6 +2,9 @@ class Objects_Entity_Artifact extends Objects_Entity {
 
 	public _artifactType: Artifact = null;
 
+	// rw artifactType: number
+	// r  name        : string
+
 	constructor( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super( itemTypeId, col, row, layer );
 	}

@@ -50,6 +50,36 @@ map.on( 'load', function() {
             
             $('#editor > div').append( tpl.text + "" );
             
+            $( '#creatures' ).on( 'click', '> .creature', function() {
+
+                map.objectHandle = null;
+                currentObject = null;
+                currentObjectConfig = null;
+
+
+                var creatureTypeId = ~~$(this).attr( 'data-item-id' ),
+                    creatureType   = map.cm.getCreatureTypeById( creatureTypeId ),
+                    obj            = creatureType.getMapObject();
+                
+                currentObjectConfig = {
+                    "creatureType": creatureTypeId
+                };
+                
+                $(this).parent().find( '.creature.active' ).removeClass( 'active' );
+                
+                if ( !obj.loaded ) {
+                    obj.on( 'load', function() {
+                        editor_load_object( this );
+                    } );
+                    obj.load();
+                } else {
+                    
+                    editor_load_object( obj );
+                }
+                
+                $(this).addClass( 'active' );
+            } );
+            
         }
     } );
     

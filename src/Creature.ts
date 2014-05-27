@@ -40,4 +40,8 @@ class Creature extends Events {
 
 	}
 
+	public getMapObject() {
+		return this.manager.map.objects.getObjectById( this.objectTypeId );
+	}
+
 }

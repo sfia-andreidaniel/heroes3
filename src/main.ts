@@ -50,6 +50,8 @@
 ///<reference path="Creatures/Manager.ts" />
 ///<reference path="Creatures/IDamage.ts" />
 ///<reference path="Creatures/IResource.ts" />
+///<reference path="Creatures/Stack.ts" />
+///<reference path="Hero/ArmiesManager.ts" />
 
 ///<reference path="Objects/Entity/Dwelling.ts" />
 ///<reference path="Layer/Terrain.ts" />

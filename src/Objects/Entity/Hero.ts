@@ -12,6 +12,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 	public skills    : Hero_SkillsManager;
 	public artifacts : Hero_ArtifactsManager;
+	public armies    : Hero_ArmiesManager;
 
 	private _interractWith: Objects_Entity = null;
 
@@ -39,8 +40,9 @@ class Objects_Entity_Hero extends Objects_Entity {
 	constructor( public itemTypeId: number, public col: number, public row: number, public layer: Layer_Entities ) {
 		super( itemTypeId, col, row, layer );
 
-		this.skills = new Hero_SkillsManager( this );
+		this.skills    = new Hero_SkillsManager( this );
 		this.artifacts = new Hero_ArtifactsManager( this );
+		this.armies    = new Hero_ArmiesManager( this );
 
 		( function( me ) {
 
@@ -178,7 +180,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 			"xp"       : this._xp,
 			"level"    : this._level,
 			"skills"   : this.skills.serialize(),
-			"artifacts": this.artifacts.serialize()
+			"artifacts": this.artifacts.serialize(),
+			"armies"   : this.armies.serialize()
 		};
 
 		return out;
@@ -197,6 +200,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 			this.skills.unserialize( data.skills || null );
 			this.artifacts.unserialize( data.artifacts || null );
+			this.armies.unserialize( data.armies || null );
 		}
 
 	}

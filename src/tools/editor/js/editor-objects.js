@@ -27,7 +27,8 @@ map.on( 'load', function() {
                 if ( [
                     'Hero',
                     'Hero_Embarked',
-                    'Artifact'
+                    'Artifact',
+                    'Creature_Adventure'
                 ].indexOf( map.objects.store[i].objectClass ) >= 0 )
                     continue;
                 

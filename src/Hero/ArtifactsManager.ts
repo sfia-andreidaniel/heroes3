@@ -37,9 +37,7 @@ class Hero_ArtifactsManager {
 		'catapult'
 	];
 
-	constructor( public hero: Objects_Entity_Hero ) {
-
-	}
+	constructor( public hero: Objects_Entity_Hero ) { }
 
 	public serialize() {
 		var out = {};
