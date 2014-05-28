@@ -29,7 +29,8 @@ map.on( 'load', function() {
                     'Hero_Embarked',
                     'Artifact',
                     'Creature_Adventure',
-                    'Dwelling'
+                    'Dwelling',
+                    'Mine'
                 ].indexOf( map.objects.store[i].objectClass ) >= 0 )
                     continue;
                 
@@ -438,7 +439,7 @@ map.on( 'load', function() {
                                         
                                         var dlg = this;
                                         
-                                        $.ajax( 'resources/tools/save-object.php', {
+                                        $.ajax('resources/tools/save-object.php', {
                                             'type'     : "POST",
                                             'dataType' : 'json',
                                             'data'     : {

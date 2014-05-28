@@ -72,6 +72,7 @@ class Loader {
 
 		this.activeRequests = data.length;
 		this.pendingRequests -= data.length;
+
 		this.update();
 
 
@@ -122,6 +123,50 @@ class Loader {
 						if ( me.chain[ k ].__requestID__ != multiResponse[i].id )
 							continue;
 
+						( function( multiResponse, chainRequest ) {
+
+							setTimeout( function() {
+
+								try {
+
+									if ( multiResponse.error ) {
+
+										if( chainRequest.error )
+											chainRequest.error( multiResponse.error );
+
+										console.error( "Request: \"" + chainRequest.url + "\" failed: " + multiResponse.error );
+
+									} else {
+
+										if ( chainRequest.success )
+											chainRequest.success( multiResponse.data );
+
+										console.log( "Response: \"" + chainRequest.url + "\" completed" );
+
+									}
+
+								} catch ( err ) {
+
+								}
+
+								for ( var k = 0, len = me.chain.length; k<len; k++ ) {
+									if ( me.chain[ k ] == chainRequest ) {
+										me.chain.splice( k, 1 );
+										break;
+									}
+								}
+								me.activeRequests -= 1;
+								me.update();
+
+
+							}, 1 );
+
+
+						})( multiResponse[i], me.chain[k] );
+
+						me.update();
+
+						/*
 						try {
 
 							if ( multiResponse[i].error ) {
@@ -146,6 +191,8 @@ class Loader {
 						me.chain.splice( k, 1 );
 						me.activeRequests -= 1;
 						me.update();
+
+						*/
 
 						break;
 

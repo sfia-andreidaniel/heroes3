@@ -1,5 +1,5 @@
 div.g-sk {
-    background-image: url( img/skills-indexed.png );
+    background-image: url( img/skills.png );
     background-repeat: no-repeat;
     background-position: 0px 0px;
     width: 58px;
@@ -7,7 +7,7 @@ div.g-sk {
     display: inline-block;
     
     outline: 1px inset brown;
-    background-color: #4d2f0c;
+    /* background-color: #4d2f0c; */
 }
 
 div.g-sk.small {
@@ -19,37 +19,38 @@ div.g-sk.small {
     margin: -14px -19px -14px -12px;
 }
 
-div.g-art {
-    background-image: url( img/artifacts-indexed.png );
+div.g-art, /* Artifacts */
+div.g-mon, /* Monsters */
+div.g-dwl, /* Dwellings */
+div.g-mne, /* Mines */
+div.g-res  /* Resources */
+{
     background-repeat: no-repeat;
     background-position: -128px 0px;
     width: 64px;
     height: 64px;
     display: inline-block;
-    
     outline: 1px inset brown;
+}
+
+div.g-art {
+    background-image: url( img/artifacts.png );
 }
 
 div.g-mon {
-    background-image: url( img/creatures-indexed.png );
-    background-repeat: no-repeat;
-    background-position: -128px 0px;
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    
-    outline: 1px inset brown;
+    background-image: url( img/creatures.png );
 }
 
 div.g-dwl {
-    background-image: url( img/dwellings-indexed.png );
-    background-repeat: no-repeat;
-    background-position: -128px 0px;
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    
-    outline: 1px inset brown;
+    background-image: url( img/dwellings.png );
+}
+
+div.g-mne {
+    background-image: url( img/mines.png );
+}
+
+div.g-res {
+    background-image: url( img/resources.png );
 }
 
 .g-sk.archery {
@@ -2165,6 +2166,232 @@ div.g-dwl {
 .g-dwl.id-1 {
     background-position: 0px -2112px;
 }
+
+/* Mines */
+.g-mne.id-48 {
+    background-position: -128px 0px;
+}
+
+.g-mne.id-47 {
+    background-position: -64px 0px;
+}
+
+.g-mne.id-46 {
+    background-position: 0px 0px;
+}
+
+.g-mne.id-45 {
+    background-position: -128px -64px;
+}
+
+.g-mne.id-44 {
+    background-position: -64px -64px;
+}
+
+.g-mne.id-43 {
+    background-position: 0px -64px;
+}
+
+.g-mne.id-42 {
+    background-position: -128px -128px;
+}
+
+.g-mne.id-41 {
+    background-position: -64px -128px;
+}
+
+.g-mne.id-40 {
+    background-position: 0px -128px;
+}
+
+.g-mne.id-39 {
+    background-position: -128px -192px;
+}
+
+.g-mne.id-38 {
+    background-position: -64px -192px;
+}
+
+.g-mne.id-37 {
+    background-position: 0px -192px;
+}
+
+.g-mne.id-36 {
+    background-position: -128px -256px;
+}
+
+.g-mne.id-35 {
+    background-position: -64px -256px;
+}
+
+.g-mne.id-34 {
+    background-position: 0px -256px;
+}
+
+.g-mne.id-33 {
+    background-position: -128px -320px;
+}
+
+.g-mne.id-32 {
+    background-position: -64px -320px;
+}
+
+.g-mne.id-31 {
+    background-position: 0px -320px;
+}
+
+.g-mne.id-30 {
+    background-position: -128px -384px;
+}
+
+.g-mne.id-29 {
+    background-position: -64px -384px;
+}
+
+.g-mne.id-28 {
+    background-position: 0px -384px;
+}
+
+.g-mne.id-27 {
+    background-position: -128px -448px;
+}
+
+.g-mne.id-26 {
+    background-position: -64px -448px;
+}
+
+.g-mne.id-25 {
+    background-position: 0px -448px;
+}
+
+.g-mne.id-24 {
+    background-position: -128px -512px;
+}
+
+.g-mne.id-23 {
+    background-position: -64px -512px;
+}
+
+.g-mne.id-22 {
+    background-position: 0px -512px;
+}
+
+.g-mne.id-21 {
+    background-position: -128px -576px;
+}
+
+.g-mne.id-20 {
+    background-position: -64px -576px;
+}
+
+.g-mne.id-19 {
+    background-position: 0px -576px;
+}
+
+.g-mne.id-18 {
+    background-position: -128px -640px;
+}
+
+.g-mne.id-17 {
+    background-position: -64px -640px;
+}
+
+.g-mne.id-16 {
+    background-position: 0px -640px;
+}
+
+.g-mne.id-15 {
+    background-position: -128px -704px;
+}
+
+.g-mne.id-14 {
+    background-position: -64px -704px;
+}
+
+.g-mne.id-13 {
+    background-position: 0px -704px;
+}
+
+.g-mne.id-12 {
+    background-position: -128px -768px;
+}
+
+.g-mne.id-11 {
+    background-position: -64px -768px;
+}
+
+.g-mne.id-10 {
+    background-position: 0px -768px;
+}
+
+.g-mne.id-9 {
+    background-position: -128px -832px;
+}
+
+.g-mne.id-8 {
+    background-position: -64px -832px;
+}
+
+.g-mne.id-7 {
+    background-position: 0px -832px;
+}
+
+.g-mne.id-6 {
+    background-position: -128px -896px;
+}
+
+.g-mne.id-5 {
+    background-position: -64px -896px;
+}
+
+.g-mne.id-4 {
+    background-position: 0px -896px;
+}
+
+.g-mne.id-3 {
+    background-position: -128px -960px;
+}
+
+.g-mne.id-2 {
+    background-position: -64px -960px;
+}
+
+.g-mne.id-1 {
+    background-position: 0px -960px;
+}
+
+.g-res.id-8, .g-res.mithril {
+    background-position: -64px 0px;
+}
+
+.g-res.id-7, .g-res.mercury {
+    background-position: 0px 0px;
+}
+
+.g-res.id-6, .g-res.gems {
+    background-position: -128px -64px;
+}
+
+.g-res.id-5, .g-res.crystals {
+    background-position: -64px -64px;
+}
+
+.g-res.id-4, .g-res.sulfur {
+    background-position: 0px -64px;
+}
+
+.g-res.id-3, .g-res.ore {
+    background-position: -128px -128px;
+}
+
+.g-res.id-2, .g-res.wood {
+    background-position: -64px -128px;
+}
+
+.g-res.id-1, .g-res.gold {
+    background-position: 0px -128px;
+}
+
 
 /* Artifacts Panel */
 div.hero-artifacts-panel {

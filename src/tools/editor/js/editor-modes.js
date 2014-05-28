@@ -38,13 +38,16 @@ function setEditorMode( mode ) {
        #objects .object,
        #heroes  .hero,
        #artifacts .artifact,
+       #creatures .creature,
+       #dwellings .dwelling,
+       #mines .mine
        
        and set: map.objectHandle    to NULL,
                 currentObject       to NULL
                 currentObjectConfig to NULL
      */
     
-    $('#objects .object, #heroes .hero, #artifacts .artifact').removeClass( 'active' ).removeClass( 'focused' );
+    $('#objects .object, #heroes .hero, #artifacts .artifact, #creatures.creature, #dwellings .dwelling, #mines .mine').removeClass( 'active' ).removeClass( 'focused' );
     
     map.objectHandle = null;
 

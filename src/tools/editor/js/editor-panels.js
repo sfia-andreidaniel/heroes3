@@ -8,7 +8,8 @@ var panels = [
     "heroes",
     "artifacts",
     "creatures",
-    "dwellings"
+    "dwellings",
+    "mines"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

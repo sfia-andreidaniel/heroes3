@@ -23,6 +23,7 @@ class Objects_Entity_Hero extends Objects_Entity {
 	// public rw moving   : boolean
 	// public rw direction: number
 
+	/* Experience levelup steps */
 	public static xp_levels: number[] = [
 		45, 1000, 2000, 3200, 4500, 6000, 7700, 9000, 11000,
 		13200, 15500, 18500, 22100, 26420, 31604, 37824, 45288,
