@@ -612,82 +612,30 @@ div.object-player > div.enterpoint {
 
 /* Panels config */
 
-div.panel-paint {
-    display: none !important;
-}
-
-body.panel-paint div.panel-paint {
-    display: block !important;
-}
-
-div.panel-erase {
-    display: none !important;
-}
-
-body.panel-erase div.panel-erase {
-    display: block !important;
-}
-
-div.panel-objects {
-    display: none !important;
-}
-
-body.panel-objects div.panel-objects {
-    display: block !important;
-}
-
-div.panel-layers {
-    display: none !important;
-}
-
-body.panel-layers div.panel-layers {
-    display: block !important;
-}
-
-div.panel-events {
-    display: none !important;
-}
-
-body.panel-events div.panel-events {
-    display: block !important;
-}
-
-div.panel-game {
-    display: none !important;
-}
-
-body.panel-game div.panel-game {
-    display: block !important;
-}
-
-div.panel-heroes {
-    display: none !important;
-}
-
-body.panel-heroes div.panel-heroes {
-    display: block !important;
-}
-
-div.panel-artifacts {
-    display: none !important;
-}
-
-body.panel-artifacts div.panel-artifacts {
-    display: block !important;
-}
-
-div.panel-creatures {
-    display: none !important;
-}
-
-body.panel-creatures div.panel-creatures {
-    display: block !important;
-}
-
+div.panel-paint,
+div.panel-erase,
+div.panel-objects,
+div.panel-layers,
+div.panel-events,
+div.panel-game,
+div.panel-heroes,
+div.panel-artifacts,
+div.panel-creatures,
+div.panel-dwellings,
 div.panel-faction-selector {
     display: none !important;
 }
 
+body.panel-paint div.panel-paint,
+body.panel-erase div.panel-erase,
+body.panel-objects div.panel-objects,
+body.panel-layers div.panel-layers,
+body.panel-events div.panel-events,
+body.panel-game div.panel-game,
+body.panel-heroes div.panel-heroes,
+body.panel-artifacts div.panel-artifacts,
+body.panel-creatures div.panel-creatures,
+body.panel-dwellings div.panel-dwellings,
 body.panel-game div.panel-faction-selector,
 body.panel-heroes div.panel-faction-selector,
 body.panel-objects div.panel-faction-selector {
@@ -696,10 +644,15 @@ body.panel-objects div.panel-faction-selector {
 
 /* PANEL HEROES */
 
+/* PANELS ARTIFACTS, DWELLINGS, CREATURES, HEROES */
+
+#artifacts,
+#dwellings,
+#creatures,
 #heroes {
     position: absolute;
     display: block;
-    top: 48px;
+    top: 0px;
     right: 0px;
     bottom: 0px;
     left: 10px;
@@ -707,89 +660,34 @@ body.panel-objects div.panel-faction-selector {
     overflow-y: auto;
 }
 
+#heroes {
+    top: 48px !important; /* Room for panel faction too */
+}
+
+#artifacts > h3,
+#dwellings > h3,
+#creatures > h3,
 #heroes > h3 {
     margin: 0px 10px 10px 10px;
 }
 
+#artifacts > .artifact,
+#dwellings > .dwelling,
+#creatures > .creature,
 #heroes > .hero {
     display: inline-block;
     width: 80px;
-    height: 100px;
+    height: 115px;
     font-size: 12px;
     text-align: center;
     padding-top: 10px;
+    vertical-align: top;
 }
 
+#artifacts > .artifact.active,
+#dwellings > .dwelling.active,
+#creatures > .creature.active,
 #heroes > .hero.active {
-    background-color: #333;
-    color: white;
-}
-
-/* PANEL ARTIFACTS */
-
-#artifacts {
-    
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    
-}
-
-#artifacts > h3 {
-    margin: 0px 10px 10px 10px;
-}
-
-#artifacts > .artifact {
-    
-    display: inline-block;
-    width: 80px;
-    height: 115px;
-    font-size: 12px;
-    text-align: center;
-    padding-top: 10px;
-    vertical-align: top;
-    
-}
-
-#artifacts > .artifact.active {
-    color: white;
-    background-color: #333;
-}
-
-/* PANEL CREATURES */
-
-#creatures {
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-#creathres > h3 {
-    margin: 0px 10px 10px 10px;
-}
-
-#creatures > .creature {
-    
-    display: inline-block;
-    width: 80px;
-    height: 115px;
-    font-size: 12px;
-    text-align: center;
-    padding-top: 10px;
-    vertical-align: top;
-}
-
-#creatures > .creature.active {
     color: white;
     background-color: #333;
 }
@@ -962,6 +860,10 @@ div.joystick > .c  { left: 16px; top: 16px; background-position: 50% 50%; }
     background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkFBQjQ1NkQ1NEM0MTFFMTgxNkFGNDJFN0U3NjIwNEQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkFBQjQ1NkU1NEM0MTFFMTgxNkFGNDJFN0U3NjIwNEQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGQUFCNDU2QjU0QzQxMUUxODE2QUY0MkU3RTc2MjA0RCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGQUFCNDU2QzU0QzQxMUUxODE2QUY0MkU3RTc2MjA0RCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmMsCa0AAAJ/SURBVHjafFNfSFNRGP/d7d67NTRm29JZpnOKg6CHyD31kNG7vRRECVo+RKgNI+ghiqyQIHoJI81CKJIMeuktehkGSShBYbUR250zNWUbzjXn3b33dM6Zk41FH3ycj+/3+77z+84fgRACZoIg8HXyxcNqmhs3CDmNbYyCMAnCFOX0njnXv8FSO3WlDZ5PPGi0WG1KW0sDGvY5IKCAERrFfyUQ+hnHVi7b1NU9GCvWiSixqqrdiv/IQUiiATWfLxUAd50dTucefJqdV1iqWGMqBk/H7k352jyQzAS6ziQKZc5yDGMcxi3W7SjQNe2Uw14FUTLBKooF4UIBJkTjm2qaBofdzLkVCnRiwLJLxtDdETjdfjhq23F9aJw7i1mOYYzDuBUKiG7AoPnghzn4/YeRz6s42dnJsZmP05AkGcHpOarDzLmVI9Ah19dTONFxFKuJJPKqimMdxznm9TZBkmW4HDWUk+TcSgX0yJeXYhgMnKe761zBl7m3HLt9I8AVWKxWKNGvMIrXU9pAVfMriWSmjuAH6mo9yG5msPo7XjioehHVooyFhTASyTQMXc9VHGImvRFMpzdx+cowYgshdF8YhGCSuff0XkU0Oo9LA7fwJ6tiI50JFut2XqKvrdnXd/Hsd9kiocV7ABFlEY0Nbo7F4stobtqPSGwRak7D/Ldwz8jjlxNlCkLhaHhtLfnObDLRGYGxJ6/4ynyUxTSwyRakkqnwo9HJNxUKtj9T852bAzN7XQ5XdktDa6uHPicCJbIIm03GyvIKxp69bldiS7P//EzbdijQ19Xvctb0MqygiCCTyb4fvj9+jeKfwYT9pwGzeupulFuKeqT02pn9FWAAuyg5wCO436AAAAAASUVORK5CYII= );
 }
 
+#btn-dwellings {
+    background-image: url( data:image/gif;base64,R0lGODlhEAAPALP/AAAAAP9mZv/MzJmZZtnZ2aampmZmZm+MnP///8DAwAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQAA8AAARIMMlJ6wQg4Z0tGIAgBGTQUZ9YlqcUjit7qfHacTh+FXzvA4cLwUAkDItAoQGBMC6bSdeQ6aRGNcaslnAFbLfdHC5IOZjP6GAEADs= );
+}
+
 #btn-layers {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIXRFWHRTb2Z0d2FyZQBBZGFtIE5ham1hbm93aWN6IFRHQTJQTkdywFGBAAABSUlEQVR4nM2SIVIDMRSGv3YQdY2sIxLHyjr2CHuE5QQsNygOx3KDHGFxyOAqi6sMDvnL50BsdtvtlEFgeDPJm7zky8v/T+CPMTsttNuNZFoCYEJDNoA+ayv82n2EOvqLE3gntPSr4qiqfjaBQRc63Nq9hTqWAPMjOMp07d3vMFANJ+ZjZ9PN+c79qod5Aaqujho9aLeNdtISy1oFGKCsO9eLNdSLhEPoE5zj3te0ExNTrAosBVc01ywcg5GY+hcpkWLAOd58zdSDFKvSDfBERh6mEQbqUcKPnTM0jPTa4hzvQOVr0niBtlWhFDtMl/2Ts33GJLQoCdogedK+A3jYdc1m4kETvhoZT+XVCWyHi7vwjLsqb+NjESYeZHhzFmYKA2HYn5/Ay7OwZdj3cHw8/JdZE77a3f79btDfm3fIytmtinsWtMfw/4hv5Q/UZzwXIn8AAAAASUVORK5CYII=);
 }
@@ -995,13 +897,19 @@ body.panel-events #btn-walkmode,
 body.panel-game #btn-game,
 body.panel-heroes #btn-heroes,
 body.panel-artifacts #btn-artifacts,
-body.panel-creatures #btn-creatures {
+body.panel-creatures #btn-creatures,
+body.panel-dwellings #btn-dwellings {
     background-color: #333;
     color: white;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     height: 20px;
     margin-top: 0px;
+}
+
+body.panel-game #btn-game,
+#btn-game:hover { /* The game panel has a green background */
+    background-color: green !important;
 }
 
 /* Game loader */

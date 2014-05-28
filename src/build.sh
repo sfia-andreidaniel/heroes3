@@ -15,6 +15,8 @@ echo "resources/tools/creatures-list.json"
 php resources/tools/creatures-list.php > resources/tools/creatures-list.json
 echo "resources/tools/factions-list.json"
 php resources/tools/faction.php "do=list" > resources/tools/factions-list.json
+echo "resources/tools/dwellings-list.json"
+php resources/tools/dwellings-list.php > resources/tools/dwellings-list.json
 echo "..."
 
 echo "done";

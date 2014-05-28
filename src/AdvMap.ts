@@ -8,12 +8,13 @@ class AdvMap extends Events {
     
     // map filesystem
 
-    public entitiesLoad : number             = 5;
+    public entitiesLoad : number             = 6;
     public fs           : FS                 = new FS();
     public fm           : Faction_Manager    = new Faction_Manager();
     public hm           : Hero_Manager       = new Hero_Manager( this );
     public am           : Artifacts_Manager  = new Artifacts_Manager( this );
     public cm           : Creatures_Manager  = new Creatures_Manager( this );
+    public dm           : Dwellings_Manager  = new Dwellings_Manager( this );
     
     // columns and rows
     public cols         : number        = 0;
@@ -114,6 +115,13 @@ class AdvMap extends Events {
             });
 
             me.cm.on( 'load', function() {
+                me.entitiesLoad--;
+
+                if ( me.entitiesLoad == 0 )
+                    me._onRequirementsReady();
+            });
+
+            me.dm.on( 'load', function() {
                 me.entitiesLoad--;
 
                 if ( me.entitiesLoad == 0 )

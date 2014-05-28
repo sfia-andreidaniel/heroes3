@@ -54,6 +54,11 @@
 ///<reference path="Hero/ArmiesManager.ts" />
 
 ///<reference path="Objects/Entity/Dwelling.ts" />
+
+///<reference path="Dwelling.ts" />
+///<reference path="Dwellings/Manager.ts" />
+///<reference path="Dwellings/IConfig.ts" />
+
 ///<reference path="Layer/Terrain.ts" />
 ///<reference path="Layer/RoadsRivers.ts" />
 ///<reference path="Layer/Entities.ts" />
