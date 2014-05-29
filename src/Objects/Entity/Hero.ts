@@ -127,10 +127,10 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 		this._faction = factionId ? this.layer.map.fm.getFactionById( factionId ) : null;
 		
-		if ( this._faction )
+		if ( this._faction ) {
 			this._faction.load();
-
-		this._faction.addHero( this );
+			this._faction.addHero( this );
+		}
 
 	}
 

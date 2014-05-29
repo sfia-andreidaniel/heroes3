@@ -9,7 +9,9 @@ var panels = [
     "artifacts",
     "creatures",
     "dwellings",
-    "mines"
+    "mines",
+    "resources",
+    "towns"
 ];
 
 $('div.button[data-panels]').on( 'click', function() {

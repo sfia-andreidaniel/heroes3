@@ -23,7 +23,8 @@ div.g-art, /* Artifacts */
 div.g-mon, /* Monsters */
 div.g-dwl, /* Dwellings */
 div.g-mne, /* Mines */
-div.g-res  /* Resources */
+div.g-res, /* Resources */
+div.g-castle /* Castle */
 {
     background-repeat: no-repeat;
     background-position: -128px 0px;
@@ -52,6 +53,12 @@ div.g-mne {
 div.g-res {
     background-image: url( img/resources.png );
 }
+
+div.g-castle {
+    background-image: url( img/castles.png );
+}
+
+/* Skills */
 
 .g-sk.archery {
     background-position: 0px -64px;
@@ -2390,6 +2397,79 @@ div.g-res {
 
 .g-res.id-1, .g-res.gold {
     background-position: 0px -128px;
+}
+
+/* Castles */
+.g-castle.id-18 {
+    background-position: -64px 0px;
+}
+
+.g-castle.id-17 {
+    background-position: 0px 0px;
+}
+
+.g-castle.id-16 {
+    background-position: -64px -64px;
+}
+
+.g-castle.id-15 {
+    background-position: 0px -64px;
+}
+
+.g-castle.id-14 {
+    background-position: -64px -128px;
+}
+
+.g-castle.id-13 {
+    background-position: 0px -128px;
+}
+
+.g-castle.id-12 {
+    background-position: -64px -192px;
+}
+
+.g-castle.id-11 {
+    background-position: 0px -192px;
+}
+
+.g-castle.id-10 {
+    background-position: -64px -256px;
+}
+
+.g-castle.id-9 {
+    background-position: 0px -256px;
+}
+
+.g-castle.id-8 {
+    background-position: -64px -320px;
+}
+
+.g-castle.id-7 {
+    background-position: 0px -320px;
+}
+
+.g-castle.id-6 {
+    background-position: -64px -384px;
+}
+
+.g-castle.id-5 {
+    background-position: 0px -384px;
+}
+
+.g-castle.id-4 {
+    background-position: -64px -448px;
+}
+
+.g-castle.id-3 {
+    background-position: 0px -448px;
+}
+
+.g-castle.id-2 {
+    background-position: -64px -512px;
+}
+
+.g-castle.id-1 {
+    background-position: 0px -512px;
 }
 
 

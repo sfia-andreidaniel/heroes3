@@ -8,7 +8,7 @@ class AdvMap extends Events {
     
     // map filesystem
 
-    public entitiesLoad : number             = 7;
+    public entitiesLoad : number             = 9;
     public fs           : FS                 = new FS();
     public fm           : Faction_Manager    = new Faction_Manager();
     public hm           : Hero_Manager       = new Hero_Manager( this );
@@ -16,6 +16,8 @@ class AdvMap extends Events {
     public cm           : Creatures_Manager  = new Creatures_Manager( this );
     public dm           : Dwellings_Manager  = new Dwellings_Manager( this );
     public mm           : Mines_Manager      = new Mines_Manager( this );
+    public rm           : Resource_Manager   = new Resource_Manager( this );
+    public tm           : Castles_Manager    = new Castles_Manager( this ); // tm stands for Towns Manager (cm is used by Creatures_Manager)
     
     // columns and rows
     public cols         : number        = 0;
@@ -31,8 +33,8 @@ class AdvMap extends Events {
     // All these 3 variables are used internally by the map,
     // when loading data.
 
-    // public _iniCols
-    // public _iniLayers
+    // public _iniCols: number
+    // public _iniRows: number
     public _iniLayers   : any           = null;
 
     // all map viewports are stored here
@@ -85,56 +87,26 @@ class AdvMap extends Events {
         } catch ( e ) {}
 
         ( function( me ) {
-            
 
-            me.fs.on( 'ready', function() {
+            for ( var i=0, requirements = [ me.fm, me.hm, me.am, me.cm, me.dm, me.mm, me.rm, me.tm ], len = requirements.length; i<len; i++ ) {
+
+                ( function( requirement ) {
+
+                    requirement.afterFire( 'load', function() {
+                        me.entitiesLoad--;
+                        if ( me.entitiesLoad == 0 )
+                            me._onRequirementsReady();
+                    });
+
+                } )( requirements[ i ] );
+            }            
+
+            me.fs.afterFire( 'ready', function() {
                 me.entitiesLoad--;
 
                 if ( me.entitiesLoad == 0)
                     me._onRequirementsReady();
             } );
-
-            me.fm.on( 'load', function() {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
-
-            me.hm.on( 'load', function () {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
-
-            me.am.on( 'load', function() {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
-
-            me.cm.on( 'load', function() {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
-
-            me.dm.on( 'load', function() {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
-
-            me.mm.on( 'load', function() {
-                me.entitiesLoad--;
-
-                if ( me.entitiesLoad == 0 )
-                    me._onRequirementsReady();
-            });
 
             if ( window && window['$'] && window['$']['debounce'] ) {
 

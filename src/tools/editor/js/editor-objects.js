@@ -30,7 +30,8 @@ map.on( 'load', function() {
                     'Artifact',
                     'Creature_Adventure',
                     'Dwelling',
-                    'Mine'
+                    'Mine',
+                    'Resource'
                 ].indexOf( map.objects.store[i].objectClass ) >= 0 )
                     continue;
                 

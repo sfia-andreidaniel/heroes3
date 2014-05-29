@@ -12,7 +12,7 @@ class Resource {
 
 		this.id           = conf.id || null;
 		this.name         = conf.name || '';
-		this.type         = conf.type || '';
+		this.type         = conf.resourceType || '';
 		this.objectTypeId = conf.objectTypeId || null;
 
 	}

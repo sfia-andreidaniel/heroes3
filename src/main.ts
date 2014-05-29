@@ -42,6 +42,8 @@
 ///<reference path="Hero/ArtifactsManager/Slot.ts" />
 
 ///<reference path="Objects/Entity/Castle.ts" />
+///<reference path="Castle.ts" />
+///<reference path="Castles/Manager.ts" />
 
 ///<reference path="Objects/Entity/Tileset.ts" />
 

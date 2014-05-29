@@ -14,6 +14,7 @@ class Faction extends Events {
 	} */
 
 	public heroesList: Objects_Entity_Hero[] = [];
+	public castlesList: Object_Entity_Castle[] = [];
 
 	constructor( public id: number, public name: string ) {
 		super();
@@ -86,7 +87,7 @@ class Faction extends Events {
 			( function( me ) {
 
 				$$.ajax( {
-				        "url": 'resources/tools/faction.php',
+				    "url": 'resources/tools/faction.php',
 					"type": "GET",
 					"data": {
 						"do": "add-resource",
@@ -138,6 +139,24 @@ class Faction extends Events {
 		if ( this.heroesList.indexOf( hero ) >= 0 ) {
 			this.heroesList.splice( this.heroesList.indexOf( hero ), 1 );
 			this.emit( 'heroes-list-changed' );
+		}
+
+	}
+
+	public addCastle( castle: Objects_Entity_Castle ) {
+
+		if ( this.castlesList.indexOf( castle ) == -1 ) {
+			this.castlesList.push( castle );
+			this.emit( 'castles-list-changed' );
+		}
+
+	}
+
+	public removeCastle( castle: Objects_Entity_Castle ) {
+
+		if ( this.castlesList.indexOf( castle ) >= 0 ) {
+			this.castlesList.splice( this.castlesList.indexOf( castle ), 1 );
+			this.emit( 'castles-list-changed' );
 		}
 
 	}
