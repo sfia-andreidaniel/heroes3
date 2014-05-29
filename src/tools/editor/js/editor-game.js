@@ -65,8 +65,8 @@ map.on( 'load', function() {
                             
                                 var btn = document.createElement( 'div' );
                                 
-                                $(btn).append( '<img src="' + hero.icon + '" />' );
-                            
+                                btn.style.backgroundImage = 'url(' + hero.icon + ')';
+                                
                                 $('#faction-objects > div.heroes').append(
                                     btn
                                 );
@@ -79,11 +79,34 @@ map.on( 'load', function() {
                         
                     } );
                     
+                    faction.on( 'castles-list-changed', function() {
+                        
+                        $('#faction-objects > div.castles').html( '' );
+                        
+                        for ( var i=0, len = this.castlesList.length; i<len; i++ ) {
+                            
+                            ( function( castle ) {
+                                
+                                var btn = document.createElement( 'div' );
+                                
+                                $(btn).addClass( 'g-castle id-' + castle.castleType );
+                                
+                                $( '#faction-objects > div.castles' ).append( btn );
+                                
+                                btn.object = castle;
+                                
+                            } )( this.castlesList[i] );
+                            
+                        }
+                        
+                    } );
+                    
                     faction.afterFire( 'load', function() {
                         
                         /* Display resources */
                         this.emit( 'estates-changed' );
                         this.emit( 'heroes-list-changed' );
+                        this.emit( 'castles-list-changed' );
                         
                     } );
                     
@@ -98,6 +121,18 @@ map.on( 'load', function() {
                     $('#faction-objects > div.heroes').on( 'dblclick', '> div', function() {
                         
                         /* Mark the object as active */
+                        
+                        this.object.edit();
+                        
+                    } );
+                    
+                    $('#faction-objects > div.castles' ).on( 'click', '> div', function() {
+                        
+                        map.activeObject = this.object;
+                        
+                    } );
+                    
+                    $('#faction-objects > div.castles' ).on( 'dblclick', '> div', function() {
                         
                         this.object.edit();
                         
@@ -122,7 +157,7 @@ map.on( 'load', function() {
                 
                 map.on( 'object-focus', function( object ) {
                     
-                    $('#faction-objects > div.heroes > div' ).removeClass( 'active' ).each( function() {
+                    $('#faction-objects > div.heroes > div, #faction-objects > div.castles > div' ).removeClass( 'active' ).each( function() {
                         
                         if ( this.object == map.activeObject )
                             $(this).addClass( 'active' );

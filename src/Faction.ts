@@ -14,7 +14,7 @@ class Faction extends Events {
 	} */
 
 	public heroesList: Objects_Entity_Hero[] = [];
-	public castlesList: Object_Entity_Castle[] = [];
+	public castlesList: Objects_Entity_Castle[] = [];
 
 	constructor( public id: number, public name: string ) {
 		super();

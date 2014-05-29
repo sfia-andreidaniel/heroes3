@@ -1,4 +1,4 @@
-<div class="widget panel-game">
+<div class="widget panel-game" id="game">
     <div id="minimap"></div>
     <div id="map-walkmode">
         <div class="option icon focused" id="opt-walk">Walk</div>

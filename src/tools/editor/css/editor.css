@@ -232,6 +232,10 @@ body {
 
 /* Game panel */
 
+#game {
+    -webkit-user-select: none;
+}
+
 .widget.panel-game {
     position: absolute;
     left: 0px;
@@ -267,24 +271,30 @@ body {
     overflow-x: hidden;
     top: 0px;
     bottom: 0px;
-    width: 90px;
+    width: 95px;
     background-color: #333;
     
+}
+
+#faction-objects > div.heroes > div {
+    background-position: 50% 50%;
 }
 
 #faction-objects > div.heroes > div,
 #faction-objects > div.castles > div {
     display: block;
-    width: 57px;
+    width: 64px;
     height: 64px;
     margin: 9px auto;
     background-color: black;
     position: relative;
+    outline: none;
+    background-repeat: no-repeat;
 }
 
 #faction-objects > div.heroes > div.active,
 #faction-objects > div.castles > div.active {
-    outline: 5px solid white;
+    outline: 5px solid white !important;
 }
 
 #faction-objects > div.heroes {
@@ -648,7 +658,19 @@ body.panel-towns div.panel-towns {
     display: block !important;
 }
 
-/* PANEL HEROES */
+/* PANEL TOWNS */
+
+#town-faction-selector {
+    padding-left: 6px;
+}
+
+#town-faction-selector > label > span {
+    font-size: 12px;
+}
+
+#town-faction-selector > label > select {
+    width: 226px;
+}
 
 /* PANELS TOWNS, ARTIFACTS, DWELLINGS, CREATURES, HEROES, MINES, RESOURCES */
 

@@ -18,7 +18,7 @@ class Objects_Entity_Castle extends Objects_Entity {
 	}
 
 	set castleType( castleTypeId: number ) {
-		this._castleType = csatleTypeId
+		this._castleType = castleTypeId
 			? this.layer.map.tm.getCastleTypeById( castleTypeId )
 			: null;
 	}
@@ -49,6 +49,28 @@ class Objects_Entity_Castle extends Objects_Entity {
 		return this._castleType
 			? this._castleType.name
 			: 'Town';
+	}
+
+	public serialize(): any {
+		var out = super.serialize();
+		
+		out.data = {
+			"faction": this.faction,
+			"castleType": this.castleType
+		};
+		
+		return out;
+	}
+
+	public unserialize( data: any ) {
+
+		if ( data ) {
+
+			this.faction = data.faction;
+			this.castleType = data.castleType;
+
+		}
+
 	}
 
 	public $sinchronizable(): boolean {
