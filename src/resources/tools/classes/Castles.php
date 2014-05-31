@@ -4,6 +4,8 @@
         
         public function __construct() {
             
+            $buildings = new Castles_Buildings();
+            
             $result = Database( 'main' )->query( "
                 SELECT id,
                        name,
@@ -25,6 +27,14 @@
                 $row[ 'upgradesToCastleId' ] = (int)$row[ 'upgradesToCastleId' ]
                     ? (int)$row[ 'upgradesToCastleId' ]
                     : NULL;
+                
+                $row[ 'buildings' ] = $buildings->getElementById( $row[ 'castleTypeId' ] )->toJSON;
+                
+                if ( $row[ 'hasFort' ] ) {
+                    
+                    $row[ 'buildings' ][ 'fort' ][ 0 ][ 'built' ] = TRUE;
+                    
+                }
                 
                 $this->_properties[] = new Castles_Castle( $this, $row );
                 
