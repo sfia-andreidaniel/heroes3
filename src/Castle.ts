@@ -7,6 +7,7 @@ class Castle extends Events {
 	public castleTypeId: number;      // 1 .. 9
 	public hasFort: boolean;
 	public upgradesToCastleId: number; // allows null. null means not upgradable anymore
+	public buildings: ICastles_Buildings; //buildings list
 
 
 	public objectTypeId: number; // Mapping to animation
@@ -19,6 +20,18 @@ class Castle extends Events {
 	    this.castleTypeId = conf.castleTypeId || null;
 	    this.hasFort = conf.hasFort || false;
 	    this.upgradesToCastleId = conf.upgradesToCastleId || null;
+
+	    this.buildings = conf.buildings || {
+	    	"id"         : this.castleTypeId,
+	    	"fort"       : [],
+	    	"hall"       : [],
+	    	"market"     : [],
+	    	"blacksmith" : [],
+	    	"tavern"     : [],
+	    	"mageGuild"  : [],
+	    	"dwelling"   : [],
+	    	"other"      : []
+	    };
 
 	    this.objectTypeId = conf.objectTypeId || null;
 	}

@@ -1,4 +1,4 @@
-interface ICreatures_Resource {
+interface IResource {
 	gold?     : number;
 	wood?     : number;
 	ore?      : number;

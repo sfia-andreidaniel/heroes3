@@ -15,7 +15,7 @@ class Creature extends Events {
 	public defense     : number; // = 0;
 	public speed 	   : number; // = 0;
 	public damage      : ICreatures_Damage; // = { "min": 0, "max": 0 };
-	public resources   : ICreatures_Resource; // = {};
+	public resources   : IResource; // = {}; // Creature cost
 
 	public objectTypeId: number; // = null;
 

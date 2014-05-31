@@ -20,6 +20,16 @@ class Faction extends Events {
 		super();
 	}
 
+	/* Test if the faction can support a cost
+	 */
+	public hasEnoughResources( cost: IResource ): boolean {
+		for ( var k in cost ) {
+			if ( this.resources[ k ] < 0 )
+				return false;
+		}
+		return true;
+	}
+
 	public load(): Faction {
 
 		if ( this.loaded ) {

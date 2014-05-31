@@ -73,6 +73,15 @@ map.on( 'load', function() {
                                 
                                 btn.object = hero;
                                 
+                                /* Add jere the clicks listeners */
+                                $(btn).on( 'click', function() {
+                                    map.activeObject = btn.object;
+                                } );
+                                
+                                $(btn).on( 'dblclick', function() {
+                                    btn.object.edit();
+                                } );
+                                
                             })( this.heroesList[i] );
                             
                         }
@@ -95,6 +104,15 @@ map.on( 'load', function() {
                                 
                                 btn.object = castle;
                                 
+                                /* Add here the clicks listeners */
+                                $(btn).on( 'click', function() {
+                                    map.activeObject = btn.object;
+                                } );
+                                
+                                $(btn).on( 'dblclick', function(){
+                                    btn.object.edit();
+                                } );
+                                
                             } )( this.castlesList[i] );
                             
                         }
@@ -107,34 +125,6 @@ map.on( 'load', function() {
                         this.emit( 'estates-changed' );
                         this.emit( 'heroes-list-changed' );
                         this.emit( 'castles-list-changed' );
-                        
-                    } );
-                    
-                    $('#faction-objects > div.heroes').on( 'click', '> div', function() {
-                        
-                        /* Mark the object as active */
-                        
-                        map.activeObject = this.object;
-                        
-                    } );
-
-                    $('#faction-objects > div.heroes').on( 'dblclick', '> div', function() {
-                        
-                        /* Mark the object as active */
-                        
-                        this.object.edit();
-                        
-                    } );
-                    
-                    $('#faction-objects > div.castles' ).on( 'click', '> div', function() {
-                        
-                        map.activeObject = this.object;
-                        
-                    } );
-                    
-                    $('#faction-objects > div.castles' ).on( 'dblclick', '> div', function() {
-                        
-                        this.object.edit();
                         
                     } );
                     

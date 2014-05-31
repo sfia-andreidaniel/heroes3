@@ -2,6 +2,8 @@ class Objects_Entity_Castle extends Objects_Entity {
 
 	public _castleType: Castle = null;
 	public _faction: Faction = null;
+	
+	public buildings: Objects_Entity_Castle_BuildingsManager = new Objects_Entity_Castle_BuildingsManager( this );
 
 	//public rw castleType: number
 	//get    rw faction: number
@@ -18,9 +20,14 @@ class Objects_Entity_Castle extends Objects_Entity {
 	}
 
 	set castleType( castleTypeId: number ) {
+
 		this._castleType = castleTypeId
-			? this.layer.map.tm.getCastleTypeById( castleTypeId )
+			? ( this.layer.map.tm.getCastleTypeById( castleTypeId ) )
 			: null;
+
+		if ( this._castleType ) {
+			this.buildings.loadInitialConfig( this._castleType.buildings );
+		}
 	}
 
 	get faction(): number {
@@ -56,7 +63,8 @@ class Objects_Entity_Castle extends Objects_Entity {
 		
 		out.data = {
 			"faction": this.faction,
-			"castleType": this.castleType
+			"castleType": this.castleType,
+			"buildings": this.buildings.serialize()
 		};
 		
 		return out;
@@ -69,12 +77,44 @@ class Objects_Entity_Castle extends Objects_Entity {
 			this.faction = data.faction;
 			this.castleType = data.castleType;
 
+			this.buildings.unserialize( data.buildings );
+
 		}
 
 	}
 
 	public $sinchronizable(): boolean {
 		return true;
+	}
+
+	public edit() {
+		(function( castle ) {
+
+			$$.ajax( {
+				"url": "tools/game/castle/editor.tpl",
+				"type": "GET",
+				"success": function( buffer: string ) {
+					var tpl = new XTemplate( buffer );
+					
+					tpl.parse('');
+					
+					$(tpl.text)[ 'dialog' ]( {
+						"width": 600,
+						"height": 400,
+						"title": castle.name,
+						"modal": true,
+						"close": function() {
+							$(this).remove();
+						}
+					} );
+				},
+				"error": function() {
+					alert( "Error editing castle" );
+				}	
+
+			} );
+
+		} )( this );		
 	}
 
 }

@@ -2,7 +2,12 @@
 
 ///<reference path="ICellNeighbours.ts" />
 ///<reference path="IObjectHandle.ts" />
+
+// IResources is an interface with all resources mandatory
 ///<reference path="IResources.ts" />
+
+// IResource is an interface with optional resources
+///<reference path="IResource.ts" /> 
 ///<reference path="IDirection.ts" />
 ///<reference path="Canvas2dContextHelper.ts" />
 ///<reference path="XTemplate.ts" />
@@ -42,8 +47,13 @@
 ///<reference path="Hero/ArtifactsManager/Slot.ts" />
 
 ///<reference path="Objects/Entity/Castle.ts" />
+///<reference path="Objects/Entity/Castle/BuildingsManager.ts" />
+///<reference path="Objects/Entity/Castle/Building.ts" />
+///<reference path="Objects/Entity/Castle/Building/Dwelling.ts" />
 ///<reference path="Castle.ts" />
 ///<reference path="Castles/Manager.ts" />
+///<reference path="Castles/IBuilding.ts" />
+///<reference path="Castles/IBuildings.ts" />
 
 ///<reference path="Objects/Entity/Tileset.ts" />
 
@@ -59,7 +69,6 @@
 ///<reference path="Creature.ts" />
 ///<reference path="Creatures/Manager.ts" />
 ///<reference path="Creatures/IDamage.ts" />
-///<reference path="Creatures/IResource.ts" />
 ///<reference path="Creatures/Stack.ts" />
 ///<reference path="Hero/ArmiesManager.ts" />
 
