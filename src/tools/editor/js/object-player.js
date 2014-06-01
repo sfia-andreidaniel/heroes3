@@ -77,15 +77,26 @@ $.fn.objectplayer = function( object, pauseStateInput, frameIndexInput, frameCho
             );
         }
 
-        canvas.paintFrame = function( fIndex ) {
+        canvas.paintFrame = function( fIndex, noClear, transparent ) {
             
             var sx = fIndex * object.width,
                 sy = 0,
                 sw = object.width,
                 sh = object.height;
+                
+            noClear = noClear || false;
             
-            ctx.fillStyle = 'rgb(255,255,255)';
-            ctx.fillRect( 0,0,object.width, object.height );
+            transparent = transparent || false;
+            
+            if ( !noClear ) {
+                ctx.fillStyle = 'rgb(255,255,255)';
+                ctx.fillRect( 0,0,object.width, object.height );
+            }
+            
+            if ( transparent ) {
+                ctx.fillStyle = '00ffff';
+                ctx.fillRect( 0,0,object.width, object.height );
+            }
             
             ctx.drawImage( 
                 object.sprite.node,

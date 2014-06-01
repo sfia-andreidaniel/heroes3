@@ -37,6 +37,23 @@
         
     }
     
+    function gdtogifrawbuffer( &$img ) {
+        imagetruecolortopalette( $img, FALSE, 255 );
+        
+        //$index = imagecolorclosest( $img, 0, 255, 255 );
+        
+        //die( "index: '" . $index . "', colors: " . imagecolorstotal( $img ) );
+        
+        imagecolortransparent( $img, imagecolorclosest( $img, 0, 255, 255 ) );
+        imagealphablending( $img, TRUE );
+        imagesavealpha( $img, TRUE );
+        
+        ob_start();
+        imagegif( $img );
+        $buffer = ob_get_clean();
+        return $buffer;
+    }
+    
     function imagepixelat( &$img, $x, $y ) {
 
         $rgb = imagecolorat( $img, $x, $y );

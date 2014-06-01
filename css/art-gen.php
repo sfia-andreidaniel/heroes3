@@ -1,13 +1,13 @@
 <?php
     
-    $index = ( 2 * 9 );
+    $index = ( 2 * 150 );
     
-    for ( $row = 0; $row < 9; $row++ ) {
+    for ( $row = 0; $row < 150; $row++ ) {
     
         for ( $col = 1; $col >= 0; $col-- ) {
             
             
-            echo ".g-castle.id-$index {\n    background-position: " , ( -$col * 64 ) , "px ", ( -$row * 64 ), "px;\n}\n\n";
+            echo ".g-tbld.id-$index {\n    background-position: " , ( -$col * 150 ) , "px ", ( -$row * 70 ), "px;\n}\n\n";
             
             $index--;
         }

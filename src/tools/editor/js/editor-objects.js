@@ -358,6 +358,55 @@ map.on( 'load', function() {
                                         
                                     } );
                                     
+                                    $(this).find( 'button.gif-dld' ).on( 'click', function() {
+                                        
+                                        var gif = new GIF( {
+                                            'workers': 2,
+                                            'quality': 1,
+                                            'workerScript': '../vendor/gif.js/dist/gif.worker.js',
+                                            'transparent': '00ffff'
+                                        } ),
+                                        
+                                        player = $(dlg).find( 'canvas[data-property-name=player]' ).get(0),
+                                        frames = object.frames,
+                                        mode   = ~~$(this).attr('data-mode');
+                                        
+                                        for ( var i=0; i<frames; i++ ) {
+                                            
+                                            if ( mode ) {
+
+                                                player.paintFrame( 0, true, true );
+                                                player.paintFrame( i, true );
+                                            
+                                            } else {
+                                                
+                                                player.paintFrame( i, false, true );
+                                            
+                                            }
+                                            
+                                            gif.addFrame( player, { "copy": true, "delay": 100 } );
+                                        }
+                                        
+                                        gif.on( 'finished', function( blob ) {
+                                            
+                                            var reader = new FileReader( blob );
+                                            
+                                            reader.onloadend = function() {
+                                                
+                                                var buffer = [
+                                                    'name=' + object.name + ".gif",
+                                                    "data=" + reader.result
+                                                ];
+                                                
+                                                $_FORM_POST( "resources/tools/bin-download.php", buffer );
+                                                
+                                            }
+                                            
+                                            reader.readAsDataURL( blob );
+                                        } );
+                                        
+                                        gif.render();
+                                    } );
                                 },
                                 "close": function() {
                                     

@@ -4,6 +4,7 @@
             <li><a href="#o-general-{object_id}">General</a></li>
             <li><a href="#o-animation-{object_id}">Frames ({object_frames})</a></li>
             <li><a href="#o-dynamics-{object_id}">Dynamics</a></li>
+            <li><a href="#o-tools-{object_id}">Tools</a></li>
         </ul>
         <div id="o-general-{object_id}" class="object-editor-sheet">
             <table class="property-grid" cellpadding=0 cellspacing=0 width="100%" >
@@ -154,6 +155,9 @@
                 <input type="checkbox" data-property-name="dynamics_fly" /> Other objects can <b>fly</b> over this object
                 </label>
             </p>
+        </div>
+        <div id="o-tools-{object_id}">
+            <p>Download as animation: <button class="gif-dld">Every Frame</button><button class="gif-dld" data-mode="1">1 + Every Frame</button></p>
         </div>
     </div>
 </div>

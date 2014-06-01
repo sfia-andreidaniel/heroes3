@@ -96,15 +96,28 @@ class Objects_Entity_Castle extends Objects_Entity {
 				"success": function( buffer: string ) {
 					var tpl = new XTemplate( buffer );
 					
+					tpl.assign( 'castle_id', castle.castleType );
+
 					tpl.parse('');
 					
+					var dlg: any = null;
+
 					$(tpl.text)[ 'dialog' ]( {
-						"width": 600,
-						"height": 400,
+						"width": 870,
+						"height": 550,
 						"title": castle.name,
 						"modal": true,
+						"open": function() {
+							dlg = this;
+							$(dlg).find( 'div.castle-' + castle.castleType + '-tabs' )[ 'tabs' ]();
+						},
 						"close": function() {
 							$(this).remove();
+						},
+						"buttons": {
+							"Ok": function() {
+								$(this).remove();
+							}
 						}
 					} );
 				},
