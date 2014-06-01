@@ -34,6 +34,1815 @@ div.g-tbld    /* Town buildings */
     display: inline-block;
 }
 
+/* Town Backgrounds */
+
+div.town-background {
+    display: block;
+    width: 800px;
+    height: 374px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.town-background.id-1 {
+    background-image: url( ../css/img/towns/castle.png );
+}
+
+.town-background.id-2 {
+    background-image: url( ../css/img/towns/tower.png );
+}
+
+.town-background.id-3 {
+    background-image: url( ../css/img/towns/inferno.png );
+}
+
+.town-background.id-4 {
+    background-image: url( ../css/img/towns/fortress.png );
+}
+
+.town-background.id-5 {
+    background-image: url( ../css/img/towns/rampart.png );
+}
+
+.town-background.id-6 {
+    background-image: url( ../css/img/towns/dungeon.png );
+}
+
+.town-background.id-7 {
+    background-image: url( ../css/img/towns/stronghold.png );
+}
+
+.town-background.id-8 {
+    background-image: url( ../css/img/towns/necropolis.png );
+}
+
+.town-background.id-9 {
+    background-image: url( ../css/img/towns/conflux.png );
+}
+
+/* TOWN BACKGROUND BUILDINGS */
+
+.town-background > .building {
+    position: absolute;
+    display: block;
+    padding: 2px;
+    background-repeat: no-repeat;
+    background-color: red;
+}
+
+/* CASTLE SPECIFIC TOWN BACKGROUND BUILDINGS */
+
+/* Castle buildings */
+
+.town-background.id-1 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-1 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-1 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-1 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-1 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-1 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-1 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* brotherhood of the sword */
+.town-background.id-1 > .building.other.id-14 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+/* griffin bastion */
+.town-background.id-1 > .building.other.id-15 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+/* stables */
+.town-background.id-1 > .building.other.id-17 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+/* lighthouse */
+.town-background.id-1 > .building.other.id-19 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Tower buildings */
+
+.town-background.id-2 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-2 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-2 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-2 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-2 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-2 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-2 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* artifacts merchants */
+.town-background.id-2 > .building.other.id-47 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* library */
+.town-background.id-2 > .building.other.id-49 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* lookout tower */
+.town-background.id-2 > .building.other.id-50 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* sculptor's wings */
+.town-background.id-2 > .building.other.id-52 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* wall of knowledge */
+.town-background.id-2 > .building.other.id-53 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Inferno Buildings */
+
+.town-background.id-3 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-3 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-3 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-3 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-3 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-3 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-3 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* birthing pools */
+.town-background.id-3 > .building.other.id-81 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* brimstone stormclouds */
+.town-background.id-3 > .building.other.id-83 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* cages */
+.town-background.id-3 > .building.other.id-84 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* castle gate */
+.town-background.id-3 > .building.other.id-85 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* order of fire */
+.town-background.id-3 > .building.other.id-86 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Fortress Buildings */
+
+.town-background.id-4 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-4 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-4 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-4 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-4 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-4 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-4 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* blood obelisk */
+.town-background.id-4 > .building.other.id-114 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* cage of warlords */
+.town-background.id-4 > .building.other.id-115 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* captain's quarters */
+.town-background.id-4 > .building.other.id-116 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* gliphs of fear */
+.town-background.id-4 > .building.other.id-117 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Rampart Buildings */
+
+.town-background.id-5 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-5 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-5 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-5 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-5 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-5 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-5 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* mystic pond */
+.town-background.id-5 > .building.other.id-148 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* dendroid saplings */
+.town-background.id-5 > .building.other.id-149 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* fountain of fortune */
+.town-background.id-5 > .building.other.id-150 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* miner's guild */
+.town-background.id-5 > .building.other.id-151 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* treasury */
+.town-background.id-5 > .building.other.id-153 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Dungeon Buildings */
+
+.town-background.id-6 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-6 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-6 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-6 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-6 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-6 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-6 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* battle schoolar academy */
+.town-background.id-6 > .building.other.id-181 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* artifact merchants */
+.town-background.id-6 > .building.other.id-182 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* mana vortex */
+.town-background.id-6 > .building.other.id-184 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* portal of summoning */
+.town-background.id-6 > .building.other.id-185 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* mushroom rings */
+.town-background.id-6 > .building.other.id-187 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Stronghold Buildings */
+
+.town-background.id-7 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-7 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-7 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-7 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-7 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-7 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-7 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* ballista yard */
+.town-background.id-7 > .building.other.id-214 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* freelancer's guild */
+.town-background.id-7 > .building.other.id-215 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* escape tunnel */
+.town-background.id-7 > .building.other.id-217 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* hall of valhalla */
+.town-background.id-7 > .building.other.id-218 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* mess hall */
+.town-background.id-7 > .building.other.id-219 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Necropolis Buildings */
+
+.town-background.id-8 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-8 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* cover of darkness */
+.town-background.id-8 > .building.other.id-248 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* necromancy amplifier */
+.town-background.id-8 > .building.other.id-249 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* skeleton transformer */
+.town-background.id-8 > .building.other.id-251 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* unearthed graves */
+.town-background.id-8 > .building.other.id-253 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-8 > .building.other.id-reserved {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* Conflux Buildings */
+
+.town-background.id-9 > .building.fort.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.fort.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.fort.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.hall.level-0 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.hall.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.hall.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.hall.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.market.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.market.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.market.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.blacksmith {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.tavern {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.mage-guild.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.mage-guild.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.mage-guild.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.mage-guild.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.mage-guild.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.dwelling.level-1 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-1.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-2 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-2.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-3 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-3.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-4 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-4.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-5 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-5.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-6 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-6.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-7 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+.town-background.id-9 > .building.dwelling.level-7.upgraded {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* magic university */
+.town-background.id-9 > .building.other.id-281 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* garden of life */
+.town-background.id-9 > .building.other.id-282 {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+.town-background.id-9 > .building.other.id-reserved {
+    background-image: none
+    left: 0px;  top: 0px;
+    width: 0px; height: 0px;
+}
+
+/* ARTIFACTS */
+
 div.g-art {
     background-image: url( img/artifacts.png );
 }

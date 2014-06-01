@@ -87,4 +87,15 @@ class Objects_Entity_Castle_Building {
 		// nothing
 	}
 
+	public build() {
+
+		var reason = this.canotBeBuiltReason();
+
+		if ( reason )
+			throw reason;
+
+		this.built = true;
+		this.manager.castle.emit( 'buildings-changed' );
+	}
+
 }

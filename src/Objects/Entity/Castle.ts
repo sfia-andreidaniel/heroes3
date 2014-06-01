@@ -97,10 +97,130 @@ class Objects_Entity_Castle extends Objects_Entity {
 					var tpl = new XTemplate( buffer );
 					
 					tpl.assign( 'castle_id', castle.castleType );
+					tpl.assign( 'castle_type_id', castle._castleType
+						? castle._castleType.castleTypeId + ''
+						: '0' 
+					);
 
 					tpl.parse('');
 					
 					var dlg: any = null;
+
+					var renderTown = function() {
+						
+						var out: string[] = [],
+						    mageGuildLevel = 0,
+						    fortLevel = 0,
+						    hallLevel = 0,
+						    blacksmithLevel = 0,
+						    marketPlaceLevel = 0,
+						    tavernLevel = 0,
+						    i: number,
+						    len: number;
+
+						// find fort level
+						for ( i=0, len = castle.buildings.fort.length; i<len; i++ )
+							if ( castle.buildings.fort[i].built )
+								fortLevel = i + 1;
+
+						if ( fortLevel )
+							out.push( '<div class="building fort level-' + fortLevel + '"></div>' );
+
+						// find hall level
+						for ( i=0, len = castle.buildings.hall.length; i<len; i++ )
+							if ( castle.buildings.hall[i].built )
+								hallLevel = i + 1;
+
+						out.push( '<div class="building hall level-' + hallLevel + '"></div>' );
+
+						// find mage guild level
+						for ( i=0, len = castle.buildings.mageGuild.length; i<len; i++ )
+							if ( castle.buildings.mageGuild[i].built )
+								mageGuildLevel = i + 1;
+
+						if ( mageGuildLevel )
+							out.push( '<div class="building mage-guild level-' + mageGuildLevel + '"></div>' );
+
+						// find blacksmith level
+						for ( i=0, len = castle.buildings.blacksmith.length; i<len; i++ )
+							if ( castle.buildings.blacksmith[i].built )
+								blacksmithLevel = i + 1;
+
+						// find tavern level
+						for ( i=0, len = castle.buildings.tavern.length; i<len; i++ )
+							if ( castle.buildings.tavern[i].built )
+								tavernLevel = i + 1;
+
+						// find market place level
+						for ( i=0, len = castle.buildings.market.length; i<len; i++ )
+							if ( castle.buildings.market[i].built )
+								out.push( '<div class="building market level-' + ( i+1 ) + '"></div>' );
+
+						// other buildings
+						for ( i=0, len = castle.buildings.other.length; i<len; i++ )
+							if ( castle.buildings.other[i].built )
+								out.push( '<div class="building other id-' + castle.buildings.others[i].id + '"></div>' );
+
+						// dwellings buildings
+						for ( i=0; i<7; i++ ) {
+
+							if ( !castle.buildings.dwelling[i * 2] || !castle.buildings.dwelling[ i * 2 + 1 ] )
+								continue;
+
+							if ( castle.buildings.dwelling[ i * 2 + 1 ].built ) {
+								out.push( '<div class="building dwelling level-' + ( i + 1 ) + ' upgraded"></div>' );
+							} else {
+								if ( castle.buildings.dwelling[ i * 2 ].built )
+									out.push( '<div class="building dwelling level-' + ( i + 1 ) + '"></div>' );
+							}
+
+						}
+
+						if ( blacksmithLevel )
+							out.push( '<div class="building blacksmith"></div>' );
+
+						if ( tavernLevel )
+							out.push( '<div class="building tavern"></div>');
+
+						$(dlg).find( '.town-background' ).html( out.join( '\n' ) );
+
+					};
+
+					var renderBuildables = function() {
+						var out: string[] = [],
+						    buildings = castle.buildings.buildableBuildings();
+
+						for ( var i=0, len = buildings.length; i<len; i++ ) {
+							out.push([
+
+								'<div class="buildable" data-building-id="' + buildings[i].id + '">',
+									'<div class="g-tbld id-' + buildings[i].id + '"></div>',
+									'<div class="title">' + buildings[i].name + '</div>',
+								'</div>'
+
+							].join( '' ) );
+						}
+
+						$(dlg).find( '#castle-' + castle.castleType + '-build' ).html( out.join( '\n' ) );
+
+						$(dlg).find( '#castle-' + castle.castleType + '-build > .buildable' ).on( 'click', function() {
+
+							var buildingId = ~~$(this).attr('data-building-id'),
+							    building   = castle.buildings.getBuildingById( buildingId );
+
+							if ( !building )
+								return;
+
+							try {
+								building.build();
+								$(dlg).find( 'li[data-role=town] > a' ).click();
+							} catch ( err ) {
+								alert( err );
+							}
+
+						});
+
+					};
 
 					$(tpl.text)[ 'dialog' ]( {
 						"width": 870,
@@ -108,14 +228,26 @@ class Objects_Entity_Castle extends Objects_Entity {
 						"title": castle.name,
 						"modal": true,
 						"open": function() {
+							
 							dlg = this;
+							
 							$(dlg).find( 'div.castle-' + castle.castleType + '-tabs' )[ 'tabs' ]();
+							
+							castle.on( 'buildings-changed', renderBuildables );
+							castle.on( 'buildings-changed', renderTown );
+
+							castle.emit( 'buildings-changed' );
+
 						},
 						"close": function() {
+							castle.removeListener( 'buildings-changed', renderBuildables );
+							castle.removeListener( 'buildings-changed', renderTown );
 							$(this).remove();
 						},
 						"buttons": {
 							"Ok": function() {
+								castle.removeListener( 'buildings-changed', renderBuildables );
+								castle.removeListener( 'buildings-changed', renderTown );
 								$(this).remove();
 							}
 						}

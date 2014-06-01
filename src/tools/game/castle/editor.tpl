@@ -12,6 +12,23 @@
             position: relative;
         }
         
+        #castle-{castle_id}-build > .buildable {
+            display: inline-block;
+            width: 150px;
+            height: 120px;
+            padding: 2px;
+            border: 2px solid black;
+            margin: 2px;
+            cursor: pointer;
+        }
+        
+        #castle-{castle_id}-build > .buildable > .title {
+            display: block;
+            padding: 4px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
         div.castle-1-tabs .town-background, div.castle-10-tabs .town-background {
             background-image: url( ../css/img/towns/castle.png );
         }
@@ -51,14 +68,14 @@
     </style>
     <div class="castle-{castle_id}-tabs">
         <ul>
-            <li><a href="#castle-{castle_id}-town">Town</a></li>
+            <li data-role="town"><a href="#castle-{castle_id}-town">Town</a></li>
             <li><a href="#castle-{castle_id}-estates">Estates</a></li>
             <li><a href="#castle-{castle_id}-build">Build</a></li>
             <li><a href="#castle-{castle_id}-armies">Armies</a></li>
             <li><a href="#castle-{castle_id}-spells">Spells</a></li>
         </ul>
         <div id="castle-{castle_id}-town">
-            <div class="town-background">
+            <div class="town-background id-{castle_type_id}">
             </div>
         </div>
         <div id="castle-{castle_id}-estates">
