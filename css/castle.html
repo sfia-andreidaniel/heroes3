@@ -1,0 +1,639 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="game.css" />
+</head>
+<body style="background-repeat: no-repeat; padding: 0; margin: 0; background-image: url( img/towns-buildings/castle.jpg )">
+    <div class="town-background id-1">
+    </div>
+    <div id="opacity">
+        <label>
+            <input type="checkbox" />
+            Opacity
+        </label>
+    </div>
+    <div id="panel" style="background-color: white">
+        <table>
+            <tr>
+                <td>Castle Type:</td>
+                <td>
+                    <select id="type">
+                        <option value="1">Castle</option>
+                        <option value="2">Tower</option>
+                        <option value="3">Inferno</option>
+                        <option value="4">Fortress</option>
+                        <option value="5">Rampart</option>
+                        <option value="6">Dungeon</option>
+                        <option value="7">Stronghold</option>
+                        <option value="8">Necropolis</option>
+                        <option value="9">Conflux</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hall:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" data-building="hall" checked />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="hall" value="level-0" checked/>
+                        Village Hall
+                    </label>
+                    <label>
+                        <input type="radio" name="hall" value="level-1" />
+                        Town Hall
+                    </label>
+                    <label>
+                        <input type="radio" name="hall" value="level-2" />
+                        City Hall
+                    </label>
+                    <label>
+                        <input type="radio" name="hall" value="level-3" />
+                        Capitol
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Fort:</td>
+                <td>
+                    <label>
+                        <input type="checkbox" data-building="fort" checked />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="fort" value="level-1" checked />
+                        Fort
+                    </label>
+                    <label>
+                        <input type="radio" name="fort" value="level-2" />
+                        Citadel
+                    </label>
+                    <label>
+                        <input type="radio" name="fort" value="level-3" />
+                        Castle
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mage Guild:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" data-building="mage-guild" checked />
+                        On
+                    <label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="mage-guild" value="level-1" checked />
+                        Level 1
+                    </label>
+                    <label>
+                        <input type="radio" name="mage-guild" value="level-2" />
+                        Level 2
+                    </label>
+                    <label>
+                        <input type="radio" name="mage-guild" value="level-3" />
+                        Level 3
+                    </label>
+                    <label>
+                        <input type="radio" name="mage-guild" value="level-4" />
+                        Level 4
+                    </label>
+                    <label>
+                        <input type="radio" name="mage-guild" value="level-5" />
+                        Level 5
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Marketplace:
+                </td>
+                <td colspan="5">
+                    <label>
+                        <input type="checkbox" data-building="marketplace" checked />
+                        On
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Resource Silo:
+                </td>
+                <td colspan="5">
+                    <label>
+                        <input type="checkbox" data-building="silo" checked />
+                        On
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Shipyard:
+                </td>
+                <td colspan="5">
+                    <label>
+                        <input type="checkbox" data-building="shipyard" checked />
+                        On
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Blacksmith:
+                </td>
+                <td colspan="5">
+                    <label>
+                        <input type="checkbox" data-building="blacksmith" checked />
+                        On
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tavern:
+                </td>
+                <td colspan="5">
+                    <label>
+                        <input type="checkbox" data-building="tavern" checked />
+                        On
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 1:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling1" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-1" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-1" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 2:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling2" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-2" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-2" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 3:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling3" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-3" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-3" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 4:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling4" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-4" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-4" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 5:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling5" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-5" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-5" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 6:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling6" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-6" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-6" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Dwelling Level 7:
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" checked data-building="dwelling7" />
+                        On
+                    </label>
+                </td>
+                <td colspan="4">
+                    <label>
+                        <input type="radio" name="level-7" checked />
+                        Basic
+                    </label>
+                    <label>
+                        <input type="radio" name="level-7" value="upgraded" />
+                        Upgraded
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Other buildings:
+                </td>
+                <td colspan="5" class="block">
+                    <label data-city="1">
+                        <input type="checkbox" checked data-building="other" data-id="14" />
+                        Brotherhood of the sword
+                    </label>
+                    <label data-city="1">
+                        <input type="checkbox" checked data-building="other" data-id="15" />
+                        Griffin Bastion
+                    </label>
+                    <label data-city="1">
+                        <input type="checkbox" checked data-building="other" data-id="17" />
+                        Stables
+                    </label>
+                    <label data-city="1">
+                        <input type="checkbox" checked data-building="other" data-id="19" />
+                        Lighthouse
+                    </label>
+                    <label data-city="2">
+                        <input type="checkbox" checked data-building="other" data-id="47" />
+                        Artifact merchants
+                    </label>
+                    <label data-city="2">
+                        <input type="checkbox" checked data-building="other" data-id="49" />
+                        Library
+                    </label>
+                    <label data-city="2">
+                        <input type="checkbox" checked data-building="other" data-id="50" />
+                        Lookout Tower
+                    </label>
+                    <label data-city="2">
+                        <input type="checkbox" checked data-building="other" data-id="52" />
+                        Sculptor's wings
+                    </label>
+                    <label data-city="2">
+                        <input type="checkbox" checked data-building="other" data-id="53" />
+                        Wall of knowledge
+                    </label>
+                    <label data-city="3">
+                        <input type="checkbox" checked data-building="other" data-id="81" />
+                        Birthing Pools
+                    </label>
+                    <label data-city="3">
+                        <input type="checkbox" checked data-building="other" data-id="83" />
+                        Brimstone Stormclouds
+                    </label>
+                    <label data-city="3">
+                        <input type="checkbox" checked data-building="other" data-id="84" />
+                        Cages
+                    </label>
+                    <label data-city="3">
+                        <input type="checkbox" checked data-building="other" data-id="85" />
+                        Castle Gate
+                    </label>
+                    <label data-city="3">
+                        <input type="checkbox" checked data-building="other" data-id="86" />
+                        Order of Fire
+                    </label>
+                    <label data-city="4">
+                        <input type="checkbox" checked data-building="other" data-id="114" />
+                        Blood obelisk
+                    </label>
+                    <label data-city="4">
+                        <input type="checkbox" checked data-building="other" data-id="115" />
+                        Cage of warlords
+                    </label>
+                    <label data-city="4">
+                        <input type="checkbox" checked data-building="other" data-id="116" />
+                        Captain's quarters
+                    </label>
+                    <label data-city="4">
+                        <input type="checkbox" checked data-building="other" data-id="117" />
+                        Glyphs of fear
+                    </label>
+                    <label data-city="5">
+                        <input type="checkbox" checked data-building="other" data-id="148" />
+                        Mystic pond
+                    </label>
+                    <label data-city="5">
+                        <input type="checkbox" checked data-building="other" data-id="149" />
+                        Dendroid saplings
+                    </label>
+                    <label data-city="5">
+                        <input type="checkbox" checked data-building="other" data-id="150" />
+                        Fountain of fortune
+                    </label>
+                    <label data-city="5">
+                        <input type="checkbox" checked data-building="other" data-id="151" />
+                        Miner's guild
+                    </label>
+                    <label data-city="5">
+                        <input type="checkbox" checked data-building="other" data-id="153" />
+                        Treasury
+                    </label>
+                    <label data-city="6">
+                        <input type="checkbox" checked data-building="other" data-id="181" />
+                        Battle schoolar academy
+                    </label>
+                    <label data-city="6">
+                        <input type="checkbox" checked data-building="other" data-id="182" />
+                        Artifact merchants
+                    </label>
+                    <label data-city="6">
+                        <input type="checkbox" checked data-building="other" data-id="184" />
+                        Mana vortex
+                    </label>
+                    <label data-city="6">
+                        <input type="checkbox" checked data-building="other" data-id="185" />
+                        Portal of sumonning
+                    </label>
+                    <label data-city="6">
+                        <input type="checkbox" checked data-building="other" data-id="187" />
+                        Mushroom rings
+                    </label>
+                    <label data-city="7">
+                        <input type="checkbox" checked data-building="other" data-id="214" />
+                        Ballista yard
+                    </label>
+                    <label data-city="7">
+                        <input type="checkbox" checked data-building="other" data-id="215" />
+                        Freelancer's guild
+                    </label>
+                    <label data-city="7">
+                        <input type="checkbox" checked data-building="other" data-id="217" />
+                        Escape tunnel
+                    </label>
+                    <label data-city="7">
+                        <input type="checkbox" checked data-building="other" data-id="218" />
+                        Hall of Valhalla
+                    </label>
+                    <label data-city="7">
+                        <input type="checkbox" checked data-building="other" data-id="219" />
+                        Mess hall
+                    </label>
+                    <label data-city="8">
+                        <input type="checkbox" checked data-building="other" data-id="248" />
+                        Cover of darkness
+                    </label>
+                    <label data-city="8">
+                        <input type="checkbox" checked data-building="other" data-id="249" />
+                        Necromancy amplifier
+                    </label>
+                    <label data-city="8">
+                        <input type="checkbox" checked data-building="other" data-id="251" />
+                        Skeleton transformer
+                    </label>
+                    <label data-city="8">
+                        <input type="checkbox" checked data-building="other" data-id="253" />
+                        Unearthed graves
+                    </label>
+                    <label data-city="9">
+                        <input type="checkbox" checked data-building="other" data-id="281" />
+                        Magic university
+                    </label>
+                    <label data-city="9">
+                        <input type="checkbox" checked data-building="other" data-id="282" />
+                        Garden of life
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <style>
+        .block > label {
+            display: block;
+        }
+        
+        #opacity {
+            position: absolute;
+            top: 6px;
+            left: 803px;
+        }
+        
+    </style>
+    
+    <script type="text/javascript" src="../vendor/jquery.js"></script>
+    <script>
+        
+        function renderTown() {
+            
+            var html = [];
+            
+            if ( $('input[data-building=hall]').get(0).checked ) {
+                
+                $('input[name=hall]').each( function() {
+                    
+                    if ( this.checked ) {
+                        html.push( '<div class="building hall ' + this.value + '"></div>' );
+                    }
+                    
+                } );
+                
+            }
+            
+            if ( $('input[data-building=fort]').get(0).checked ) {
+                
+                $('input[name=fort]').each( function() {
+                    
+                    if ( this.checked ) {
+                        html.push( '<div class="building fort ' + this.value + '"></div>' );
+                    }
+                    
+                } );
+                
+            }
+            
+            if ( $('input[data-building=marketplace]').get(0).checked ) {
+                html.push( '<div class="building market level-1"></div>' );
+            }
+
+            if ( $('input[data-building=silo]').get(0).checked ) {
+                html.push( '<div class="building market level-2"></div>' );
+            }
+
+            if ( $('input[data-building=blacksmith]').get(0).checked ) {
+                html.push( '<div class="building blacksmith"></div>' );
+            }
+
+            if ( $('input[data-building=tavern]').get(0).checked ) {
+                html.push( '<div class="building tavern"></div>' );
+            }
+
+            if ( $('input[data-building=mage-guild]').get(0).checked ) {
+                
+                $('#panel input[name=mage-guild]').each( function() {
+                    if ( this.checked ) {
+                        
+                        html.push( '<div class="building mage-guild ' + this.value + '"></div>' );
+                        
+                    }
+                } );
+                
+            }
+            
+            for ( var i=1; i<=7; i++ ) {
+                ( function( dwLevel ) {
+                    
+                    if ( $('input[data-building=dwelling' + dwLevel + ']').get(0).checked ) {
+                        
+                        $('input[type=radio][name=level-' + dwLevel + ']').each( function() {
+                            
+                            if ( this.checked ) {
+                                
+                                html.push( '<div class="building dwelling level-' + dwLevel + ' ' + ( $(this).attr('value') ? $(this).attr('value') : '' ) + '"></div>' );
+                                
+                            }
+                            
+                        } );
+                        
+                    }
+                    
+                })( i );
+            }
+            
+            /* Place other towns */
+            var hasFeatures = [],
+                cityId = $('#type').val();
+            
+            $('label[data-city=' + cityId + '] > input[type=checkbox]').each( function() {
+                
+                var id = $(this).attr('data-id'),
+                    checked = this.checked;
+                
+                if ( checked ) {
+                    
+                    hasFeatures.push( 'has-building-' + id );
+                    
+                    html.push( '<div class="building other id-' + id + '"></div>' );
+                    
+                }
+                
+            } );
+            
+            $('.town-background').get(0).className = 'town-background id-' + cityId + ' ' + hasFeatures.join( " " );
+            
+            $( '.town-background' ).html( html.join( '' ) );
+            
+        }
+        
+        function onCastleChange() {
+
+            var castleId = ~~$('#type').val();
+
+            $('label[data-city]').each( function() {
+                var cid = ~~$(this).attr( 'data-city' );
+                if ( cid == castleId ) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                    $(this).find( '> input' ).get(0).checked = false;
+                }
+            } );
+            
+            $('.town-background').get(0).className = 'town-background id-' + castleId;
+            
+            renderTown();
+
+        }
+        
+        $('#type').on( 'change', onCastleChange );
+        
+        $('#panel').on( 'click', 'input[type=radio], input[type=checkbox]', renderTown );
+        
+        $('#opacity input[type=checkbox]').on( 'click', function() {
+            
+            $('.town-background').css({
+                "opacity": this.checked ? '.5' : '1'
+            });
+            
+        } );
+        
+        onCastleChange();
+        
+    </script>
+</body>
+</html>
