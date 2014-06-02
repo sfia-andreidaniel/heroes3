@@ -345,16 +345,19 @@ div.town-background {
     background-image: url(img/towns-buildings/tower/tbtwhal2.gif);
     left: 0px;  top: 208px;
     width: 288px; height: 160px;
+    z-index: 20;
 }
 .town-background.id-2 > .building.hall.level-2 {
     background-image: url(img/towns-buildings/tower/tbtwhal3.gif);
     left: 0px;  top: 74px;
     width: 288px; height: 288px;
+    z-index: 20;
 }
 .town-background.id-2 > .building.hall.level-3 {
     background-image: url(img/towns-buildings/tower/tbtwhal4.gif);
     left: 0px;  top: 74px;
     width: 288px; height: 288px;
+    z-index: 20;
 }
 
 .town-background.id-2 > .building.market.level-1 {
