@@ -321,51 +321,52 @@ div.town-background {
 /* Tower buildings */
 
 .town-background.id-2 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwcstl.gif);
+    left: 304px;  top: -10px;
+    width: 128px; height: 288px;
 }
 .town-background.id-2 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwcas2.gif);
+    left: 301px;  top: -16px;
+    width: 160px; height: 320px;
 }
 .town-background.id-2 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwcas3.gif);
+    left: 301px;  top: -16px;
+    width: 160px; height: 320px;
 }
 
 .town-background.id-2 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    /* Level 0 hall is painted allready on the background, so
+       it is not displayable */
+    display: none;
 }
 .town-background.id-2 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwhal2.gif);
+    left: 0px;  top: 208px;
+    width: 288px; height: 160px;
 }
 .town-background.id-2 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwhal3.gif);
+    left: 0px;  top: 74px;
+    width: 288px; height: 288px;
 }
 .town-background.id-2 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwhal4.gif);
+    left: 0px;  top: 74px;
+    width: 288px; height: 288px;
 }
 
 .town-background.id-2 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmark.gif);
+    left: 615px;  top: 272px;
+    width: 192px; height: 96px;
 }
 .town-background.id-2 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwsilo.gif);
+    left: 770px;  top: 196px;
+    width: 32px; height: 96px;
+    z-index: 10;
 }
 .town-background.id-2 > .building.market.level-3 {
     background-image: none;
@@ -374,146 +375,159 @@ div.town-background {
 }
 
 .town-background.id-2 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/blacksmith.gif);
+    left: 485px;  top: 213px;
+    width: 128px; height: 138px;
 }
 .town-background.id-2 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwtvrn.gif);
+    left: 376px;  top: 280px;
+    width: 128px; height: 96px;
 }
 
 .town-background.id-2 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmage.gif);
+    left: 597px;  top: 75px;
+    width: 192px; height: 160px;
 }
 .town-background.id-2 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmag2.gif);
+    left: 593px;  top: 43px;
+    width: 192px; height: 192px;
 }
 .town-background.id-2 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmag3.gif);
+    left: 593px;  top: 43px;
+    width: 192px; height: 192px;
 }
 .town-background.id-2 > .building.mage-guild.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmag4.gif);
+    left: 593px;  top: 11px;
+    width: 192px; height: 224px;
 }
 .town-background.id-2 > .building.mage-guild.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwmag5.gif);
+    left: 593px;  top: 11px;
+    width: 192px; height: 224px;
 }
 
 .town-background.id-2 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_0.gif);
+    left: 452px;  top: 198px;
+    width: 64px; height: 96px;
 }
 .town-background.id-2 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_0.gif);
+    left: 445px;  top: 198px;
+    width: 96px; height: 96px;
 }
 .town-background.id-2 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_1.gif);
+    left: 0px;  top: 44px;
+    width: 64px; height: 96px;
 }
 .town-background.id-2 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_1.gif);
+    left: 0px;  top: 13px;
+    width: 64px; height: 128px;
 }
 .town-background.id-2 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_2.gif);
+    left: 210px;  top: 178px;
+    width: 128px; height: 128px;
+    z-index: 10;
 }
 .town-background.id-2 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_2.gif);
+    left: 210px;  top: 178px;
+    width: 128px; height: 128px;
+    z-index: 10;
 }
 .town-background.id-2 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_3.gif);
+    left: 604px;  top: 101px;
+    width: 64px; height: 128px;
 }
 .town-background.id-2 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_3.gif);
+    left: 604px;  top: 69px;
+    width: 64px; height: 160px;
 }
 .town-background.id-2 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_4.gif);
+    left: 509px;  top: 63px;
+    width: 96px; height: 96px;
 }
 .town-background.id-2 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_4.gif);
+    left: 509px;  top: 0px;
+    width: 96px; height: 160px;
 }
 .town-background.id-2 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_5.gif);
+    left: 680px;  top: 183px;
+    width: 128px; height: 96px;
+    z-index: 4;
 }
 .town-background.id-2 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_5.gif);
+    left: 680px;  top: 148px;
+    width: 128px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-2 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwdw_6.gif);
+    left: 75px;  top: 135px;
+    width: 192px; height: 96px;
 }
 .town-background.id-2 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwup_6.gif);
+    left: 75px;  top: 71px;
+    width: 192px; height: 160px;
 }
 
 /* artifacts merchants */
 .town-background.id-2 > .building.other.id-47 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url( img/towns-buildings/tower/tbtwspec.gif );
+    left: 675px;  top: 260px;
+    width: 96px; height: 96px;
+    z-index: 8;
 }
 
 /* library */
 .town-background.id-2 > .building.other.id-49 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwext1.gif );
+    left: 699px;  top: 111px;
+    width: 32px; height: 96px;
+    z-index: 1;
 }
 
 /* lookout tower */
 .town-background.id-2 > .building.other.id-50 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwext0.gif);
+    left: 409px;  top: 80px;
+    width: 64px; height: 192px;
 }
 
 /* sculptor's wings */
-.town-background.id-2 > .building.other.id-52 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+
+/* When the sculptor wings addon is present, the apearence of the
+   dwellings of level-2 changes
+ */
+
+.town-background.id-2.has-building-52 > .building.dwelling.level-2 {
+    background-image: url(img/towns-buildings/tower/tbtwhrd1.gif);
+    left: -4px;
+}
+.town-background.id-2.has-building-52 > .building.dwelling.level-2.upgraded {
+    background-image: url(img/towns-buildings/tower/tbtwhrd2.gif);
 }
 
 /* wall of knowledge */
 .town-background.id-2 > .building.other.id-53 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/tower/tbtwext2.gif);
+    left: 593px;  top: 178px;
+    width: 192px; height: 64px;
 }
 
 /* Inferno Buildings */
