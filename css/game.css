@@ -754,56 +754,59 @@ div.town-background {
 
 .town-background.id-4 > .building.fort.level-1 {
     background-image: url(img/towns-buildings/fortres/tbfrcstl.gif);
-    left: 367px;  top: 104px;
+    left: 367px;  top: 103px;
     width: 384px; height: 192px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.fort.level-2 {
     background-image: url(img/towns-buildings/fortres/tbfrcas2.gif);
     left: 367px;  top: 94px;
     width: 384px; height: 192px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.fort.level-3 {
     background-image: url(img/towns-buildings/fortres/tbfrcas3.gif);
-    left: 367px;  top: 40px;
+    left: 367px;  top: 36px;
     width: 384px; height: 256px;
+    z-index: 1;
 }
 
 .town-background.id-4 > .building.hall.level-0 {
     background-image: url(img/towns-buildings/fortres/tbfrhall.gif);
     left: 166px;  top: 124px;
     width: 256px; height: 96px;
-    z-index: 1;
+    z-index: 5;
 }
 .town-background.id-4 > .building.hall.level-1 {
     background-image: url(img/towns-buildings/fortres/tbfrhal2.gif);
     left: 166px;  top: 91px;
     width: 256px; height: 128px;
-    z-index: 1;
+    z-index: 5;
 }
 .town-background.id-4 > .building.hall.level-2 {
     background-image: url(img/towns-buildings/fortres/tbfrhal3.gif);
     left: 166px;  top: 31px;
     width: 256px; height: 192px;
-    z-index: 1;
+    z-index: 5;
 }
 .town-background.id-4 > .building.hall.level-3 {
     background-image: url(img/towns-buildings/fortres/tbfrhal4.gif);
     left: 166px;  top: 0px;
     width: 256px; height: 224px;
-    z-index: 1;
+    z-index: 5;
 }
 
 .town-background.id-4 > .building.market.level-1 {
     background-image: url(img/towns-buildings/fortres/tbfrmark.gif);
     left: 382px;  top: 220px;
     width: 160px; height: 128px;
-    z-index: 1;
+    z-index: 3;
 }
 .town-background.id-4 > .building.market.level-2 {
     background-image: url(img/towns-buildings/fortres/tbfrsilo.gif);
     left: 379px;  top: 257px;
     width: 64px; height: 64px;
-    z-index: 2;
+    z-index: 4;
 }
 .town-background.id-4 > .building.market.level-3 {
     background-image: none;
@@ -827,16 +830,19 @@ div.town-background {
     background-image: url(img/towns-buildings/fortres/tbfrmage.gif);
     left: 0px;  top: 187px;
     width: 160px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-4 > .building.mage-guild.level-2 {
     background-image: url(img/towns-buildings/fortres/tbfrmag2.gif);
     left: 0px;  top: 178px;
     width: 160px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-4 > .building.mage-guild.level-3 {
     background-image: url(img/towns-buildings/fortres/tbfrmag3.gif);
     left: 0px;  top: 120px;
     width: 160px; height: 192px;
+    z-index: 4;
 }
 .town-background.id-4 > .building.mage-guild.level-4 {
     background-image: none;
@@ -850,102 +856,118 @@ div.town-background {
 }
 
 .town-background.id-4 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_0.gif);
+    left: 640px;  top: 155px;
+    width: 160px; height: 128px;
+    z-index: 3;
 }
 .town-background.id-4 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_0.gif);
+    left: 640px;  top: 87px;
+    width: 160px; height: 192px;
+    z-index: 3;
 }
 .town-background.id-4 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_1.gif);
+    left: 141px;  top: 161px;
+    width: 192px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-4 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_1.gif);
+    left: 123px;  top: 161px;
+    width: 224px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-4 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_2.gif);
+    left: 15px;  top: 121px;
+    width: 256px; height: 128px;
 }
 .town-background.id-4 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_2.gif);
+    left: 15px;  top: 54px;
+    width: 256px; height: 192px;
 }
 .town-background.id-4 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_3.gif);
+    left: 195px;  top: 94px;
+    width: 64px; height: 64px;
 }
 .town-background.id-4 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_3.gif);
+    left: 160px;  top: 15px;
+    width: 96px; height: 160px;
 }
 .town-background.id-4 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_4.gif);
+    left: 0px;  top: 282px;
+    width: 192px; height: 96px;
+    z-index: 5;
 }
 .town-background.id-4 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_4.gif);
+    left: 0px;  top: 248px;
+    width: 192px; height: 128px;
+    z-index: 5;
 }
 .town-background.id-4 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_5.gif);
+    left: 0px;  top: -15px;
+    width: 128px; height: 128px;
 }
 .town-background.id-4 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_5.gif);
+    left: 0px;  top: -15px;
+    width: 192px; height: 128px;
 }
 .town-background.id-4 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrdw_6.gif);
+    left: 612px;  top: 278px;
+    width: 192px; height: 96px;
 }
 .town-background.id-4 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrup_6.gif);
+    left: 587px;  top: 246px;
+    width: 224px; height: 128px;
 }
 
 /* blood obelisk */
 .town-background.id-4 > .building.other.id-114 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrext1.gif);
+    left: 348px;  top: 90px;
+    width: 416px; height: 128px;
 }
 
 /* cage of warlords */
 .town-background.id-4 > .building.other.id-115 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrspec.gif);
+    left: 736px;  top: 5px;
+    width: 96px; height: 64px;
 }
 
 /* captain's quarters */
-.town-background.id-4 > .building.other.id-116 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+/* The captain's quarters change the appearence of gnoll hut */
+
+.town-background.id-4.has-building-116 > .building.dwelling.level-1 {
+    background-image: url(img/towns-buildings/fortres/tbfrhrd1.gif);
+    width: 160px;
+    height: 160px;
+    top: 114px;
+}
+.town-background.id-4.has-building-116 > .building.dwelling.level-1.upgraded {
+    background-image: url(img/towns-buildings/fortres/tbfrhrd2.gif);
+    width: 160px;
+    height: 224px;
+    top: 51px;
 }
 
 /* gliphs of fear */
 .town-background.id-4 > .building.other.id-117 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrext0.gif);
+    left: 341px;  top: 164px;
+    width: 416px; height: 128px;
+    z-index: 2;
 }
 
 /* Rampart Buildings */
