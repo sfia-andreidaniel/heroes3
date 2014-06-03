@@ -536,51 +536,56 @@ div.town-background {
 /* Inferno Buildings */
 
 .town-background.id-3 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbincstl.gif);
+    left: 222px;  top: 27px;
+    width: 256px; height: 256px;
+    z-index: 1;
 }
 .town-background.id-3 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbincas2.gif);
+    left: 222px;  top: 27px;
+    width: 256px; height: 256px;
+    z-index: 1;
 }
 .town-background.id-3 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbincas3.gif);
+    left: 222px;  top: -6px;
+    width: 256px; height: 288px;
+    z-index: 1;
 }
 
 .town-background.id-3 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinhall.gif);
+    left: 0px;  top: 170px;
+    width: 256px; height: 96px;
 }
 .town-background.id-3 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinhal2.gif);
+    left: 0px;  top: 170px;
+    width: 256px; height: 96px;
 }
 .town-background.id-3 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinhal3.gif);
+    left: 0px;  top: 170px;
+    width: 256px; height: 96px;
 }
 .town-background.id-3 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinhal4.gif);
+    left: 0px;  top: 106px;
+    width: 256px; height: 160px;
 }
 
 .town-background.id-3 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmark.gif);
+    left: 515px;  top: 289px;
+    width: 160px; height: 96px;
+    z-index: 10;
 }
 .town-background.id-3 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinsilo.gif);
+    left: 501px;  top: 327px;
+    width: 96px; height: 64px;
+    z-index: 11;
 }
 .town-background.id-3 > .building.market.level-3 {
     background-image: none;
@@ -589,111 +594,120 @@ div.town-background {
 }
 
 .town-background.id-3 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinblak.gif);
+    left: 684px;  top: 246px;
+    width: 128px; height: 128px;
+    z-index: 100;
 }
 .town-background.id-3 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbintvrn.gif);
+    left: 109px;  top: 199px;
+    width: 96px; height: 96px;
 }
 
 .town-background.id-3 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmage.gif);
+    left: 670px;  top: 125px;
+    width: 128px; height: 96px;
 }
 .town-background.id-3 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmag2.gif);
+    left: 670px;  top: 96px;
+    width: 160px; height: 128px;
 }
 .town-background.id-3 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmag3.gif);
+    left: 670px;  top: 65px;
+    width: 160px; height: 160px;
 }
 .town-background.id-3 > .building.mage-guild.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmag4.gif);
+    left: 670px;  top: 33px;
+    width: 160px; height: 192px;
 }
 .town-background.id-3 > .building.mage-guild.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinmag5.gif);
+    left: 670px;  top: 32px;
+    width: 160px; height: 192px;
 }
 
 .town-background.id-3 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_0.gif);
+    left: 625px;  top: 248px;
+    width: 96px; height: 64px;
 }
 .town-background.id-3 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_0.gif);
+    left: 625px;  top: 188px;
+    width: 96px; height: 128px;
 }
 .town-background.id-3 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_1.gif);
+    left: 186px;  top: 246px;
+    width: 160px; height: 128px;
+    z-index: 4;
 }
 .town-background.id-3 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_1.gif);
+    left: 186px;  top: 193px;
+    width: 160px; height: 192px;
+    z-index: 4;
 }
 .town-background.id-3 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_2.gif);
+    left: 14px;  top: 320px;
+    width: 128px; height: 64px;
 }
 .town-background.id-3 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_2.gif);
+    left: 14px;  top: 284px;
+    width: 160px; height: 96px;
 }
 .town-background.id-3 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_3.gif);
+    left: 408px;  top: 200px;
+    width: 128px; height: 96px;
+    z-index: 5;
 }
 .town-background.id-3 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_3.gif);
+    left: 408px;  top: 200px;
+    width: 128px; height: 96px;
+    z-index: 5;
 }
 .town-background.id-3 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_4.gif);
+    left: 360px;  top: 292px;
+    width: 224px; height: 64px;
+    z-index: 6;
 }
 .town-background.id-3 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_4.gif);
+    left: 359px;  top: 230px;
+    width: 192px; height: 128px;
+    z-index: 6;
 }
 .town-background.id-3 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_5.gif);
+    left: 226px;  top: 345px;
+    width: 288px; height: 32px;
+    z-index: 7;
 }
 .town-background.id-3 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_5.gif);
+    left: 226px;  top: 278px;
+    width: 288px; height: 96px;
+    z-index: 7;
 }
 .town-background.id-3 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbindw_6.gif);
+    left: 419px;  top: 154px;
+    width: 192px; height: 96px;
 }
 .town-background.id-3 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinup_6.gif);
+    left: 419px;  top: 90px;
+    width: 192px; height: 160px;
 }
 
 /* birthing pools */
@@ -705,30 +719,35 @@ div.town-background {
 
 /* brimstone stormclouds */
 .town-background.id-3 > .building.other.id-83 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinext0.gif);
+    left: 305px;  top: -18px;
+    width: 352px; height: 96px;
 }
 
 /* cages */
-.town-background.id-3 > .building.other.id-84 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+
+/* When the cages are built, the appearence of dwelling level 3 is changed
+ */
+
+.town-background.id-3.has-building-84 > .building.dwelling.level-3 {
+    background-image: url(img/towns-buildings/inferno/tbinhrd3.gif);
+}
+.town-background.id-3.has-building-84 > .building.dwelling.level-3.upgraded {
+    background-image: url(img/towns-buildings/inferno/tbinhrd4.gif);
 }
 
 /* castle gate */
 .town-background.id-3 > .building.other.id-85 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinext1.gif);
+    left: 230px;  top: 189px;
+    width: 64px; height: 64px;
 }
 
 /* order of fire */
 .town-background.id-3 > .building.other.id-86 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/inferno/tbinext2.gif);
+    left: 591px;  top: 94px;
+    width: 96px; height: 128px;
 }
 
 /* Fortress Buildings */
