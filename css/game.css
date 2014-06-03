@@ -753,51 +753,57 @@ div.town-background {
 /* Fortress Buildings */
 
 .town-background.id-4 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrcstl.gif);
+    left: 367px;  top: 104px;
+    width: 384px; height: 192px;
 }
 .town-background.id-4 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrcas2.gif);
+    left: 367px;  top: 94px;
+    width: 384px; height: 192px;
 }
 .town-background.id-4 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrcas3.gif);
+    left: 367px;  top: 40px;
+    width: 384px; height: 256px;
 }
 
 .town-background.id-4 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrhall.gif);
+    left: 166px;  top: 124px;
+    width: 256px; height: 96px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrhal2.gif);
+    left: 166px;  top: 91px;
+    width: 256px; height: 128px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrhal3.gif);
+    left: 166px;  top: 31px;
+    width: 256px; height: 192px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrhal4.gif);
+    left: 166px;  top: 0px;
+    width: 256px; height: 224px;
+    z-index: 1;
 }
 
 .town-background.id-4 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrmark.gif);
+    left: 382px;  top: 220px;
+    width: 160px; height: 128px;
+    z-index: 1;
 }
 .town-background.id-4 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrsilo.gif);
+    left: 379px;  top: 257px;
+    width: 64px; height: 64px;
+    z-index: 2;
 }
 .town-background.id-4 > .building.market.level-3 {
     background-image: none;
@@ -806,30 +812,31 @@ div.town-background {
 }
 
 .town-background.id-4 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrblak.gif);
+    left: 360px;  top: 157px;
+    width: 96px; height: 128px;
 }
 .town-background.id-4 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrtvrn.gif);
+    left: 634px;  top: 219px;
+    width: 192px; height: 128px;
+    z-index: 20;
 }
 
 .town-background.id-4 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrmage.gif);
+    left: 0px;  top: 187px;
+    width: 160px; height: 128px;
 }
 .town-background.id-4 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrmag2.gif);
+    left: 0px;  top: 178px;
+    width: 160px; height: 128px;
 }
 .town-background.id-4 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/fortres/tbfrmag3.gif);
+    left: 0px;  top: 120px;
+    width: 160px; height: 192px;
 }
 .town-background.id-4 > .building.mage-guild.level-4 {
     background-image: none;
