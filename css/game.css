@@ -1207,51 +1207,76 @@ div.town-background {
 /* Dungeon Buildings */
 
 .town-background.id-6 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdncstl.gif);
+    left: 364px;  top: 74px;
+    width: 224px; height: 192px;
+    
+    transform: scale(1,.89);
+    -webkit-transform: scale(1,.89);
+    -o-transform: scale(1,.89);
+    -ms-transform: scale(1,.89);
+    z-index: 1;
 }
 .town-background.id-6 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdncas2.gif);
+    left: 364px;  top: 84px;
+    width: 224px; height: 256px;
+    z-index: 1;
 }
 .town-background.id-6 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdncas3.gif);
+    left: 364px;  top: 84px;
+    width: 224px; height: 256px;
+    z-index: 1;
 }
 
 .town-background.id-6 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnhall.gif);
+    left: 0px;  bottom: 50px;
+    width: 192px; height: 96px;
 }
 .town-background.id-6 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnhal2.gif);
+    left: 0px;  bottom: 57px;
+    width: 192px; height: 96px;
 }
 .town-background.id-6 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnhal3.gif);
+    left: 0px; bottom: 57px;
+    width: 192px; height: 96px;
 }
+
+.town-background.id-6 > .building.hall.level-0,
+.town-background.id-6 > .building.hall.level-1,
+.town-background.id-6 > .building.hall.level-2 {
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+}
+
 .town-background.id-6 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnhal4.gif);
+    left: 0px;  bottom: 67px;
+    width: 192px; height: 96px;
 }
 
 .town-background.id-6 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmark.gif);
+    left: 586px;  top: 311px;
+    width: 192px; height: 64px;
+    z-index: 1;
 }
 .town-background.id-6 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnsilo.gif);
+    left: 622px;  top: 319px;
+    width: 96px; height: 64px;
+    z-index: 2;
+    
+    transform: scale(1,.7);
+    -ms-transform: scale(1,.7);
+    -o-transform: scale(1,.7);
+    -webkit-transform: scale(1,.7);
 }
 .town-background.id-6 > .building.market.level-3 {
     background-image: none;
@@ -1260,146 +1285,182 @@ div.town-background {
 }
 
 .town-background.id-6 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnblak.gif);
+    left: 549px;  top: 245px;
+    width: 96px; height: 96px;
 }
 .town-background.id-6 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdntvrn.gif);
+    left: 208px;  top: 278px;
+    width: 96px; height: 96px;
+    
+    transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
 }
 
 .town-background.id-6 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmage.gif);
+    left: 164px;  bottom: 159px;
+    width: 96px; height: 85px;
 }
 .town-background.id-6 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmag2.gif);
+    left: 164px;  bottom: 159px;
+    width: 96px; height: 105px;
 }
 .town-background.id-6 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmag3.gif);
+    left: 164px; bottom: 159px;
+    width: 96px; height: 128px;
 }
 .town-background.id-6 > .building.mage-guild.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmag4.gif);
+    left: 164px;  bottom: 159px;
+    width: 96px; height: 147px;
 }
 .town-background.id-6 > .building.mage-guild.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnmag5.gif);
+    left: 164px;  bottom: 159px;
+    width: 96px; height: 192px;
 }
 
 .town-background.id-6 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_0.gif);
+    left: 0px;  top: 310px;
+    width: 160px; height: 64px;
+    z-index: 1;
 }
 .town-background.id-6 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_0.gif);
+    left: 0px;  top: 277px;
+    width: 160px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_1.gif);
+    left: 0px;  top: 19px;
+    width: 96px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_1.gif);
+    left: 0px;  top: 19px;
+    width: 96px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_2.gif);
+    left: 120px;  top: 293px;
+    width: 128px; height: 96px;
+
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 .town-background.id-6 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_2.gif);
+    left: 120px;  top: 249px;
+    width: 128px; height: 128px;
+    transform: scale(1,1);
+    -webkit-transform: scale(1,1);
+    -o-transform: scale(1,1);
+    -moz-transform: scale(1,1);
+    -ms-transform: scale(1,1);
 }
 .town-background.id-6 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_3.gif);
+    left: 302px;  top: 17px;
+    width: 128px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_3.gif);
 }
 .town-background.id-6 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_4.gif);
+    left: 551px;  top: 184px;
+    width: 128px; height: 64px;
 }
 .town-background.id-6 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_4.gif);
+    left: 518px;  top: 162px;
+    width: 160px; height: 96px;
+
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 .town-background.id-6 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_5.gif);
+    left: 284px;  top: 246px;
+    width: 160px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_5.gif);
 }
 .town-background.id-6 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdndw_6.gif);
+    left: 549px;  top: -5px;
+    width: 250px; height: 96px;
 }
 .town-background.id-6 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnup_6.gif);
 }
 
 /* battle schoolar academy */
 .town-background.id-6 > .building.other.id-181 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnext2.gif);
+    left: 313px;  top: 286px;
+    width: 160px; height: 96px;
+    z-index: 2;
 }
 
 /* artifact merchants */
 .town-background.id-6 > .building.other.id-182 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnspec.gif);
+    left: 747px;  top: 292px;
+    width: 64px; height: 96px;
+    z-index: 5;
 }
 
 /* mana vortex */
 .town-background.id-6 > .building.other.id-184 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnext0_.gif);
+    left: 131px;  top: 0px;
+    width: 160px; height: 64px;
+    
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 
 /* portal of summoning */
 .town-background.id-6 > .building.other.id-185 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/dungeon/tbdnext1.gif);
+    left: 687px;  top: 163px;
+    width: 128px; height: 128px;
+
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 
 /* mushroom rings */
-.town-background.id-6 > .building.other.id-187 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+
+/* The mushroom rings changes the appearence of dwelling level 1 */
+.town-background.id-6.has-building-187 > .building.dwelling.level-1 {
+    background-image: url(img/towns-buildings/dungeon/tbdnhrd1.gif);
+    width: 160px; height: 64px;
+}
+.town-background.id-6.has-building-187 > .building.dwelling.level-1.upgraded {
+    background-image: url(img/towns-buildings/dungeon/tbdnhrd2.gif);
+    width: 160px; height: 96px;
 }
 
 /* Stronghold Buildings */
