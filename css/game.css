@@ -1466,40 +1466,40 @@ div.town-background {
 /* Stronghold Buildings */
 
 .town-background.id-7 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/stronghold/tbstcstl.gif);
+    left: 401px;  bottom: 142px;
+    width: 224px; height: 96px;
 }
 .town-background.id-7 > .building.fort.level-2 {
-    background-image: none;
+    background-image: url(img/towns-buildings/stronghold/tbstcas2.gif);
     left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    width: 224px; height: 128px;
 }
 .town-background.id-7 > .building.fort.level-3 {
-    background-image: none;
+    background-image: url(img/towns-buildings/stronghold/tbstcas3.gif);
     left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    width: 224px; height: 128px;
 }
 
 .town-background.id-7 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/stronghold/tbsthall.gif);
+    left: 0px;  bottom: 0px;
+    width: 256px; height: 128px;
 }
 .town-background.id-7 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/stronghold/tbsthal2.gif);
+    left: 0px; bottom: 0px;
+    width: 256px; height: 160px;
 }
 .town-background.id-7 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/stronghold/tbsthal3.gif);
+    left: 0px;  bottom: 0px;
+    width: 256px; height: 192px;
 }
 .town-background.id-7 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/stronghold/tbsthal4.gif);
+    left: 0px;  bottom: 0px;
+    width: 256px; height: 224px;
 }
 
 .town-background.id-7 > .building.market.level-1 {
