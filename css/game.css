@@ -1703,51 +1703,63 @@ div.town-background {
 /* Necropolis Buildings */
 
 .town-background.id-8 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnccstl.gif);
+    left: 138px;  top: 67px;
+    width: 224px; height: 195px;
+    z-index: 1;
 }
+
 .town-background.id-8 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnccas2.gif);
+    left: 140px;  top: 64px;
+    width: 256px; height: 205px;
+    z-index: 1;
 }
+
 .town-background.id-8 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnccas3.gif);
+    left: 35px;  top: 18px;
+    width: 352px; height: 256px;
+    z-index: 1;
 }
 
 .town-background.id-8 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnchall.gif);
+    left: 461px;  top: 75px;
+    width: 192px; height: 160px;
 }
 .town-background.id-8 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnchal2.gif);
+    left: 476px;  top: 53px;
+    width: 160px; height: 192px;
 }
 .town-background.id-8 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnchal3.gif);
+    left: 472px;  top: 21px;
+    width: 160px; height: 224px;
 }
 .town-background.id-8 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnchal4.gif);
+    left: 475px;  top: 20px;
+    width: 160px; height: 224px;
 }
 
 .town-background.id-8 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmark.gif);
+    left: 341px;  top: 212px;
+    width: 128px; height: 64px;
+
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 .town-background.id-8 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncsilo.gif);
+    left: 272px;  top: 176px;
+    width: 96px; height: 96px;
+    z-index:1;
 }
 .town-background.id-8 > .building.market.level-3 {
     background-image: none;
@@ -1756,145 +1768,194 @@ div.town-background {
 }
 
 .town-background.id-8 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncblak.gif);
+    left: 375px;  top: 253px;
+    width: 128px; height: 64px;
 }
 .town-background.id-8 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbnctvrn.gif);
+    left: 504px;  top: 183px;
+    width: 224px; height: 96px;
+
+    transform: scale(1,.8);
+    -webkit-transform: scale(1,.8);
+    -o-transform: scale(1,.8);
+    -moz-transform: scale(1,.8);
+    -ms-transform: scale(1,.8);
 }
 
 .town-background.id-8 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmage.gif);
+    left: 341px;  top: 114px;
+    width: 160px; height: 96px;
 }
 .town-background.id-8 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmag2.gif);
+    left: 341px;  top: 90px;
+    width: 160px; height: 128px;
 }
 .town-background.id-8 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmag3.gif);
+    left: 341px;  top: 69px;
+    width: 160px; height: 160px;
 }
 .town-background.id-8 > .building.mage-guild.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmag4.gif);
+    left: 341px;  top: 61px;
+    width: 160px; height: 160px;
 }
 .town-background.id-8 > .building.mage-guild.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncmag5.gif);
+    left: 344px;  top: 31px;
+    width: 160px; height: 192px;
 }
 
 .town-background.id-8 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_0.gif);
+    left: 85px;  top: 213px;
+    width: 192px; height: 128px;
+
+    transform: scale(1,.9);
+    -webkit-transform: scale(1,.9);
+    -o-transform: scale(1,.9);
+    -moz-transform: scale(1,.9);
+    -ms-transform: scale(1,.9);
+    
+    z-index: 4;
 }
 .town-background.id-8 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_0.gif);
+    left: 70px;
+    width: 224px; height: 128px;
 }
 .town-background.id-8 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_1.gif);
+    left: 490px;  top: 217px;
+    width: 160px; height: 96px;
 }
 .town-background.id-8 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_1.gif);
+    left: 488px;  top: 219px;
+    width: 160px; height: 96px;
 }
 .town-background.id-8 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_2.gif);
+    left: 0px;  top: 181px;
+    width: 160px; height: 192px;
+    
+    z-index: 4;
 }
 .town-background.id-8 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_2.gif);
+    left: 0px;  top: 161px;
+    width: 160px; height: 224px;
+
+    transform: scale(1,.9);
+    -webkit-transform: scale(1,.9);
+    -o-transform: scale(1,.9);
+    -moz-transform: scale(1,.9);
+    -ms-transform: scale(1,.9);
 }
 .town-background.id-8 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_3.gif);
+    left: 604px;  top: 194px;
+    width: 192px; height: 96px;
+    
+    transform: scale(1,.9);
+    -webkit-transform: scale(1,.9);
+    -o-transform: scale(1,.9);
+    -moz-transform: scale(1,.9);
+    -ms-transform: scale(1,.9);
 }
 .town-background.id-8 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_3.gif);
+    left: 611px;  top: 189px;
+    width: 192px; height: 96px;
+    
+    transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
 }
 .town-background.id-8 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_4.gif);
+    left: 202px;  top: 200px;
+    width: 160px; height: 96px;
+    z-index: 3;
 }
 .town-background.id-8 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_4.gif);
+    left: 218px;  top: 167px;
+    width: 128px; height: 128px;
 }
 .town-background.id-8 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_5.gif);
+    left: 0px;  top: 28px;
+    width: 128px; height: 224px;
 }
 .town-background.id-8 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_5.gif);
 }
 .town-background.id-8 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncdw_6.gif);
+    left: 654px;  top: 17px;
+    width: 160px; height: 192px;
 }
 .town-background.id-8 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncup_6.gif);
 }
 
 /* cover of darkness */
 .town-background.id-8 > .building.other.id-248 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncspec.gif);
+    left: 23px;  top: 0px;
+    width: 224px; height: 256px;
 }
 
 /* necromancy amplifier */
 .town-background.id-8 > .building.other.id-249 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncext0.gif);
+    left: 309px;  top: 60px;
+    width: 96px; height: 160px;
 }
 
 /* skeleton transformer */
 .town-background.id-8 > .building.other.id-251 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/necropolis/tbncext1.gif);
+    left: 258px;  top: 267px;
+    width: 96px; height: 64px;
+
+    transform: scale(1,.7);
+    -webkit-transform: scale(1,.7);
+    -o-transform: scale(1,.7);
+    -moz-transform: scale(1,.7);
+    -ms-transform: scale(1,.7);
+    z-index: 5;
 }
 
 /* unearthed graves */
-.town-background.id-8 > .building.other.id-253 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+
+/* The unearthed graves changes the appearence of the dwelling level 1 */
+
+.town-background.id-8.has-building-253 > .building.dwelling.level-1 {
+    background-image: url(img/towns-buildings/necropolis/tbnchrd1.gif);
+    width: 224px;
+    height: 160px;
+    top: 208px;
 }
 
-.town-background.id-8 > .building.other.id-reserved {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+.town-background.id-8.has-building-253 > .building.dwelling.level-1.upgraded {
+    background-image: url(img/towns-buildings/necropolis/tbnchrd2.gif);
+    width: 224px;
+    height: 160px;
+    top: 208px;
+}
+
+.town-background.id-8.has-dwelling-level-2 > .building.other.aux {
+    background-image: url(img/towns-buildings/necropolis/tbncext2.gif);
+    left: 70px;  top: 296px;
+    width: 736px; height: 96px;
 }
 
 /* Conflux Buildings */

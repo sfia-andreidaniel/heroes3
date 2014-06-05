@@ -25,8 +25,8 @@
                         <option value="5">Rampart</option>
                         <option value="6">Dungeon</option>
                         <option value="7">Stronghold</option>
-                        <option value="8" selected>Necropolis</option>
-                        <option value="9">Conflux</option>
+                        <option value="8">Necropolis</option>
+                        <option value="9" selected>Conflux</option>
                     </select>
                 </td>
             </tr>
@@ -554,6 +554,8 @@
                 } );
                 
             }
+            var hasFeatures = [],
+                cityId = $('#type').val();
             
             for ( var i=1; i<=7; i++ ) {
                 ( function( dwLevel ) {
@@ -566,6 +568,8 @@
                                 
                                 html.push( '<div class="building dwelling level-' + dwLevel + ' ' + ( $(this).attr('value') ? $(this).attr('value') : '' ) + '"></div>' );
                                 
+                                hasFeatures.push( 'has-dwelling-level-' + i );
+                                
                             }
                             
                         } );
@@ -576,8 +580,6 @@
             }
             
             /* Place other towns */
-            var hasFeatures = [],
-                cityId = $('#type').val();
             
             $('label[data-city=' + cityId + '] > input[type=checkbox]').each( function() {
                 
@@ -593,6 +595,8 @@
                 }
                 
             } );
+            
+            html.push( '<div class="building other aux"></div>' );
             
             $('.town-background').get(0).className = 'town-background id-' + cityId + ' ' + hasFeatures.join( " " );
             
