@@ -1961,51 +1961,56 @@ div.town-background {
 /* Conflux Buildings */
 
 .town-background.id-9 > .building.fort.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelcstl.gif);
+    left: 347px;  top: 93px;
+    width: 384px; height: 160px;
 }
 .town-background.id-9 > .building.fort.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelcas2.gif);
+    left: 347px;  top: 93px;
+    width: 384px; height: 160px;
 }
 .town-background.id-9 > .building.fort.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelcas3.gif);
+    left: 347px;  top: 93px;
+    width: 384px; height: 160px;
 }
 
 .town-background.id-9 > .building.hall.level-0 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelhall.gif);
+    left: 0px;  top: 148px;
+    width: 256px; height: 224px;
+    z-index: 2;
 }
 .town-background.id-9 > .building.hall.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelhal2.gif);
+    left: 0px;  top: 148px;
+    width: 256px; height: 224px;
+    z-index: 2;
 }
 .town-background.id-9 > .building.hall.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelhal3.gif);
+    left: 0px;  top: 148px;
+    width: 256px; height: 224px;
+    z-index: 2;
 }
 .town-background.id-9 > .building.hall.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelhal4.gif);
+    left: 0px;  top: 148px;
+    width: 256px; height: 224px;
+    z-index: 2;
 }
 
 .town-background.id-9 > .building.market.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmark.gif);
+    left: 363px;  top: 212px;
+    width: 224px; height: 96px;
+    z-index: 2;
 }
 .town-background.id-9 > .building.market.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelsilo.gif);
+    left: 385px;  top: 159px;
+    width: 96px; height: 128px;
 }
 .town-background.id-9 > .building.market.level-3 {
     background-image: none;
@@ -2014,125 +2019,149 @@ div.town-background {
 }
 
 .town-background.id-9 > .building.blacksmith {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelblak.gif);
+    left: 463px;  top: 137px;
+    width: 96px; height: 128px;
 }
 .town-background.id-9 > .building.tavern {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeltvrn.gif);
+    left: 558px;  top: 179px;
+    width: 96px; height: 96px;
 }
 
 .town-background.id-9 > .building.mage-guild.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmage.gif);
+    left: 213px;  top: 38px;
+    width: 96px; height: 256px;
+    z-index: 3;
 }
 .town-background.id-9 > .building.mage-guild.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmag2.gif);
+    left: 213px;  top: 38px;
+    width: 96px; height: 256px;
+    z-index: 3;
 }
 .town-background.id-9 > .building.mage-guild.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmag3.gif);
+    left: 213px;  top: 38px;
+    width: 96px; height: 256px;
+    z-index: 3;
 }
 .town-background.id-9 > .building.mage-guild.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmag4.gif);
+    left: 213px;  top: 38px;
+    width: 96px; height: 256px;
+    z-index: 3;
 }
 .town-background.id-9 > .building.mage-guild.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelmag5.gif);
+    left: 213px;  top: 38px;
+    width: 96px; height: 256px;
+    z-index: 3;
 }
 
 .town-background.id-9 > .building.dwelling.level-1 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_0.gif);
+    left: 689px;  top: 246px;
+    width: 128px; height: 128px;
 }
 .town-background.id-9 > .building.dwelling.level-1.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_0.gif);
 }
 .town-background.id-9 > .building.dwelling.level-2 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_1.gif);
+    left: 630px;  top: 37px;
+    width: 90px; height: 96px;
+    
+    transform: scale(1, .75 );
+    -webkit-transform: scale(1, .75);
+    -moz-transform: scale(1, .75);
+    -o-transform: scale(1, .75);
+    -ms-transform: scale(1, .75);
 }
 .town-background.id-9 > .building.dwelling.level-2.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_1.gif);
 }
 .town-background.id-9 > .building.dwelling.level-3 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_2.gif);
+    left: 703px;  top: 191px;
+    width: 96px; height: 64px;
 }
 .town-background.id-9 > .building.dwelling.level-3.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_2.gif);
 }
 .town-background.id-9 > .building.dwelling.level-4 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_3.gif);
+    left: 110px;  top: 118px;
+    width: 96px; height: 96px;
+
+    transform: scale(1, .75 );
+    -webkit-transform: scale(1, .75);
+    -moz-transform: scale(1, .75);
+    -o-transform: scale(1, .75);
+    -ms-transform: scale(1, .75);
 }
 .town-background.id-9 > .building.dwelling.level-4.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_3.gif);
 }
 .town-background.id-9 > .building.dwelling.level-5 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_4.gif);
+    left: 261px;  top: 166px;
+    width: 96px; height: 64px;
 }
 .town-background.id-9 > .building.dwelling.level-5.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_4.gif);
 }
 .town-background.id-9 > .building.dwelling.level-6 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_5.gif);
+    left: 405px;  top: 276px;
+    width: 96px; height: 96px;
+    z-index: 5;
 }
 .town-background.id-9 > .building.dwelling.level-6.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_5.gif);
 }
 .town-background.id-9 > .building.dwelling.level-7 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbeldw_6.gif);
+    left: 35px;  top: 16px;
+    width: 160px; height: 128px;
 }
 .town-background.id-9 > .building.dwelling.level-7.upgraded {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelup_6.gif);
+    left: 34px;  top: -9px;
+    width: 160px; height: 160px;
+
+    transform: scale(1, .9 );
+    -webkit-transform: scale(1, .9);
+    -moz-transform: scale(1, .9);
+    -o-transform: scale(1, .9);
+    -ms-transform: scale(1, .9);
 }
 
 /* magic university */
 .town-background.id-9 > .building.other.id-281 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+    background-image: url(img/towns-buildings/conflux/tbelext6.gif);
+    left: 107px;  top: 165px;
+    width: 192px; height: 128px;
 }
 
 /* garden of life */
-.town-background.id-9 > .building.other.id-282 {
-    background-image: none;
-    left: 0px;  top: 0px;
-    width: 0px; height: 0px;
+
+/* The garden of life changes the appearence of dwelling level 1 */
+
+.town-background.id-9.has-building-282 > .building.dwelling.level-1 {
+    background-image: url(img/towns-buildings/conflux/tbelhrd1.gif);
+}
+.town-background.id-9.has-building-282 > .building.dwelling.level-1.upgraded {
+    background-image: url(img/towns-buildings/conflux/tbelhrd2.gif);
+}
+
+.town-background.id-9.has-dwelling-level-1.has-building-282 > .building.other.aux {
+    background-image: url(img/towns-buildings/conflux/tbelext1.gif);
+    width: 672px;
+    height: 160px;
+    left: 15px;
+    top: 215px;
 }
 
 .town-background.id-9 > .building.other.id-reserved {

@@ -497,6 +497,7 @@
     </style>
     
     <script type="text/javascript" src="../vendor/jquery.js"></script>
+    <script type="text/javascript" src="../vendor/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
     <script>
         
         function renderTown() {
@@ -601,6 +602,8 @@
             $('.town-background').get(0).className = 'town-background id-' + cityId + ' ' + hasFeatures.join( " " );
             
             $( '.town-background' ).html( html.join( '' ) );
+            
+                $( '.town-background > .building' ).draggable();
             
         }
         
