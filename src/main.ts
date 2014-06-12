@@ -13,6 +13,7 @@
 ///<reference path="XTemplate.ts" />
 ///<reference path="Loader.ts" />
 ///<reference path="Dialogs.ts" />
+///<reference path="DOMUtils.ts" />
 
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />

@@ -58,6 +58,75 @@ class Objects_Entity_Castle extends Objects_Entity {
 			: 'Town';
 	}
 
+	get estates(): IResource {
+		
+		var out = {},
+
+		    hallLevel = 0,
+		    marketLevel = 0,
+
+		    i: number,
+		    len: number;
+
+		/* Find hall level */
+		for ( i=0, len = this.buildings.hall.length; i<len; i++ ) {
+			if ( this.buildings.hall[i].built )
+				hallLevel = i + 1;
+		}
+
+		switch ( hallLevel ) {
+			case 0:
+				out[ 'gold' ] = 500;
+				break;
+
+			case 1:
+				out[ 'gold' ] = 1000;
+				break;
+
+			case 2:
+				out[ 'gold' ] = 2000;
+				break;
+
+			case 3:
+				out[ 'gold' ] = 4000;
+				break;
+		}
+
+		/* Find market level */
+		for ( i=0, len = this.buildings.market.length; i<len; i++ ) {
+			if ( this.buildings.market[i].built )
+				marketLevel = i + 1;
+		}
+
+		if ( marketLevel == 2 ) { // has resource silo
+
+			switch ( this.castleType ) {
+				case 1: case 10: // castle
+				case 4: case 13: // fortress
+				case 7: case 16: // stronghold
+				case 8: case 17: // necropolis
+					out[ 'wood' ] = 1; out[ 'ore' ] = 1;
+					break;
+				case 2: case 11: // tower
+					out[ 'gems' ] = 1;
+					break;
+				case 3: case 12: // inferno
+				case 9: case 18: // conflux
+					out[ 'mercury' ] = 1;
+					break;
+				case 5: case 14: // rampart
+					out[ 'crystals' ] = 1;
+					break;
+				case 6: case 15: // dungeon
+					out[ 'sulfur' ] = 1;
+					break;
+			}
+
+		}
+
+		return out;
+	}
+
 	public serialize(): any {
 		var out = super.serialize();
 		
@@ -208,6 +277,7 @@ class Objects_Entity_Castle extends Objects_Entity {
 								'<div class="buildable" data-building-id="' + buildings[i].id + '">',
 									'<div class="g-tbld id-' + buildings[i].id + '"></div>',
 									'<div class="title">' + buildings[i].name + '</div>',
+									DOMUtils.ResourceToHTML( buildings[i].costs ),
 								'</div>'
 
 							].join( '' ) );
@@ -234,6 +304,24 @@ class Objects_Entity_Castle extends Objects_Entity {
 
 					};
 
+					var renderEstates = function() {
+
+						$(dlg).find( '#castle-' + castle.castleType + '-estates' ).html(
+							'<p>This town produces daily the following resources:</p><ul>' +
+							DOMUtils.ResourceToHTML( castle.estates ).replace( /<nobr>/g, '<li>' ).replace( /<\/nobr>/g, '</li>' )
+							+ '</ul>'
+						);
+
+					};
+
+					var renderArmies = function() {
+
+						$(dlg).find( '#castle-' + castle.castleType + '-armies' ).html(
+							'<p>This town produces weekly the following armies:</p>'
+						);
+
+					}
+
 					$(tpl.text)[ 'dialog' ]( {
 						"width": 870,
 						"height": 550,
@@ -246,7 +334,9 @@ class Objects_Entity_Castle extends Objects_Entity {
 							$(dlg).find( 'div.castle-' + castle.castleType + '-tabs' )[ 'tabs' ]();
 							
 							castle.on( 'buildings-changed', renderBuildables );
+							castle.on( 'buildings-changed', renderEstates );
 							castle.on( 'buildings-changed', renderTown );
+							castle.on( 'buildings-changed', renderArmies );
 
 							castle.emit( 'buildings-changed' );
 
@@ -254,12 +344,18 @@ class Objects_Entity_Castle extends Objects_Entity {
 						"close": function() {
 							castle.removeListener( 'buildings-changed', renderBuildables );
 							castle.removeListener( 'buildings-changed', renderTown );
+							castle.removeListener( 'buildings-changed', renderEstates );
+							castle.removeListener( 'buildings-changed', renderArmies );
+							
 							$(this).remove();
 						},
 						"buttons": {
 							"Ok": function() {
 								castle.removeListener( 'buildings-changed', renderBuildables );
 								castle.removeListener( 'buildings-changed', renderTown );
+								castle.removeListener( 'buildings-changed', renderEstates );
+								castle.removeListener( 'buildings-changed', renderArmies );
+								
 								$(this).remove();
 							}
 						}

@@ -2,7 +2,8 @@
     <style>
         
         div.castle-{castle_id}-tabs .ui-tabs-panel.ui-widget-content {
-            height: 370px;
+            height: 375px;
+            overflow-y: auto;
         }
         
         div.castle-{castle_id}-tabs .town-background {
@@ -15,11 +16,35 @@
         #castle-{castle_id}-build > .buildable {
             display: inline-block;
             width: 150px;
-            height: 120px;
+            height: 160px;
             padding: 2px;
             border: 2px solid black;
             margin: 2px;
             cursor: pointer;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        #castle-{castle_id}-estates li {
+            list-style-type: none;
+        }
+        
+        #castle-{castle_id}-estates li > .g-res {
+            vertical-align: bottom;
+            margin: -15px;
+            
+            -webkit-transform: scale(.8, .8);
+            -moz-transform: scale(.8, .8);
+            -ms-transform: scale(.8, .8);
+            -o-transform: scale(.8, .8);
+            transform: scale(.8, .8);
+            
+            display: inline-block;
+        }
+        
+        #castle-{castle_id}-build > .buildable > .g-tbld {
+            margin: 0px auto;
+            display: block;
         }
         
         #castle-{castle_id}-build > .buildable > .title {
@@ -27,6 +52,25 @@
             padding: 4px;
             text-align: center;
             font-size: 12px;
+        }
+        
+        #castle-{castle_id}-build > .buildable > nobr {
+            vertical-align: middle;
+            display: inline;
+        }
+        
+        #castle-{castle_id}-build > .buildable > nobr > .g-res {
+            -webkit-transform: scale( .6, .6 );
+            -o-transform: scale( .6, .6 );
+            -ms-transform: scale( .6, .6 );
+            -moz-transform: scale( .6, .6 );
+            
+            transform: scale( .6, .6 );
+            
+            margin: -22px;
+            
+            vertical-align: bottom;
+            display: inline-block;
         }
         
         div.castle-1-tabs .town-background, div.castle-10-tabs .town-background {
