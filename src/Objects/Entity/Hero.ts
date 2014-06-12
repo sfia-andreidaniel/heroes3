@@ -212,6 +212,8 @@ class Objects_Entity_Hero extends Objects_Entity {
 
 		if ( !( cell.x() == this.col && cell.y() == this.row ) ) {
 
+			// console.log( "Move to : ", cell.x(), ":", cell.y() );
+
 			var dx = cell.x(),
 			    dy = cell.y();
 
@@ -233,6 +235,9 @@ class Objects_Entity_Hero extends Objects_Entity {
 			this.moving = true;
 		
 		} else {
+
+			// console.log( "Move allready at " + cell.x() + ":" + cell.y() );
+
 			this._onReachedDestination();
 		}
 

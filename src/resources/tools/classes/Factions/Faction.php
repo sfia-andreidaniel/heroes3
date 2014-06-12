@@ -46,7 +46,7 @@
                         throw new Exception_Game( "$propertyName is of type int!" );
                     
                     if ( $propertyValue < 0 )
-                        throw new Exception_Game( "$propertyName should be gte 0" );
+                        throw new Exception_Game( "$propertyName should be gte 0, but you tried to set it to $propertyValue" );
                     
                     $this->_properties[ $propertyName ] = $propertyValue;
                     

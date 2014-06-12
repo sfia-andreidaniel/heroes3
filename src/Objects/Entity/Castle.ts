@@ -116,7 +116,8 @@ class Objects_Entity_Castle extends Objects_Entity {
 						    marketPlaceLevel = 0,
 						    tavernLevel = 0,
 						    i: number,
-						    len: number;
+						    len: number,
+						    setClasses: string[] = [];
 
 						// find fort level
 						for ( i=0, len = castle.buildings.fort.length; i<len; i++ )
@@ -158,8 +159,10 @@ class Objects_Entity_Castle extends Objects_Entity {
 
 						// other buildings
 						for ( i=0, len = castle.buildings.other.length; i<len; i++ )
-							if ( castle.buildings.other[i].built )
-								out.push( '<div class="building other id-' + castle.buildings.others[i].id + '"></div>' );
+							if ( castle.buildings.other[i].built ) {
+								out.push( '<div class="building other id-' + castle.buildings.other[i].id + '"></div>' );
+								setClasses.push( 'has-building-' + castle.buildings.other[i].id );
+							}
 
 						// dwellings buildings
 						for ( i=0; i<7; i++ ) {
@@ -169,9 +172,12 @@ class Objects_Entity_Castle extends Objects_Entity {
 
 							if ( castle.buildings.dwelling[ i * 2 + 1 ].built ) {
 								out.push( '<div class="building dwelling level-' + ( i + 1 ) + ' upgraded"></div>' );
+								setClasses.push( 'has-dwelling-level-' + ( i + 1 ) );
 							} else {
-								if ( castle.buildings.dwelling[ i * 2 ].built )
+								if ( castle.buildings.dwelling[ i * 2 ].built ) {
 									out.push( '<div class="building dwelling level-' + ( i + 1 ) + '"></div>' );
+									setClasses.push( 'has-dwelling-level-' + ( i + 1 ) );
+								}
 							}
 
 						}
@@ -182,7 +188,13 @@ class Objects_Entity_Castle extends Objects_Entity {
 						if ( tavernLevel )
 							out.push( '<div class="building tavern"></div>');
 
+						out.push( '<div class="building other aux" ></div>' );
+
 						$(dlg).find( '.town-background' ).html( out.join( '\n' ) );
+
+						$(dlg).find( '.town-background' ).each( function() {
+							this.className = this.className.split( ' ' ).slice( 0, 2 ).join( ' ' ) + ' ' + setClasses.join( ' ' );
+						});
 
 					};
 
@@ -211,12 +223,12 @@ class Objects_Entity_Castle extends Objects_Entity {
 							if ( !building )
 								return;
 
-							try {
+							
+							$(dlg).find( 'li[data-role=town] > a' ).click();
+
+							setTimeout( function() {
 								building.build();
-								$(dlg).find( 'li[data-role=town] > a' ).click();
-							} catch ( err ) {
-								alert( err );
-							}
+							}, 300 );
 
 						});
 

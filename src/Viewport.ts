@@ -312,7 +312,7 @@ class Viewport extends Events {
 				if ( deferredEmitters.length ) {
 
 					deferredEmitters.sort( function( a,b ) {
-						return ( a.isHotSpot ? 1 : 0 ) - ( b.isHotSpot ? 1 : 0 );
+						return ( b.isHotSpot ? 1 : 0 ) - ( a.isHotSpot ? 1 : 0 );
 					});
 					// console.log( deferredEmitters );
 

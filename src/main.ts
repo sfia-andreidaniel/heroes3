@@ -12,6 +12,7 @@
 ///<reference path="Canvas2dContextHelper.ts" />
 ///<reference path="XTemplate.ts" />
 ///<reference path="Loader.ts" />
+///<reference path="Dialogs.ts" />
 
 ///<reference path="FS.ts" />
 ///<reference path="Picture.ts" />

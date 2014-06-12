@@ -85,17 +85,21 @@ class Objects_Entity_Resource extends Objects_Entity {
 
 			( function( me ) {
 
-				obj._faction.addResource( me._resourceType.type, quantity, function( err ) {
+				var give = {};
+
+				give[ me._resourceType.type ] = quantity;
+
+				obj._faction.addResources( give, function( err ) {
 
 					if ( !err ) {
 
-						alert( "You find " + quantity + " " + me._resourceType.type );
-
-						me.remove();
+						Dialogs.alert( "You find " + quantity + " " + me._resourceType.type, "Resource", function() {
+							me.remove();
+						} );
 
 					} else {
 
-						alert( "Error: " + err );
+						Dialogs.alert( err, "Error" );
 
 					}
 

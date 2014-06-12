@@ -87,15 +87,43 @@ class Objects_Entity_Castle_Building {
 		// nothing
 	}
 
-	public build() {
+	public build( success: any = null, failure: any = null ) {
 
 		var reason = this.canotBeBuiltReason();
 
-		if ( reason )
-			throw reason;
+		if ( reason ) {
+			
+			Dialogs.alert( reason, 'Failed to build ' + this.name, function() {
+				if ( failure ) {
+			 		failure();
+				}
+			} );
 
-		this.built = true;
-		this.manager.castle.emit( 'buildings-changed' );
+			return;
+		}
+
+		( function( me ) {
+			me.manager.castle._faction.taxResources( me.costs, 
+				function() {
+					
+					me.built = true;
+					
+					me.manager.castle.emit( 'buildings-changed' );
+					
+					if ( success )
+						success();
+
+				},
+				function() {
+
+					if ( failure )
+						failure();
+
+				}
+			);
+		} )( this );
+		
+
 	}
 
 }

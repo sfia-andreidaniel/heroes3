@@ -1,5 +1,5 @@
 <?php
-    
+
     try {
     
         header( 'Content-Type: application/json' );
@@ -36,34 +36,39 @@
                 
                 break;
             
-            case 'add-resource':
+            case 'add-resources':
     
-                $id = isset( $_GET['id'] ) ? (int)$_GET['id'] : NULL;   
+                $id = isset( $_POST['id'] ) ? (int)$_POST['id'] : NULL;
                 
                 if ( $id === NULL || $id < 1 )
                     throw new Exception( "Bad id!" );
             
-                $resource = isset( $_GET['resource'] ) ? $_GET['resource'] : NULL;
+                $resources = isset( $_POST['resources'] ) ? @json_decode( $_POST['resources'], TRUE ) : NULL;
                 
-                if ( !in_array( $resource, [
-                    'gold',
-                    'wood',
-                    'ore',
-                    'crystals',
-                    'gems',
-                    'sulfur',
-                    'mercury',
-                    'mithril'
-                ] ) ) throw new Exception( "Bad resource name!" );
+                if ( !is_array( $resources ) )
+                    throw new Exception( "Bad resources object!" );
                 
                 $faction = $factions->getElementById( $id );
                 
                 if ( !$faction )
                     throw new Exception( "Faction #" . $id . " not found!" );
                 
-                $amount = isset( $_GET['amount'] ) ? (int)$_GET['amount'] : 0;
+                foreach ( array_keys( $resources ) as $resource ) {
                 
-                $faction->{$resource} += $amount;
+                    if ( !in_array( $resource, [
+                        'gold',
+                        'wood',
+                        'ore',
+                        'crystals',
+                        'gems',
+                        'sulfur',
+                        'mercury',
+                        'mithril'
+                    ] ) ) throw new Exception( "Bad resource name!" );
+                    
+                    $faction->{$resource} = ( $faction->{$resource} + $resources[ $resource ] );
+                    
+                }
                 
                 echo json_encode( [
                     'ok' => TRUE

@@ -83,13 +83,10 @@ class Faction extends Events {
 		return this;
 	}
 
-	public addResource( resource: string, amount: number, callback: any ) {
+	public addResources( resources: IResource, callback: any ) {
 
 		if ( !this.loaded )
 			throw "Failed to add resource: Faction not loaded!";
-
-		if ( [ "gold", "wood", "ore", "crystals", "mercury", "sulfur", "gems", "mithril" ].indexOf( resource ) == -1 )
-			throw "Invalid resource";
 
 		callback = callback || function( error: string = null ) { if ( error ) console.log( error ); };
 
@@ -97,21 +94,27 @@ class Faction extends Events {
 			( function( me ) {
 
 				$$.ajax( {
-				    "url": 'resources/tools/faction.php',
-					"type": "GET",
+				    "url": 'resources/tools/faction.php?do=add-resources',
+					"type": "POST",
 					"data": {
-						"do": "add-resource",
 						"id": me.id,
-						"resource": resource,
-						"amount": amount
+						"resources": JSON.stringify( resources )
 					},
 					"success": function( rsp ) {
+
+						var k: string;
+
 						if ( !rsp || !rsp.ok )
 							callback( rsp.error || 'unknown error' );
 						else {
 
-							me.resources[ resource ] += amount;
-							me.emit( 'estates-changed', resource, me.resources[ resource ] );
+							for ( k in resources ) {
+								me.resources[ k ] += resources[ k ];
+							}
+
+							for ( k in resources ) {
+								me.emit( 'estates-changed', k, me.resources[ k ] );
+							}
 
 							callback();
 						}
@@ -126,6 +129,62 @@ class Faction extends Events {
 		} else {
 			callback( "not implemented under node.");
 		}
+
+	}
+
+	public taxResources( resources: IResource, success: any = null, failure: any = null ) {
+
+		var k         : string,
+		    negs      : IResource = {},
+		    notHaving : string[] = [];
+
+		for ( k in resources ) {
+			
+			if ( resources[k] < 0 ) {
+
+				throw "Invalid negative resource value in resources[" + k + "] argument!";
+
+			}
+
+			negs[ k ] = -resources[ k ];
+
+			if ( this.resources[ k ] < resources[ k ] ) {
+				notHaving.push( "* You need more " + k + " (have: " + this.resources[k] + ", need: " + ( Math.abs( this.resources[k] - resources[k] ) ) + ")" );
+			}
+
+		}
+
+		if ( notHaving.length ) {
+
+			Dialogs.alert( 'You don\'t have enough resources to complete this operation:\n' + notHaving.join( '\n' ), 'Not enough resources', function() {
+				
+				if ( failure )
+					failure();
+
+			});
+
+			return;
+		
+		}
+
+		this.addResources( negs, function( error: string ) {
+
+			if ( error ) {
+
+				Dialogs.alert( error, 'Error paying resources', function() {
+					if ( failure )
+						failure();
+				});
+
+			} else {
+
+				if ( success )
+					success();
+
+			}
+
+		} );
+
 
 	}
 

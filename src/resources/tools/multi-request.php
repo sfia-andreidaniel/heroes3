@@ -137,7 +137,7 @@
                     }
                     
                     $buffer = `$cmdLine`;
-                    $jBuffer = json_decode( `$cmdLine`, TRUE );
+                    $jBuffer = json_decode( $buffer, TRUE );
                     
                     $parsed[ 'cmdLine' ] = $cmdLine;
                     
